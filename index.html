@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Γλεμπ — Ελληνικά B1</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0f;
+    --surface: #161618;
+    --surface2: #1e1e21;
+    --border: #2a2a2e;
+    --accent: #4af0a0;
+    --accent2: #f0a04a;
+    --accent3: #4a9ff0;
+    --text: #e8e8ec;
+    --muted: #6b6b75;
+    --danger: #f04a4a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Literata', Georgia, serif;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(14,14,15,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    height: 56px;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--text); }
+
+  .nav-tabs {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  .nav-tab {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--muted);
+    border: none;
+    background: none;
+    transition: all 0.15s;
+  }
+
+  .nav-tab:hover { color: var(--text); background: var(--surface2); }
+  .nav-tab.active { color: var(--accent); background: rgba(74,240,160,0.08); }
+
+  .nav-deadline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent2);
+    padding: 0.3rem 0.7rem;
+    border: 1px solid rgba(240,160,74,0.3);
+    border-radius: 4px;
+  }
+
+  /* PAGES */
+  .page { display: none; padding: 80px 2rem 3rem; max-width: 1100px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* DASHBOARD */
+  .dash-header {
+    padding: 3rem 0 2rem;
+  }
+
+  .dash-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+
+  .dash-title .gr { color: var(--accent); }
+
+  .dash-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  .progress-bar-wrap {
+    margin: 2rem 0;
+    background: var(--surface2);
+    border-radius: 4px;
+    height: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+
+  .progress-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent-line, var(--accent));
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 0.4rem;
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .topic-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .topic-item:hover { border-color: var(--accent); background: var(--surface2); }
+
+  .topic-status {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .topic-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .topic-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin: 2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* VOCABULARY */
+  .vocab-toolbar {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    color: var(--text);
+    font-family: 'Literata', serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .search-input:focus { border-color: var(--accent); }
+  .search-input::placeholder { color: var(--muted); }
+
+  .filter-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(74,240,160,0.06);
+  }
+
+  .btn-primary {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: none;
+    background: var(--accent);
+    color: #0e0e0f;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.03em;
+  }
+
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  .btn-secondary {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-secondary:hover { border-color: var(--text); }
+
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .word-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .word-card:hover { border-color: var(--accent3); transform: translateY(-2px); }
+
+  .word-card.flipped .word-front { display: none; }
+  .word-card.flipped .word-back { display: block; }
+  .word-back { display: none; }
+
+  .word-greek {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent3);
+    margin-bottom: 0.2rem;
+  }
+
+  .word-type {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .word-example {
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .word-russian {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .word-tag {
+    position: absolute;
+    top: 0.7rem; right: 0.7rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .add-word-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    display: none;
+  }
+
+  .add-word-form.open { display: block; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-input {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.55rem 0.8rem;
+    color: var(--text);
+    font-family: 'Literata', serif;
+    font-size: 0.88rem;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.15s;
+  }
+
+  .form-input:focus { border-color: var(--accent); }
+  .form-input::placeholder { color: var(--muted); font-style: italic; }
+
+  select.form-input { cursor: pointer; }
+
+  /* GRAMMAR */
+  .grammar-topics {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .grammar-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .grammar-card:hover { border-color: var(--accent2); transform: translateY(-2px); }
+
+  .grammar-card-header {
+    padding: 1.2rem 1.4rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .grammar-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .grammar-card-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+
+  .grammar-card-body {
+    padding: 1rem 1.4rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .grammar-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    margin-top: 0.75rem;
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 680px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 0.3rem;
+    transition: color 0.15s;
+  }
+
+  .modal-close:hover { color: var(--text); }
+
+  .modal-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.3rem;
+  }
+
+  .modal-subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .theory-block {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .theory-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin: 1rem 0;
+  }
+
+  .theory-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .theory-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid rgba(42,42,46,0.5);
+  }
+
+  .theory-table tr:last-child td { border-bottom: none; }
+
+  .gr-word { color: var(--accent3); font-family: 'Syne', sans-serif; font-weight: 600; }
+  .highlight { color: var(--accent); font-weight: 600; }
+
+  /* MOCK EXAM */
+  .exam-intro {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .exam-title-big {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .exam-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+
+  .exam-sections {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    text-align: left;
+  }
+
+  .exam-section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .exam-section-card:hover { border-color: var(--accent); }
+  .exam-section-card.selected { border-color: var(--accent); background: rgba(74,240,160,0.06); }
+
+  .exam-section-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+  }
+
+  .exam-section-desc {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+  }
+
+  .question-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .question-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .question-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .option-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.65rem 1rem;
+    color: var(--text);
+    font-family: 'Literata', serif;
+    font-size: 0.88rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .option-btn:hover { border-color: var(--accent3); background: rgba(74,159,240,0.06); }
+  .option-btn.correct { border-color: var(--accent); background: rgba(74,240,160,0.1); color: var(--accent); }
+  .option-btn.wrong { border-color: var(--danger); background: rgba(240,74,74,0.1); color: var(--danger); }
+  .option-btn:disabled { cursor: default; }
+
+  .timer-bar {
+    background: var(--surface2);
+    border-radius: 4px;
+    height: 4px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .timer-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 1s linear;
+  }
+
+  .score-display {
+    text-align: center;
+    padding: 3rem;
+  }
+
+  .score-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .score-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.5rem;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    padding: 0.75rem 1.2rem;
+    border-radius: 8px;
+    z-index: 300;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.2s;
+    pointer-events: none;
+  }
+
+  .toast.show { opacity: 1; transform: translateY(0); }
+
+  /* empty state */
+  .empty {
+    text-align: center;
+    padding: 3rem;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Γλεμπ <span>B1</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('dashboard')">Обзор</button>
+    <button class="nav-tab" onclick="showPage('vocab')">Словарь</button>
+    <button class="nav-tab" onclick="showPage('grammar')">Грамматика</button>
+    <button class="nav-tab" onclick="showPage('exam')">Mock-тест</button>
+  </div>
+  <div class="nav-deadline" id="deadlineCounter">⏱ загрузка...</div>
+</nav>
+
+<!-- DASHBOARD -->
+<div class="page active" id="page-dashboard">
+  <div class="dash-header">
+    <div class="dash-title">Ελληνικά <span class="gr">B1</span></div>
+    <div class="dash-sub">Подготовка к экзамену · Κρατικό Πιστοποιητικό Γλωσσομάθειας</div>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="overallProgress" style="width: 8%"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">Неделя 1 из 12 · Диагностика завершена</div>
+
+  <div class="grid-3">
+    <div class="stat-card" style="--accent-line: var(--accent)">
+      <div class="stat-num" id="statWords">0</div>
+      <div class="stat-label">Слов в словаре</div>
+    </div>
+    <div class="stat-card" style="--accent-line: var(--accent2)">
+      <div class="stat-num" id="statTopics">3/7</div>
+      <div class="stat-label">Тем изучено</div>
+    </div>
+    <div class="stat-card" style="--accent-line: var(--accent3)">
+      <div class="stat-num" id="statTests">0</div>
+      <div class="stat-label">Тестов пройдено</div>
+    </div>
+  </div>
+
+  <div class="section-title">Грамматические темы B1</div>
+  <div class="topics-grid" id="topicsGrid"></div>
+
+  <div class="section-title">Разделы экзамена</div>
+  <div class="grid-3" style="grid-template-columns: repeat(4,1fr)">
+    <div class="stat-card" style="--accent-line: #4af0a0; cursor:pointer" onclick="showPage('exam')">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem">👂</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem">Listening</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--muted);margin-top:0.3rem">Аудирование</div>
+    </div>
+    <div class="stat-card" style="--accent-line: #4a9ff0; cursor:pointer" onclick="showPage('exam')">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem">📖</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem">Reading</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--muted);margin-top:0.3rem">Чтение</div>
+    </div>
+    <div class="stat-card" style="--accent-line: #f0a04a; cursor:pointer" onclick="showPage('exam')">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem">✍️</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem">Writing</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--muted);margin-top:0.3rem">Письмо</div>
+    </div>
+    <div class="stat-card" style="--accent-line: #f04a4a; cursor:pointer" onclick="showPage('exam')">
+      <div style="font-size:1.5rem;margin-bottom:0.5rem">🗣️</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem">Speaking</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--muted);margin-top:0.3rem">Говорение</div>
+    </div>
+  </div>
+</div>
+
+<!-- VOCABULARY -->
+<div class="page" id="page-vocab">
+  <div style="padding: 2rem 0 1rem; display:flex; align-items:baseline; gap:1rem">
+    <h1 style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-0.02em">Словарь</h1>
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--muted)" id="vocabCount">0 слов</span>
+  </div>
+
+  <div class="vocab-toolbar">
+    <input class="search-input" type="text" placeholder="Поиск по-гречески или по-русски..." id="vocabSearch" oninput="renderVocab()">
+    <button class="filter-btn active" onclick="setFilter('all', this)">Все</button>
+    <button class="filter-btn" onclick="setFilter('travel', this)">Путешествия</button>
+    <button class="filter-btn" onclick="setFilter('work', this)">Работа</button>
+    <button class="filter-btn" onclick="setFilter('health', this)">Здоровье</button>
+    <button class="filter-btn" onclick="setFilter('daily', this)">Быт</button>
+    <button class="filter-btn" onclick="setFilter('society', this)">Общество</button>
+    <button class="btn-primary" onclick="toggleAddForm()">+ Добавить слово</button>
+  </div>
+
+  <div class="add-word-form" id="addWordForm">
+    <div class="form-row">
+      <input class="form-input" id="newGreek" placeholder="Греческое слово" />
+      <input class="form-input" id="newRussian" placeholder="Перевод (русский)" />
+      <select class="form-input" id="newCategory">
+        <option value="travel">Путешествия</option>
+        <option value="work">Работа</option>
+        <option value="health">Здоровье</option>
+        <option value="daily">Быт</option>
+        <option value="society">Общество</option>
+        <option value="other">Другое</option>
+      </select>
+    </div>
+    <div class="form-row" style="grid-template-columns:1fr 1fr auto">
+      <input class="form-input" id="newType" placeholder="Тип (сущ., глаг., ...)" />
+      <input class="form-input" id="newExample" placeholder="Пример (по-гречески)" />
+      <button class="btn-primary" onclick="addWord()">Добавить</button>
+    </div>
+  </div>
+
+  <div class="vocab-grid" id="vocabGrid"></div>
+</div>
+
+<!-- GRAMMAR -->
+<div class="page" id="page-grammar">
+  <div style="padding: 2rem 0 1rem">
+    <h1 style="font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;letter-spacing:-0.02em">Грамматика B1</h1>
+    <p style="color:var(--muted);font-style:italic;margin-top:0.3rem">Нажми на тему — откроется теория</p>
+  </div>
+  <div class="grammar-topics" id="grammarTopics"></div>
+</div>
+
+<!-- EXAM -->
+<div class="page" id="page-exam">
+  <div id="examIntro">
+    <div class="exam-intro">
+      <div class="exam-title-big">Mock-тест</div>
+      <div class="exam-meta">
+        Формат: Πιστοποίηση Ελληνομάθειας B1<br>
+        60–119 баллов = B1 · 120–200 баллов = B2<br>
+        Выбери раздел для практики
+      </div>
+      <div class="exam-sections">
+        <div class="exam-section-card selected" id="sec-reading" onclick="selectSection('reading')">
+          <div class="exam-section-name">📖 Reading</div>
+          <div class="exam-section-desc">Чтение и понимание текста</div>
+        </div>
+        <div class="exam-section-card" id="sec-grammar" onclick="selectSection('grammar')">
+          <div class="exam-section-name">⚙️ Grammar</div>
+          <div class="exam-section-desc">Грамматические задания</div>
+        </div>
+        <div class="exam-section-card" id="sec-vocab" onclick="selectSection('vocab')">
+          <div class="exam-section-name">📝 Vocabulary</div>
+          <div class="exam-section-desc">Лексические задания</div>
+        </div>
+        <div class="exam-section-card" id="sec-mixed" onclick="selectSection('mixed')">
+          <div class="exam-section-name">🎯 Полный тест</div>
+          <div class="exam-section-desc">Все типы заданий</div>
+        </div>
+      </div>
+      <button class="btn-primary" style="font-size:0.95rem;padding:0.8rem 2.5rem" onclick="startExam()">Начать тест</button>
+    </div>
+  </div>
+  <div id="examQuestions" style="display:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0 1rem">
+      <div style="font-family:'Syne',sans-serif;font-weight:700" id="examProgressText">Вопрос 1 из 10</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--accent2)" id="examTimer">⏱ 00:00</div>
+    </div>
+    <div class="timer-bar"><div class="timer-fill" id="timerFill" style="width:100%"></div></div>
+    <div id="questionsContainer"></div>
+    <div style="text-align:center;margin-top:1.5rem">
+      <button class="btn-primary" onclick="submitExam()" id="submitBtn">Завершить тест</button>
+    </div>
+  </div>
+  <div id="examResults" style="display:none">
+    <div class="score-display">
+      <div class="score-num" id="scoreNum">0%</div>
+      <div class="score-label">Результат</div>
+      <div id="scoreFeedback" style="margin-top:1rem;font-style:italic;color:var(--muted)"></div>
+      <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center">
+        <button class="btn-primary" onclick="startExam()">Пройти снова</button>
+        <button class="btn-secondary" onclick="showIntro()">Выбрать раздел</button>
+      </div>
+      <div id="answersReview" style="margin-top:2rem;text-align:left"></div>
+    </div>
+  </div>
+</div>
+
+<!-- GRAMMAR MODAL -->
+<div class="modal-overlay" id="grammarModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== DATA ====================
+const TOPICS = [
+  { id: 'aorist', name: 'Αόριστος', sub: 'Прошедшее завершённое', status: 'known', color: '#4af0a0' },
+  { id: 'paratatikos', name: 'Παρατατικός', sub: 'Прошедшее длительное', status: 'learning', color: '#4a9ff0' },
+  { id: 'perfect', name: 'Παρακείμενος', sub: 'Перфект (έχω + причастие)', status: 'new', color: '#f04a4a' },
+  { id: 'future', name: 'Μέλλοντας', sub: 'Будущее время', status: 'known', color: '#4af0a0' },
+  { id: 'conditionals', name: 'Υποθετικές προτάσεις', sub: 'Условные предложения', status: 'new', color: '#f04a4a' },
+  { id: 'passive', name: 'Παθητική φωνή', sub: 'Пассивный залог', status: 'new', color: '#f04a4a' },
+  { id: 'comparison', name: 'Συγκριτικός / Υπερθετικός', sub: 'Степени сравнения', status: 'new', color: '#f04a4a' },
+];
+
+const STATUS_LABELS = { known: 'Знаю', learning: 'Изучаю', new: 'Не начато' };
+const STATUS_COLORS = { known: '#4af0a0', learning: '#f0a04a', new: '#f04a4a' };
+
+const GRAMMAR_THEORY = {
+  aorist: {
+    title: 'Αόριστος — Прошедшее завершённое',
+    subtitle: 'Действие, завершившееся в прошлом',
+    content: `
+      <div class="theory-block">
+        Используется для однократных, завершённых действий в прошлом.<br>
+        Отвечает на вопрос: <span class="highlight">что сделал?</span>
+      </div>
+      <table class="theory-table">
+        <tr><th>Лицо</th><th>παίζω (играть)</th><th>πηγαίνω (идти)</th><th>τρώω (есть)</th></tr>
+        <tr><td>εγώ</td><td class="gr-word">έπαιξα</td><td class="gr-word">πήγα</td><td class="gr-word">έφαγα</td></tr>
+        <tr><td>εσύ</td><td class="gr-word">έπαιξες</td><td class="gr-word">πήγες</td><td class="gr-word">έφαγες</td></tr>
+        <tr><td>αυτός/ή</td><td class="gr-word">έπαιξε</td><td class="gr-word">πήγε</td><td class="gr-word">έφαγε</td></tr>
+        <tr><td>εμείς</td><td class="gr-word">παίξαμε</td><td class="gr-word">πήγαμε</td><td class="gr-word">φάγαμε</td></tr>
+        <tr><td>εσείς</td><td class="gr-word">παίξατε</td><td class="gr-word">πήγατε</td><td class="gr-word">φάγατε</td></tr>
+        <tr><td>αυτοί</td><td class="gr-word">έπαιξαν</td><td class="gr-word">πήγαν</td><td class="gr-word">έφαγαν</td></tr>
+      </table>
+      <div class="theory-block">
+        <strong>Ключевые слова:</strong> χθες (вчера), πέρσι (в прошлом году), πριν (назад), μια φορά (однажды)
+      </div>
+    `
+  },
+  paratatikos: {
+    title: 'Παρατατικός — Прошедшее длительное',
+    subtitle: 'Повторяющиеся или длительные действия в прошлом',
+    content: `
+      <div class="theory-block">
+        Используется для:<br>
+        • Повторяющихся действий в прошлом: <span class="gr-word">Κάθε μέρα έπαιζα</span> (каждый день я играл)<br>
+        • Длительных действий: <span class="gr-word">Διάβαζα όταν ήρθε</span> (я читал, когда он пришёл)
+      </div>
+      <table class="theory-table">
+        <tr><th>Лицо</th><th>παίζω</th><th>είμαι (быть)</th></tr>
+        <tr><td>εγώ</td><td class="gr-word">έπαιζα</td><td class="gr-word">ήμουν</td></tr>
+        <tr><td>εσύ</td><td class="gr-word">έπαιζες</td><td class="gr-word">ήσουν</td></tr>
+        <tr><td>αυτός/ή</td><td class="gr-word">έπαιζε</td><td class="gr-word">ήταν</td></tr>
+        <tr><td>εμείς</td><td class="gr-word">παίζαμε</td><td class="gr-word">ήμαστε</td></tr>
+        <tr><td>εσείς</td><td class="gr-word">παίζατε</td><td class="gr-word">ήσαστε</td></tr>
+        <tr><td>αυτοί</td><td class="gr-word">έπαιζαν</td><td class="gr-word">ήταν</td></tr>
+      </table>
+      <div class="theory-block">
+        <strong>Ключевые слова:</strong> κάθε μέρα, συνήθως (обычно), πάντα (всегда), τότε (тогда)
+      </div>
+    `
+  },
+  perfect: {
+    title: 'Παρακείμενος — Перфект',
+    subtitle: 'έχω + причастие глагола',
+    content: `
+      <div class="theory-block">
+        Действие завершилось, но его результат важен <span class="highlight">сейчас</span>.<br>
+        Формула: <span class="gr-word">έχω/έχεις/έχει... + причастие</span>
+      </div>
+      <table class="theory-table">
+        <tr><th>Лицо</th><th>Вспом. глагол</th><th>φάω (есть)</th><th>πηγαίνω (идти)</th></tr>
+        <tr><td>εγώ</td><td class="gr-word">έχω</td><td class="gr-word">έχω φάει</td><td class="gr-word">έχω πάει</td></tr>
+        <tr><td>εσύ</td><td class="gr-word">έχεις</td><td class="gr-word">έχεις φάει</td><td class="gr-word">έχεις πάει</td></tr>
+        <tr><td>αυτός/ή</td><td class="gr-word">έχει</td><td class="gr-word">έχει φάει</td><td class="gr-word">έχει πάει</td></tr>
+        <tr><td>εμείς</td><td class="gr-word">έχουμε</td><td class="gr-word">έχουμε φάει</td><td class="gr-word">έχουμε πάει</td></tr>
+        <tr><td>εσείς</td><td class="gr-word">έχετε</td><td class="gr-word">έχετε φάει</td><td class="gr-word">έχετε πάει</td></tr>
+        <tr><td>αυτοί</td><td class="gr-word">έχουν</td><td class="gr-word">έχουν φάει</td><td class="gr-word">έχουν πάει</td></tr>
+      </table>
+      <div class="theory-block">
+        <span class="gr-word">Έχω φάει</span> = Я уже поел (и сейчас сыт)<br>
+        <span class="gr-word">Έχω πάει στην Κύπρο</span> = Я бывал на Кипре<br><br>
+        <strong>Ключевые слова:</strong> ήδη (уже), ποτέ (никогда), μόλις (только что)
+      </div>
+    `
+  },
+  future: {
+    title: 'Μέλλοντας — Будущее время',
+    subtitle: 'θα + форма глагола',
+    content: `
+      <div class="theory-block">
+        Формула: <span class="gr-word">θα + глагол в настоящем или сослагательном</span>
+      </div>
+      <table class="theory-table">
+        <tr><th>Лицо</th><th>πηγαίνω (идти)</th><th>φεύγω (уходить)</th></tr>
+        <tr><td>εγώ</td><td class="gr-word">θα πάω</td><td class="gr-word">θα φύγω</td></tr>
+        <tr><td>εσύ</td><td class="gr-word">θα πας</td><td class="gr-word">θα φύγεις</td></tr>
+        <tr><td>αυτός/ή</td><td class="gr-word">θα πάει</td><td class="gr-word">θα φύγει</td></tr>
+        <tr><td>εμείς</td><td class="gr-word">θα πάμε</td><td class="gr-word">θα φύγουμε</td></tr>
+        <tr><td>εσείς</td><td class="gr-word">θα πάτε</td><td class="gr-word">θα φύγετε</td></tr>
+        <tr><td>αυτοί</td><td class="gr-word">θα πάνε</td><td class="gr-word">θα φύγουν</td></tr>
+      </table>
+      <div class="theory-block">
+        <strong>Ключевые слова:</strong> αύριο (завтра), σύντομα (скоро), την επόμενη εβδομάδα (на следующей неделе)
+      </div>
+    `
+  },
+  conditionals: {
+    title: 'Υποθετικές προτάσεις — Условные предложения',
+    subtitle: '1-й и 2-й тип',
+    content: `
+      <div class="theory-block">
+        <strong>1-й тип (реальное условие):</strong><br>
+        <span class="gr-word">Αν + настоящее время → θα + будущее</span><br>
+        Αν <span class="highlight">έχεις</span> χρόνο, θα <span class="highlight">πάμε</span> στην παραλία.<br>
+        (Если у тебя будет время, мы пойдём на пляж)
+      </div>
+      <div class="theory-block">
+        <strong>2-й тип (нереальное/маловероятное):</strong><br>
+        <span class="gr-word">Αν + παρατατικός → θα + παρατατικός</span><br>
+        Αν <span class="highlight">είχα</span> χρόνο, θα <span class="highlight">πήγαινα</span> στην παραλία.<br>
+        (Если бы у меня было время, я бы пошёл на пляж — но его нет)
+      </div>
+      <table class="theory-table">
+        <tr><th></th><th>Условие (αν)</th><th>Результат</th></tr>
+        <tr><td><strong>1-й тип</strong></td><td>настоящее</td><td>θα + будущее</td></tr>
+        <tr><td><strong>2-й тип</strong></td><td>παρατατικός</td><td>θα + παρατατικός</td></tr>
+      </table>
+    `
+  },
+  passive: {
+    title: 'Παθητική φωνή — Пассивный залог',
+    subtitle: 'Действие совершается над подлежащим',
+    content: `
+      <div class="theory-block">
+        В активном залоге субъект совершает действие.<br>
+        В пассивном — субъект получает действие.<br><br>
+        Активный: <span class="gr-word">Ο Νίκος <span class="highlight">διαβάζει</span> το βιβλίο</span> (Никос читает книгу)<br>
+        Пассивный: <span class="gr-word">Το βιβλίο <span class="highlight">διαβάζεται</span> από τον Νίκο</span> (Книга читается Никосом)
+      </div>
+      <table class="theory-table">
+        <tr><th>Лицо</th><th>Активный (γράφω)</th><th>Пассивный (γράφομαι)</th></tr>
+        <tr><td>εγώ</td><td class="gr-word">γράφω</td><td class="gr-word">γράφομαι</td></tr>
+        <tr><td>εσύ</td><td class="gr-word">γράφεις</td><td class="gr-word">γράφεσαι</td></tr>
+        <tr><td>αυτός/ή</td><td class="gr-word">γράφει</td><td class="gr-word">γράφεται</td></tr>
+        <tr><td>εμείς</td><td class="gr-word">γράφουμε</td><td class="gr-word">γραφόμαστε</td></tr>
+        <tr><td>εσείς</td><td class="gr-word">γράφετε</td><td class="gr-word">γράφεστε</td></tr>
+        <tr><td>αυτοί</td><td class="gr-word">γράφουν</td><td class="gr-word">γράφονται</td></tr>
+      </table>
+    `
+  },
+  comparison: {
+    title: 'Συγκριτικός / Υπερθετικός — Степени сравнения',
+    subtitle: 'Как выражать "лучше", "самый лучший"',
+    content: `
+      <div class="theory-block">
+        Положительная → Сравнительная → Превосходная
+      </div>
+      <table class="theory-table">
+        <tr><th>Положительная</th><th>Сравнительная (-τερος)</th><th>Превосходная (ο/η/το + -τερος)</th></tr>
+        <tr><td class="gr-word">καλός (хороший)</td><td class="gr-word">καλύτερος</td><td class="gr-word">ο καλύτερος</td></tr>
+        <tr><td class="gr-word">κακός (плохой)</td><td class="gr-word">χειρότερος</td><td class="gr-word">ο χειρότερος</td></tr>
+        <tr><td class="gr-word">μεγάλος (большой)</td><td class="gr-word">μεγαλύτερος</td><td class="gr-word">ο μεγαλύτερος</td></tr>
+        <tr><td class="gr-word">μικρός (маленький)</td><td class="gr-word">μικρότερος</td><td class="gr-word">ο μικρότερος</td></tr>
+        <tr><td class="gr-word">ωραίος (красивый)</td><td class="gr-word">ωραιότερος</td><td class="gr-word">ο ωραιότερος</td></tr>
+      </table>
+      <div class="theory-block">
+        Конструкция сравнения:<br>
+        <span class="gr-word">Η Αθήνα είναι <span class="highlight">μεγαλύτερη από</span> την Θεσσαλονίκη</span><br>
+        (Афины больше, чем Салоники)<br><br>
+        Превосходная: <span class="gr-word">Αυτό είναι <span class="highlight">το καλύτερο</span> εστιατόριο</span>
+      </div>
+    `
+  }
+};
+
+const EXAM_QUESTIONS = {
+  reading: [
+    {
+      text: 'Διαβάστε το κείμενο:\n\n«Ο Κώστας εργάζεται ως δάσκαλος σε ένα σχολείο στη Θεσσαλονίκη. Κάθε πρωί πηγαίνει στη δουλειά του με το λεωφορείο. Του αρέσει η δουλειά του γιατί αγαπά τα παιδιά και τη διδασκαλία.»\n\nΤι δουλειά κάνει ο Κώστας;',
+      options: ['Γιατρός', 'Δάσκαλος', 'Οδηγός λεωφορείου', 'Μαθητής'],
+      correct: 1
+    },
+    {
+      text: 'Από το ίδιο κείμενο — Πώς πηγαίνει ο Κώστας στη δουλειά;',
+      options: ['Με το αυτοκίνητο', 'Με τα πόδια', 'Με το λεωφορείο', 'Με το μετρό'],
+      correct: 2
+    },
+    {
+      text: 'Γιατί αρέσει στον Κώστα η δουλειά του;',
+      options: ['Επειδή έχει πολλές διακοπές', 'Επειδή αγαπά τα παιδιά και τη διδασκαλία', 'Επειδή πληρώνεται πολύ καλά', 'Επειδή δουλεύει κοντά στο σπίτι του'],
+      correct: 1
+    }
+  ],
+  grammar: [
+    {
+      text: 'Επιλέξτε τη σωστή μορφή:\nΧθες ο Γιώργης ___ στη δουλειά με τα πόδια.',
+      options: ['πηγαίνει', 'θα πάει', 'πήγε', 'πήγαινε'],
+      correct: 2
+    },
+    {
+      text: 'Επιλέξτε τη σωστή μορφή:\nΌταν ήμουν μικρός, κάθε μέρα ___ ποδόσφαιρο.',
+      options: ['παίζω', 'παίξω', 'έπαιξα', 'έπαιζα'],
+      correct: 3
+    },
+    {
+      text: 'Επιλέξτε τη σωστή μορφή:\nΑύριο ___ στην παραλία με τους φίλους μου.',
+      options: ['πάω', 'πήγα', 'θα πάω', 'πήγαινα'],
+      correct: 2
+    },
+    {
+      text: 'Επιλέξτε τη σωστή μορφή:\n«Я уже поел» по-гречески:',
+      options: ['Τρώω ήδη', 'Έχω φάει', 'Έφαγα ήδη', 'Τρώγω'],
+      correct: 1
+    },
+    {
+      text: 'Επιλέξτε τη σωστή μορφή:\nΑν έχεις χρόνο, ___ στο σινεμά.',
+      options: ['πάμε', 'θα πάμε', 'πηγαίνουμε', 'πήγαμε'],
+      correct: 1
+    },
+    {
+      text: 'Βαθμός σύγκρισης — επιλέξτε σωστά:\nΗ Αθήνα είναι ___ από τη Θεσσαλονίκη.',
+      options: ['πολύ μεγάλη', 'μεγαλύτερη', 'η μεγαλύτερη', 'πιο μεγάλος'],
+      correct: 1
+    }
+  ],
+  vocab: [
+    {
+      text: 'Τι σημαίνει η λέξη «η εργασία»;',
+      options: ['Отдых', 'Работа', 'Путешествие', 'Учёба'],
+      correct: 1
+    },
+    {
+      text: 'Πώς λέμε «путешествовать» στα ελληνικά;',
+      options: ['δουλεύω', 'ταξιδεύω', 'μελετώ', 'αγοράζω'],
+      correct: 1
+    },
+    {
+      text: 'Τι σημαίνει: «Συμφωνώ μαζί σου»;',
+      options: ['Я не согласен с тобой', 'Я думаю о тебе', 'Я согласен с тобой', 'Я понимаю тебя'],
+      correct: 2
+    },
+    {
+      text: 'Πώς λέμε «по моему мнению» στα ελληνικά;',
+      options: ['Νομίζω ότι', 'Κατά τη γνώμη μου', 'Πιστεύω ότι', 'Για μένα'],
+      correct: 1
+    }
+  ]
+};
+
+// Merge for mixed
+EXAM_QUESTIONS.mixed = [
+  ...EXAM_QUESTIONS.reading,
+  ...EXAM_QUESTIONS.grammar,
+  ...EXAM_QUESTIONS.vocab
+].sort(() => Math.random() - 0.5).slice(0, 10);
+
+// ==================== STATE ====================
+let vocab = JSON.parse(localStorage.getItem('greek_vocab') || '[]');
+let testCount = parseInt(localStorage.getItem('greek_tests') || '0');
+let currentFilter = 'all';
+let selectedSection = 'reading';
+let examStartTime, examTimer, currentAnswers = {};
+
+// ==================== INIT ====================
+function init() {
+  renderDeadline();
+  renderTopics();
+  renderVocab();
+  renderGrammarTopics();
+  updateStats();
+  setInterval(renderDeadline, 60000);
+}
+
+function renderDeadline() {
+  const exam = new Date('2025-05-25');
+  const now = new Date();
+  const days = Math.ceil((exam - now) / (1000 * 60 * 60 * 24));
+  document.getElementById('deadlineCounter').textContent = `⏱ ${days} дн. до экзамена`;
+}
+
+// ==================== NAVIGATION ====================
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const tabs = document.querySelectorAll('.nav-tab');
+  const order = ['dashboard', 'vocab', 'grammar', 'exam'];
+  tabs[order.indexOf(name)]?.classList.add('active');
+}
+
+// ==================== TOPICS DASHBOARD ====================
+function renderTopics() {
+  const g = document.getElementById('topicsGrid');
+  g.innerHTML = TOPICS.map(t => `
+    <div class="topic-item" onclick="openGrammar('${t.id}')">
+      <div class="topic-status" style="background:${STATUS_COLORS[t.status]}"></div>
+      <div>
+        <div class="topic-name">${t.name}</div>
+        <div class="topic-sub">${t.sub} · <span style="color:${STATUS_COLORS[t.status]}">${STATUS_LABELS[t.status]}</span></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ==================== GRAMMAR ====================
+function renderGrammarTopics() {
+  const g = document.getElementById('grammarTopics');
+  g.innerHTML = TOPICS.map(t => `
+    <div class="grammar-card" onclick="openGrammar('${t.id}')">
+      <div class="grammar-card-header">
+        <div class="grammar-card-title">${t.name}</div>
+        <div class="grammar-card-sub">${t.sub}</div>
+        <div class="grammar-status" style="background:rgba(${hexToRgb(STATUS_COLORS[t.status])},0.1);color:${STATUS_COLORS[t.status]}">
+          ● ${STATUS_LABELS[t.status]}
+        </div>
+      </div>
+      <div class="grammar-card-body">Нажми чтобы открыть теорию и примеры →</div>
+    </div>
+  `).join('');
+}
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+function openGrammar(id) {
+  const theory = GRAMMAR_THEORY[id];
+  if (!theory) return;
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-title">${theory.title}</div>
+    <div class="modal-subtitle">${theory.subtitle}</div>
+    ${theory.content}
+  `;
+  document.getElementById('grammarModal').classList.add('open');
+}
+
+function openGrammarFromDash(id) {
+  showPage('grammar');
+  setTimeout(() => openGrammar(id), 100);
+}
+
+function closeModal() {
+  document.getElementById('grammarModal').classList.remove('open');
+}
+
+// ==================== VOCABULARY ====================
+const CAT_COLORS = {
+  travel: '#4a9ff0', work: '#4af0a0', health: '#f04a4a',
+  daily: '#f0a04a', society: '#a04af0', other: '#6b6b75'
+};
+const CAT_LABELS = {
+  travel: 'путешествия', work: 'работа', health: 'здоровье',
+  daily: 'быт', society: 'общество', other: 'другое'
+};
+
+// Preload starter words
+if (vocab.length === 0) {
+  vocab = [
+    { greek: 'η εργασία', russian: 'работа', type: 'сущ.', category: 'work', example: 'Η εργασία μου είναι ενδιαφέρουσα.' },
+    { greek: 'το ταξίδι', russian: 'путешествие', type: 'сущ.', category: 'travel', example: 'Μου αρέσει να κάνω ταξίδια.' },
+    { greek: 'η υγεία', russian: 'здоровье', type: 'сущ.', category: 'health', example: 'Η υγεία είναι σημαντική.' },
+    { greek: 'η γειτονιά', russian: 'район, окрестность', type: 'сущ.', category: 'daily', example: 'Μένω σε μια όμορφη γειτονιά.' },
+    { greek: 'το περιβάλλον', russian: 'окружающая среда', type: 'сущ.', category: 'society', example: 'Πρέπει να προστατεύουμε το περιβάλλον.' },
+    { greek: 'ταξιδεύω', russian: 'путешествовать', type: 'глаг.', category: 'travel', example: 'Ταξιδεύω κάθε καλοκαίρι.' },
+    { greek: 'δουλεύω', russian: 'работать', type: 'глаг.', category: 'work', example: 'Δουλεύω σε μια εταιρεία.' },
+    { greek: 'συμφωνώ', russian: 'соглашаться', type: 'глаг.', category: 'society', example: 'Συμφωνώ μαζί σου.' },
+    { greek: 'κατά τη γνώμη μου', russian: 'по моему мнению', type: 'фраза', category: 'society', example: 'Κατά τη γνώμη μου, αυτό είναι σωστό.' },
+    { greek: 'αν και', russian: 'хотя, несмотря на то что', type: 'союз', category: 'society', example: 'Πήγα, αν και ήμουν κουρασμένος.' },
+  ];
+  saveVocab();
+}
+
+function saveVocab() {
+  localStorage.setItem('greek_vocab', JSON.stringify(vocab));
+  updateStats();
+}
+
+function updateStats() {
+  document.getElementById('statWords').textContent = vocab.length;
+  document.getElementById('statTests').textContent = testCount;
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderVocab();
+}
+
+function renderVocab() {
+  const search = document.getElementById('vocabSearch').value.toLowerCase();
+  let filtered = vocab.filter(w => {
+    const matchFilter = currentFilter === 'all' || w.category === currentFilter;
+    const matchSearch = !search || w.greek.toLowerCase().includes(search) || w.russian.toLowerCase().includes(search);
+    return matchFilter && matchSearch;
+  });
+  document.getElementById('vocabCount').textContent = `${filtered.length} слов`;
+  const g = document.getElementById('vocabGrid');
+  if (filtered.length === 0) {
+    g.innerHTML = '<div class="empty">Слова не найдены</div>';
+    return;
+  }
+  g.innerHTML = filtered.map((w, i) => `
+    <div class="word-card" onclick="this.classList.toggle('flipped')">
+      <div class="word-front">
+        <div class="word-tag" style="background:rgba(${hexToRgb(CAT_COLORS[w.category]||'#6b6b75')},0.15);color:${CAT_COLORS[w.category]||'#6b6b75'}">${CAT_LABELS[w.category]||'др.'}</div>
+        <div class="word-greek">${w.greek}</div>
+        <div class="word-type">${w.type || ''}</div>
+        <div class="word-example">${w.example || ''}</div>
+      </div>
+      <div class="word-back">
+        <div class="word-russian">${w.russian}</div>
+        <div class="word-example" style="margin-top:0.5rem">${w.example || ''}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleAddForm() {
+  document.getElementById('addWordForm').classList.toggle('open');
+}
+
+function addWord() {
+  const greek = document.getElementById('newGreek').value.trim();
+  const russian = document.getElementById('newRussian').value.trim();
+  if (!greek || !russian) { showToast('Заполни греческое слово и перевод'); return; }
+  vocab.push({
+    greek,
+    russian,
+    category: document.getElementById('newCategory').value,
+    type: document.getElementById('newType').value.trim(),
+    example: document.getElementById('newExample').value.trim()
+  });
+  saveVocab();
+  renderVocab();
+  ['newGreek','newRussian','newType','newExample'].forEach(id => document.getElementById(id).value = '');
+  showToast('Слово добавлено: ' + greek);
+}
+
+// ==================== EXAM ====================
+function selectSection(s) {
+  selectedSection = s;
+  document.querySelectorAll('.exam-section-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('sec-' + s).classList.add('selected');
+}
+
+function startExam() {
+  // Refresh mixed
+  EXAM_QUESTIONS.mixed = [
+    ...EXAM_QUESTIONS.reading,
+    ...EXAM_QUESTIONS.grammar,
+    ...EXAM_QUESTIONS.vocab
+  ].sort(() => Math.random() - 0.5).slice(0, 10);
+
+  currentAnswers = {};
+  const questions = EXAM_QUESTIONS[selectedSection] || EXAM_QUESTIONS.grammar;
+
+  document.getElementById('examIntro').style.display = 'none';
+  document.getElementById('examResults').style.display = 'none';
+  document.getElementById('examQuestions').style.display = 'block';
+
+  const container = document.getElementById('questionsContainer');
+  container.innerHTML = questions.map((q, i) => `
+    <div class="question-block">
+      <div class="question-num">Вопрос ${i+1} из ${questions.length}</div>
+      <div class="question-text" style="white-space:pre-line">${q.text}</div>
+      <div class="options-list" id="opts-${i}">
+        ${q.options.map((opt, j) => `
+          <button class="option-btn" onclick="selectAnswer(${i}, ${j}, ${q.correct})" id="opt-${i}-${j}">${opt}</button>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('examProgressText').textContent = `${questions.length} вопросов · ${selectedSection}`;
+  examStartTime = Date.now();
+  startTimer(questions.length * 60);
+  testCount++;
+  localStorage.setItem('greek_tests', testCount);
+  updateStats();
+}
+
+function startTimer(seconds) {
+  if (examTimer) clearInterval(examTimer);
+  let remaining = seconds;
+  examTimer = setInterval(() => {
+    remaining--;
+    const m = Math.floor(remaining/60).toString().padStart(2,'0');
+    const s = (remaining%60).toString().padStart(2,'0');
+    document.getElementById('examTimer').textContent = `⏱ ${m}:${s}`;
+    document.getElementById('timerFill').style.width = (remaining/seconds*100) + '%';
+    if (remaining <= 0) { clearInterval(examTimer); submitExam(); }
+  }, 1000);
+}
+
+function selectAnswer(qi, ai, correct) {
+  currentAnswers[qi] = ai;
+  const opts = document.querySelectorAll(`#opts-${qi} .option-btn`);
+  opts.forEach(b => b.disabled = true);
+  opts[ai].classList.add(ai === correct ? 'correct' : 'wrong');
+  if (ai !== correct) opts[correct].classList.add('correct');
+}
+
+function submitExam() {
+  if (examTimer) clearInterval(examTimer);
+  const questions = EXAM_QUESTIONS[selectedSection];
+  let correct = 0;
+  questions.forEach((q, i) => {
+    if (currentAnswers[i] === q.correct) correct++;
+  });
+  const pct = Math.round(correct / questions.length * 100);
+
+  document.getElementById('examQuestions').style.display = 'none';
+  document.getElementById('examResults').style.display = 'block';
+  document.getElementById('scoreNum').textContent = pct + '%';
+
+  let feedback = '';
+  if (pct >= 80) feedback = 'Отлично! Уровень B1 достигается. Продолжай в том же духе.';
+  else if (pct >= 60) feedback = 'Хорошо, но есть пробелы. Разбери ошибки и повтори тему.';
+  else feedback = 'Нужно больше практики. Вернись к теории и попробуй снова.';
+
+  document.getElementById('scoreFeedback').textContent = feedback + ` (${correct}/${questions.length} правильно)`;
+
+  const review = document.getElementById('answersReview');
+  review.innerHTML = '<div class="section-title">Разбор ошибок</div>' + questions.map((q, i) => {
+    const userAns = currentAnswers[i];
+    const isCorrect = userAns === q.correct;
+    return `
+      <div class="question-block" style="border-color:${isCorrect ? 'var(--accent)' : 'var(--danger)'}">
+        <div class="question-text" style="white-space:pre-line;font-size:0.85rem">${q.text}</div>
+        <div style="margin-top:0.5rem;font-size:0.82rem">
+          ${isCorrect
+            ? `<span style="color:var(--accent)">✓ ${q.options[q.correct]}</span>`
+            : `<span style="color:var(--danger)">✗ Ты ответил: ${q.options[userAns] ?? 'не ответил'}</span><br>
+               <span style="color:var(--accent)">✓ Правильно: ${q.options[q.correct]}</span>`
+          }
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function showIntro() {
+  document.getElementById('examIntro').style.display = 'block';
+  document.getElementById('examQuestions').style.display = 'none';
+  document.getElementById('examResults').style.display = 'none';
+}
+
+// ==================== TOAST ====================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// Close modal on overlay click
+document.getElementById('grammarModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+init();
+</script>
+</body>
+</html>
