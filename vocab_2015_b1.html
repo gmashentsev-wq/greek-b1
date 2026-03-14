@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Словарь B1 · Тест 2015</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f0f4f8; --surface:#fff; --border:#e2e8f0;
+  --blue:#2563eb; --bl:#eff6ff; --blm:#bfdbfe;
+  --green:#059669; --gl:#ecfdf5;
+  --amber:#d97706; --al:#fffbeb;
+  --red:#dc2626; --rl:#fef2f2;
+  --purple:#7c3aed; --pl:#f5f3ff;
+  --teal:#0891b2; --tl:#ecfeff;
+  --text:#0f172a; --t2:#334155; --muted:#64748b; --m2:#94a3b8;
+  --sh:0 1px 3px rgba(0,0,0,.08); --shm:0 4px 12px rgba(0,0,0,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#1d4ed8,#0891b2);color:#fff;padding:2rem 2rem 1.5rem;text-align:center}
+.hdr-badge{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:.3rem .9rem;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.6rem}
+.hdr h1{font-size:1.8rem;font-weight:800;letter-spacing:-.04em;margin-bottom:.25rem}
+.hdr h1 span{opacity:.75;font-family:'Noto Serif',serif}
+.hdr p{font-size:.85rem;opacity:.7}
+.hdr-stats{display:flex;justify-content:center;gap:2.5rem;margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,.2)}
+.hs-num{font-size:1.6rem;font-weight:800;letter-spacing:-.04em}
+.hs-lbl{font-size:.7rem;opacity:.7;margin-top:.1rem}
+
+/* TAB NAV */
+.tab-nav{background:var(--surface);border-bottom:1px solid var(--border);display:flex;gap:0;position:sticky;top:0;z-index:80;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.tab-btn{flex:1;padding:.85rem .5rem;font-size:.82rem;font-weight:600;cursor:pointer;border:none;background:none;color:var(--muted);transition:all .15s;font-family:inherit;border-bottom:2px solid transparent;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.tab-btn:hover{color:var(--text);background:var(--bg)}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);background:var(--bl)}
+
+/* CONTROLS */
+.controls{background:var(--surface);border-bottom:1px solid var(--border);padding:.85rem 1.5rem;display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.srch{position:relative;flex:1;min-width:200px}
+.srch input{width:100%;padding:.5rem .9rem .5rem 2.2rem;border:1.5px solid var(--border);border-radius:9px;font-size:.85rem;font-family:inherit;outline:none;background:#f8fafc;transition:border-color .15s}
+.srch input:focus{border-color:var(--blue);background:#fff}
+.si{position:absolute;left:.7rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem}
+.pill{padding:.38rem .8rem;border:1.5px solid var(--border);border-radius:20px;font-size:.75rem;font-weight:600;cursor:pointer;background:var(--surface);color:var(--muted);transition:all .15s;font-family:inherit;white-space:nowrap}
+.pill:hover{border-color:var(--blm);color:var(--blue)}
+.pill.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.nbadge{background:var(--bl);color:var(--blue);font-size:.68rem;font-weight:700;padding:.12rem .45rem;border-radius:8px;margin-left:.35rem}
+
+/* MAIN LAYOUT */
+.main{max-width:1100px;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+
+/* VOCAB TABLE */
+.sec-hdr{display:flex;align-items:center;gap:.65rem;margin:1.5rem 0 .75rem;padding-bottom:.65rem;border-bottom:2px solid var(--border)}
+.sec-icon{font-size:1.2rem}
+.sec-title{font-size:.95rem;font-weight:700}
+.sec-desc{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.sec-cnt{margin-left:auto;font-size:.72rem;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--border);padding:.18rem .55rem;border-radius:9px}
+.wtbl{display:grid;grid-template-columns:2fr 2fr .9fr 1fr;background:var(--surface);border:1px solid var(--border);border-radius:13px;overflow:hidden;box-shadow:var(--sh)}
+.th{background:#f8fafc;padding:.55rem .9rem;font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border)}
+.wr{display:contents}
+.wr>div{padding:.72rem .9rem;border-bottom:1px solid var(--border);display:flex;align-items:center;font-size:.855rem;transition:background .1s}
+.wr:last-child>div{border-bottom:none}
+.wr:hover>div{background:#f8fafc}
+.wr.hidden{display:none}
+.wgr{font-family:'Noto Serif',serif;font-weight:600;color:var(--blue);font-size:.92rem}
+.wru{color:var(--text);font-weight:500}
+.tbadge{display:inline-block;padding:.13rem .5rem;border-radius:5px;font-size:.68rem;font-weight:600;background:var(--bg);color:var(--muted);border:1px solid var(--border)}
+.cbadge{display:inline-block;padding:.18rem .55rem;border-radius:20px;font-size:.68rem;font-weight:600;white-space:nowrap}
+.ct{background:var(--bl);color:var(--blue)}
+.ch{background:var(--rl);color:var(--red)}
+.cf{background:#fff7ed;color:#ea580c}
+.cw{background:var(--gl);color:var(--green)}
+.cd{background:var(--al);color:var(--amber)}
+.cs{background:var(--pl);color:var(--purple)}
+.ce{background:#fdf2f8;color:#be185d}
+.cn{background:#f0fdf4;color:#15803d}
+
+/* ===== TAB PANELS ===== */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* FLASHCARD */
+.ex-wrap{max-width:600px;margin:2rem auto;padding:0 1rem}
+.ex-controls{display:flex;gap:.6rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
+.ex-progress{display:flex;gap:.75rem;margin-bottom:1.2rem;align-items:center}
+.prog-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--teal));border-radius:4px;transition:width .4s}
+.prog-txt{font-size:.78rem;font-weight:600;color:var(--muted);white-space:nowrap}
+.card-scene{perspective:1000px;margin:0 auto 1.5rem}
+.card-3d{width:100%;height:220px;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer;border-radius:18px}
+.card-3d.flipped{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;box-shadow:var(--shm)}
+.card-front{background:var(--surface);border:1.5px solid var(--border)}
+.card-back{background:linear-gradient(135deg,#1d4ed8,#0891b2);transform:rotateY(180deg)}
+.card-hint{font-size:.72rem;color:var(--m2);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.06em}
+.card-word{font-size:1.6rem;font-weight:700;text-align:center;line-height:1.3}
+.card-front .card-word{font-family:'Noto Serif',serif;color:var(--blue)}
+.card-back .card-word{color:#fff}
+.card-type{font-size:.75rem;color:var(--m2);margin-top:.5rem;font-style:italic}
+.card-back .card-type{color:rgba(255,255,255,.65)}
+.card-hint-click{font-size:.72rem;color:var(--m2);margin-top:1rem}
+.card-actions{display:flex;gap:.75rem;justify-content:center}
+.btn{padding:.6rem 1.4rem;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;border:none}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#1d4ed8;box-shadow:0 4px 12px rgba(37,99,235,.3);transform:translateY(-1px)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#b91c1c}
+.btn-outline{background:var(--surface);color:var(--text);border:1.5px solid var(--border)}.btn-outline:hover{background:var(--bg)}
+.btn-amber{background:var(--amber);color:#fff}.btn-amber:hover{background:#b45309}
+.result-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center;box-shadow:var(--sh)}
+.result-big{font-size:2.5rem;font-weight:800;letter-spacing:-.04em;color:var(--blue)}
+.result-sub{font-size:.9rem;color:var(--muted);margin-top:.4rem}
+.score-breakdown{display:flex;justify-content:center;gap:2rem;margin-top:1.2rem}
+.sb-item{text-align:center}
+.sb-num{font-size:1.4rem;font-weight:800}
+.sb-lbl{font-size:.72rem;color:var(--muted);margin-top:.15rem}
+/* mode toggle */
+.mode-toggle{display:flex;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
+.mode-btn{flex:1;padding:.45rem .9rem;font-size:.78rem;font-weight:600;cursor:pointer;border:none;background:none;color:var(--muted);font-family:inherit;transition:all .15s}
+.mode-btn.active{background:var(--blue);color:#fff}
+
+/* QUIZ */
+.quiz-q{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem 1.8rem;box-shadow:var(--sh);margin-bottom:1.2rem}
+.quiz-num{font-size:.7rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.06em;background:var(--bl);display:inline-block;padding:.18rem .55rem;border-radius:5px;margin-bottom:.65rem}
+.quiz-word{font-size:1.3rem;font-weight:700;font-family:'Noto Serif',serif;color:var(--blue);margin-bottom:1rem}
+.quiz-opts{display:flex;flex-direction:column;gap:.5rem}
+.qopt{padding:.72rem 1rem;border:1.5px solid var(--border);border-radius:10px;background:#f8fafc;color:var(--text);font-size:.88rem;font-weight:500;cursor:pointer;text-align:left;transition:all .15s;font-family:inherit}
+.qopt:hover:not(:disabled){border-color:var(--blm);background:var(--bl);color:var(--blue)}
+.qopt.correct{background:var(--gl);border-color:var(--green);color:var(--green);font-weight:600}
+.qopt.wrong{background:var(--rl);border-color:var(--red);color:var(--red);font-weight:600}
+.qopt:disabled{cursor:default}
+.quiz-stats{display:flex;gap:1rem;margin-bottom:1.2rem;align-items:center}
+.stat-chip{font-size:.78rem;font-weight:600;padding:.3rem .75rem;border-radius:20px}
+.sc-right{background:var(--gl);color:var(--green)}
+.sc-wrong{background:var(--rl);color:var(--red)}
+
+/* SPELLING */
+.spell-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;box-shadow:var(--sh);text-align:center;margin-bottom:1.2rem}
+.spell-ru{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
+.spell-type{font-size:.78rem;color:var(--muted);font-style:italic;margin-bottom:1.4rem}
+.spell-input{width:100%;padding:.75rem 1rem;border:2px solid var(--border);border-radius:10px;font-size:1.05rem;font-family:'Noto Serif',serif;text-align:center;outline:none;transition:border-color .15s;color:var(--text)}
+.spell-input:focus{border-color:var(--blue)}
+.spell-input.ok{border-color:var(--green);background:var(--gl);color:var(--green)}
+.spell-input.err{border-color:var(--red);background:var(--rl);color:var(--red)}
+.spell-answer{margin-top:.75rem;font-size:.88rem}
+.spell-hint-letters{display:flex;justify-content:center;gap:.3rem;margin-top:1rem;flex-wrap:wrap}
+.sl{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:6px;font-size:.85rem;font-weight:600;font-family:'Noto Serif',serif}
+.sl.ok{background:var(--gl);color:var(--green);border:1.5px solid var(--green)}
+.sl.err{background:var(--rl);color:var(--red);border:1.5px solid var(--red)}
+.sl.miss{background:var(--bg);color:var(--muted);border:1.5px solid var(--border)}
+.spell-progress{margin-bottom:1rem}
+
+/* EMPTY */
+.empty{text-align:center;padding:3rem;color:var(--muted);font-style:italic;grid-column:1/-1}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-badge">Κρατικό Πιστοποιητικό Γλωσσομάθειας · B1</div>
+  <h1>Словарь <span>B1</span> · Тест 2015</h1>
+  <p>Все слова из официального экзамена — тексты, аудио, письмо, говорение</p>
+  <div class="hdr-stats">
+    <div><div class="hs-num" id="totalWords">163</div><div class="hs-lbl">Слов и фраз</div></div>
+    <div><div class="hs-num">4</div><div class="hs-lbl">Текста + аудио</div></div>
+    <div><div class="hs-num">8</div><div class="hs-lbl">Тематик</div></div>
+  </div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('vocab',this)">📚 Словарь</button>
+  <button class="tab-btn" onclick="switchTab('flash',this)">🃏 Карточки</button>
+  <button class="tab-btn" onclick="switchTab('quiz',this)">✅ Тест</button>
+  <button class="tab-btn" onclick="switchTab('spell',this)">✍️ Написание</button>
+</div>
+
+<!-- ===== TAB: СЛОВАРЬ ===== -->
+<div class="tab-panel active" id="tab-vocab">
+  <div class="controls">
+    <div class="srch"><span class="si">🔍</span><input type="text" id="srchIn" placeholder="Поиск по-гречески или по-русски..." oninput="filterVocab()"></div>
+    <div style="display:flex;gap:.4rem;flex-wrap:wrap">
+      <button class="pill active" data-cat="all" onclick="setCat('all',this)">Все <span class="nbadge" id="cnt-all">163</span></button>
+      <button class="pill" data-cat="travel" onclick="setCat('travel',this)">✈️ Путешествия</button>
+      <button class="pill" data-cat="health" onclick="setCat('health',this)">💊 Здоровье</button>
+      <button class="pill" data-cat="food" onclick="setCat('food',this)">🍽️ Еда</button>
+      <button class="pill" data-cat="work" onclick="setCat('work',this)">💼 Работа</button>
+      <button class="pill" data-cat="daily" onclick="setCat('daily',this)">🏠 Быт</button>
+      <button class="pill" data-cat="society" onclick="setCat('society',this)">🌍 Общество</button>
+      <button class="pill" data-cat="emotions" onclick="setCat('emotions',this)">💬 Чувства</button>
+      <button class="pill" data-cat="nature" onclick="setCat('nature',this)">🌿 Природа</button>
+    </div>
+  </div>
+  <div class="main" id="vocabMain"></div>
+</div>
+
+<!-- ===== TAB: КАРТОЧКИ ===== -->
+<div class="tab-panel" id="tab-flash">
+  <div class="ex-wrap">
+    <div class="ex-controls">
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="fm-gr" onclick="setFlashMode('gr')">🇬🇷 → 🇷🇺</button>
+        <button class="mode-btn" id="fm-ru" onclick="setFlashMode('ru')">🇷🇺 → 🇬🇷</button>
+      </div>
+      <button class="btn btn-outline" onclick="shuffleFlash()">🔀 Перемешать</button>
+      <button class="btn btn-outline" onclick="resetFlash()">↺ Сначала</button>
+      <div style="margin-left:auto;font-size:.78rem;color:var(--muted)" id="flashCatInfo">Все слова</div>
+    </div>
+    <div class="ex-progress">
+      <div class="prog-bar"><div class="prog-fill" id="flashProg" style="width:0%"></div></div>
+      <div class="prog-txt" id="flashProgTxt">0 / 0</div>
+    </div>
+    <div class="card-scene">
+      <div class="card-3d" id="flashCard" onclick="flipCard()">
+        <div class="card-face card-front">
+          <div class="card-hint" id="fc-hint-front">Греческое</div>
+          <div class="card-word" id="fc-word-front">—</div>
+          <div class="card-type" id="fc-type">сущ.</div>
+          <div class="card-hint-click">нажми чтобы перевернуть</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-hint" style="color:rgba(255,255,255,.6)" id="fc-hint-back">Перевод</div>
+          <div class="card-word" id="fc-word-back">—</div>
+          <div class="card-type" id="fc-type-back"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-red" onclick="markCard(false)">✗ Не знаю</button>
+      <button class="btn btn-green" onclick="markCard(true)">✓ Знаю</button>
+    </div>
+    <div id="flashResult" style="display:none;margin-top:1.5rem"></div>
+  </div>
+</div>
+
+<!-- ===== TAB: ТЕСТ ===== -->
+<div class="tab-panel" id="tab-quiz">
+  <div class="ex-wrap">
+    <div class="ex-controls">
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="qm-gr" onclick="setQuizMode('gr')">🇬🇷 → 🇷🇺</button>
+        <button class="mode-btn" id="qm-ru" onclick="setQuizMode('ru')">🇷🇺 → 🇬🇷</button>
+      </div>
+      <button class="btn btn-blue" onclick="startQuiz()">▶ Начать тест</button>
+      <div style="font-size:.78rem;color:var(--muted)">10 случайных вопросов</div>
+    </div>
+    <div id="quizArea">
+      <div class="result-box" style="margin-top:1rem">
+        <div style="font-size:2rem;margin-bottom:.5rem">🎯</div>
+        <div style="font-weight:700;font-size:1rem">Выбери режим и нажми «Начать тест»</div>
+        <div style="font-size:.85rem;color:var(--muted);margin-top:.4rem">4 варианта ответа · мгновенная проверка</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TAB: НАПИСАНИЕ ===== -->
+<div class="tab-panel" id="tab-spell">
+  <div class="ex-wrap">
+    <div class="ex-controls">
+      <button class="btn btn-blue" onclick="startSpell()">▶ Начать</button>
+      <button class="btn btn-outline" onclick="nextSpell()">Пропустить →</button>
+      <div style="font-size:.78rem;color:var(--muted)">Написание греческих слов</div>
+    </div>
+    <div id="spellArea">
+      <div class="result-box" style="margin-top:1rem">
+        <div style="font-size:2rem;margin-bottom:.5rem">✍️</div>
+        <div style="font-weight:700;font-size:1rem">Напиши греческое слово по переводу</div>
+        <div style="font-size:.85rem;color:var(--muted);margin-top:.4rem">Тренирует правописание и активный словарный запас</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== ALL WORDS ====================
+const W = [
+  // — ЧТЕНИЕ 1: Путешествие с безопасностью —
+  {g:'το ταξίδι',r:'путешествие',t:'сущ.',c:'travel',s:'Чтение 1'},
+  {g:'η ασφάλεια',r:'безопасность',t:'сущ.',c:'travel',s:'Чтение 1'},
+  {g:'η βαλίτσα',r:'чемодан',t:'сущ.',c:'travel',s:'Чтение 1'},
+  {g:'η πιστωτική κάρτα',r:'кредитная карта',t:'сущ.',c:'travel',s:'Чтение 1'},
+  {g:'η τσέπη',r:'карман',t:'сущ.',c:'daily',s:'Чтение 1'},
+  {g:'η τσάντα',r:'сумка',t:'сущ.',c:'daily',s:'Чтение 1'},
+  {g:'ο κλέφτης',r:'вор',t:'сущ.',c:'society',s:'Чтение 1'},
+  {g:'ο ξεναγός',r:'гид, экскурсовод',t:'сущ.',c:'travel',s:'Чтение 1'},
+  {g:'ο ξενοδόχος',r:'хозяин гостиницы',t:'сущ.',c:'travel',s:'Чтение 1'},
+  {g:'η γάζα',r:'марля, бинт',t:'сущ.',c:'health',s:'Чтение 1'},
+  {g:'το οινόπνευμα',r:'спирт',t:'сущ.',c:'health',s:'Чтение 1'},
+  {g:'το παυσίπονο',r:'обезболивающее',t:'сущ.',c:'health',s:'Чтение 1'},
+  {g:'το διαβατήριο',r:'паспорт',t:'сущ.',c:'travel',s:'Чтение 1'},
+  {g:'η ταυτότητα',r:'удостоверение личности',t:'сущ.',c:'daily',s:'Чтение 1'},
+  {g:'ο συγγενής',r:'родственник',t:'сущ.',c:'society',s:'Чтение 1'},
+  {g:'το έγγραφο',r:'документ',t:'сущ.',c:'daily',s:'Чтение 1'},
+  {g:'οι οδηγίες',r:'инструкции, указания',t:'сущ.',c:'society',s:'Чтение 1'},
+  {g:'η συμβουλή',r:'совет',t:'сущ.',c:'society',s:'Чтение 1'},
+  {g:'ταξιδεύω',r:'путешествовать',t:'глаг.',c:'travel',s:'Чтение 1'},
+  {g:'χάνω',r:'терять',t:'глаг.',c:'daily',s:'Чтение 1'},
+  {g:'κρύβω',r:'прятать',t:'глаг.',c:'daily',s:'Чтение 1'},
+  {g:'προσεκτικός',r:'осторожный, внимательный',t:'прил.',c:'daily',s:'Чтение 1'},
+  // — ЧТЕНИЕ 2: Спортзалы —
+  {g:'το γυμναστήριο',r:'спортивный зал, фитнес-клуб',t:'сущ.',c:'health',s:'Чтение 2'},
+  {g:'η ηλικία',r:'возраст',t:'сущ.',c:'daily',s:'Чтение 2'},
+  {g:'ο φοιτητής',r:'студент',t:'сущ.',c:'work',s:'Чтение 2'},
+  {g:'ο άνεργος',r:'безработный',t:'сущ.',c:'work',s:'Чтение 2'},
+  {g:'η διατροφή',r:'питание, диета',t:'сущ.',c:'health',s:'Чтение 2'},
+  {g:'ο διαιτολόγος',r:'диетолог',t:'сущ.',c:'health',s:'Чтение 2'},
+  {g:'η πισίνα',r:'бассейн',t:'сущ.',c:'health',s:'Чтение 2'},
+  {g:'η γυμναστική',r:'гимнастика, фитнес',t:'сущ.',c:'health',s:'Чтение 2'},
+  {g:'η έκπτωση',r:'скидка',t:'сущ.',c:'work',s:'Чтение 2'},
+  {g:'η προσφορά',r:'предложение, акция',t:'сущ.',c:'work',s:'Чтение 2'},
+  {g:'η τιμή',r:'цена; честь',t:'сущ.',c:'daily',s:'Чтение 2'},
+  {g:'η εμπειρία',r:'опыт',t:'сущ.',c:'work',s:'Чтение 2'},
+  {g:'ο χορός',r:'танец',t:'сущ.',c:'health',s:'Чтение 2'},
+  {g:'η κατάσταση',r:'состояние, положение',t:'сущ.',c:'daily',s:'Чтение 2'},
+  {g:'η ποιότητα',r:'качество',t:'сущ.',c:'work',s:'Чтение 2'},
+  {g:'το σώμα',r:'тело',t:'сущ.',c:'health',s:'Чтение 2'},
+  {g:'θεραπευτική γυμναστική',r:'лечебная физкультура',t:'фраза',c:'health',s:'Чтение 2'},
+  {g:'δωρεάν',r:'бесплатно',t:'нар.',c:'daily',s:'Чтение 2'},
+  // — ЧТЕНИЕ 3: История Данаи —
+  {g:'ο παππούς',r:'дедушка',t:'сущ.',c:'society',s:'Чтение 3'},
+  {g:'η γιαγιά',r:'бабушка',t:'сущ.',c:'society',s:'Чтение 3'},
+  {g:'ο θείος',r:'дядя',t:'сущ.',c:'society',s:'Чтение 3'},
+  {g:'η θεία',r:'тётя',t:'сущ.',c:'society',s:'Чтение 3'},
+  {g:'το λεωφορείο',r:'автобус',t:'сущ.',c:'daily',s:'Чтение 3'},
+  {g:'το νοσοκομείο',r:'больница',t:'сущ.',c:'health',s:'Чтение 3'},
+  {g:'η Μεσόγειος',r:'Средиземное море',t:'сущ.',c:'travel',s:'Чтение 3'},
+  {g:'ο γάμος',r:'свадьба, брак',t:'сущ.',c:'society',s:'Чтение 3'},
+  {g:'η αδερφή',r:'сестра',t:'сущ.',c:'daily',s:'Чтение 3'},
+  {g:'τα χωράφια',r:'поля (сельскохозяйственные)',t:'сущ.',c:'nature',s:'Чтение 3'},
+  {g:'γραφικές τέχνες',r:'изобразительное искусство',t:'фраза',c:'work',s:'Чтение 3'},
+  {g:'σπουδάζω',r:'учиться (в университете)',t:'глаг.',c:'work',s:'Чтение 3'},
+  {g:'παντρεύομαι',r:'жениться / выходить замуж',t:'глаг.',c:'society',s:'Чтение 3'},
+  {g:'συγχωρώ',r:'прощать',t:'глаг.',c:'emotions',s:'Чтение 3'},
+  {g:'περνώ',r:'проходить; проводить время',t:'глаг.',c:'travel',s:'Чтение 3'},
+  {g:'πεθαίνω',r:'умирать',t:'глаг.',c:'society',s:'Чтение 3'},
+  {g:'ερωτευμένος',r:'влюблённый',t:'прил.',c:'emotions',s:'Чтение 3'},
+  // — ЧТЕНИЕ 4: Оливковое масло —
+  {g:'το ελαιόλαδο',r:'оливковое масло',t:'сущ.',c:'food',s:'Чтение 4'},
+  {g:'η μαγειρική',r:'кулинария',t:'сущ.',c:'food',s:'Чтение 4'},
+  {g:'τα μαλλιά',r:'волосы',t:'сущ.',c:'health',s:'Чтение 4'},
+  {g:'τα σπυράκια',r:'прыщи',t:'сущ.',c:'health',s:'Чтение 4'},
+  {g:'το δέρμα',r:'кожа',t:'сущ.',c:'health',s:'Чтение 4'},
+  {g:'το πρόσωπο',r:'лицо',t:'сущ.',c:'health',s:'Чтение 4'},
+  {g:'τα γένια',r:'борода',t:'сущ.',c:'health',s:'Чтение 4'},
+  {g:'το αλάτι',r:'соль',t:'сущ.',c:'food',s:'Чтение 4'},
+  {g:'η ζάχαρη',r:'сахар',t:'сущ.',c:'food',s:'Чтение 4'},
+  {g:'τα έπιπλα',r:'мебель',t:'сущ.',c:'daily',s:'Чтение 4'},
+  {g:'τα κουτάλια',r:'ложки',t:'сущ.',c:'food',s:'Чтение 4'},
+  {g:'η μερίδα',r:'порция',t:'сущ.',c:'food',s:'Чтение 4'},
+  {g:'το ποτό',r:'напиток, алкоголь',t:'сущ.',c:'food',s:'Чтение 4'},
+  {g:'ανακατεύω',r:'смешивать, перемешивать',t:'глаг.',c:'daily',s:'Чтение 4'},
+  {g:'μυρίζομαι',r:'пахнуть; нюхать',t:'глаг.',c:'daily',s:'Чтение 4'},
+  {g:'γυαλίζω',r:'полировать, натирать до блеска',t:'глаг.',c:'daily',s:'Чтение 4'},
+  {g:'ξηρός',r:'сухой',t:'прил.',c:'health',s:'Чтение 4'},
+  {g:'λαμπερός',r:'блестящий, сияющий',t:'прил.',c:'health',s:'Чтение 4'},
+  {g:'βρόμικος',r:'грязный',t:'прил.',c:'daily',s:'Чтение 4'},
+  {g:'απαλός',r:'мягкий, нежный',t:'прил.',c:'daily',s:'Чтение 4'},
+  {g:'ξύλινος',r:'деревянный',t:'прил.',c:'daily',s:'Чтение 4'},
+  {g:'ταλαιπωρημένος',r:'изношенный, повреждённый',t:'прил.',c:'daily',s:'Чтение 4'},
+  {g:'χρήσιμος',r:'полезный',t:'прил.',c:'daily',s:'Чтение 4'},
+  // — АУДИРОВАНИЕ —
+  {g:'η διαφήμιση',r:'реклама',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'ο διαφημιστής',r:'рекламист',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'η εταιρεία',r:'компания, фирма',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'ο σχεδιαστής',r:'дизайнер',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'το εξώφυλλο',r:'обложка журнала/книги',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'το περιοδικό',r:'журнал',t:'сущ.',c:'society',s:'Аудирование'},
+  {g:'ο διαγωνισμός',r:'конкурс, соревнование',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'ο αναγνώστης',r:'читатель',t:'сущ.',c:'society',s:'Аудирование'},
+  {g:'το τεύχος',r:'номер, выпуск журнала',t:'сущ.',c:'society',s:'Аудирование'},
+  {g:'το δώρο',r:'подарок',t:'сущ.',c:'society',s:'Аудирование'},
+  {g:'ο διευθυντής',r:'директор, редактор',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'η ιδέα',r:'идея',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'η συνέντευξη',r:'интервью',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'η συζήτηση',r:'дискуссия, разговор',t:'сущ.',c:'society',s:'Аудирование'},
+  {g:'το μήνυμα',r:'сообщение',t:'сущ.',c:'society',s:'Аудирование'},
+  {g:'η αγγελία',r:'объявление',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'ο δημοσιογράφος',r:'журналист',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'ο ανθοπώλης',r:'флорист',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'η υποτροφία',r:'стипендия',t:'сущ.',c:'work',s:'Аудирование'},
+  {g:'η συνταγή',r:'рецепт',t:'сущ.',c:'food',s:'Аудирование'},
+  {g:'επιτυχημένος',r:'успешный',t:'прил.',c:'work',s:'Аудирование'},
+  {g:'ενημερώνω',r:'информировать, уведомлять',t:'глаг.',c:'society',s:'Аудирование'},
+  {g:'κυκλοφορώ',r:'выходить (об издании); ездить',t:'глаг.',c:'society',s:'Аудирование'},
+  // — ПИСЬМО И ГОВОРЕНИЕ —
+  {g:'το πορτοφόλι',r:'кошелёк',t:'сущ.',c:'daily',s:'Письмо/Говорение'},
+  {g:'το εστιατόριο',r:'ресторан',t:'сущ.',c:'food',s:'Письмо/Говорение'},
+  {g:'ο ιδιοκτήτης',r:'владелец',t:'сущ.',c:'work',s:'Письмо/Говорение'},
+  {g:'ο σερβιτόρος',r:'официант',t:'сущ.',c:'food',s:'Письмо/Говорение'},
+  {g:'η συμπεριφορά',r:'поведение, отношение',t:'сущ.',c:'society',s:'Письмо/Говорение'},
+  {g:'η καθαριότητα',r:'чистота',t:'сущ.',c:'daily',s:'Письмо/Говорение'},
+  {g:'η ανακύκλωση',r:'переработка, рециклинг',t:'сущ.',c:'nature',s:'Письмо/Говорение'},
+  {g:'το περιβάλλον',r:'окружающая среда',t:'сущ.',c:'nature',s:'Письмо/Говорение'},
+  {g:'το σουπερμάρκετ',r:'супермаркет',t:'сущ.',c:'daily',s:'Письмо/Говорение'},
+  {g:'η λαϊκή αγορά',r:'рынок, базар',t:'фраза',c:'daily',s:'Письмо/Говорение'},
+  {g:'η αγορά',r:'рынок; покупка',t:'сущ.',c:'daily',s:'Письмо/Говорение'},
+  {g:'το ξενοδοχείο',r:'гостиница, отель',t:'сущ.',c:'travel',s:'Письмо/Говорение'},
+  {g:'το δωμάτιο',r:'комната, номер в отеле',t:'сущ.',c:'travel',s:'Письмо/Говорение'},
+  {g:'οι διακοπές',r:'отпуск, каникулы',t:'сущ.',c:'travel',s:'Письмо/Говорение'},
+  {g:'η κράτηση',r:'бронирование',t:'сущ.',c:'travel',s:'Письмо/Говорение'},
+  {g:'η ημερομηνία',r:'дата',t:'сущ.',c:'travel',s:'Письмо/Говорение'},
+  {g:'το γεύμα',r:'обед, трапеза',t:'сущ.',c:'food',s:'Письмо/Говорение'},
+  {g:'ο υπάλληλος',r:'сотрудник, служащий',t:'сущ.',c:'work',s:'Письмо/Говорение'},
+  {g:'η δραστηριότητα',r:'деятельность, активность',t:'сущ.',c:'travel',s:'Письмо/Говорение'},
+  {g:'το βιβλίο',r:'книга',t:'сущ.',c:'daily',s:'Письмо/Говорение'},
+  {g:'ο αστυνομικός',r:'полицейский',t:'сущ.',c:'society',s:'Письмо/Говорение'},
+  {g:'το αποτέλεσμα',r:'результат',t:'сущ.',c:'work',s:'Письмо/Говорение'},
+  {g:'η γωνία',r:'угол',t:'сущ.',c:'daily',s:'Письмо/Говорение'},
+  {g:'το διαδίκτυο',r:'интернет',t:'сущ.',c:'society',s:'Письмо/Говорение'},
+  {g:'οι κάτοικοι',r:'жители',t:'сущ.',c:'society',s:'Письмо/Говорение'},
+  {g:'καταλαβαίνω',r:'понимать, осознавать',t:'глаг.',c:'daily',s:'Письмо/Говорение'},
+  {g:'περιγράφω',r:'описывать',t:'глаг.',c:'emotions',s:'Письмо/Говорение'},
+  {g:'προστατεύω',r:'защищать, охранять',t:'глаг.',c:'nature',s:'Письмо/Говорение'},
+  // — ГЛАГОЛЫ (сводная секция) —
+  {g:'αναζητώ',r:'искать, разыскивать',t:'глаг.',c:'daily',s:'Глаголы'},
+  {g:'αφήνω',r:'оставлять; позволять',t:'глаг.',c:'daily',s:'Глаголы'},
+  {g:'ανακαλύπτω',r:'обнаруживать, открывать',t:'глаг.',c:'daily',s:'Глаголы'},
+  {g:'ανησυχώ',r:'беспокоиться, тревожиться',t:'глаг.',c:'emotions',s:'Глаголы'},
+  {g:'απλώνω',r:'наносить, намазывать; вешать',t:'глаг.',c:'daily',s:'Глаголы'},
+  {g:'διατηρώ',r:'сохранять, поддерживать',t:'глаг.',c:'daily',s:'Глаголы'},
+  {g:'ζητώ',r:'просить, требовать; искать',t:'глаг.',c:'daily',s:'Глаголы'},
+  {g:'θυμώνω',r:'сердиться, злиться',t:'глаг.',c:'emotions',s:'Глаголы'},
+  {g:'κλέβω',r:'красть, воровать',t:'глаг.',c:'society',s:'Глаголы'},
+  {g:'σκέφτομαι',r:'думать, размышлять',t:'глаг.',c:'emotions',s:'Глаголы'},
+  {g:'συναντώ',r:'встречать, встречаться',t:'глаг.',c:'society',s:'Глаголы'},
+  {g:'σημειώνω',r:'записывать, отмечать',t:'глаг.',c:'daily',s:'Глаголы'},
+  {g:'σερβίρω',r:'обслуживать, подавать',t:'глаг.',c:'work',s:'Глаголы'},
+  {g:'ταλαιπωρώ',r:'мучить, причинять неудобства',t:'глаг.',c:'daily',s:'Глаголы'},
+  {g:'χτυπώ',r:'ударять, бить; звонить',t:'глаг.',c:'daily',s:'Глаголы'},
+  {g:'συνομιλώ',r:'разговаривать, общаться',t:'глаг.',c:'society',s:'Глаголы'},
+  {g:'ταιριάζω',r:'подходить, соответствовать',t:'глаг.',c:'daily',s:'Глаголы'},
+  {g:'πουλώ',r:'продавать',t:'глаг.',c:'work',s:'Глаголы'},
+  // — ПРИЛАГАТЕЛЬНЫЕ И ПРОЧЕЕ —
+  {g:'βασικός',r:'основной, базовый',t:'прил.',c:'daily',s:'Прилагательные'},
+  {g:'πραγματικός',r:'настоящий, реальный',t:'прил.',c:'daily',s:'Прилагательные'},
+  {g:'σίγουρος',r:'уверенный; конечно (нар.)',t:'прил.',c:'daily',s:'Прилагательные'},
+  {g:'στενός',r:'тесный, узкий; близкий (о друге)',t:'прил.',c:'daily',s:'Прилагательные'},
+  {g:'μικρότερος',r:'меньший, младший',t:'прил.',c:'daily',s:'Прилагательные'},
+  {g:'συνολικός',r:'общий, суммарный',t:'прил.',c:'work',s:'Прилагательные'},
+  {g:'τοπικός',r:'местный',t:'прил.',c:'society',s:'Прилагательные'},
+  {g:'παρακάτω',r:'следующий, нижеследующий',t:'нар.',c:'daily',s:'Прилагательные'},
+  {g:'η εξέλιξη',r:'развитие, прогресс',t:'сущ.',c:'society',s:'Прилагательные'},
+  {g:'η ευτυχία',r:'счастье',t:'сущ.',c:'emotions',s:'Прилагательные'},
+  {g:'το παράδειγμα',r:'пример, образец',t:'сущ.',c:'society',s:'Прилагательные'},
+  {g:'η πληροφορία',r:'информация',t:'сущ.',c:'society',s:'Прилагательные'},
+  {g:'η στιγμή',r:'момент, мгновение',t:'сущ.',c:'daily',s:'Прилагательные'},
+  {g:'η υγεία',r:'здоровье',t:'сущ.',c:'health',s:'Прилагательные'},
+];
+
+const CAT_META = {
+  travel:{label:'путешествия',cls:'ct'},health:{label:'здоровье',cls:'ch'},
+  food:{label:'еда',cls:'cf'},work:{label:'работа',cls:'cw'},
+  daily:{label:'быт',cls:'cd'},society:{label:'общество',cls:'cs'},
+  emotions:{label:'чувства',cls:'ce'},nature:{label:'природа',cls:'cn'}
+};
+const SECTION_ICONS = {
+  'Чтение 1':'📖','Чтение 2':'📖','Чтение 3':'📖','Чтение 4':'📖',
+  'Аудирование':'👂','Письмо/Говорение':'✍️','Глаголы':'⚡','Прилагательные':'🎨'
+};
+const SECTION_DESC = {
+  'Чтение 1':'«Ταξιδέψτε με ασφάλεια» · Советы путешественникам',
+  'Чтение 2':'Спортивные залы · таблица',
+  'Чтение 3':'История Данаи · верно/неверно',
+  'Чтение 4':'«Το ελαιόλαδο εκτός κουζίνας» · заполнение пропусков',
+  'Аудирование':'Γεώργης Λεοντής + журналы «Ευτυχία» vs «Ζωή»',
+  'Письмо/Говорение':'Кошелёк, ресторан, экология, отель, книги',
+  'Глаголы':'Глагольная лексика из всех разделов теста',
+  'Прилагательные':'Прилагательные, наречия и доп. существительные'
+};
+
+// ==================== VOCAB TAB ====================
+let currentCat = 'all';
+function buildVocab() {
+  const sections = [...new Set(W.map(w=>w.s))];
+  const cnt = {all:W.length};
+  W.forEach(w=>{ cnt[w.c]=(cnt[w.c]||0)+1; });
+  document.getElementById('cnt-all').textContent = W.length;
+  document.getElementById('totalWords').textContent = W.length;
+
+  const main = document.getElementById('vocabMain');
+  main.innerHTML = sections.map(sec=>{
+    const words = W.filter(w=>w.s===sec);
+    const rows = words.map(w=>`
+      <div class="wr" data-cat="${w.c}" data-g="${w.g.toLowerCase()}" data-r="${w.r.toLowerCase()}">
+        <div class="wgr">${w.g}</div>
+        <div class="wru">${w.r}</div>
+        <div><span class="tbadge">${w.t}</span></div>
+        <div><span class="cbadge ${CAT_META[w.c]?.cls||''}">${CAT_META[w.c]?.label||w.c}</span></div>
+      </div>`).join('');
+    return `<div class="topic-section" data-sec="${sec}">
+      <div class="sec-hdr">
+        <span class="sec-icon">${SECTION_ICONS[sec]||'📌'}</span>
+        <div><div class="sec-title">${sec}</div><div class="sec-desc">${SECTION_DESC[sec]||''}</div></div>
+        <span class="sec-cnt">${words.length} слов</span>
+      </div>
+      <div class="wtbl">
+        <div class="th">Греческое</div><div class="th">Русский</div>
+        <div class="th">Тип</div><div class="th">Тема</div>
+        ${rows}
+      </div>
+    </div>`;
+  }).join('');
+}
+function setCat(cat,btn){
+  currentCat=cat;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  filterVocab();
+}
+function filterVocab(){
+  const q=document.getElementById('srchIn').value.toLowerCase().trim();
+  let v=0;
+  document.querySelectorAll('.wr').forEach(r=>{
+    const mc=currentCat==='all'||r.dataset.cat===currentCat;
+    const ms=!q||r.dataset.g.includes(q)||r.dataset.r.includes(q);
+    r.classList.toggle('hidden',!(mc&&ms));
+    if(mc&&ms)v++;
+  });
+  document.querySelectorAll('.topic-section').forEach(s=>{
+    s.style.display=s.querySelectorAll('.wr:not(.hidden)').length?'':'none';
+  });
+  document.getElementById('totalWords').textContent=v;
+}
+
+// ==================== TAB SWITCHING ====================
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flash')initFlash();
+  if(id==='quiz')resetQuiz();
+  if(id==='spell')resetSpell();
+}
+
+// ==================== FLASHCARDS ====================
+let fMode='gr', fDeck=[], fIdx=0, fCorrect=0, fTotal=0, fFlipped=false;
+function initFlash(){
+  fDeck=[...W].sort(()=>Math.random()-.5);
+  fIdx=0; fCorrect=0; fTotal=0; fFlipped=false;
+  document.getElementById('flashResult').style.display='none';
+  showCard();
+}
+function shuffleFlash(){ fDeck.sort(()=>Math.random()-.5); fIdx=0; fFlipped=false; showCard(); }
+function resetFlash(){ fIdx=0; fCorrect=0; fTotal=0; fFlipped=false; document.getElementById('flashResult').style.display='none'; showCard(); }
+function setFlashMode(m){
+  fMode=m;
+  document.getElementById('fm-gr').classList.toggle('active',m==='gr');
+  document.getElementById('fm-ru').classList.toggle('active',m==='ru');
+  fFlipped=false; showCard();
+}
+function showCard(){
+  if(fIdx>=fDeck.length){ showFlashResult(); return; }
+  const w=fDeck[fIdx];
+  const front=fMode==='gr'?w.g:w.r;
+  const back=fMode==='gr'?w.r:w.g;
+  const fHint=fMode==='gr'?'Греческое':'Русский';
+  const bHint=fMode==='gr'?'Перевод':'Греческое';
+  document.getElementById('fc-hint-front').textContent=fHint;
+  document.getElementById('fc-word-front').textContent=front;
+  document.getElementById('fc-type').textContent=w.t+' · '+w.s;
+  document.getElementById('fc-hint-back').textContent=bHint;
+  document.getElementById('fc-word-back').textContent=back;
+  document.getElementById('fc-type-back').textContent=w.t;
+  const card=document.getElementById('flashCard');
+  card.classList.remove('flipped');
+  fFlipped=false;
+  // progress
+  const pct=fDeck.length?fIdx/fDeck.length*100:0;
+  document.getElementById('flashProg').style.width=pct+'%';
+  document.getElementById('flashProgTxt').textContent=fIdx+' / '+fDeck.length;
+}
+function flipCard(){
+  fFlipped=!fFlipped;
+  document.getElementById('flashCard').classList.toggle('flipped',fFlipped);
+}
+function markCard(known){
+  if(!fFlipped){ flipCard(); return; }
+  fTotal++;
+  if(known)fCorrect++;
+  fIdx++;
+  showCard();
+}
+function showFlashResult(){
+  const pct=fTotal?Math.round(fCorrect/fTotal*100):0;
+  document.getElementById('flashProg').style.width='100%';
+  document.getElementById('flashProgTxt').textContent=fDeck.length+' / '+fDeck.length;
+  document.getElementById('flashResult').style.display='block';
+  document.getElementById('flashResult').innerHTML=`
+    <div class="result-box">
+      <div class="result-big">${pct}%</div>
+      <div class="result-sub">Знаю ${fCorrect} из ${fTotal} слов</div>
+      <div class="score-breakdown">
+        <div class="sb-item"><div class="sb-num" style="color:var(--green)">${fCorrect}</div><div class="sb-lbl">Знаю ✓</div></div>
+        <div class="sb-item"><div class="sb-num" style="color:var(--red)">${fTotal-fCorrect}</div><div class="sb-lbl">Не знаю ✗</div></div>
+      </div>
+      <div style="margin-top:1.2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-blue" onclick="resetFlash()">↺ Сначала</button>
+        <button class="btn btn-outline" onclick="initFlash()">🔀 Перемешать</button>
+      </div>
+    </div>`;
+}
+
+// ==================== QUIZ ====================
+let qMode='gr', qDeck=[], qIdx=0, qRight=0, qWrong=0;
+function setQuizMode(m){
+  qMode=m;
+  document.getElementById('qm-gr').classList.toggle('active',m==='gr');
+  document.getElementById('qm-ru').classList.toggle('active',m==='ru');
+}
+function resetQuiz(){ document.getElementById('quizArea').innerHTML=`<div class="result-box" style="margin-top:1rem"><div style="font-size:2rem;margin-bottom:.5rem">🎯</div><div style="font-weight:700;font-size:1rem">Выбери режим и нажми «Начать тест»</div><div style="font-size:.85rem;color:var(--muted);margin-top:.4rem">4 варианта ответа · мгновенная проверка</div></div>`; }
+function startQuiz(){
+  qDeck=[...W].sort(()=>Math.random()-.5).slice(0,10);
+  qIdx=0; qRight=0; qWrong=0;
+  renderQuiz();
+}
+function renderQuiz(){
+  if(qIdx>=qDeck.length){ showQuizResult(); return; }
+  const w=qDeck[qIdx];
+  const question=qMode==='gr'?w.g:w.r;
+  const correctAnswer=qMode==='gr'?w.r:w.g;
+  // wrong options
+  const pool=W.filter(x=>x!==w);
+  const wrongs=pool.sort(()=>Math.random()-.5).slice(0,3).map(x=>qMode==='gr'?x.r:x.g);
+  const opts=[correctAnswer,...wrongs].sort(()=>Math.random()-.5);
+  const ci=opts.indexOf(correctAnswer);
+  document.getElementById('quizArea').innerHTML=`
+    <div class="quiz-stats">
+      <span class="stat-chip sc-right">✓ ${qRight}</span>
+      <span class="stat-chip sc-wrong">✗ ${qWrong}</span>
+      <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:${qIdx/qDeck.length*100}%"></div></div>
+      <span style="font-size:.78rem;font-weight:600;color:var(--muted)">${qIdx+1}/10</span>
+    </div>
+    <div class="quiz-q">
+      <div class="quiz-num">Вопрос ${qIdx+1} из ${qDeck.length}</div>
+      <div class="quiz-word">${question}</div>
+      <div class="quiz-opts">${opts.map((o,i)=>`<button class="qopt" id="qo${i}" onclick="answerQuiz(${i},${ci})">${o}</button>`).join('')}</div>
+    </div>`;
+}
+function answerQuiz(chosen,correct){
+  document.querySelectorAll('.qopt').forEach(b=>b.disabled=true);
+  document.getElementById('qo'+chosen).classList.add(chosen===correct?'correct':'wrong');
+  if(chosen!==correct){document.getElementById('qo'+correct).classList.add('correct');}
+  chosen===correct?qRight++:qWrong++;
+  setTimeout(()=>{ qIdx++; renderQuiz(); },1100);
+}
+function showQuizResult(){
+  const pct=Math.round(qRight/qDeck.length*100);
+  const fb=pct>=80?'🎉 Отлично! Так держать.':pct>=60?'👍 Хорошо, есть над чем поработать.':'📖 Нужно больше практики.';
+  document.getElementById('quizArea').innerHTML=`
+    <div class="result-box" style="margin-top:.5rem">
+      <div class="result-big">${pct}%</div>
+      <div class="result-sub">${fb}</div>
+      <div class="score-breakdown">
+        <div class="sb-item"><div class="sb-num" style="color:var(--green)">${qRight}</div><div class="sb-lbl">Правильно</div></div>
+        <div class="sb-item"><div class="sb-num" style="color:var(--red)">${qDeck.length-qRight}</div><div class="sb-lbl">Неправильно</div></div>
+      </div>
+      <div style="margin-top:1.2rem;display:flex;gap:.75rem;justify-content:center">
+        <button class="btn btn-blue" onclick="startQuiz()">🔀 Ещё раз</button>
+      </div>
+    </div>`;
+}
+
+// ==================== SPELLING ====================
+let sDeck=[], sIdx=0, sRight=0, sWrong=0, sSkip=0;
+function resetSpell(){ sDeck=[]; sIdx=0; sRight=0; sWrong=0; sSkip=0; }
+function startSpell(){
+  sDeck=[...W].sort(()=>Math.random()-.5);
+  sIdx=0; sRight=0; sWrong=0; sSkip=0;
+  showSpell();
+}
+function nextSpell(){
+  if(sDeck.length===0){startSpell();return;}
+  sSkip++;
+  sIdx=(sIdx+1)%sDeck.length;
+  showSpell();
+}
+function showSpell(){
+  if(!sDeck.length)return;
+  const w=sDeck[sIdx];
+  document.getElementById('spellArea').innerHTML=`
+    <div class="spell-progress">
+      <div class="prog-bar"><div class="prog-fill" style="width:${sIdx/sDeck.length*100}%"></div></div>
+      <div style="font-size:.78rem;font-weight:600;color:var(--muted);margin-top:.35rem;text-align:right">${sIdx+1} / ${sDeck.length} &nbsp;·&nbsp; ✓ ${sRight} &nbsp; ✗ ${sWrong}</div>
+    </div>
+    <div class="spell-card">
+      <div class="spell-ru">${w.r}</div>
+      <div class="spell-type">${w.t} · ${w.s}</div>
+      <input class="spell-input" id="spellIn" placeholder="Введи по-гречески..." autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkSpell()">
+      <div class="spell-answer" id="spellAns"></div>
+      <div class="spell-hint-letters" id="spellHint"></div>
+    </div>
+    <div style="display:flex;gap:.75rem;justify-content:center;margin-top:.5rem">
+      <button class="btn btn-blue" onclick="checkSpell()">Проверить</button>
+      <button class="btn btn-outline" onclick="nextSpell()">Пропустить →</button>
+    </div>`;
+  document.getElementById('spellIn').focus();
+}
+function checkSpell(){
+  const w=sDeck[sIdx];
+  const input=document.getElementById('spellIn');
+  if(!input)return;
+  const val=input.value.trim();
+  if(!val)return;
+  // Normalize: strip articles (ο, η, το, τα, οι, τους etc.) from target for comparison
+  const target=w.g.replace(/^(ο|η|το|τα|οι|τους|των|τον|την|τη|τη[ν]?)\s+/i,'').trim();
+  const userClean=val.replace(/^(ο|η|το|τα|οι|τους|των|τον|την|τη|τη[ν]?)\s+/i,'').trim();
+  const ok=userClean.toLowerCase()===target.toLowerCase()||val.toLowerCase()===w.g.toLowerCase();
+  input.className='spell-input '+(ok?'ok':'err');
+  input.disabled=true;
+  // Letter-by-letter hint
+  const hint=document.getElementById('spellHint');
+  const full=w.g;
+  const user=val;
+  hint.innerHTML=full.split('').map((ch,i)=>{
+    if(ch===' ')return '<span style="width:.5rem"></span>';
+    const uch=user[i]||'';
+    const cls=uch&&uch.toLowerCase()===ch.toLowerCase()?'ok':uch?'err':'miss';
+    return `<span class="sl ${cls}">${ch}</span>`;
+  }).join('');
+  const ans=document.getElementById('spellAns');
+  if(ok){
+    sRight++;
+    ans.innerHTML=`<span style="color:var(--green);font-weight:600">✓ Правильно!</span>`;
+  } else {
+    sWrong++;
+    ans.innerHTML=`<span style="color:var(--red);font-weight:600">✗</span> &nbsp;Правильно: <span style="font-family:'Noto Serif',serif;font-weight:600;color:var(--blue)">${w.g}</span>`;
+  }
+  setTimeout(()=>{ sIdx=(sIdx+1)%sDeck.length; showSpell(); },2000);
+}
+
+// INIT
+buildVocab();
+</script>
+</body>
+</html>
