@@ -195,6 +195,56 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
 
 /* EMPTY */
 .empty{text-align:center;padding:3rem;color:var(--muted);font-style:italic;grid-column:1/-1}
+
+/* ===== EXAM SECTION ===== */
+.exam-wrap{max-width:860px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+.exam-topbar{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:2px solid var(--border)}
+.esec-nav{display:flex;gap:.4rem;flex:1;flex-wrap:wrap}
+.esec-btn{padding:.5rem 1rem;border-radius:30px;font-size:.82rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-family:inherit;transition:all .15s}
+.esec-btn:hover{border-color:var(--blm);color:var(--g1)}
+.esec-btn.active{background:var(--g1);border-color:var(--g1);color:#fff}
+.exam-toggles{display:flex;gap:.5rem}
+.tog-btn{padding:.45rem .9rem;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-family:inherit;transition:all .15s;white-space:nowrap}
+.tog-btn.on{background:var(--bl);border-color:var(--blm);color:var(--g1)}
+.exam-section{display:none}
+.exam-section.active{display:block}
+.exam-part{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;margin-bottom:1.4rem;box-shadow:var(--sh)}
+.exam-part-hdr{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.exam-part-num{background:var(--g1);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
+.exam-part-title{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--g1);margin-bottom:.2rem}
+.exam-part-meta{font-size:.75rem;color:var(--muted)}
+.exam-instr{background:var(--bl);border-left:3px solid var(--g3);padding:.85rem 1.1rem;border-radius:0 8px 8px 0;font-size:.85rem;color:var(--t2);margin-bottom:1.2rem;line-height:1.6}
+.exam-text{font-family:'Noto Serif',serif;font-size:.95rem;line-height:1.8;color:var(--text);margin-bottom:1.2rem}
+.exam-text p{margin-bottom:.8rem}
+.blank{display:inline-block;min-width:120px;border-bottom:2px solid var(--g3);color:var(--g1);font-weight:600;padding:0 .3rem;font-family:'Noto Serif',serif}
+.exam-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:1rem}
+.exam-table th{background:var(--g1);color:#fff;padding:.55rem .9rem;text-align:left;font-weight:600;font-size:.78rem}
+.exam-table td{padding:.6rem .9rem;border-bottom:1px solid var(--border);vertical-align:top}
+.exam-table tr:last-child td{border-bottom:none}
+.exam-table tr:nth-child(even) td{background:#fafaf8}
+.exam-table .lbl{font-weight:700;color:var(--g1);white-space:nowrap}
+.exam-table .example{background:var(--bl)!important}
+.key-box{background:#fffbf0;border:1px solid #f0d070;border-radius:10px;padding:1rem 1.2rem;margin-top:1rem;font-size:.85rem}
+.key-box strong{color:var(--g1);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.5rem}
+.key-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.25rem;align-items:baseline}
+.key-num{font-weight:700;color:var(--g1);min-width:22px}
+.key-ans{font-family:'Noto Serif',serif;color:var(--text)}
+.trans-box{background:#f0f7ff;border:1px solid #b8d4f0;border-radius:10px;padding:1rem 1.2rem;margin-top:.8rem;font-size:.85rem;line-height:1.7;color:var(--t2)}
+.trans-box strong{color:#1a4a8a;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.5rem}
+.hidden-toggle{display:none}
+.tf-grid{display:grid;grid-template-columns:1fr auto;gap:.5rem .75rem;align-items:center;margin-bottom:.5rem}
+.tf-stmt{font-family:'Noto Serif',serif;font-size:.9rem;line-height:1.55}
+.tf-btns{display:flex;gap:.3rem}
+.tf-btn{padding:.25rem .6rem;border-radius:5px;font-size:.75rem;font-weight:700;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;font-family:inherit}
+.tf-btn.σ{background:#e8f5ee;border-color:var(--green);color:var(--green)}
+.tf-btn.λ{background:var(--rl);border-color:var(--red);color:var(--red)}
+.writing-prompt{background:#faf9f7;border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.4rem;font-family:'Noto Serif',serif;font-size:.92rem;line-height:1.75;margin-bottom:.8rem}
+.speak-q{padding:.6rem 0;border-bottom:1px solid var(--border);font-family:'Noto Serif',serif;font-size:.9rem;line-height:1.55;display:flex;gap:.6rem}
+.speak-q:last-child{border-bottom:none}
+.speak-q-dash{color:var(--g3);font-weight:700;flex-shrink:0}
+.exam-section-title{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--g1);margin-bottom:.3rem}
+.exam-section-sub{font-size:.82rem;color:var(--muted);margin-bottom:1.4rem;display:flex;gap:1.2rem}
+.exam-section-sub span{display:flex;align-items:center;gap:.3rem}
 </style>
 </head>
 <body>
@@ -213,6 +263,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
     <button class="tab-btn" onclick="switchTab('flash',this)">🃏 Карточки</button>
     <button class="tab-btn" onclick="switchTab('quiz',this)">✅ Тест</button>
     <button class="tab-btn" onclick="switchTab('spell',this)">✍️ Написание</button>
+    <button class="tab-btn" onclick="switchTab('exam',this)">📋 Тест 2015</button>
   </div>
   <div style="color:rgba(255,255,255,.45);font-size:.75rem;flex-shrink:0">KPG · B1 · 2015</div>
 </nav>
@@ -357,6 +408,402 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
     </div>
   </div>
 </div>
+
+<!-- ===== TAB: ТЕСТ 2015 ===== -->
+<div class="tab-panel" id="tab-exam">
+<div class="exam-wrap">
+
+  <!-- TOPBAR -->
+  <div class="exam-topbar">
+    <div class="esec-nav">
+      <button class="esec-btn active" onclick="showExamSec('reading',this)">📖 Чтение <span style="opacity:.6;font-weight:400">25 б.</span></button>
+      <button class="esec-btn" onclick="showExamSec('listening',this)">🎧 Аудирование <span style="opacity:.6;font-weight:400">25 б.</span></button>
+      <button class="esec-btn" onclick="showExamSec('writing',this)">✏️ Письмо <span style="opacity:.6;font-weight:400">25 б.</span></button>
+      <button class="esec-btn" onclick="showExamSec('speaking',this)">🗣️ Говорение <span style="opacity:.6;font-weight:400">25 б.</span></button>
+    </div>
+    <div class="exam-toggles">
+      <button class="tog-btn" id="btnKeys" onclick="toggleExamKeys()">🔑 Ключи</button>
+      <button class="tog-btn" id="btnTrans" onclick="toggleExamTrans()">🇷🇺 Перевод</button>
+    </div>
+  </div>
+
+  <!-- ═══════════ ЧТЕНИЕ ═══════════ -->
+  <div class="exam-section active" id="esec-reading">
+    <div class="exam-section-title">Κατανόηση γραπτού λόγου</div>
+    <div class="exam-section-sub">
+      <span>📋 Понимание письменной речи</span>
+      <span>⏱️ 40 минут</span>
+      <span>🏆 25 баллов</span>
+    </div>
+
+    <!-- ЗАДАНИЕ 1 -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">1</div>
+        <div><div class="exam-part-title">Ταξιδέψτε με ασφάλεια</div><div class="exam-part-meta">6 баллов · соответствие частей предложения</div></div>
+      </div>
+      <div class="exam-instr">Διαβάζετε στο διαδίκτυο συμβουλές, για να ταξιδεύετε με ασφάλεια. Όμως, η οθόνη του υπολογιστή σας έχει πρόβλημα και βλέπετε καθαρά μόνο το πρώτο μέρος κάθε πληροφορίας. Στον πίνακα που ακολουθεί έχετε το δεύτερο μέρος. Σημειώνετε στον πίνακα τον αριθμό του πρώτου μέρους, όπως στο παράδειγμα.<br><em>Προσοχή: οι σωστές απαντήσεις είναι έξι (6) χωρίς το παράδειγμα. Υπάρχουν τρεις φράσεις στον πίνακα που δεν πρέπει να χρησιμοποιήσετε.</em></div>
+      <div class="trans-box hidden-toggle"><strong>Перевод инструкции</strong>Вы читаете в интернете советы по безопасным путешествиям. Однако экран вашего компьютера имеет проблему и вы чётко видите только первую часть каждой информации. В таблице ниже — вторые части. Запишите в таблицу номер первой части, как в примере.</div>
+
+      <div class="exam-text">
+        <p>Σας αρέσουν πολύ τα ταξίδια; Το όνειρο που σκέφτεστε είναι να ετοιμάσετε τη βαλίτσα σας και να φύγετε <span class="blank">0 ✓</span> ; Επειδή, όμως, πολλά μπορούν να γίνουν σε ένα ταξίδι, ακολουθήστε τις παρακάτω συμβουλές:</p>
+        <p>Να είστε προσεκτικοί, όταν πληρώνετε με πιστωτική κάρτα. Αν τη χάσετε στο ταξίδι, <span class="blank">1 ___</span>.</p>
+        <p>Μην βάζετε τα χρήματά σας σε τσάντες. Κρύψτε τα στις τσέπες των ρούχων σας. Κλέφτες υπάρχουν παντού, <span class="blank">2 ___</span>.</p>
+        <p>Πηγαίνετε σε εστιατόρια που προτιμούν οι κάτοικοι της περιοχής. Ζητήστε πληροφορίες από τον ξεναγό ή τον ξενοδόχο, για να είστε πιο σίγουροι <span class="blank">3 ___</span>.</p>
+        <p>Πάρτε μαζί σας ένα τσαντάκι με γάζες, οινόπνευμα, παυσίπονα και άλλα βασικά φάρμακα. Το τελευταίο πράγμα που θέλετε είναι <span class="blank">4 ___</span>.</p>
+        <p>Ενημερώστε συγγενείς ή φίλους για το πρόγραμμα του ταξιδιού σας. Αφήστε τους μια φωτοτυπία από το διαβατήριό σας, την ταυτότητα και άλλα ταξιδιωτικά έγγραφα. Αν σας τα κλέψει κάνεις στο ταξίδι, <span class="blank">5 ___</span>.</p>
+        <p>Αν ταξιδεύετε με παιδιά, καλό είναι να έχετε μαζί σας μερικές φωτογραφίες τους. Αν χαθεί κάποιο παιδί, θα δώσετε αμέσως τη φωτογραφία του στο αστυνομικό τμήμα και έτσι <span class="blank">6 ___</span>.</p>
+      </div>
+      <div class="trans-box hidden-toggle"><strong>Перевод текста</strong>Вы очень любите путешествовать? Ваша мечта — собрать чемодан и уехать как можно быстрее? Но поскольку в поездке может случиться многое, следуйте советам ниже:<br><br>1. Будьте осторожны при оплате кредитной картой. Если потеряете её в поездке, <em>[ответ 1]</em>. 2. Не кладите деньги в сумки. Прячьте их в карманы одежды. Воры везде, <em>[ответ 2]</em>. 3. Ходите в рестораны, которые предпочитают местные. Спросите гида или администратора, чтобы быть уверены <em>[ответ 3]</em>. 4. Возьмите аптечку с бинтами, спиртом, обезболивающими и другими лекарствами. Последнее, чего вы хотите, — это <em>[ответ 4]</em>. 5. Сообщите родственникам о программе поездки. Оставьте копию паспорта и других документов. Если их украдут, <em>[ответ 5]</em>. 6. Если путешествуете с детьми, возьмите их фотографии. Если ребёнок потеряется, отдайте фото в полицию — и тогда <em>[ответ 6]</em>.</div>
+
+      <table class="exam-table">
+        <tr><th></th><th>Второе полупредложение</th><th>№ первого полупредложения</th></tr>
+        <tr class="example"><td class="lbl">0 ✓</td><td>600 πιο γρήγορα μπορείτε</td><td>пример</td></tr>
+        <tr><td class="lbl">A</td><td>για τα απαραίτητα ρούχα</td><td>___</td></tr>
+        <tr><td class="lbl">B</td><td>να τρέξετε στο νοσοκομείο</td><td>___</td></tr>
+        <tr><td class="lbl">C</td><td>δεν θα ξοδέψετε χρόνο στην περιγραφή του</td><td>___</td></tr>
+        <tr><td class="lbl">D</td><td>ενημερώστε αμέσως την τράπεζα</td><td>___</td></tr>
+        <tr><td class="lbl">E</td><td>θα ξεχάσετε όλες τις άσχημες στιγμές</td><td>___</td></tr>
+        <tr><td class="lbl">F</td><td>για αυτά που τρώτε και πίνετε</td><td>___</td></tr>
+        <tr><td class="lbl">G</td><td>να οδηγείτε σε αντίθετη κατεύθυνση</td><td>___</td></tr>
+        <tr><td class="lbl">H</td><td>σε κάθε μέρος του κόσμου</td><td>___</td></tr>
+      </table>
+      <div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 1</strong>
+        <div class="key-row"><span class="key-num">1→</span><span class="key-ans">D: ενημερώστε αμέσως την τράπεζα</span></div>
+        <div class="key-row"><span class="key-num">2→</span><span class="key-ans">H: σε κάθε μέρος του κόσμου</span></div>
+        <div class="key-row"><span class="key-num">3→</span><span class="key-ans">F: για αυτά που τρώτε και πίνετε</span></div>
+        <div class="key-row"><span class="key-num">4→</span><span class="key-ans">B: να τρέξετε στο νοσοκομείο</span></div>
+        <div class="key-row"><span class="key-num">5→</span><span class="key-ans">C: δεν θα ξοδέψετε χρόνο στην περιγραφή του</span></div>
+        <div class="key-row"><span class="key-num">6→</span><span class="key-ans">E: θα ξεχάσετε όλες τις άσχημες στιγμές</span></div>
+        <div style="margin-top:.5rem;font-size:.78rem;color:var(--muted)">Лишние: A, G + одна не попала в OCR</div>
+      </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 2 -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">2</div>
+        <div><div class="exam-part-title">Γυμναστήρια — Спортзалы</div><div class="exam-part-meta">6 баллов · соответствие характеристик спортзалам</div></div>
+      </div>
+      <div class="exam-instr">Ζητάτε στο διαδίκτυο πληροφορίες για διάφορα γυμναστήρια. Από τον πίνακα που ακολουθεί σημειώνετε με / τι προσφέρει το καθένα, όπως στο παράδειγμα.<br><em>Προσοχή: πρέπει να σημειώσετε συνολικά δώδεκα (12) / χωρίς το παράδειγμα.</em></div>
+      <div class="trans-box hidden-toggle"><strong>Перевод</strong>Вы ищете в интернете информацию о различных спортзалах. В таблице ниже отмечайте ✓, что предлагает каждый, как в примере. Всего нужно отметить 12 пунктов.</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.2rem">
+        <div class="writing-prompt"><strong style="color:var(--g1)">A «Πάντα σε Φόρμα»</strong><br><br>Λειτουργούμε από το 1987. Έχουμε αίθουσες για ποδήλατο αλλά και για ομαδικά προγράμματα.</div>
+        <div class="writing-prompt"><strong style="color:var(--g1)">B «Κίνηση &amp; Ζωή»</strong><br><br>Ανοίξαμε πριν 10 μέρες. Διαθέτουμε προγράμματα για κάθε ηλικία, από 3 έως 93 χρονών. Φοιτητές και άνεργοι πληρώνουν μόνο 200 ευρώ. Παίρνετε οδηγίες από τον διαιτολόγο μας.</div>
+        <div class="writing-prompt"><strong style="color:var(--g1)">C «Η δύναμη μέσα σας»</strong><br><br>Κλείνουμε δεκαπέντε χρόνια στον χώρο. Γίνε τώρα μέλος με 300 ευρώ τον χρόνο και κέρδισε: ελεύθερη χρήση μηχανημάτων, δωρεάν διατροφική ενημέρωση, δωρεάν χρήση πισίνας. Για τα παιδιά γίνονται μαθήματα μοντέρνου χορού.</div>
+      </div>
+
+      <table class="exam-table">
+        <tr><th>Χαρακτηριστικά</th><th>A</th><th>B</th><th>C</th></tr>
+        <tr class="example"><td>Περισσότερα από 10 χρόνια λειτουργίας</td><td>✓</td><td></td><td></td></tr>
+        <tr><td>Συμβουλές διατροφής</td><td></td><td>___</td><td>___</td></tr>
+        <tr><td>Ειδικές τιμές για ανέργους</td><td>___</td><td>___</td><td>___</td></tr>
+        <tr><td>Προγράμματα για παιδιά</td><td>___</td><td>___</td><td>___</td></tr>
+        <tr><td>Χρήση πισίνας χωρίς επιπλέον κόστος</td><td>___</td><td>___</td><td>___</td></tr>
+        <tr><td>Ομαδικά προγράμματα</td><td>___</td><td>___</td><td>___</td></tr>
+        <tr><td>Μαθήματα χορού</td><td>___</td><td>___</td><td>___</td></tr>
+      </table>
+      <div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 2</strong>
+        <div class="key-row"><span class="key-ans">Συμβουλές διατροφής → B, C</span></div>
+        <div class="key-row"><span class="key-ans">Ειδικές τιμές για ανέργους → B</span></div>
+        <div class="key-row"><span class="key-ans">Προγράμματα για παιδιά → B, C</span></div>
+        <div class="key-row"><span class="key-ans">Χρήση πισίνας χωρίς επιπλέον κόστος → C</span></div>
+        <div class="key-row"><span class="key-ans">Ομαδικά προγράμματα → A, B, C</span></div>
+        <div class="key-row"><span class="key-ans">Μαθήματα χορού → C</span></div>
+      </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3 -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">3</div>
+        <div><div class="exam-part-title">Η ιστορία της Δανάης — История Данаи</div><div class="exam-part-meta">6 баллов · верно / неверно</div></div>
+      </div>
+      <div class="exam-instr">Διαβάστε το παρακάτω κείμενο. Για κάθε πρόταση που ακολουθεί σημειώστε αν είναι σωστή (Σ) ή λάθος (Λ). <em>Προσοχή: πρέπει να σημειώσετε συνολικά έξι (6) / χωρίς το παράδειγμα.</em></div>
+      <div class="exam-text">
+        <p>Τελικά έμαθα την αληθινή ιστορία της μαμάς. Ο Δανός παππούς μου πέθανε από το 1976, πριν η μαμά μου γίνει οκτώ χρονών. Έναν χρόνο μετά πέθανε και η γιαγιά μου. Την χτύπησε ένα λεωφορείο, καθώς γύρισε από τη νυχτερινή δουλειά της στο νοσοκομείο.</p>
+        <p>Τη μαμά τη μεγάλωσε ένας θείος της μαζί με τα δικά του παιδιά. Για τέσσερα χρόνια σπούδαζε γραφικές τέχνες και τα μεσημέρια σέρβιρε τους φοιτητές στο εστιατόριο του πανεπιστημίου. Όσα χρήματα της περίσσευαν τα έξοδε στα ταξίδια. Κάθε καλοκαίρι αναζητούσε τον ήλιο και τη ζεστή θάλασσα της Μεσογείου, άλλοτε στην Ισπανία και στην Ιταλία και άλλοτε στο Μαρόκο και την Τυνησία.</p>
+        <p>Στο τελευταίο ταξίδι της στην Ελλάδα συνάντησε τον υπαυτό, τον πρώτο άντρα που τη ζήτησε σε γάμο. Στενούς συγγενείς δεν είχε στη Δανία, εκτός από τον θείο της και τα ξαδέρφια της. Έτσι, δεν ήθελε να γυρίσει πίσω. Ο υπαυτός ήταν πολύ ερωτευμένος μαζί της και την παντρεύτηκε. Η οικογένεια του όμως δεν τον συγχώρεσε ποτέ. Οι πρώτες που τη βρήκαν αντιπαθητική ήταν οι αδελφές του υπαυτού: η Κλειώ, η Ευτέρπη και η Θάλεια. Η θεία Οδέτα περνούσε, βέβαια, κάποτε-κάποτε να δει τι κάνει ο αδερφός της, αλλά πάντοτε την ώρα που η μαμά έβγαινε για περίπατο.</p>
+      </div>
+      <div class="trans-box hidden-toggle"><strong>Перевод текста</strong>Наконец я узнала настоящую историю мамы. Датский дедушка умер в 1976 году, ещё до того как маме исполнилось восемь лет. Год спустя умерла бабушка — её сбил автобус, когда она возвращалась с ночной смены в больнице. Маму воспитал дядя вместе со своими детьми. Четыре года она изучала изобразительное искусство и по обедам обслуживала студентов в университетском ресторане. Остатки денег тратила на поездки — каждое лето искала солнце Средиземноморья: то в Испании и Италии, то в Марокко и Тунисе. В последней поездке в Грецию она встретила будущего мужа. Близких родственников в Дании не было — только дядя и двоюродные. Поэтому не хотела возвращаться. Муж был очень влюблён и женился на ней, но семья так и не приняла её. Тётя Одетта иногда заходила проверить брата, но всегда в то время, когда мама выходила гулять.</div>
+
+      <div style="margin-top:1rem">
+        <div class="tf-grid">
+          <div class="tf-stmt" style="font-style:italic;color:var(--muted)">0. Ο παππούς της Δανάης ήταν από τη Δανία. <em>(παράδειγμα)</em></div>
+          <div class="tf-btns"><span class="tf-btn σ">Σ ✓</span></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">1. Όταν η μαμά της Δανάης ήταν μικρή, πέθαναν οι γονείς της.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">2. Η γιαγιά της Δανάης δούλευε βράδυ, την ημέρα που πέθανε.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">3. Η μαμά της Δανάης δούλευε, ενώ σπούδαζε.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">4. Η μαμά της Δανάης ταξίδευε κάθε καλοκαίρι στην Ελλάδα.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">5. Η μαμά της Δανάης δεν είχε κανέναν συγγενή στη Δανία.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">6. Η θεία Οδέτα πήγαινε πολύ συχνά να δει τον υπαυτό της Δανάης.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+        </div>
+      </div>
+      <div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 3</strong>
+        <div class="key-row"><span class="key-num">1→</span><span class="key-ans">Σ (умерли оба дедушка и бабушка, то есть родители мамы)</span></div>
+        <div class="key-row"><span class="key-num">2→</span><span class="key-ans">Σ (νυχτερινή δουλειά = ночная смена)</span></div>
+        <div class="key-row"><span class="key-num">3→</span><span class="key-ans">Σ (сёрвировала в ресторане во время учёбы)</span></div>
+        <div class="key-row"><span class="key-num">4→</span><span class="key-ans">Λ (ездила в разные страны Средиземноморья, не только в Грецию)</span></div>
+        <div class="key-row"><span class="key-num">5→</span><span class="key-ans">Λ (был дядя и двоюродные — εκτός από τον θείο και τα ξαδέρφια)</span></div>
+        <div class="key-row"><span class="key-num">6→</span><span class="key-ans">Λ (приходила κάποτε-κάποτε = изредка, не πολύ συχνά)</span></div>
+      </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 4 -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">4</div>
+        <div><div class="exam-part-title">Το ελαιόλαδο... Εκτός κουζίνας</div><div class="exam-part-meta">7 баллов · заполнение пропусков</div></div>
+      </div>
+      <div class="exam-instr">Διαβάζετε στο διαδίκτυο ένα κείμενο για το λάδι ελαιάς. Μερικές λέξεις/φράσεις, όμως, δεν φαίνονται καλά. Στον πίνακα που ακολουθεί υπάρχουν λέξεις/φράσεις που ταιριάζουν στα κενά σημεία του κειμένου. Διαβάστε προσεκτικά το κείμενο και συμπληρώνετε δίπλα σε κάθε λέξη/φράση του πίνακα τον αριθμό του κενού στο οποίο αυτή ταιριάζει, όπως στο παράδειγμα.<br><em>Υπάρχουν έξι λέξεις/φράσεις που δεν ταιριάζουν σε κανένα κενό.</em></div>
+      <div class="exam-text">
+        <p>Το ελαιόλαδο είναι η βάση της <span class="blank">0 μεσογειακής ✓</span> διατροφής. Δεν είναι, όμως, χρήσιμο μόνο στη μαγειρική. Βγάλτε το από την κουζίνα σας και σημειώστε πέντε τρόπους, <span class="blank">1 ___</span>, για να το χρησιμοποιήσετε.</p>
+        <p>Αν τα μαλλιά σας είναι ξηρά και <span class="blank">2 ___</span>, απλώστε επάνω τους λίγο ελαιόλαδο. Μετά από μία ώρα τα μαλλιά σας θα είναι λαμπερά και απαλά.</p>
+        <p>Αν έχετε σπυράκια στο δέρμα, φτιάξτε μια κρέμα από αλάτι και ελαιόλαδο. Βάλτε την στο πρόσωπό σας για δέκα λεπτά και ξεπλύνετε με χλιαρό νερό. Το αποτέλεσμα <span class="blank">3 ___</span> απόλυτα!</p>
+        <p>Μυρίζεστε άσχημα και <span class="blank">4 ___</span> δεν έχετε αρκετό εύρισμα; Κανένα πρόβλημα! Βάλτε λίγο ελαιόλαδο και μια <span class="blank">5 ___</span> του γλυκού ζάχαρη σε ένα ποτήρι και ανακατέψτε τα. Σε λίγα λεπτά θα έχετε τη κρέμα που θα καθαρίσει τα χέρια σας και θα τα κάνει πολύ απαλά.</p>
+        <p>Αν θέλετε να διατηρήσετε τα ξύλινα έπιπλά σας σε <span class="blank">6 ___</span>, γυαλίστε τα με ελαιόλαδο. Θα γίνουν σαν καινούρια!</p>
+        <p><span class="blank">7 ___</span>, γυαλίστε τα με ελαιόλαδο.</p>
+      </div>
+      <div class="trans-box hidden-toggle"><strong>Перевод</strong>Оливковое масло — основа <em>средиземноморской</em> диеты. Но оно полезно не только в кулинарии. Достаньте его из кухни и запишите пять способов <em>[1]</em> использования. Если волосы сухие и <em>[2]</em>, нанесите немного масла. Через час волосы будут блестящими и мягкими. Если есть прыщи, сделайте крем из соли и масла, нанесите на лицо на 10 минут, смойте тёплой водой. Результат <em>[3]</em> абсолютно! Если плохо пахнете и <em>[4]</em> не хватает дезодоранта, смешайте масло и <em>[5]</em> сахара — через несколько минут крем очистит руки. Чтобы поддерживать деревянную мебель в <em>[6]</em>, полируйте маслом. <em>[7]</em>, полируйте маслом.</div>
+
+      <table class="exam-table">
+        <tr><th>Слово/фраза из таблицы</th><th>№ пропуска</th></tr>
+        <tr class="example"><td>μεσογειακής</td><td>0 ✓</td></tr>
+        <tr><td>ταλαιπωρημένα</td><td>___</td></tr>
+        <tr><td>κουτάλια</td><td>___</td></tr>
+        <tr><td>χρειάζεστε</td><td>___</td></tr>
+        <tr><td>καλή κατάσταση</td><td>___</td></tr>
+        <tr><td>μερίδα</td><td>___</td></tr>
+        <tr><td>κακή ποιότητα</td><td>___</td></tr>
+        <tr><td>ανακαλύπτετε</td><td>___</td></tr>
+        <tr><td>θα σας ικανοποιήσει</td><td>___</td></tr>
+        <tr><td>κουραστικά</td><td>___</td></tr>
+        <tr><td>θα τα αλλάξετε</td><td>___</td></tr>
+        <tr><td>λεύκους</td><td>___</td></tr>
+        <tr><td>αλεύρι</td><td>___</td></tr>
+      </table>
+      <div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 4 (реконструкция по OCR)</strong>
+        <div class="key-row"><span class="key-num">1→</span><span class="key-ans">χωρίς σχέση με τη μαγειρική / ανακαλύπτετε</span></div>
+        <div class="key-row"><span class="key-num">2→</span><span class="key-ans">ταλαιπωρημένα</span></div>
+        <div class="key-row"><span class="key-num">3→</span><span class="key-ans">θα σας ικανοποιήσει</span></div>
+        <div class="key-row"><span class="key-num">4→</span><span class="key-ans">χρειάζεστε</span></div>
+        <div class="key-row"><span class="key-num">5→</span><span class="key-ans">μερίδα</span></div>
+        <div class="key-row"><span class="key-num">6→</span><span class="key-ans">καλή κατάσταση</span></div>
+        <div class="key-row"><span class="key-num">7→</span><span class="key-ans">θα τα αλλάξετε (или ταλαιπωρημένα έπιπλα)</span></div>
+        <div style="margin-top:.5rem;font-size:.78rem;color:var(--muted)">⚠️ Ключ восстановлен по OCR — возможны неточности. Сверяйся с оригиналом.</div>
+      </div>
+    </div>
+  </div><!-- /esec-reading -->
+
+  <!-- ═══════════ АУДИРОВАНИЕ ═══════════ -->
+  <div class="exam-section" id="esec-listening">
+    <div class="exam-section-title">Κατανόηση προφορικού λόγου</div>
+    <div class="exam-section-sub">
+      <span>🎧 Понимание устной речи</span>
+      <span>⏱️ 25 минут</span>
+      <span>🏆 25 баллов</span>
+    </div>
+    <div class="exam-part" style="border-left:4px solid var(--amber)">
+      <div style="background:var(--al);border-radius:8px;padding:.75rem 1rem;margin-bottom:1rem;font-size:.85rem;color:var(--amber)">⚠️ Этот раздел требует аудиозаписи. В электронной версии представлена только структура заданий и ключи.</div>
+
+      <!-- ЗАДАНИЕ 1 -->
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">1</div>
+        <div><div class="exam-part-title">Ραδιοφωνική εκπομπή — Радиопередача</div><div class="exam-part-meta">12 баллов · заметки по передаче</div></div>
+      </div>
+      <div class="exam-instr">Θα ακούσετε δύο (2) φορές μια ραδιοφωνική εκπομπή. Ο καλεσμένος της εκπομπής, ο Γιώργος Λεοντής, είναι γνωστός διαφημιστής και μιλάει για τη ζωή και τη δουλειά του. Κρατάτε πολύ σύντομες σημειώσεις (1–3 λέξεις), όπως στο παράδειγμα.</div>
+      <div class="trans-box hidden-toggle"><strong>Перевод</strong>Вы услышите дважды радиопередачу. Гость передачи — Йоргос Леонтис, известный рекламист, рассказывает о своей жизни и работе. Делайте очень краткие заметки (1–3 слова), как в примере.</div>
+
+      <table class="exam-table" style="margin-top:.8rem">
+        <tr><th>#</th><th>Вопрос</th><th>Ответ (заметки)</th></tr>
+        <tr class="example"><td>0</td><td>Γιώργος Λεοντής: откуда родом, где живёт</td><td>из Греции, живёт в США</td></tr>
+        <tr><td>1</td><td>Γιατί μπόρεσαν οι γονείς να φύγουν από την Ελλάδα</td><td>___</td></tr>
+        <tr><td>2</td><td>Τι πίστευαν ότι θα γινόταν ο Γιώργος</td><td>___</td></tr>
+        <tr><td>3</td><td>Τι έδειξε ο νεαρός Γιώργος ότι είχε</td><td>___</td></tr>
+        <tr><td>4</td><td>Σε έναν καλλιτεχνικό διαγωνισμό κέρδισε</td><td>___</td></tr>
+        <tr><td>5</td><td>Ενώ σπούδαζε δούλευε, επειδή ήθελε να έχει</td><td>___</td></tr>
+        <tr><td>6</td><td>Δούλεψε για πρώτη φορά σε διαφημιστική εταιρεία σε ηλικία</td><td>___</td></tr>
+        <tr><td>7</td><td>Σχεδίαζε διαφημίσεις για εταιρείες, τηλεοπτικά κανάλια και</td><td>___</td></tr>
+        <tr><td>8</td><td>Η πιο επιτυχημένη διαφήμισή του ήταν για ένα</td><td>___</td></tr>
+        <tr><td>9</td><td>Άνοιξε τη δική του διαφημιστική εταιρεία το</td><td>___</td></tr>
+        <tr><td>10</td><td>Πολλά εξώφυλλα που σχεδίασε υπάρχουν στη Νέα Υόρκη στο</td><td>___</td></tr>
+        <tr><td>11</td><td>Μέσα από τη δουλειά του στα περιοδικά, στέλνει</td><td>___</td></tr>
+        <tr><td>12</td><td>Ο Γιώργος πιστεύει ότι στη διαφήμιση οι εικόνες είναι πιο σημαντικές από</td><td>___</td></tr>
+      </table>
+    </div>
+
+    <!-- ЗАДАНИЕ 2 -->
+    <div class="exam-part" style="margin-top:1.4rem">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">2</div>
+        <div><div class="exam-part-title">«Ευτυχία» και «Ζήσε» — Два журнала</div><div class="exam-part-meta">13 баллов · соответствие информации журналам</div></div>
+      </div>
+      <div class="exam-instr">Θα ακούσετε δύο (2) φορές μια συνέντευξη σε μια ραδιοφωνική εκπομπή. Δύο διευθυντές περιοδικών συνομιλούν με έναν δημοσιογράφο. Καθώς ακούτε τη συζήτηση, στον πίνακα που έχετε μπροστά σας, σημειώνετε ✓ στις πληροφορίες που ταιριάζουν σε κάθε περιοδικό.<br><em>Ορισμένες πληροφορίες ταιριάζουν και στα δύο περιοδικά.</em></div>
+      <div class="trans-box hidden-toggle"><strong>Перевод</strong>Вы услышите дважды интервью в радиопередаче. Два редактора журналов общаются с журналистом. Отмечайте ✓ информацию, которая относится к каждому журналу. Некоторые данные подходят к обоим.</div>
+
+      <table class="exam-table" style="margin-top:.8rem">
+        <tr><th>#</th><th>Информация</th><th>«Ευτυχία»</th><th>«Ζήσε»</th></tr>
+        <tr class="example"><td>0</td><td>Διευθυντής — κύριος Στεργίου</td><td>✓</td><td></td></tr>
+        <tr><td>1</td><td>Πωλούνται περισσότερα από 30.000 τεύχη τον μήνα</td><td>___</td><td>___</td></tr>
+        <tr><td>2</td><td>Το διαβάζουν άντρες και γυναίκες</td><td>___</td><td>___</td></tr>
+        <tr><td>3</td><td>Οι αναγνώστες ενημερώνονται για όλες τις εξελίξεις στον χώρο της υγείας</td><td>___</td><td>___</td></tr>
+        <tr><td>4</td><td>Οι αναγνώστες μαθαίνουν τα τοπικά νέα</td><td>___</td><td>___</td></tr>
+        <tr><td>5</td><td>Υπάρχουν αγγελίες για δουλειά</td><td>___</td><td>___</td></tr>
+        <tr><td>6</td><td>Υπάρχουν συνταγές μαγειρικής</td><td>___</td><td>___</td></tr>
+        <tr><td>7</td><td>Ενημέρωση για ταινίες κινηματογράφου</td><td>___</td><td>___</td></tr>
+        <tr><td>8</td><td>Κυκλοφορεί μία φορά την εβδομάδα</td><td>___</td><td>___</td></tr>
+        <tr><td>9</td><td>Τιμή μικρότερη από 5 ευρώ</td><td>___</td><td>___</td></tr>
+        <tr><td>10</td><td>Μαζί με κάθε τεύχος οι αναγνώστες παίρνουν ένα δώρο</td><td>___</td><td>___</td></tr>
+      </table>
+    </div>
+  </div><!-- /esec-listening -->
+
+  <!-- ═══════════ ПИСЬМО ═══════════ -->
+  <div class="exam-section" id="esec-writing">
+    <div class="exam-section-title">Παραγωγή γραπτού λόγου</div>
+    <div class="exam-section-sub">
+      <span>✏️ Письменная речь</span>
+      <span>⏱️ 55 минут</span>
+      <span>🏆 25 баллов</span>
+    </div>
+
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">1</div>
+        <div><div class="exam-part-title">Γράμμα σε φίλο — Письмо другу</div><div class="exam-part-meta">~150 λέξεις</div></div>
+      </div>
+      <div class="writing-prompt">Την περασμένη εβδομάδα χάσατε το πορτοφόλι σας και το ξαναβρήκατε μόλις χθες. Γράψτε ένα γράμμα σε έναν φίλο σας και περιγράψτε όλα όσα έγιναν. Πείτε:<br><br>
+      • τι είχατε μέσα στο πορτοφόλι σας<br>
+      • με ποιον ήσαστε όταν το χάσατε<br>
+      • τι κάνατε όταν καταλάβατε ότι λείπει<br>
+      • ποιος τελικά το βρήκε<br>
+      • τα συναισθήματά σας<br><br>
+      <strong>(150 λέξεις)</strong><br><br>
+      <em>Προσοχή: στο τέλος του γράμματος μην υπογράψετε με το όνομά σας. Χρησιμοποιήστε άλλο όνομα.</em>
+      </div>
+      <div class="trans-box hidden-toggle"><strong>Перевод задания</strong>На прошлой неделе вы потеряли кошелёк и нашли его только вчера. Напишите письмо другу и опишите всё, что произошло. Напишите: что было в кошельке; с кем вы были, когда потеряли; что вы делали, когда поняли, что его нет; кто в итоге нашёл; ваши чувства. (150 слов) <em>Не подписывайтесь своим именем — используйте другое.</em></div>
+      <div style="margin-top:1rem">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:.4rem">Начало письма (дано в задании):</div>
+        <div class="writing-prompt" style="border-left:3px solid var(--g3)">19 Μαΐου 2015<br><br>Γεια σου, Πέτρε!</div>
+      </div>
+      <div style="margin-top:1rem;background:var(--bg);border-radius:10px;padding:1rem 1.2rem">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:.6rem;font-weight:600">📝 КРИТЕРИИ ОЦЕНКИ</div>
+        <div style="font-size:.82rem;color:var(--t2);line-height:1.65">Содержание (все 5 пунктов) · Организация текста (структура письма) · Лексика (разнообразие, точность) · Грамматика (правильность форм)</div>
+      </div>
+    </div>
+
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">2</div>
+        <div><div class="exam-part-title">Επιστολή παραπόνων — Письмо-жалоба</div><div class="exam-part-meta">~150 λέξεις</div></div>
+      </div>
+      <div class="writing-prompt">Πήγατε σε ένα εστιατόριο που δεν σας άρεσε. Γράψτε ένα γράμμα στον ιδιοκτήτη του εστιατορίου, τον κύριο Παπαδόπουλο, και πείτε τα παράπονά σας (για το φαγητό, τη συμπεριφορά των σερβιτόρων, τις τιμές, την καθαριότητα κτλ.). Προτείνετε ευγενικά τι μπορεί να κάνει, για να είναι ευχαριστημένοι οι πελάτες.<br><br>
+      <strong>(150 λέξεις)</strong>
+      </div>
+      <div class="trans-box hidden-toggle"><strong>Перевод задания</strong>Вы побывали в ресторане, который вам не понравился. Напишите письмо владельцу ресторана, господину Пападопулосу, и изложите жалобы (по поводу еды, поведения официантов, цен, чистоты и т.д.). Вежливо предложите, что можно улучшить для удовлетворения клиентов. (150 слов)</div>
+      <div style="margin-top:1rem">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:.4rem">Начало письма:</div>
+        <div class="writing-prompt" style="border-left:3px solid var(--g3)">19 Μαΐου 2015<br><br>Αξιότιμε κύριε Παπαδόπουλε,</div>
+      </div>
+    </div>
+  </div><!-- /esec-writing -->
+
+  <!-- ═══════════ ГОВОРЕНИЕ ═══════════ -->
+  <div class="exam-section" id="esec-speaking">
+    <div class="exam-section-title">Παραγωγή προφορικού λόγου</div>
+    <div class="exam-section-sub">
+      <span>🗣️ Устная речь</span>
+      <span>⏱️ ~12 минут</span>
+      <span>🏆 25 баллов</span>
+    </div>
+
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num" style="background:var(--g3)">1</div>
+        <div><div class="exam-part-title">Πρώτο μέρος — Знакомство</div><div class="exam-part-meta">Личные вопросы</div></div>
+      </div>
+      <div class="speak-q"><span class="speak-q-dash">—</span><span>Πώς λέγεστε;</span></div>
+      <div class="speak-q"><span class="speak-q-dash">—</span><span>Από πού είστε;</span></div>
+      <div class="trans-box hidden-toggle"><strong>Перевод</strong>— Как вас зовут? — Откуда вы?</div>
+    </div>
+
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num" style="background:var(--g3)">2</div>
+        <div><div class="exam-part-title">Δεύτερο μέρος — Беседа по вопросам и картинкам</div><div class="exam-part-meta">Свободная беседа + описание изображений</div></div>
+      </div>
+      <div style="font-size:.82rem;font-weight:600;color:var(--g1);margin-bottom:.6rem">Часть А — Вопросы</div>
+      <div class="speak-q"><span class="speak-q-dash">—</span><span>Φροντίζετε την υγεία σας; Με ποιον τρόπο;</span></div>
+      <div class="speak-q"><span class="speak-q-dash">—</span><span>Πόσο σημαντικοί είναι οι φίλοι για εσάς; Τι κάνετε μαζί τους;</span></div>
+      <div class="trans-box hidden-toggle"><strong>Перевод вопросов</strong>— Заботитесь ли вы о своём здоровье? Каким образом? — Насколько важны для вас друзья? Что вы делаете вместе?</div>
+      <div style="font-size:.82rem;font-weight:600;color:var(--g1);margin:1rem 0 .6rem">Часть Б — Описание картинок</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:.8rem">
+        <div class="writing-prompt">
+          <strong style="font-size:.78rem;color:var(--g1)">Картинка 1: Женщина и переработка отходов</strong>
+          <div class="speak-q" style="margin-top:.5rem"><span class="speak-q-dash">—</span><span>Τι βλέπετε στην εικόνα;</span></div>
+          <div class="speak-q"><span class="speak-q-dash">—</span><span>Τι κάνει η γυναίκα; Πώς νιώθει;</span></div>
+          <div class="speak-q"><span class="speak-q-dash">—</span><span>Εσείς κάνετε ανακύκλωση; Τι ανακυκλώνετε;</span></div>
+          <div class="speak-q"><span class="speak-q-dash">—</span><span>Με ποιους άλλους τρόπους μπορούμε να προστατεύσουμε το περιβάλλον;</span></div>
+          <div class="speak-q"><span class="speak-q-dash">—</span><span>Ποια είναι τα πιο σοβαρά προβλήματα του περιβάλλοντος;</span></div>
+        </div>
+        <div class="writing-prompt">
+          <strong style="font-size:.78rem;color:var(--g1)">Картинка 2: Мужчина на рынке/в магазине</strong>
+          <div class="speak-q" style="margin-top:.5rem"><span class="speak-q-dash">—</span><span>Τι βλέπετε στην εικόνα;</span></div>
+          <div class="speak-q"><span class="speak-q-dash">—</span><span>Πού βρίσκεται ο άντρας; Τι κάνει;</span></div>
+          <div class="speak-q"><span class="speak-q-dash">—</span><span>Προτιμάτε να αγοράζετε φρούτα και λαχανικά από μεγάλα σούπερ μάρκετ ή από λαϊκές αγορές; Γιατί;</span></div>
+          <div class="speak-q"><span class="speak-q-dash">—</span><span>Κάνετε αγορές, όταν υπάρχουν εκπτώσεις;</span></div>
+          <div class="speak-q"><span class="speak-q-dash">—</span><span>Κάνετε αγορές από το διαδίκτυο; Ποια είναι τα πλεονεκτήματα και τα μειονεκτήματα τέτοιων αγορών;</span></div>
+        </div>
+      </div>
+      <div class="trans-box hidden-toggle"><strong>Перевод вопросов к картинкам</strong><strong>Картинка 1:</strong> Что вы видите? Что делает женщина? Как она себя чувствует? Занимаетесь ли вы переработкой? Что перерабатываете? Какими ещё способами можно защитить окружающую среду? Какие самые серьёзные экологические проблемы?<br><br><strong>Картинка 2:</strong> Что вы видите? Где находится мужчина? Предпочитаете покупать фрукты и овощи в супермаркете или на рынке? Почему? Делаете ли покупки во время скидок? Покупаете ли что-то в интернете? Плюсы и минусы?</div>
+    </div>
+
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num" style="background:var(--g3)">3</div>
+        <div><div class="exam-part-title">Τρίτο μέρος — Ролевая игра</div><div class="exam-part-meta">2 сценария: выбрать 1</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div class="writing-prompt">
+          <strong style="color:var(--g1)">Сценарий А: Περιγραφή βιβλίου</strong>
+          <div style="margin-top:.75rem;font-size:.85rem;line-height:1.65">
+            <strong>Роль A:</strong> Обсудите с другом книги, которые вам понравились. Опишите любимую книгу, объясните почему, посоветуйте ему купить её. Выслушайте его рекомендацию и выскажите своё мнение.<br><br>
+            <strong>Роль B:</strong> Выслушайте описание книги друга. Затем опишите свою любимую книгу и порекомендуйте её.
+          </div>
+        </div>
+        <div class="writing-prompt">
+          <strong style="color:var(--g1)">Сценарий Б: Κράτηση δωματίου</strong>
+          <div style="margin-top:.75rem;font-size:.85rem;line-height:1.65">
+            <strong>Роль A:</strong> Вы хотите поехать с семьёй на отдых. Найдите отель в интернете и позвоните. Скажите, сколько номеров, какого типа и на какие даты. Спросите про цены, питание, развлечения. Поблагодарите и закончите разговор.<br><br>
+            <strong>Роль B:</strong> Вы — сотрудник отеля. Ответьте на вопросы клиента про номера, даты, цены, питание. Предложите развлечения. Сделайте бронирование.
+          </div>
+        </div>
+      </div>
+      <div class="trans-box hidden-toggle"><strong>Оригинальный текст заданий (греческий)</strong><strong>Σενάριο Α — Ρόλος A:</strong> Συζητήστε με έναν φίλο/μια φίλη σας για βιβλία που διαβάσατε και σας άρεσαν πολύ. Του/Της περιγράψτε το αγαπημένο σας βιβλίο. Εξηγείτε γιατί σας άρεσε το βιβλίο και του/της προτείνετε να το αγοράσει. Ακούτε την περιγραφή του βιβλίου που σας προτείνει ο φίλος/η φίλη σας και λέτε τη γνώμη σας.<br><br><strong>Σενάριο Β — Ρόλος A:</strong> Θέλετε να πάτε διακοπές με την οικογένειά σας. Βρίσκετε στο διαδίκτυο ένα ξενοδοχείο που σας αρέσει και τηλεφωνείτε, για να κάνετε κράτηση. Μιλάτε με έναν/μια υπάλληλο και του/της λέτε τι θέλετε (αριθμός δωματίων, είδος δωματίων, ημερομηνίες). Ρωτάτε για τις τιμές και τα γεύματα. Ζητάτε από τον/την υπάλληλο να σας προτείνει δραστηριότητες.</div>
+    </div>
+  </div><!-- /esec-speaking -->
+
+</div><!-- /exam-wrap -->
+</div><!-- /tab-exam -->
 
 <script>
 // ==================== ALL WORDS ====================
@@ -838,6 +1285,37 @@ function checkSpell(){
     ans.innerHTML=`<span style="color:var(--red);font-weight:600">✗</span> &nbsp;Правильно: <span style="font-family:'Noto Serif',serif;font-weight:600;color:var(--blue)">${w.g}</span>`;
   }
   setTimeout(()=>{ sIdx=(sIdx+1)%sDeck.length; showSpell(); },2000);
+}
+
+// ==================== EXAM SECTION ====================
+let examKeysVisible = false;
+let examTransVisible = false;
+
+function showExamSec(id, btn) {
+  document.querySelectorAll('.exam-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.esec-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('esec-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleExamKeys() {
+  examKeysVisible = !examKeysVisible;
+  document.querySelectorAll('.key-box').forEach(el => {
+    el.style.display = examKeysVisible ? 'block' : 'none';
+  });
+  const btn = document.getElementById('btnKeys');
+  btn.classList.toggle('on', examKeysVisible);
+  btn.textContent = examKeysVisible ? '🔑 Ключи: вкл.' : '🔑 Ключи';
+}
+
+function toggleExamTrans() {
+  examTransVisible = !examTransVisible;
+  document.querySelectorAll('.trans-box').forEach(el => {
+    el.style.display = examTransVisible ? 'block' : 'none';
+  });
+  const btn = document.getElementById('btnTrans');
+  btn.classList.toggle('on', examTransVisible);
+  btn.textContent = examTransVisible ? '🇷🇺 Перевод: вкл.' : '🇷🇺 Перевод';
 }
 
 // INIT
