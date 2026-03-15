@@ -245,6 +245,26 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
 .exam-section-title{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--g1);margin-bottom:.3rem}
 .exam-section-sub{font-size:.82rem;color:var(--muted);margin-bottom:1.4rem;display:flex;gap:1.2rem}
 .exam-section-sub span{display:flex;align-items:center;gap:.3rem}
+
+/* ===== INTERACTIVE EXAM ELEMENTS ===== */
+.exam-sel{font-family:inherit;font-size:.82rem;padding:.22rem .5rem;border:1.5px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);cursor:pointer;min-width:70px;transition:border-color .15s}
+.exam-sel:focus{border-color:var(--g3);outline:none}
+.exam-sel.correct{border-color:#16a34a!important;background:#f0fdf4;color:#16a34a;font-weight:600}
+.exam-sel.wrong{border-color:var(--red)!important;background:var(--rl);color:var(--red)}
+.exam-cb{width:18px;height:18px;cursor:pointer;accent-color:var(--g2);vertical-align:middle}
+.exam-inp{font-family:inherit;font-size:.82rem;padding:.22rem .6rem;border:1.5px solid var(--border);border-radius:6px;width:150px;background:var(--surface);color:var(--text);transition:border-color .15s}
+.exam-inp:focus{border-color:var(--g3);outline:none}
+.exam-ta{width:100%;font-family:inherit;font-size:.85rem;padding:.75rem;border:1.5px solid var(--border);border-radius:8px;resize:vertical;min-height:140px;background:var(--surface);color:var(--text);line-height:1.6;margin-top:.75rem}
+.exam-ta:focus{border-color:var(--g3);outline:none}
+.wc-label{font-size:.75rem;color:var(--muted);margin-top:.35rem;text-align:right}
+.check-row{margin:.9rem 0;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.check-btn{background:var(--g1);color:#fff;border:none;padding:.45rem 1.2rem;border-radius:20px;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:background .15s}
+.check-btn:hover{background:var(--g2)}
+.check-result{font-size:.88rem;font-weight:600}
+.check-result.pass{color:#16a34a}
+.check-result.fail{color:var(--red)}
+.cb-correct{outline:2px solid #16a34a;border-radius:3px}
+.cb-wrong{outline:2px solid var(--red);border-radius:3px}
 </style>
 </head>
 <body>
@@ -447,28 +467,29 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
 
       <div class="exam-text">
         <p>Σας αρέσουν πολύ τα ταξίδια; Το όνειρο που σκέφτεστε είναι να ετοιμάσετε τη βαλίτσα σας και να φύγετε <span class="blank">0 ✓</span> ; Επειδή, όμως, πολλά μπορούν να γίνουν σε ένα ταξίδι, ακολουθήστε τις παρακάτω συμβουλές:</p>
-        <p>Να είστε προσεκτικοί, όταν πληρώνετε με πιστωτική κάρτα. Αν τη χάσετε στο ταξίδι, <span class="blank">1 ___</span>.</p>
-        <p>Μην βάζετε τα χρήματά σας σε τσάντες. Κρύψτε τα στις τσέπες των ρούχων σας. Κλέφτες υπάρχουν παντού, <span class="blank">2 ___</span>.</p>
-        <p>Πηγαίνετε σε εστιατόρια που προτιμούν οι κάτοικοι της περιοχής. Ζητήστε πληροφορίες από τον ξεναγό ή τον ξενοδόχο, για να είστε πιο σίγουροι <span class="blank">3 ___</span>.</p>
-        <p>Πάρτε μαζί σας ένα τσαντάκι με γάζες, οινόπνευμα, παυσίπονα και άλλα βασικά φάρμακα. Το τελευταίο πράγμα που θέλετε είναι <span class="blank">4 ___</span>.</p>
-        <p>Ενημερώστε συγγενείς ή φίλους για το πρόγραμμα του ταξιδιού σας. Αφήστε τους μια φωτοτυπία από το διαβατήριό σας, την ταυτότητα και άλλα ταξιδιωτικά έγγραφα. Αν σας τα κλέψει κάνεις στο ταξίδι, <span class="blank">5 ___</span>.</p>
-        <p>Αν ταξιδεύετε με παιδιά, καλό είναι να έχετε μαζί σας μερικές φωτογραφίες τους. Αν χαθεί κάποιο παιδί, θα δώσετε αμέσως τη φωτογραφία του στο αστυνομικό τμήμα και έτσι <span class="blank">6 ___</span>.</p>
+        <p>Να είστε προσεκτικοί, όταν πληρώνετε με πιστωτική κάρτα. Αν τη χάσετε στο ταξίδι, <select class="exam-sel" id="t1q1"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option></select>.</p>
+        <p>Μην βάζετε τα χρήματά σας σε τσάντες. Κρύψτε τα στις τσέπες των ρούχων σας. Κλέφτες υπάρχουν παντού, <select class="exam-sel" id="t1q2"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option></select>.</p>
+        <p>Πηγαίνετε σε εστιατόρια που προτιμούν οι κάτοικοι της περιοχής. Ζητήστε πληροφορίες από τον ξεναγό ή τον ξενοδόχο, για να είστε πιο σίγουροι <select class="exam-sel" id="t1q3"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option></select>.</p>
+        <p>Πάρτε μαζί σας ένα τσαντάκι με γάζες, οινόπνευμα, παυσίπονα και άλλα βασικά φάρμακα. Το τελευταίο πράγμα που θέλετε είναι <select class="exam-sel" id="t1q4"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option></select>.</p>
+        <p>Ενημερώστε συγγενείς ή φίλους για το πρόγραμμα του ταξιδιού σας. Αφήστε τους μια φωτοτυπία από το διαβατήριό σας, την ταυτότητα και άλλα ταξιδιωτικά έγγραφα. Αν σας τα κλέψει κάνεις στο ταξίδι, <select class="exam-sel" id="t1q5"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option></select>.</p>
+        <p>Αν ταξιδεύετε με παιδιά, καλό είναι να έχετε μαζί σας μερικές φωτογραφίες τους. Αν χαθεί κάποιο παιδί, θα δώσετε αμέσως τη φωτογραφία του στο αστυνομικό τμήμα και έτσι <select class="exam-sel" id="t1q6"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option></select>.</p>
       </div>
       <div class="trans-box hidden-toggle"><strong>Перевод текста</strong>Вы очень любите путешествовать? Ваша мечта — собрать чемодан и уехать как можно быстрее? Но поскольку в поездке может случиться многое, следуйте советам ниже:<br><br>1. Будьте осторожны при оплате кредитной картой. Если потеряете её в поездке, <em>[ответ 1]</em>. 2. Не кладите деньги в сумки. Прячьте их в карманы одежды. Воры везде, <em>[ответ 2]</em>. 3. Ходите в рестораны, которые предпочитают местные. Спросите гида или администратора, чтобы быть уверены <em>[ответ 3]</em>. 4. Возьмите аптечку с бинтами, спиртом, обезболивающими и другими лекарствами. Последнее, чего вы хотите, — это <em>[ответ 4]</em>. 5. Сообщите родственникам о программе поездки. Оставьте копию паспорта и других документов. Если их украдут, <em>[ответ 5]</em>. 6. Если путешествуете с детьми, возьмите их фотографии. Если ребёнок потеряется, отдайте фото в полицию — и тогда <em>[ответ 6]</em>.</div>
 
       <table class="exam-table">
         <tr><th></th><th>Второе полупредложение</th><th>№ первого полупредложения</th></tr>
         <tr class="example"><td class="lbl">0 ✓</td><td>600 πιο γρήγορα μπορείτε</td><td>пример</td></tr>
-        <tr><td class="lbl">A</td><td>για τα απαραίτητα ρούχα</td><td>___</td></tr>
-        <tr><td class="lbl">B</td><td>να τρέξετε στο νοσοκομείο</td><td>___</td></tr>
-        <tr><td class="lbl">C</td><td>δεν θα ξοδέψετε χρόνο στην περιγραφή του</td><td>___</td></tr>
-        <tr><td class="lbl">D</td><td>ενημερώστε αμέσως την τράπεζα</td><td>___</td></tr>
-        <tr><td class="lbl">E</td><td>θα ξεχάσετε όλες τις άσχημες στιγμές</td><td>___</td></tr>
-        <tr><td class="lbl">F</td><td>για αυτά που τρώτε και πίνετε</td><td>___</td></tr>
-        <tr><td class="lbl">G</td><td>να οδηγείτε σε αντίθετη κατεύθυνση</td><td>___</td></tr>
+        <tr><td class="lbl">A</td><td>για τα απαραίτητα ρούχα</td><td>—</td></tr>
+        <tr><td class="lbl">B</td><td>να τρέξετε στο νοσοκομείο</td><td>—</td></tr>
+        <tr><td class="lbl">C</td><td>δεν θα ξοδέψετε χρόνο στην περιγραφή του</td><td>—</td></tr>
+        <tr><td class="lbl">D</td><td>ενημερώστε αμέσως την τράπεζα</td><td>—</td></tr>
+        <tr><td class="lbl">E</td><td>θα ξεχάσετε όλες τις άσχημες στιγμές</td><td>—</td></tr>
+        <tr><td class="lbl">F</td><td>για αυτά που τρώτε και πίνετε</td><td>—</td></tr>
+        <tr><td class="lbl">G</td><td>να οδηγείτε σε αντίθετη κατεύθυνση</td><td>—</td></tr>
         <tr><td class="lbl">H</td><td>σε κάθε μέρος του κόσμου</td><td>___</td></tr>
       </table>
-      <div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 1</strong>
+            <div class="check-row"><button class="check-btn" onclick="checkTask1()">✅ Проверить задание 1</button><span id="t1result" class="check-result"></span></div>
+<div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 1</strong>
         <div class="key-row"><span class="key-num">1→</span><span class="key-ans">D: ενημερώστε αμέσως την τράπεζα</span></div>
         <div class="key-row"><span class="key-num">2→</span><span class="key-ans">H: σε κάθε μέρος του κόσμου</span></div>
         <div class="key-row"><span class="key-num">3→</span><span class="key-ans">F: για αυτά που τρώτε και πίνετε</span></div>
@@ -497,14 +518,15 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
       <table class="exam-table">
         <tr><th>Χαρακτηριστικά</th><th>A</th><th>B</th><th>C</th></tr>
         <tr class="example"><td>Περισσότερα από 10 χρόνια λειτουργίας</td><td>✓</td><td></td><td></td></tr>
-        <tr><td>Συμβουλές διατροφής</td><td></td><td>___</td><td>___</td></tr>
-        <tr><td>Ειδικές τιμές για ανέργους</td><td>___</td><td>___</td><td>___</td></tr>
-        <tr><td>Προγράμματα για παιδιά</td><td>___</td><td>___</td><td>___</td></tr>
-        <tr><td>Χρήση πισίνας χωρίς επιπλέον κόστος</td><td>___</td><td>___</td><td>___</td></tr>
-        <tr><td>Ομαδικά προγράμματα</td><td>___</td><td>___</td><td>___</td></tr>
-        <tr><td>Μαθήματα χορού</td><td>___</td><td>___</td><td>___</td></tr>
+        <tr><td>Συμβουλές διατροφής</td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2dietA" disabled style="opacity:.3"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2dietB"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2dietC"></td></tr>
+        <tr><td>Ειδικές τιμές για ανέργους</td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2discountA"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2discountB"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2discountC"></td></tr>
+        <tr><td>Προγράμματα για παιδιά</td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2kidsA"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2kidsB"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2kidsC"></td></tr>
+        <tr><td>Χρήση πισίνας χωρίς επιπλέον κόστος</td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2poolA"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2poolB"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2poolC"></td></tr>
+        <tr><td>Ομαδικά προγράμματα</td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2groupA"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2groupB"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2groupC"></td></tr>
+        <tr><td>Μαθήματα χορού</td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2danceA"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2danceB"></td><td style="text-align:center"><input type="checkbox" class="exam-cb" id="t2danceC"></td></tr>
       </table>
-      <div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 2</strong>
+            <div class="check-row"><button class="check-btn" onclick="checkTask2()">✅ Проверить задание 2</button><span id="t2result" class="check-result"></span></div>
+<div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 2</strong>
         <div class="key-row"><span class="key-ans">Συμβουλές διατροφής → B, C</span></div>
         <div class="key-row"><span class="key-ans">Ειδικές τιμές για ανέργους → B</span></div>
         <div class="key-row"><span class="key-ans">Προγράμματα για παιδιά → B, C</span></div>
@@ -558,7 +580,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
           <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
         </div>
       </div>
-      <div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 3</strong>
+            <div class="check-row"><button class="check-btn" onclick="checkTask3()">✅ Проверить задание 3</button><span id="t3result" class="check-result"></span></div>
+<div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 3</strong>
         <div class="key-row"><span class="key-num">1→</span><span class="key-ans">Σ (умерли оба дедушка и бабушка, то есть родители мамы)</span></div>
         <div class="key-row"><span class="key-num">2→</span><span class="key-ans">Σ (νυχτερινή δουλειά = ночная смена)</span></div>
         <div class="key-row"><span class="key-num">3→</span><span class="key-ans">Σ (сёрвировала в ресторане во время учёбы)</span></div>
@@ -576,12 +599,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
       </div>
       <div class="exam-instr">Διαβάζετε στο διαδίκτυο ένα κείμενο για το λάδι ελαιάς. Μερικές λέξεις/φράσεις, όμως, δεν φαίνονται καλά. Στον πίνακα που ακολουθεί υπάρχουν λέξεις/φράσεις που ταιριάζουν στα κενά σημεία του κειμένου. Διαβάστε προσεκτικά το κείμενο και συμπληρώνετε δίπλα σε κάθε λέξη/φράση του πίνακα τον αριθμό του κενού στο οποίο αυτή ταιριάζει, όπως στο παράδειγμα.<br><em>Υπάρχουν έξι λέξεις/φράσεις που δεν ταιριάζουν σε κανένα κενό.</em></div>
       <div class="exam-text">
-        <p>Το ελαιόλαδο είναι η βάση της <span class="blank">0 μεσογειακής ✓</span> διατροφής. Δεν είναι, όμως, χρήσιμο μόνο στη μαγειρική. Βγάλτε το από την κουζίνα σας και σημειώστε πέντε τρόπους, <span class="blank">1 ___</span>, για να το χρησιμοποιήσετε.</p>
-        <p>Αν τα μαλλιά σας είναι ξηρά και <span class="blank">2 ___</span>, απλώστε επάνω τους λίγο ελαιόλαδο. Μετά από μία ώρα τα μαλλιά σας θα είναι λαμπερά και απαλά.</p>
-        <p>Αν έχετε σπυράκια στο δέρμα, φτιάξτε μια κρέμα από αλάτι και ελαιόλαδο. Βάλτε την στο πρόσωπό σας για δέκα λεπτά και ξεπλύνετε με χλιαρό νερό. Το αποτέλεσμα <span class="blank">3 ___</span> απόλυτα!</p>
-        <p>Μυρίζεστε άσχημα και <span class="blank">4 ___</span> δεν έχετε αρκετό εύρισμα; Κανένα πρόβλημα! Βάλτε λίγο ελαιόλαδο και μια <span class="blank">5 ___</span> του γλυκού ζάχαρη σε ένα ποτήρι και ανακατέψτε τα. Σε λίγα λεπτά θα έχετε τη κρέμα που θα καθαρίσει τα χέρια σας και θα τα κάνει πολύ απαλά.</p>
-        <p>Αν θέλετε να διατηρήσετε τα ξύλινα έπιπλά σας σε <span class="blank">6 ___</span>, γυαλίστε τα με ελαιόλαδο. Θα γίνουν σαν καινούρια!</p>
-        <p><span class="blank">7 ___</span>, γυαλίστε τα με ελαιόλαδο.</p>
+        <p>Το ελαιόλαδο είναι η βάση της <span class="blank">0 μεσογειακής ✓</span> διατροφής. Δεν είναι, όμως, χρήσιμο μόνο στη μαγειρική. Βγάλτε το από την κουζίνα σας και σημειώστε πέντε τρόπους, <select class="exam-sel" id="t4q1" style="min-width:160px"><option value="">—</option><option value="ταλαιπωρημένα">ταλαιπωρημένα</option><option value="κουτάλια">κουτάλια</option><option value="χρειάζεστε">χρειάζεστε</option><option value="καλή κατάσταση">καλή κατάσταση</option><option value="μερίδα">μερίδα</option><option value="κακή ποιότητα">κακή ποιότητα</option><option value="ανακαλύπτετε">ανακαλύπτετε</option><option value="θα σας ικανοποιήσει">θα σας ικανοποιήσει</option><option value="κουραστικά">κουραστικά</option><option value="θα τα αλλάξετε">θα τα αλλάξετε</option><option value="λεύκους">λεύκους</option><option value="αλεύρι">αλεύρι</option></select>, για να το χρησιμοποιήσετε.</p>
+        <p>Αν τα μαλλιά σας είναι ξηρά και <select class="exam-sel" id="t4q2" style="min-width:160px"><option value="">—</option><option value="ταλαιπωρημένα">ταλαιπωρημένα</option><option value="κουτάλια">κουτάλια</option><option value="χρειάζεστε">χρειάζεστε</option><option value="καλή κατάσταση">καλή κατάσταση</option><option value="μερίδα">μερίδα</option><option value="κακή ποιότητα">κακή ποιότητα</option><option value="ανακαλύπτετε">ανακαλύπτετε</option><option value="θα σας ικανοποιήσει">θα σας ικανοποιήσει</option><option value="κουραστικά">κουραστικά</option><option value="θα τα αλλάξετε">θα τα αλλάξετε</option><option value="λεύκους">λεύκους</option><option value="αλεύρι">αλεύρι</option></select>, απλώστε επάνω τους λίγο ελαιόλαδο. Μετά από μία ώρα τα μαλλιά σας θα είναι λαμπερά και απαλά.</p>
+        <p>Αν έχετε σπυράκια στο δέρμα, φτιάξτε μια κρέμα από αλάτι και ελαιόλαδο. Βάλτε την στο πρόσωπό σας για δέκα λεπτά και ξεπλύνετε με χλιαρό νερό. Το αποτέλεσμα <select class="exam-sel" id="t4q3" style="min-width:160px"><option value="">—</option><option value="ταλαιπωρημένα">ταλαιπωρημένα</option><option value="κουτάλια">κουτάλια</option><option value="χρειάζεστε">χρειάζεστε</option><option value="καλή κατάσταση">καλή κατάσταση</option><option value="μερίδα">μερίδα</option><option value="κακή ποιότητα">κακή ποιότητα</option><option value="ανακαλύπτετε">ανακαλύπτετε</option><option value="θα σας ικανοποιήσει">θα σας ικανοποιήσει</option><option value="κουραστικά">κουραστικά</option><option value="θα τα αλλάξετε">θα τα αλλάξετε</option><option value="λεύκους">λεύκους</option><option value="αλεύρι">αλεύρι</option></select> απόλυτα!</p>
+        <p>Μυρίζεστε άσχημα και <select class="exam-sel" id="t4q4" style="min-width:160px"><option value="">—</option><option value="ταλαιπωρημένα">ταλαιπωρημένα</option><option value="κουτάλια">κουτάλια</option><option value="χρειάζεστε">χρειάζεστε</option><option value="καλή κατάσταση">καλή κατάσταση</option><option value="μερίδα">μερίδα</option><option value="κακή ποιότητα">κακή ποιότητα</option><option value="ανακαλύπτετε">ανακαλύπτετε</option><option value="θα σας ικανοποιήσει">θα σας ικανοποιήσει</option><option value="κουραστικά">κουραστικά</option><option value="θα τα αλλάξετε">θα τα αλλάξετε</option><option value="λεύκους">λεύκους</option><option value="αλεύρι">αλεύρι</option></select> δεν έχετε αρκετό εύρισμα; Κανένα πρόβλημα! Βάλτε λίγο ελαιόλαδο και μια <select class="exam-sel" id="t4q5" style="min-width:160px"><option value="">—</option><option value="ταλαιπωρημένα">ταλαιπωρημένα</option><option value="κουτάλια">κουτάλια</option><option value="χρειάζεστε">χρειάζεστε</option><option value="καλή κατάσταση">καλή κατάσταση</option><option value="μερίδα">μερίδα</option><option value="κακή ποιότητα">κακή ποιότητα</option><option value="ανακαλύπτετε">ανακαλύπτετε</option><option value="θα σας ικανοποιήσει">θα σας ικανοποιήσει</option><option value="κουραστικά">κουραστικά</option><option value="θα τα αλλάξετε">θα τα αλλάξετε</option><option value="λεύκους">λεύκους</option><option value="αλεύρι">αλεύρι</option></select> του γλυκού ζάχαρη σε ένα ποτήρι και ανακατέψτε τα. Σε λίγα λεπτά θα έχετε τη κρέμα που θα καθαρίσει τα χέρια σας και θα τα κάνει πολύ απαλά.</p>
+        <p>Αν θέλετε να διατηρήσετε τα ξύλινα έπιπλά σας σε <select class="exam-sel" id="t4q6" style="min-width:160px"><option value="">—</option><option value="ταλαιπωρημένα">ταλαιπωρημένα</option><option value="κουτάλια">κουτάλια</option><option value="χρειάζεστε">χρειάζεστε</option><option value="καλή κατάσταση">καλή κατάσταση</option><option value="μερίδα">μερίδα</option><option value="κακή ποιότητα">κακή ποιότητα</option><option value="ανακαλύπτετε">ανακαλύπτετε</option><option value="θα σας ικανοποιήσει">θα σας ικανοποιήσει</option><option value="κουραστικά">κουραστικά</option><option value="θα τα αλλάξετε">θα τα αλλάξετε</option><option value="λεύκους">λεύκους</option><option value="αλεύρι">αλεύρι</option></select>, γυαλίστε τα με ελαιόλαδο. Θα γίνουν σαν καινούρια!</p>
+        <p><select class="exam-sel" id="t4q7" style="min-width:160px"><option value="">—</option><option value="ταλαιπωρημένα">ταλαιπωρημένα</option><option value="κουτάλια">κουτάλια</option><option value="χρειάζεστε">χρειάζεστε</option><option value="καλή κατάσταση">καλή κατάσταση</option><option value="μερίδα">μερίδα</option><option value="κακή ποιότητα">κακή ποιότητα</option><option value="ανακαλύπτετε">ανακαλύπτετε</option><option value="θα σας ικανοποιήσει">θα σας ικανοποιήσει</option><option value="κουραστικά">κουραστικά</option><option value="θα τα αλλάξετε">θα τα αλλάξετε</option><option value="λεύκους">λεύκους</option><option value="αλεύρι">αλεύρι</option></select>, γυαλίστε τα με ελαιόλαδο.</p>
       </div>
       <div class="trans-box hidden-toggle"><strong>Перевод</strong>Оливковое масло — основа <em>средиземноморской</em> диеты. Но оно полезно не только в кулинарии. Достаньте его из кухни и запишите пять способов <em>[1]</em> использования. Если волосы сухие и <em>[2]</em>, нанесите немного масла. Через час волосы будут блестящими и мягкими. Если есть прыщи, сделайте крем из соли и масла, нанесите на лицо на 10 минут, смойте тёплой водой. Результат <em>[3]</em> абсолютно! Если плохо пахнете и <em>[4]</em> не хватает дезодоранта, смешайте масло и <em>[5]</em> сахара — через несколько минут крем очистит руки. Чтобы поддерживать деревянную мебель в <em>[6]</em>, полируйте маслом. <em>[7]</em>, полируйте маслом.</div>
 
@@ -601,7 +624,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
         <tr><td>λεύκους</td><td>___</td></tr>
         <tr><td>αλεύρι</td><td>___</td></tr>
       </table>
-      <div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 4 (реконструкция по OCR)</strong>
+            <div class="check-row"><button class="check-btn" onclick="checkTask4()">✅ Проверить задание 4</button><span id="t4result" class="check-result"></span></div>
+<div class="key-box hidden-toggle"><strong>🔑 Ключ — Задание 4 (реконструкция по OCR)</strong>
         <div class="key-row"><span class="key-num">1→</span><span class="key-ans">χωρίς σχέση με τη μαγειρική / ανακαλύπτετε</span></div>
         <div class="key-row"><span class="key-num">2→</span><span class="key-ans">ταλαιπωρημένα</span></div>
         <div class="key-row"><span class="key-num">3→</span><span class="key-ans">θα σας ικανοποιήσει</span></div>
@@ -636,18 +660,18 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
       <table class="exam-table" style="margin-top:.8rem">
         <tr><th>#</th><th>Вопрос</th><th>Ответ (заметки)</th></tr>
         <tr class="example"><td>0</td><td>Γιώργος Λεοντής: откуда родом, где живёт</td><td>из Греции, живёт в США</td></tr>
-        <tr><td>1</td><td>Γιατί μπόρεσαν οι γονείς να φύγουν από την Ελλάδα</td><td>___</td></tr>
-        <tr><td>2</td><td>Τι πίστευαν ότι θα γινόταν ο Γιώργος</td><td>___</td></tr>
-        <tr><td>3</td><td>Τι έδειξε ο νεαρός Γιώργος ότι είχε</td><td>___</td></tr>
-        <tr><td>4</td><td>Σε έναν καλλιτεχνικό διαγωνισμό κέρδισε</td><td>___</td></tr>
-        <tr><td>5</td><td>Ενώ σπούδαζε δούλευε, επειδή ήθελε να έχει</td><td>___</td></tr>
-        <tr><td>6</td><td>Δούλεψε για πρώτη φορά σε διαφημιστική εταιρεία σε ηλικία</td><td>___</td></tr>
-        <tr><td>7</td><td>Σχεδίαζε διαφημίσεις για εταιρείες, τηλεοπτικά κανάλια και</td><td>___</td></tr>
-        <tr><td>8</td><td>Η πιο επιτυχημένη διαφήμισή του ήταν για ένα</td><td>___</td></tr>
-        <tr><td>9</td><td>Άνοιξε τη δική του διαφημιστική εταιρεία το</td><td>___</td></tr>
-        <tr><td>10</td><td>Πολλά εξώφυλλα που σχεδίασε υπάρχουν στη Νέα Υόρκη στο</td><td>___</td></tr>
-        <tr><td>11</td><td>Μέσα από τη δουλειά του στα περιοδικά, στέλνει</td><td>___</td></tr>
-        <tr><td>12</td><td>Ο Γιώργος πιστεύει ότι στη διαφήμιση οι εικόνες είναι πιο σημαντικές από</td><td>___</td></tr>
+        <tr><td>1</td><td>Γιατί μπόρεσαν οι γονείς να φύγουν από την Ελλάδα</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>2</td><td>Τι πίστευαν ότι θα γινόταν ο Γιώργος</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>3</td><td>Τι έδειξε ο νεαρός Γιώργος ότι είχε</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>4</td><td>Σε έναν καλλιτεχνικό διαγωνισμό κέρδισε</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>5</td><td>Ενώ σπούδαζε δούλευε, επειδή ήθελε να έχει</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>6</td><td>Δούλεψε για πρώτη φορά σε διαφημιστική εταιρεία σε ηλικία</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>7</td><td>Σχεδίαζε διαφημίσεις για εταιρείες, τηλεοπτικά κανάλια και</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>8</td><td>Η πιο επιτυχημένη διαφήμισή του ήταν για ένα</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>9</td><td>Άνοιξε τη δική του διαφημιστική εταιρεία το</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>10</td><td>Πολλά εξώφυλλα που σχεδίασε υπάρχουν στη Νέα Υόρκη στο</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>11</td><td>Μέσα από τη δουλειά του στα περιοδικά, στέλνει</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>12</td><td>Ο Γιώργος πιστεύει ότι στη διαφήμιση οι εικόνες είναι πιο σημαντικές από</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
       </table>
     </div>
 
@@ -663,16 +687,16 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
       <table class="exam-table" style="margin-top:.8rem">
         <tr><th>#</th><th>Информация</th><th>«Ευτυχία»</th><th>«Ζήσε»</th></tr>
         <tr class="example"><td>0</td><td>Διευθυντής — κύριος Στεργίου</td><td>✓</td><td></td></tr>
-        <tr><td>1</td><td>Πωλούνται περισσότερα από 30.000 τεύχη τον μήνα</td><td>___</td><td>___</td></tr>
-        <tr><td>2</td><td>Το διαβάζουν άντρες και γυναίκες</td><td>___</td><td>___</td></tr>
-        <tr><td>3</td><td>Οι αναγνώστες ενημερώνονται για όλες τις εξελίξεις στον χώρο της υγείας</td><td>___</td><td>___</td></tr>
-        <tr><td>4</td><td>Οι αναγνώστες μαθαίνουν τα τοπικά νέα</td><td>___</td><td>___</td></tr>
-        <tr><td>5</td><td>Υπάρχουν αγγελίες για δουλειά</td><td>___</td><td>___</td></tr>
-        <tr><td>6</td><td>Υπάρχουν συνταγές μαγειρικής</td><td>___</td><td>___</td></tr>
-        <tr><td>7</td><td>Ενημέρωση για ταινίες κινηματογράφου</td><td>___</td><td>___</td></tr>
-        <tr><td>8</td><td>Κυκλοφορεί μία φορά την εβδομάδα</td><td>___</td><td>___</td></tr>
-        <tr><td>9</td><td>Τιμή μικρότερη από 5 ευρώ</td><td>___</td><td>___</td></tr>
-        <tr><td>10</td><td>Μαζί με κάθε τεύχος οι αναγνώστες παίρνουν ένα δώρο</td><td>___</td><td>___</td></tr>
+        <tr><td>1</td><td>Πωλούνται περισσότερα από 30.000 τεύχη τον μήνα</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>2</td><td>Το διαβάζουν άντρες και γυναίκες</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>3</td><td>Οι αναγνώστες ενημερώνονται για όλες τις εξελίξεις στον χώρο της υγείας</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>4</td><td>Οι αναγνώστες μαθαίνουν τα τοπικά νέα</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>5</td><td>Υπάρχουν αγγελίες για δουλειά</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>6</td><td>Υπάρχουν συνταγές μαγειρικής</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>7</td><td>Ενημέρωση για ταινίες κινηματογράφου</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>8</td><td>Κυκλοφορεί μία φορά την εβδομάδα</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>9</td><td>Τιμή μικρότερη από 5 ευρώ</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>10</td><td>Μαζί με κάθε τεύχος οι αναγνώστες παίρνουν ένα δώρο</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
       </table>
     </div>
   </div><!-- /esec-listening -->
@@ -709,6 +733,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
         <div style="font-size:.78rem;color:var(--muted);margin-bottom:.6rem;font-weight:600">📝 КРИТЕРИИ ОЦЕНКИ</div>
         <div style="font-size:.82rem;color:var(--t2);line-height:1.65">Содержание (все 5 пунктов) · Организация текста (структура письма) · Лексика (разнообразие, точность) · Грамматика (правильность форм)</div>
       </div>
+      <div style="margin-top:1rem">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:.3rem;font-weight:600">✍️ Твой ответ:</div>
+        <textarea class="exam-ta" id="w1ta" rows="10" oninput="countWords(this,'w1wc')" placeholder="Начни с: 19 Μαΐου 2015&#10;&#10;Γεια σου, Πέτρε!"></textarea>
+        <div class="wc-label" id="w1wc">Слов: 0 / 150</div>
+      </div>
     </div>
 
     <div class="exam-part">
@@ -723,6 +752,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
       <div style="margin-top:1rem">
         <div style="font-size:.78rem;color:var(--muted);margin-bottom:.4rem">Начало письма:</div>
         <div class="writing-prompt" style="border-left:3px solid var(--g3)">19 Μαΐου 2015<br><br>Αξιότιμε κύριε Παπαδόπουλε,</div>
+      </div>
+      <div style="margin-top:1rem">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:.3rem;font-weight:600">✍️ Твой ответ:</div>
+        <textarea class="exam-ta" id="w2ta" rows="10" oninput="countWords(this,'w2wc')" placeholder="Αξιότιμε κύριε Παπαδόπουλε,"></textarea>
+        <div class="wc-label" id="w2wc">Слов: 0 / 150</div>
       </div>
     </div>
   </div><!-- /esec-writing -->
@@ -800,6 +834,10 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
       </div>
       <div class="trans-box hidden-toggle"><strong>Оригинальный текст заданий (греческий)</strong><strong>Σενάριο Α — Ρόλος A:</strong> Συζητήστε με έναν φίλο/μια φίλη σας για βιβλία που διαβάσατε και σας άρεσαν πολύ. Του/Της περιγράψτε το αγαπημένο σας βιβλίο. Εξηγείτε γιατί σας άρεσε το βιβλίο και του/της προτείνετε να το αγοράσει. Ακούτε την περιγραφή του βιβλίου που σας προτείνει ο φίλος/η φίλη σας και λέτε τη γνώμη σας.<br><br><strong>Σενάριο Β — Ρόλος A:</strong> Θέλετε να πάτε διακοπές με την οικογένειά σας. Βρίσκετε στο διαδίκτυο ένα ξενοδοχείο που σας αρέσει και τηλεφωνείτε, για να κάνετε κράτηση. Μιλάτε με έναν/μια υπάλληλο και του/της λέτε τι θέλετε (αριθμός δωματίων, είδος δωματίων, ημερομηνίες). Ρωτάτε για τις τιμές και τα γεύματα. Ζητάτε από τον/την υπάλληλο να σας προτείνει δραστηριότητες.</div>
     </div>
+  <div class="exam-part" style="margin-top:1.2rem">
+    <div style="font-size:.82rem;font-weight:600;color:var(--muted);margin-bottom:.5rem">📝 Заметки / подготовка к говорению</div>
+    <textarea class="exam-ta" id="speak_notes" rows="6" placeholder="Пиши тезисы, слова, фразы для подготовки…"></textarea>
+  </div>
   </div><!-- /esec-speaking -->
 
 </div><!-- /exam-wrap -->
@@ -1320,6 +1358,94 @@ function toggleExamTrans() {
 
 // INIT
 buildVocab();
+
+// ===== EXAM INTERACTIVE CHECK FUNCTIONS =====
+function checkTask1() {
+  const key = {1:'D',2:'H',3:'F',4:'B',5:'C',6:'E'};
+  let score = 0;
+  for (let i=1;i<=6;i++) {
+    const el = document.getElementById('t1q'+i);
+    if (!el) continue;
+    el.classList.remove('correct','wrong');
+    const ok = el.value === key[i];
+    el.classList.add(ok ? 'correct' : 'wrong');
+    if (ok) score++;
+  }
+  const r = document.getElementById('t1result');
+  r.textContent = score + '/6 правильно';
+  r.className = 'check-result ' + (score >= 4 ? 'pass' : 'fail');
+}
+
+function checkTask2() {
+  // key: {id: expected_checked}
+  const key = {
+    t2dietA:false, t2dietB:true,  t2dietC:true,
+    t2discountA:false, t2discountB:true, t2discountC:false,
+    t2kidsA:false, t2kidsB:true, t2kidsC:true,
+    t2poolA:false, t2poolB:false, t2poolC:true,
+    t2groupA:true, t2groupB:true, t2groupC:true,
+    t2danceA:false, t2danceB:false, t2danceC:true
+  };
+  let correct = 0, total = 0;
+  for (const [id, expected] of Object.entries(key)) {
+    const el = document.getElementById(id);
+    if (!el || el.disabled) continue;
+    total++;
+    el.classList.remove('cb-correct','cb-wrong');
+    if (el.checked === expected) { correct++; el.classList.add('cb-correct'); }
+    else { el.classList.add('cb-wrong'); }
+  }
+  const r = document.getElementById('t2result');
+  r.textContent = correct + '/' + total + ' правильно';
+  r.className = 'check-result ' + (correct >= 14 ? 'pass' : 'fail');
+}
+
+function checkTask3() {
+  const key = ['σ','σ','σ','λ','λ','λ'];
+  const grids = document.querySelectorAll('#esec-reading .tf-grid');
+  // grids[0] = example, grids[1..6] = questions 1-6
+  let score = 0;
+  for (let i = 1; i <= 6; i++) {
+    const grid = grids[i];
+    if (!grid) continue;
+    const btns = grid.querySelectorAll('.tf-btn');
+    let answer = null;
+    btns.forEach(b => {
+      if (b.className.indexOf('σ') !== -1) answer = 'σ';
+      if (b.className.indexOf('λ') !== -1) answer = 'λ';
+    });
+    if (answer === key[i-1]) score++;
+  }
+  const r = document.getElementById('t3result');
+  r.textContent = score + '/6 правильно';
+  r.className = 'check-result ' + (score >= 4 ? 'pass' : 'fail');
+}
+
+function checkTask4() {
+  const key = {
+    1:'ανακαλύπτετε', 2:'ταλαιπωρημένα', 3:'θα σας ικανοποιήσει',
+    4:'χρειάζεστε', 5:'μερίδα', 6:'καλή κατάσταση', 7:'θα τα αλλάξετε'
+  };
+  let score = 0;
+  for (let i=1;i<=7;i++) {
+    const el = document.getElementById('t4q'+i);
+    if (!el) continue;
+    el.classList.remove('correct','wrong');
+    const ok = el.value === key[i];
+    el.classList.add(ok ? 'correct' : 'wrong');
+    if (ok) score++;
+  }
+  const r = document.getElementById('t4result');
+  r.textContent = score + '/7 правильно' + (score < 7 ? ' (ключ приблизительный)' : ' ✓');
+  r.className = 'check-result ' + (score >= 5 ? 'pass' : 'fail');
+}
+
+function countWords(ta, wcId) {
+  const words = ta.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+  const el = document.getElementById(wcId);
+  if (el) el.textContent = 'Слов: ' + words + ' / 150';
+}
+
 </script>
 </body>
 </html>
