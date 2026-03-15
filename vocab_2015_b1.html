@@ -265,6 +265,22 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
 .check-result.fail{color:var(--red)}
 .cb-correct{outline:2px solid #16a34a;border-radius:3px}
 .cb-wrong{outline:2px solid var(--red);border-radius:3px}
+
+/* ── Progress indicators ── */
+.wd-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-left:.4rem;vertical-align:middle;flex-shrink:0}
+.wd-dot.known{background:#16a34a}
+.wd-dot.unknown{background:var(--red)}
+.wd-dot.unseen{background:var(--border)}
+.progress-bar-wrap{background:var(--bg);border-radius:8px;padding:.55rem 1rem;margin-bottom:.8rem;display:flex;align-items:center;gap:1rem;font-size:.78rem;color:var(--muted);flex-wrap:wrap}
+.progress-bar-wrap strong{color:var(--text);font-size:.85rem}
+.mini-prog{flex:1;min-width:80px;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.mini-prog-fill{height:100%;background:var(--g2);border-radius:3px;transition:width .4s}
+.filter-btns{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
+.filter-btn{padding:.3rem .85rem;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-family:inherit;font-size:.78rem;font-weight:500;cursor:pointer;transition:all .15s;color:var(--t2)}
+.filter-btn:hover{border-color:var(--g3);color:var(--g1)}
+.filter-btn.active{background:var(--g1);color:#fff;border-color:var(--g1)}
+.filter-btn .fb-cnt{background:rgba(255,255,255,.25);color:inherit;font-size:.68rem;padding:.05rem .3rem;border-radius:8px;margin-left:.3rem}
+.filter-btn:not(.active) .fb-cnt{background:var(--bl);color:var(--g2)}
 </style>
 </head>
 <body>
@@ -313,6 +329,13 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
 <!-- ===== TAB: КАРТОЧКИ ===== -->
 <div class="tab-panel" id="tab-flash">
   <div class="ex-wrap">
+    <div class="progress-bar-wrap" id="globalProgress"></div>
+    <div class="filter-btns">
+      <button class="filter-btn active" id="ff-all"     onclick="setFlashFilter('all')">Все слова <span class="fb-cnt" id="ff-cnt-all">—</span></button>
+      <button class="filter-btn"        id="ff-unknown" onclick="setFlashFilter('unknown')">🔴 Не знаю <span class="fb-cnt" id="ff-cnt-unknown">—</span></button>
+      <button class="filter-btn"        id="ff-unseen"  onclick="setFlashFilter('unseen')">◌ Новые <span class="fb-cnt" id="ff-cnt-unseen">—</span></button>
+      <button class="filter-btn"        id="ff-known"   onclick="setFlashFilter('known')">✅ Знаю <span class="fb-cnt" id="ff-cnt-known">—</span></button>
+    </div>
     <div class="ex-controls">
       <div class="mode-toggle">
         <button class="mode-btn active" id="fm-gr" onclick="setFlashMode('gr')">🇬🇷 → 🇷🇺</button>
@@ -1023,6 +1046,64 @@ const SECTION_DESC = {
   'Прилагательные':'Прилагательные, наречия и доп. существительные'
 };
 
+
+// ==================== PROGRESS / LOCALSTORAGE ====================
+const LS_KEY = 'greek_b1_v1';
+
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+function saveProgress(data) {
+  try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch(e) {}
+}
+function recordWord(word, known) {
+  const data = loadProgress();
+  const key  = word.g;
+  if (!data[key]) data[key] = {k:0, u:0};
+  known ? data[key].k++ : data[key].u++;
+  data[key].last = Date.now();
+  saveProgress(data);
+}
+function getWordState(word) {
+  // returns 'known' | 'unknown' | 'unseen'
+  const data = loadProgress();
+  const s = data[word.g];
+  if (!s) return 'unseen';
+  return s.k > s.u ? 'known' : 'unknown';
+}
+function getProgressCounts() {
+  const data = loadProgress();
+  let known = 0, unknown = 0, unseen = 0;
+  W.forEach(w => {
+    const s = data[w.g];
+    if (!s) { unseen++; return; }
+    s.k > s.u ? known++ : unknown++;
+  });
+  return { known, unknown, unseen, total: W.length };
+}
+function resetProgress() {
+  if (!confirm('Сбросить весь прогресс?')) return;
+  localStorage.removeItem(LS_KEY);
+  buildVocab();
+  renderProgressBar();
+  if (document.getElementById('tab-flash').classList.contains('active')) initFlash();
+}
+
+function renderProgressBar() {
+  const el = document.getElementById('globalProgress');
+  if (!el) return;
+  const {known, unknown, unseen, total} = getProgressCounts();
+  const pct = total ? Math.round(known / total * 100) : 0;
+  el.innerHTML = `
+    <strong>${pct}% освоено</strong>
+    <div class="mini-prog"><div class="mini-prog-fill" style="width:${pct}%"></div></div>
+    <span style="color:var(--green)">✓ ${known}</span>
+    <span style="color:var(--red)">✗ ${unknown}</span>
+    <span>◌ ${unseen} новых</span>
+    <button onclick="resetProgress()" style="margin-left:auto;font-size:.72rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;font-family:inherit">сбросить</button>`;
+}
+
 // ==================== VOCAB TAB ====================
 let currentCat = 'all';
 function buildVocab() {
@@ -1037,7 +1118,7 @@ function buildVocab() {
     const words = W.filter(w=>w.s===sec);
     const rows = words.map(w=>`
       <div class="wr" data-cat="${w.c}" data-g="${w.g.toLowerCase()}" data-r="${w.r.toLowerCase()}">
-        <div class="wgr">${w.g}</div>
+        <div class="wgr">${w.g}<span class="wd-dot ${getWordState(w)}" title="${getWordState(w)==='known'?'Знаю':getWordState(w)==='unknown'?'Не знаю':'Не встречал'}"></span></div>
         <div class="wru">${w.r}</div>
         <div><span class="tbadge">${w.t}</span></div>
         <div><span class="cbadge ${CAT_META[w.c]?.cls||''}">${CAT_META[w.c]?.label||w.c}</span></div>
@@ -1089,12 +1170,37 @@ function switchTab(id,btn){
 }
 
 // ==================== FLASHCARDS ====================
-let fMode='gr', fDeck=[], fIdx=0, fCorrect=0, fTotal=0, fFlipped=false;
+let fMode='gr', fFilter='all', fDeck=[], fIdx=0, fCorrect=0, fTotal=0, fFlipped=false;
 function initFlash(){
-  fDeck=[...W].sort(()=>Math.random()-.5);
+  renderProgressBar();
+  const {known, unknown, unseen, total} = getProgressCounts();
+  const el = id => document.getElementById(id);
+  el('ff-cnt-all').textContent     = total;
+  el('ff-cnt-unknown').textContent = unknown;
+  el('ff-cnt-unseen').textContent  = unseen;
+  el('ff-cnt-known').textContent   = known;
+
+  let pool;
+  if      (fFilter === 'unknown') pool = W.filter(w => getWordState(w) === 'unknown');
+  else if (fFilter === 'unseen')  pool = W.filter(w => getWordState(w) === 'unseen');
+  else if (fFilter === 'known')   pool = W.filter(w => getWordState(w) === 'known');
+  else                            pool = [...W];
+
+  if (pool.length === 0) pool = [...W]; // fallback
+  fDeck = pool.sort(() => Math.random() - .5);
   fIdx=0; fCorrect=0; fTotal=0; fFlipped=false;
   document.getElementById('flashResult').style.display='none';
+  document.getElementById('flashCatInfo').textContent =
+    fFilter==='unknown' ? `Не знаю (${unknown})` :
+    fFilter==='unseen'  ? `Новые (${unseen})`    :
+    fFilter==='known'   ? `Знаю (${known})`      : `Все слова (${total})`;
   showCard();
+}
+function setFlashFilter(f){
+  fFilter = f;
+  ['all','unknown','unseen','known'].forEach(id =>
+    document.getElementById('ff-'+id).classList.toggle('active', id === f));
+  initFlash();
 }
 function shuffleFlash(){ fDeck.sort(()=>Math.random()-.5); fIdx=0; fFlipped=false; showCard(); }
 function resetFlash(){ fIdx=0; fCorrect=0; fTotal=0; fFlipped=false; document.getElementById('flashResult').style.display='none'; showCard(); }
@@ -1133,21 +1239,23 @@ function markCard(known){
   if(!fFlipped){ flipCard(); return; }
   fTotal++;
   if(known)fCorrect++;
+  // Save to localStorage
+  recordWord(fDeck[fIdx], known);
   fIdx++;
-  // Disable flip transition while swapping content — prevents
-  // next card's back-face from flashing during unflip
+  // Disable flip transition while swapping content
   const card = document.getElementById('flashCard');
   card.style.transition = 'none';
-  void card.offsetWidth; // force reflow
-  showCard();            // updates content + removes 'flipped' class
+  void card.offsetWidth;
+  showCard();
   requestAnimationFrame(() => requestAnimationFrame(() => {
-    card.style.transition = ''; // restore transition for next flip
+    card.style.transition = '';
   }));
 }
 function showFlashResult(){
   const pct=fTotal?Math.round(fCorrect/fTotal*100):0;
   document.getElementById('flashProg').style.width='100%';
   document.getElementById('flashProgTxt').textContent=fDeck.length+' / '+fDeck.length;
+  renderProgressBar();
   document.getElementById('flashResult').style.display='block';
   document.getElementById('flashResult').innerHTML=`
     <div class="result-box">
@@ -1158,8 +1266,9 @@ function showFlashResult(){
         <div class="sb-item"><div class="sb-num" style="color:var(--red)">${fTotal-fCorrect}</div><div class="sb-lbl">Не знаю ✗</div></div>
       </div>
       <div style="margin-top:1.2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
-        <button class="btn btn-blue" onclick="resetFlash()">↺ Сначала</button>
+        <button class="btn btn-blue" onclick="resetFlash()">↺ Ещё раз</button>
         <button class="btn btn-outline" onclick="initFlash()">🔀 Перемешать</button>
+        <button class="btn btn-outline" onclick="setFlashFilter('unknown')">🔴 Повторить слабые</button>
       </div>
     </div>`;
 }
@@ -1326,6 +1435,7 @@ function toggleExamTrans() {
 
 // INIT
 buildVocab();
+renderProgressBar();
 
 
 function toggleTF(btn, cls) {
