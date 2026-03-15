@@ -286,6 +286,12 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
 .btn-amber:hover{background:#b45309}
 .due-badge{background:#dc2626;color:#fff;font-size:.68rem;font-weight:700;padding:.1rem .35rem;border-radius:8px;margin-left:.3rem}
 .sm2-next{font-size:.7rem;color:rgba(255,255,255,.55);margin-top:.5rem;letter-spacing:.01em}
+
+.wrong-list{margin-top:1rem;text-align:left;max-width:480px;margin-left:auto;margin-right:auto}
+.wrong-list-hdr{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.wrong-item{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;padding:.45rem .7rem;border-radius:8px;background:var(--rl);border:1px solid #fecaca;margin-bottom:.35rem;font-size:.85rem}
+.wrong-item .wi-q{font-weight:600;color:var(--g1);font-family:'Noto Serif',serif}
+.wrong-item .wi-a{color:var(--t2)}
 </style>
 </head>
 <body>
@@ -1344,7 +1350,7 @@ function showFlashResult(){
 }
 
 // ==================== QUIZ ====================
-let qMode='gr', qDeck=[], qIdx=0, qRight=0, qWrong=0;
+let qMode='gr', qDeck=[], qIdx=0, qRight=0, qWrong=0, qWrongWords=[];
 function setQuizMode(m){
   qMode=m;
   document.getElementById('qm-gr').classList.toggle('active',m==='gr');
@@ -1353,7 +1359,13 @@ function setQuizMode(m){
 function resetQuiz(){ document.getElementById('quizArea').innerHTML=`<div class="result-box" style="margin-top:1rem"><div style="font-size:2rem;margin-bottom:.5rem">🎯</div><div style="font-weight:700;font-size:1rem">Выбери режим и нажми «Начать тест»</div><div style="font-size:.85rem;color:var(--muted);margin-top:.4rem">4 варианта ответа · мгновенная проверка</div></div>`; }
 function startQuiz(){
   qDeck=[...W].sort(()=>Math.random()-.5).slice(0,10);
-  qIdx=0; qRight=0; qWrong=0;
+  qIdx=0; qRight=0; qWrong=0; qWrongWords=[];
+  renderQuiz();
+}
+function retryWrong(){
+  if(!qWrongWords.length) return;
+  qDeck=[...qWrongWords].sort(()=>Math.random()-.5);
+  qIdx=0; qRight=0; qWrong=0; qWrongWords=[];
   renderQuiz();
 }
 function renderQuiz(){
@@ -1384,12 +1396,31 @@ function answerQuiz(chosen,correct){
   document.querySelectorAll('.qopt').forEach(b=>b.disabled=true);
   document.getElementById('qo'+chosen).classList.add(chosen===correct?'correct':'wrong');
   if(chosen!==correct){document.getElementById('qo'+correct).classList.add('correct');}
-  chosen===correct?qRight++:qWrong++;
+  const w = qDeck[qIdx];
+  if(chosen===correct){
+    qRight++;
+    recordWord(w, 5); // правильно → SM-2 quality 5
+  } else {
+    qWrong++;
+    qWrongWords.push(w);
+    recordWord(w, 0); // неправильно → SM-2 quality 0
+  }
   setTimeout(()=>{ qIdx++; renderQuiz(); },1100);
 }
 function showQuizResult(){
   const pct=Math.round(qRight/qDeck.length*100);
-  const fb=pct>=80?'🎉 Отлично! Так держать.':pct>=60?'👍 Хорошо, есть над чем поработать.':'📖 Нужно больше практики.';
+  const fb=pct>=80?'🎉 Отлично!':pct>=60?'👍 Хорошо, есть над чем поработать.':'📖 Нужно больше практики.';
+  const wrongHTML = qWrongWords.length ? `
+    <div class="wrong-list">
+      <div class="wrong-list-hdr">❌ Ошибки (${qWrongWords.length})</div>
+      ${qWrongWords.map(w=>`
+        <div class="wrong-item">
+          <div class="wi-q">${qMode==='gr'?w.g:w.r}</div>
+          <div class="wi-a">${qMode==='gr'?w.r:w.g}</div>
+        </div>`).join('')}
+    </div>` : '';
+  const retryBtn = qWrongWords.length
+    ? `<button class="btn btn-red" onclick="retryWrong()">↺ Повторить ошибки (${qWrongWords.length})</button>` : '';
   document.getElementById('quizArea').innerHTML=`
     <div class="result-box" style="margin-top:.5rem">
       <div class="result-big">${pct}%</div>
@@ -1398,10 +1429,13 @@ function showQuizResult(){
         <div class="sb-item"><div class="sb-num" style="color:var(--green)">${qRight}</div><div class="sb-lbl">Правильно</div></div>
         <div class="sb-item"><div class="sb-num" style="color:var(--red)">${qDeck.length-qRight}</div><div class="sb-lbl">Неправильно</div></div>
       </div>
-      <div style="margin-top:1.2rem;display:flex;gap:.75rem;justify-content:center">
-        <button class="btn btn-blue" onclick="startQuiz()">🔀 Ещё раз</button>
+      <div style="margin-top:1.2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        ${retryBtn}
+        <button class="btn btn-blue" onclick="startQuiz()">🔀 Новый тест</button>
       </div>
+      ${wrongHTML}
     </div>`;
+  renderProgressBar();
 }
 
 // ==================== SPELLING ====================
