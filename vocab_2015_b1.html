@@ -1030,7 +1030,7 @@ function buildVocab() {
   const cnt = {all:W.length};
   W.forEach(w=>{ cnt[w.c]=(cnt[w.c]||0)+1; });
   document.getElementById('cnt-all').textContent = W.length;
-  document.getElementById('totalWords').textContent = W.length;
+  const twEl = document.getElementById('totalWords'); if(twEl) twEl.textContent = W.length;
 
   const main = document.getElementById('vocabMain');
   main.innerHTML = sections.map(sec=>{
@@ -1074,7 +1074,7 @@ function filterVocab(){
   document.querySelectorAll('.topic-section').forEach(s=>{
     s.style.display=s.querySelectorAll('.wr:not(.hidden)').length?'':'none';
   });
-  document.getElementById('totalWords').textContent=v;
+  const twEl2 = document.getElementById('totalWords'); if(twEl2) twEl2.textContent=v;
 }
 
 // ==================== TAB SWITCHING ====================
