@@ -281,6 +281,11 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
 .filter-btn.active{background:var(--g1);color:#fff;border-color:var(--g1)}
 .filter-btn .fb-cnt{background:rgba(255,255,255,.25);color:inherit;font-size:.68rem;padding:.05rem .3rem;border-radius:8px;margin-left:.3rem}
 .filter-btn:not(.active) .fb-cnt{background:var(--bl);color:var(--g2)}
+
+.btn-amber{background:#d97706;color:#fff;border:none}
+.btn-amber:hover{background:#b45309}
+.due-badge{background:#dc2626;color:#fff;font-size:.68rem;font-weight:700;padding:.1rem .35rem;border-radius:8px;margin-left:.3rem}
+.sm2-next{font-size:.7rem;color:rgba(255,255,255,.55);margin-top:.5rem;letter-spacing:.01em}
 </style>
 </head>
 <body>
@@ -331,6 +336,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
   <div class="ex-wrap">
     <div class="progress-bar-wrap" id="globalProgress"></div>
     <div class="filter-btns">
+      <button class="filter-btn"        id="ff-due"     onclick="setFlashFilter('due')">📅 На сегодня <span class="fb-cnt due-badge" id="ff-cnt-due">0</span></button>
       <button class="filter-btn active" id="ff-all"     onclick="setFlashFilter('all')">Все слова <span class="fb-cnt" id="ff-cnt-all">—</span></button>
       <button class="filter-btn"        id="ff-unknown" onclick="setFlashFilter('unknown')">🔴 Не знаю <span class="fb-cnt" id="ff-cnt-unknown">—</span></button>
       <button class="filter-btn"        id="ff-unseen"  onclick="setFlashFilter('unseen')">◌ Новые <span class="fb-cnt" id="ff-cnt-unseen">—</span></button>
@@ -361,12 +367,14 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
           <div class="card-hint" style="color:rgba(255,255,255,.6)" id="fc-hint-back">Перевод</div>
           <div class="card-word" id="fc-word-back">—</div>
           <div class="card-type" id="fc-type-back"></div>
+          <div class="sm2-next" id="fc-sm2-next"></div>
         </div>
       </div>
     </div>
     <div class="card-actions">
-      <button class="btn btn-red" onclick="markCard(false)">✗ Не знаю</button>
-      <button class="btn btn-green" onclick="markCard(true)">✓ Знаю</button>
+      <button class="btn btn-red"   onclick="markCard(0)">✗ Не знаю</button>
+      <button class="btn btn-amber" onclick="markCard(3)">~ С трудом</button>
+      <button class="btn btn-green" onclick="markCard(5)">✓ Знаю</button>
     </div>
     <div id="flashResult" style="display:none;margin-top:1.5rem"></div>
   </div>
@@ -1047,7 +1055,7 @@ const SECTION_DESC = {
 };
 
 
-// ==================== PROGRESS / LOCALSTORAGE ====================
+// ==================== PROGRESS / LOCALSTORAGE + SM-2 ====================
 const LS_KEY = 'greek_b1_v1';
 
 function loadProgress() {
@@ -1057,31 +1065,75 @@ function loadProgress() {
 function saveProgress(data) {
   try { localStorage.setItem(LS_KEY, JSON.stringify(data)); } catch(e) {}
 }
-function recordWord(word, known) {
+
+// SM-2 algorithm
+// quality: 0 = не знаю, 3 = с трудом, 5 = знаю
+function sm2(card, quality) {
+  let {interval=1, ef=2.5, rep=0, k=0, u=0} = card;
+  if (quality >= 3) {
+    if      (rep === 0) interval = 1;
+    else if (rep === 1) interval = 6;
+    else                interval = Math.round(interval * ef);
+    ef = Math.max(1.3, ef + 0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+    rep++;
+    quality === 5 ? k++ : k++;   // both 3 and 5 count as known pass
+  } else {
+    interval = 1;
+    rep = 0;
+    u++;
+  }
+  return {
+    interval, ef, rep, k, u,
+    last: Date.now(),
+    due:  Date.now() + interval * 86400000
+  };
+}
+
+function recordWord(word, quality) {
   const data = loadProgress();
   const key  = word.g;
-  if (!data[key]) data[key] = {k:0, u:0};
-  known ? data[key].k++ : data[key].u++;
-  data[key].last = Date.now();
+  const prev = data[key] || {};
+  data[key] = sm2(prev, quality);
   saveProgress(data);
 }
+
 function getWordState(word) {
-  // returns 'known' | 'unknown' | 'unseen'
   const data = loadProgress();
   const s = data[word.g];
   if (!s) return 'unseen';
-  return s.k > s.u ? 'known' : 'unknown';
+  if (s.rep === 0 && !s.due) return s.k > s.u ? 'known' : 'unknown';
+  return s.k > 0 && s.rep > 0 ? 'known' : 'unknown';
 }
+
+function isDue(word) {
+  const data = loadProgress();
+  const s = data[word.g];
+  if (!s || !s.due) return false;
+  return s.due <= Date.now();
+}
+
+function getNextDue(word) {
+  const data = loadProgress();
+  const s = data[word.g];
+  if (!s || !s.due) return null;
+  const diff = s.due - Date.now();
+  if (diff <= 0) return 'сегодня';
+  const days = Math.ceil(diff / 86400000);
+  return days === 1 ? 'завтра' : `через ${days} д.`;
+}
+
 function getProgressCounts() {
   const data = loadProgress();
-  let known = 0, unknown = 0, unseen = 0;
+  let known = 0, unknown = 0, unseen = 0, dueToday = 0;
   W.forEach(w => {
     const s = data[w.g];
     if (!s) { unseen++; return; }
-    s.k > s.u ? known++ : unknown++;
+    if (s.k > 0 && s.rep > 0) known++; else unknown++;
+    if (isDue(w)) dueToday++;
   });
-  return { known, unknown, unseen, total: W.length };
+  return { known, unknown, unseen, dueToday, total: W.length };
 }
+
 function resetProgress() {
   if (!confirm('Сбросить весь прогресс?')) return;
   localStorage.removeItem(LS_KEY);
@@ -1093,7 +1145,7 @@ function resetProgress() {
 function renderProgressBar() {
   const el = document.getElementById('globalProgress');
   if (!el) return;
-  const {known, unknown, unseen, total} = getProgressCounts();
+  const {known, unknown, unseen, dueToday, total} = getProgressCounts();
   const pct = total ? Math.round(known / total * 100) : 0;
   el.innerHTML = `
     <strong>${pct}% освоено</strong>
@@ -1101,7 +1153,17 @@ function renderProgressBar() {
     <span style="color:var(--green)">✓ ${known}</span>
     <span style="color:var(--red)">✗ ${unknown}</span>
     <span>◌ ${unseen} новых</span>
+    ${dueToday ? `<span style="color:#dc2626;font-weight:700">📅 ${dueToday} на сегодня</span>` : ''}
     <button onclick="resetProgress()" style="margin-left:auto;font-size:.72rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;font-family:inherit">сбросить</button>`;
+  // Update due badge on filter button
+  const dueBtn = document.getElementById('ff-due');
+  if (dueBtn) {
+    const badge = dueBtn.querySelector('.due-badge');
+    if (badge) badge.textContent = dueToday;
+    dueBtn.style.display = dueToday > 0 ? '' : '';
+  }
+  const dueCnt = document.getElementById('ff-cnt-due');
+  if (dueCnt) dueCnt.textContent = dueToday;
 }
 
 // ==================== VOCAB TAB ====================
@@ -1173,15 +1235,17 @@ function switchTab(id,btn){
 let fMode='gr', fFilter='all', fDeck=[], fIdx=0, fCorrect=0, fTotal=0, fFlipped=false;
 function initFlash(){
   renderProgressBar();
-  const {known, unknown, unseen, total} = getProgressCounts();
+  const {known, unknown, unseen, dueToday, total} = getProgressCounts();
   const el = id => document.getElementById(id);
   el('ff-cnt-all').textContent     = total;
   el('ff-cnt-unknown').textContent = unknown;
   el('ff-cnt-unseen').textContent  = unseen;
   el('ff-cnt-known').textContent   = known;
+  el('ff-cnt-due').textContent     = dueToday;
 
   let pool;
-  if      (fFilter === 'unknown') pool = W.filter(w => getWordState(w) === 'unknown');
+  if      (fFilter === 'due')     pool = W.filter(w => isDue(w));
+  else if (fFilter === 'unknown') pool = W.filter(w => getWordState(w) === 'unknown');
   else if (fFilter === 'unseen')  pool = W.filter(w => getWordState(w) === 'unseen');
   else if (fFilter === 'known')   pool = W.filter(w => getWordState(w) === 'known');
   else                            pool = [...W];
@@ -1191,14 +1255,15 @@ function initFlash(){
   fIdx=0; fCorrect=0; fTotal=0; fFlipped=false;
   document.getElementById('flashResult').style.display='none';
   document.getElementById('flashCatInfo').textContent =
-    fFilter==='unknown' ? `Не знаю (${unknown})` :
-    fFilter==='unseen'  ? `Новые (${unseen})`    :
-    fFilter==='known'   ? `Знаю (${known})`      : `Все слова (${total})`;
+    fFilter==='due'     ? `На сегодня (${dueToday})` :
+    fFilter==='unknown' ? `Не знаю (${unknown})`     :
+    fFilter==='unseen'  ? `Новые (${unseen})`         :
+    fFilter==='known'   ? `Знаю (${known})`           : `Все слова (${total})`;
   showCard();
 }
 function setFlashFilter(f){
   fFilter = f;
-  ['all','unknown','unseen','known'].forEach(id =>
+  ['due','all','unknown','unseen','known'].forEach(id =>
     document.getElementById('ff-'+id).classList.toggle('active', id === f));
   initFlash();
 }
@@ -1226,6 +1291,10 @@ function showCard(){
   const card=document.getElementById('flashCard');
   card.classList.remove('flipped');
   fFlipped=false;
+  // SM-2 next due hint on back face
+  const nextDue = getNextDue(fDeck[fIdx]);
+  const sm2el = document.getElementById('fc-sm2-next');
+  if (sm2el) sm2el.textContent = nextDue ? `повтор: ${nextDue}` : '';
   // progress
   const pct=fDeck.length?fIdx/fDeck.length*100:0;
   document.getElementById('flashProg').style.width=pct+'%';
@@ -1235,12 +1304,12 @@ function flipCard(){
   fFlipped=!fFlipped;
   document.getElementById('flashCard').classList.toggle('flipped',fFlipped);
 }
-function markCard(known){
+function markCard(quality){
   if(!fFlipped){ flipCard(); return; }
   fTotal++;
-  if(known)fCorrect++;
-  // Save to localStorage
-  recordWord(fDeck[fIdx], known);
+  if(quality >= 3) fCorrect++;
+  // Save to localStorage with SM-2
+  recordWord(fDeck[fIdx], quality);
   fIdx++;
   // Disable flip transition while swapping content
   const card = document.getElementById('flashCard');
@@ -1268,7 +1337,8 @@ function showFlashResult(){
       <div style="margin-top:1.2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
         <button class="btn btn-blue" onclick="resetFlash()">↺ Ещё раз</button>
         <button class="btn btn-outline" onclick="initFlash()">🔀 Перемешать</button>
-        <button class="btn btn-outline" onclick="setFlashFilter('unknown')">🔴 Повторить слабые</button>
+        <button class="btn btn-outline" onclick="setFlashFilter('unknown')">🔴 Слабые</button>
+        <button class="btn btn-outline" onclick="setFlashFilter('due')">📅 На сегодня</button>
       </div>
     </div>`;
 }
