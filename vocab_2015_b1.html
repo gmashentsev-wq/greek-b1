@@ -557,27 +557,27 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
         </div>
         <div class="tf-grid">
           <div class="tf-stmt">1. Όταν η μαμά της Δανάης ήταν μικρή, πέθαναν οι γονείς της.</div>
-          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
         </div>
         <div class="tf-grid">
           <div class="tf-stmt">2. Η γιαγιά της Δανάης δούλευε βράδυ, την ημέρα που πέθανε.</div>
-          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
         </div>
         <div class="tf-grid">
           <div class="tf-stmt">3. Η μαμά της Δανάης δούλευε, ενώ σπούδαζε.</div>
-          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
         </div>
         <div class="tf-grid">
           <div class="tf-stmt">4. Η μαμά της Δανάης ταξίδευε κάθε καλοκαίρι στην Ελλάδα.</div>
-          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
         </div>
         <div class="tf-grid">
           <div class="tf-stmt">5. Η μαμά της Δανάης δεν είχε κανέναν συγγενή στη Δανία.</div>
-          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
         </div>
         <div class="tf-grid">
           <div class="tf-stmt">6. Η θεία Οδέτα πήγαινε πολύ συχνά να δει τον υπαυτό της Δανάης.</div>
-          <div class="tf-btns"><button class="tf-btn" onclick="this.className='tf-btn σ'">Σ</button><button class="tf-btn" onclick="this.className='tf-btn λ'">Λ</button></div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
         </div>
       </div>
             <div class="check-row"><button class="check-btn" onclick="checkTask3()">✅ Проверить задание 3</button><span id="t3result" class="check-result"></span></div>
@@ -1175,7 +1175,15 @@ function markCard(known){
   fTotal++;
   if(known)fCorrect++;
   fIdx++;
-  showCard();
+  // Disable flip transition while swapping content — prevents
+  // next card's back-face from flashing during unflip
+  const card = document.getElementById('flashCard');
+  card.style.transition = 'none';
+  void card.offsetWidth; // force reflow
+  showCard();            // updates content + removes 'flipped' class
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    card.style.transition = ''; // restore transition for next flip
+  }));
 }
 function showFlashResult(){
   const pct=fTotal?Math.round(fCorrect/fTotal*100):0;
@@ -1215,9 +1223,10 @@ function renderQuiz(){
   const w=qDeck[qIdx];
   const question=qMode==='gr'?w.g:w.r;
   const correctAnswer=qMode==='gr'?w.r:w.g;
-  // wrong options
-  const pool=W.filter(x=>x!==w);
-  const wrongs=pool.sort(()=>Math.random()-.5).slice(0,3).map(x=>qMode==='gr'?x.r:x.g);
+  // wrong options — same part of speech first, then fallback
+  const sameType = W.filter(x => x !== w && x.t === w.t).sort(() => Math.random() - .5);
+  const anyOther = W.filter(x => x !== w && x.t !== w.t).sort(() => Math.random() - .5);
+  const wrongs   = [...sameType, ...anyOther].slice(0, 3).map(x => qMode === 'gr' ? x.r : x.g);
   const opts=[correctAnswer,...wrongs].sort(()=>Math.random()-.5);
   const ci=opts.indexOf(correctAnswer);
   document.getElementById('quizArea').innerHTML=`
@@ -1359,6 +1368,18 @@ function toggleExamTrans() {
 // INIT
 buildVocab();
 
+
+function toggleTF(btn, cls) {
+  const container = btn.closest('.tf-btns');
+  // If already active → deselect (toggle off)
+  if (btn.className === 'tf-btn ' + cls) {
+    btn.className = 'tf-btn';
+  } else {
+    // Reset all sibling buttons, then activate this one
+    container.querySelectorAll('button.tf-btn').forEach(b => b.className = 'tf-btn');
+    btn.className = 'tf-btn ' + cls;
+  }
+}
 // ===== EXAM INTERACTIVE CHECK FUNCTIONS =====
 function checkTask1() {
   const key = {1:'D',2:'H',3:'F',4:'B',5:'C',6:'E'};
