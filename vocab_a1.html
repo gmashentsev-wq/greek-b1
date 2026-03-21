@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPG A1 · Греческий словарь</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Noto+Serif:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f0f0eb; --surface:#fff; --border:#e0ddd6;
+  --g1:#0d3b2e; --g2:#1a5c40; --g3:#2d8653; --sage:#74b99a;
+  --bl:#e8f5ee; --blm:#a7d4bb;
+  --green:#1a6b40; --gl:#e8f5ee;
+  --amber:#b45309; --al:#fffbeb;
+  --red:#dc2626; --rl:#fef2f2;
+  --text:#0f1a15; --t2:#2d4a3a; --muted:#6b7c72;
+  --sh:0 1px 4px rgba(13,59,46,.07); --shm:0 4px 16px rgba(13,59,46,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* NAVBAR */
+.navbar{background:var(--g1);padding:0 1.5rem;display:flex;align-items:center;gap:1.5rem;position:sticky;top:0;z-index:90;box-shadow:0 2px 12px rgba(0,0,0,.18);flex-wrap:wrap}
+.nav-logo{display:flex;align-items:center;gap:.6rem;color:#fff;padding:.85rem 0;flex-shrink:0}
+.nav-logo-icon{width:32px;height:32px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;border:1.5px solid rgba(255,255,255,.25)}
+.nav-logo-text{font-weight:700;font-size:.95rem}
+.nav-logo-sub{font-size:.7rem;opacity:.6}
+.nav-tabs{display:flex;gap:.25rem}
+.nav-tab{padding:.5rem 1rem;border-radius:6px 6px 0 0;font-size:.8rem;font-weight:600;cursor:pointer;border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-family:inherit;transition:all .15s}
+.nav-tab:hover{background:rgba(255,255,255,.18);color:#fff}
+.nav-tab.active{background:#fff;color:var(--g1)}
+.nav-badge{background:var(--g3);color:#fff;font-size:.65rem;font-weight:700;padding:.1rem .35rem;border-radius:8px;margin-left:.3rem}
+
+/* TAB PANELS */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* VOCAB WRAP */
+.vocab-wrap{max-width:920px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+.vocab-top{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.2rem;box-shadow:var(--sh)}
+.vc-search{width:100%;padding:.6rem 1rem;font-size:1rem;font-family:inherit;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);outline:none;transition:border-color .15s;margin-bottom:1rem}
+.vc-search:focus{border-color:var(--g3);background:#fff}
+.filter-label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.45rem}
+.pills-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem}
+.pill{padding:.32rem .75rem;border-radius:20px;font-size:.76rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-family:inherit;transition:all .15s;white-space:nowrap}
+.pill:hover{border-color:var(--blm);color:var(--g1)}
+.pill.active{background:var(--g1);border-color:var(--g1);color:#fff}
+.pill-pos.active{background:#1a4a8a;border-color:#1a4a8a;color:#fff}
+.vc-meta{display:flex;align-items:center;gap:1rem;margin-top:.5rem;font-size:.76rem;color:var(--muted)}
+.vc-meta strong{color:var(--text)}
+
+/* SECTION HEADER */
+.vsec-hdr{display:flex;align-items:center;gap:.75rem;padding:.65rem 0;margin:1.4rem 0 .5rem;border-bottom:2px solid var(--border)}
+.vsec-icon{font-size:1.25rem}
+.vsec-name{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--g1)}
+.vsec-cnt{font-size:.72rem;color:var(--muted);margin-left:auto;background:var(--bl);border-radius:12px;padding:.2rem .6rem;font-weight:600}
+
+/* WORD ROWS */
+.wr{display:grid;grid-template-columns:1fr auto;gap:.35rem .75rem;padding:.6rem .9rem;border-radius:10px;background:var(--surface);border:1px solid var(--border);margin-bottom:.4rem;cursor:default;transition:box-shadow .12s,border-color .12s}
+.wr.expandable{cursor:pointer}
+.wr:hover{box-shadow:var(--shm);border-color:var(--blm)}
+.wr>div:not(.wr-forms){display:flex;flex-wrap:wrap;align-items:baseline;gap:.35rem}
+.wr-greek{font-family:'Noto Serif',serif;font-size:.98rem;color:var(--text);font-weight:600}
+.wr-type{font-size:.66rem;color:#fff;padding:.1rem .38rem;border-radius:4px;font-weight:600}
+.type-nm{background:#1a6b9a}.type-nf{background:#9a1a6b}.type-nn{background:#4a6b1a}
+.type-vt,.type-vi{background:#6b1a1a}.type-adj{background:#6b5a1a}
+.type-adv{background:#4a4a9a}.type-phrase{background:#6b6b6b}.type-conj,.type-prep{background:#8a4a1a}.type-pron{background:#5a3a7a}
+.wr-topic{font-size:.64rem;color:var(--sage);background:var(--bl);padding:.1rem .35rem;border-radius:4px}
+.wr-expand{font-size:.65rem;color:var(--muted);flex-shrink:0;transition:transform .2s;line-height:1}
+.wr.expanded .wr-expand{transform:rotate(180deg)}
+.wr-rus{font-size:.84rem;color:var(--t2);grid-column:1}
+.wr-forms{display:none;grid-column:1/-1;border-top:1px solid var(--border);margin-top:.4rem;padding-top:.5rem;animation:fadeIn .15s ease}
+.wr.expanded .wr-forms{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+.forms-table{font-size:.76rem;border-collapse:collapse;width:auto}
+.forms-table td{padding:.18rem .5rem .18rem 0;color:var(--t2);vertical-align:top}
+.forms-table td:first-child{color:var(--muted);white-space:nowrap;width:130px;font-size:.7rem}
+.ft-greek{font-family:'Noto Serif',serif;font-weight:600;color:var(--g1)}
+.wd-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-left:.3rem;vertical-align:middle;flex-shrink:0}
+.wd-dot.known{background:#16a34a}
+.wd-dot.unknown{background:var(--red)}
+.wd-dot.unseen{background:var(--border);border:1px solid var(--muted)}
+
+/* FLASHCARD */
+.ex-wrap{max-width:580px;margin:2rem auto;padding:0 1rem}
+.ex-controls{display:flex;gap:.5rem;margin-bottom:1.1rem;flex-wrap:wrap;align-items:center}
+.ex-progress{display:flex;gap:.75rem;margin-bottom:1.1rem;align-items:center}
+.prog-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--g1),var(--g3));border-radius:4px;transition:width .4s}
+.prog-txt{font-size:.78rem;font-weight:600;color:var(--muted);white-space:nowrap}
+.card-scene{perspective:1000px;margin:0 auto 1.4rem}
+.card-3d{width:100%;min-height:230px;position:relative;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer;border-radius:18px}
+.card-3d.flipped{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;box-shadow:var(--shm)}
+.card-front{background:var(--surface);border:1.5px solid var(--border)}
+.card-back{background:linear-gradient(135deg,var(--g1),var(--g3));transform:rotateY(180deg)}
+.card-hint{font-size:.7rem;color:var(--muted);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.06em}
+.card-word{font-size:1.65rem;font-weight:700;text-align:center;line-height:1.3}
+.card-front .card-word{font-family:'Noto Serif',serif;color:var(--g1)}
+.card-back .card-word{color:#fff}
+.card-sub{font-size:.75rem;color:var(--muted);margin-top:.5rem;font-style:italic;text-align:center}
+.card-back .card-sub{color:rgba(255,255,255,.6)}
+.card-hint-click{font-size:.7rem;color:var(--muted);margin-top:.9rem}
+.fc-forms{margin-top:.6rem;font-size:.74rem;color:rgba(255,255,255,.65);line-height:1.75;text-align:center}
+.fc-forms span{margin-right:.8rem;white-space:nowrap}
+.fc-forms strong{color:rgba(255,255,255,.9)}
+.sm2-next{font-size:.68rem;color:rgba(255,255,255,.45);margin-top:.4rem}
+.card-actions{display:flex;gap:.75rem;justify-content:center;margin-bottom:1rem}
+.btn{padding:.55rem 1.3rem;border-radius:10px;font-size:.84rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;border:none}
+.btn-blue{background:var(--g1);color:#fff}.btn-blue:hover{background:var(--g2)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#b91c1c}
+.btn-amber{background:var(--amber);color:#fff}.btn-amber:hover{background:#b45309}
+.btn-outline{background:var(--surface);color:var(--text);border:1.5px solid var(--border)}.btn-outline:hover{background:var(--bg)}
+.mode-toggle{display:flex;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
+.mode-btn{flex:1;padding:.42rem .85rem;font-size:.76rem;font-weight:600;cursor:pointer;border:none;background:none;color:var(--muted);font-family:inherit;transition:all .15s}
+.mode-btn.active{background:var(--g1);color:#fff}
+.result-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center;box-shadow:var(--sh)}
+.result-big{font-size:2.5rem;font-weight:800;color:var(--g1);font-family:'DM Serif Display',serif}
+.result-sub{font-size:.9rem;color:var(--muted);margin-top:.4rem}
+.score-breakdown{display:flex;justify-content:center;gap:2rem;margin-top:1.2rem}
+.sb-item{text-align:center}.sb-num{font-size:1.4rem;font-weight:800}.sb-lbl{font-size:.72rem;color:var(--muted)}
+.progress-bar-wrap{background:var(--bg);border-radius:8px;padding:.5rem 1rem;margin-bottom:.75rem;display:flex;align-items:center;gap:.9rem;font-size:.76rem;color:var(--muted);flex-wrap:wrap}
+.progress-bar-wrap strong{color:var(--text);font-size:.83rem}
+.mini-prog{flex:1;min-width:80px;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.mini-prog-fill{height:100%;background:var(--g2);border-radius:3px;transition:width .4s}
+.filter-btns{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
+.filter-btn{padding:.3rem .85rem;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-family:inherit;font-size:.77rem;font-weight:500;cursor:pointer;transition:all .15s;color:var(--t2)}
+.filter-btn:hover{border-color:var(--g3);color:var(--g1)}
+.filter-btn.active{background:var(--g1);color:#fff;border-color:var(--g1)}
+.fb-cnt{font-size:.67rem;padding:.04rem .3rem;border-radius:8px;margin-left:.3rem}
+.filter-btn:not(.active) .fb-cnt{background:var(--bl);color:var(--g2)}
+.filter-btn.active .fb-cnt{background:rgba(255,255,255,.25);color:inherit}
+.due-badge{background:#dc2626;color:#fff;font-size:.67rem;font-weight:700;padding:.1rem .35rem;border-radius:8px}
+.wrong-list{text-align:left;max-width:480px;margin:1rem auto 0}
+.wrong-list-hdr{font-size:.74rem;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:.5rem}
+.wrong-item{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;padding:.4rem .7rem;border-radius:8px;background:var(--rl);border:1px solid #fecaca;margin-bottom:.3rem;font-size:.84rem}
+.wrong-item .wi-q{font-weight:600;color:var(--g1);font-family:'Noto Serif',serif}
+
+/* QUIZ */
+.quiz-stats{display:flex;gap:1rem;margin-bottom:1.1rem;align-items:center}
+.stat-chip{font-size:.77rem;font-weight:600;padding:.28rem .7rem;border-radius:20px}
+.sc-right{background:var(--gl);color:var(--green)}
+.sc-wrong{background:var(--rl);color:var(--red)}
+.quiz-q{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.4rem 1.6rem;box-shadow:var(--sh);margin-bottom:1rem}
+.quiz-num{font-size:.68rem;font-weight:700;color:var(--g1);text-transform:uppercase;letter-spacing:.06em;background:var(--bl);display:inline-block;padding:.16rem .5rem;border-radius:5px;margin-bottom:.6rem}
+.quiz-word{font-size:1.3rem;font-weight:700;font-family:'Noto Serif',serif;color:var(--g1);margin-bottom:.9rem}
+.quiz-opts{display:flex;flex-direction:column;gap:.45rem}
+.qopt{padding:.68rem .95rem;border:1.5px solid var(--border);border-radius:10px;background:#f8fafc;color:var(--text);font-size:.86rem;font-weight:500;cursor:pointer;text-align:left;transition:all .15s;font-family:inherit}
+.qopt:hover:not(:disabled){border-color:var(--blm);background:var(--bl);color:var(--g1)}
+.qopt.correct{background:var(--gl);border-color:var(--green);color:var(--green);font-weight:600}
+.qopt.wrong{background:var(--rl);border-color:var(--red);color:var(--red);font-weight:600}
+.qopt:disabled{cursor:default}
+
+/* KEYBOARD HINTS */
+.kbd-hints{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;font-size:.69rem;color:var(--muted);margin-top:.2rem;margin-bottom:.6rem}
+kbd{background:var(--bg);border:1px solid var(--border);border-bottom:2px solid var(--border);border-radius:4px;padding:.1rem .4rem;font-family:inherit;font-size:.69rem;color:var(--t2)}
+/* QUIZ GREEK OPTS */
+.qopt.greek-opt{font-family:'Noto Serif',serif}
+.quiz-word-ru{font-family:'Inter',sans-serif}
+
+/* MOBILE */
+@media (max-width:600px){
+  .kbd-hints{display:none}
+  .navbar{padding:0 1rem;gap:1rem}
+  .nav-tab{padding:.5rem .7rem;font-size:.75rem}
+  .ex-wrap{margin:1rem auto;padding:0 .75rem}
+  .vocab-wrap{padding:1rem .75rem 4rem}
+  .vocab-top{padding:.9rem 1rem}
+  .card-3d{min-height:210px}
+  .card-face{padding:1.5rem 1rem}
+  .card-word{font-size:1.35rem}
+  .card-actions{gap:.5rem}
+  .btn{padding:.6rem .9rem;font-size:.82rem}
+  .filter-btn{padding:.42rem .75rem;font-size:.75rem}
+  .qopt{padding:.75rem .9rem;font-size:.9rem}
+  .quiz-q{padding:1.1rem 1.2rem}
+  .result-box{padding:1.5rem 1rem}
+  .ex-controls{gap:.4rem}
+  .mode-btn{padding:.42rem .65rem;font-size:.74rem}
+  .pill{padding:.3rem .65rem;font-size:.74rem}
+  .swipe-hint{display:block}
+}
+.swipe-hint{display:none;text-align:center;font-size:.7rem;color:var(--muted);margin-bottom:.5rem}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">Α</div>
+    <div>
+      <div class="nav-logo-text">A1 · Ελληνικά</div>
+      <div class="nav-logo-sub">Словарь для подготовки</div>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('vocab',this)">📚 Словарь</button>
+    <button class="nav-tab" onclick="switchTab('flash',this)">🃏 Карточки</button>
+    <button class="nav-tab" onclick="switchTab('quiz',this)">✅ Тест</button>
+  </div>
+</nav>
+
+<!-- ===== TAB: СЛОВАРЬ ===== -->
+<div class="tab-panel active" id="tab-vocab">
+  <div class="vocab-wrap">
+    <div class="vocab-top">
+      <input type="text" class="vc-search" id="vocab-search" placeholder="🔍 Поиск по-гречески или по-русски…">
+
+      <div class="filter-label">По теме</div>
+      <div class="pills-row" id="topic-pills">
+        <button class="pill active" onclick="setTopic('all',this)">Все</button>
+        <button class="pill" onclick="setTopic('greet',this)">👋 Приветствия</button>
+        <button class="pill" onclick="setTopic('family',this)">👨‍👩‍👧 Семья</button>
+        <button class="pill" onclick="setTopic('home',this)">🏠 Дом</button>
+        <button class="pill" onclick="setTopic('food',this)">🍽️ Еда</button>
+        <button class="pill" onclick="setTopic('time',this)">🕐 Время</button>
+        <button class="pill" onclick="setTopic('body',this)">🫀 Тело</button>
+        <button class="pill" onclick="setTopic('clothes',this)">👗 Одежда</button>
+        <button class="pill" onclick="setTopic('transport',this)">🚌 Транспорт</button>
+        <button class="pill" onclick="setTopic('shopping',this)">🛒 Покупки</button>
+        <button class="pill" onclick="setTopic('weather',this)">☀️ Погода</button>
+        <button class="pill" onclick="setTopic('school',this)">🎓 Школа/Работа</button>
+        <button class="pill" onclick="setTopic('verbs',this)">⚡ Глаголы</button>
+        <button class="pill" onclick="setTopic('adj',this)">🎨 Прилагательные</button>
+        <button class="pill" onclick="setTopic('numbers',this)">🔢 Числа</button>
+        <button class="pill" onclick="setTopic('grammar',this)">📐 Местоимения</button>
+      </div>
+
+      <div class="filter-label">По части речи</div>
+      <div class="pills-row" id="pos-pills">
+        <button class="pill pill-pos active" onclick="setPos('all',this)">Все</button>
+        <button class="pill pill-pos" onclick="setPos('noun',this)">Существительные</button>
+        <button class="pill pill-pos" onclick="setPos('verb',this)">Глаголы</button>
+        <button class="pill pill-pos" onclick="setPos('adj',this)">Прилагательные</button>
+        <button class="pill pill-pos" onclick="setPos('adv',this)">Наречия</button>
+        <button class="pill pill-pos" onclick="setPos('other',this)">Фразы / Служебные</button>
+      </div>
+
+      <div class="vc-meta">
+        <span id="vocab-count">Слов: —</span>
+        <span id="vocab-progress-mini"></span>
+      </div>
+    </div>
+    <div id="vocab-list"></div>
+  </div>
+</div>
+
+<!-- ===== TAB: КАРТОЧКИ ===== -->
+<div class="tab-panel" id="tab-flash">
+  <div class="ex-wrap">
+    <div class="progress-bar-wrap" id="globalProgress"></div>
+    <div class="filter-btns">
+      <button class="filter-btn" id="ff-due" onclick="setFlashFilter('due')">📅 На сегодня <span class="fb-cnt due-badge" id="ff-cnt-due">0</span></button>
+      <button class="filter-btn active" id="ff-all" onclick="setFlashFilter('all')">Все <span class="fb-cnt" id="ff-cnt-all">—</span></button>
+      <button class="filter-btn" id="ff-unknown" onclick="setFlashFilter('unknown')">🔴 Не знаю <span class="fb-cnt" id="ff-cnt-unknown">—</span></button>
+      <button class="filter-btn" id="ff-unseen" onclick="setFlashFilter('unseen')">◌ Новые <span class="fb-cnt" id="ff-cnt-unseen">—</span></button>
+      <button class="filter-btn" id="ff-known" onclick="setFlashFilter('known')">✅ Знаю <span class="fb-cnt" id="ff-cnt-known">—</span></button>
+    </div>
+    <div class="ex-controls">
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="fm-gr" onclick="setFlashMode('gr')">🇬🇷 → 🇷🇺</button>
+        <button class="mode-btn" id="fm-ru" onclick="setFlashMode('ru')">🇷🇺 → 🇬🇷</button>
+      </div>
+      <button class="btn btn-outline" onclick="shuffleFlash()">🔀 Перемешать</button>
+      <button class="btn btn-outline" onclick="resetFlash()">↺ Сначала</button>
+      <div style="margin-left:auto;font-size:.76rem;color:var(--muted)" id="flashCatInfo"></div>
+    </div>
+    <div class="ex-progress">
+      <div class="prog-bar"><div class="prog-fill" id="flashProg" style="width:0%"></div></div>
+      <div class="prog-txt" id="flashProgTxt">0 / 0</div>
+    </div>
+    <div class="card-scene">
+      <div class="card-3d" id="flashCard" onclick="flipCard()">
+        <div class="card-face card-front">
+          <div class="card-hint" id="fc-hint-front">Греческое</div>
+          <div class="card-word" id="fc-word-front">—</div>
+          <div class="card-sub" id="fc-sub-front"></div>
+          <div class="card-hint-click">нажми чтобы перевернуть</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-hint" style="color:rgba(255,255,255,.6)" id="fc-hint-back">Перевод</div>
+          <div class="card-word" id="fc-word-back">—</div>
+          <div class="card-sub" id="fc-sub-back"></div>
+          <div class="fc-forms" id="fc-forms"></div>
+          <div class="sm2-next" id="fc-sm2-next"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-red" onclick="markCard(0)">✗ Не знаю</button>
+      <button class="btn btn-amber" onclick="markCard(3)">~ С трудом</button>
+      <button class="btn btn-green" onclick="markCard(5)">✓ Знаю</button>
+    </div>
+    <div class="kbd-hints">
+      <span><kbd>Пробел</kbd> перевернуть</span>
+      <span><kbd>1</kbd> не знаю</span>
+      <span><kbd>2</kbd> с трудом</span>
+      <span><kbd>3</kbd> знаю</span>
+    </div>
+    <div class="swipe-hint">← свайп влево: не знаю &nbsp;·&nbsp; свайп вправо: знаю</div>
+    <div id="flashResult" style="display:none;margin-top:1rem"></div>
+  </div>
+</div>
+
+<!-- ===== TAB: ТЕСТ ===== -->
+<div class="tab-panel" id="tab-quiz">
+  <div class="ex-wrap">
+    <div class="ex-controls">
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="qm-gr" onclick="setQuizMode('gr')">🇬🇷 → 🇷🇺</button>
+        <button class="mode-btn" id="qm-ru" onclick="setQuizMode('ru')">🇷🇺 → 🇬🇷</button>
+      </div>
+      <button class="btn btn-blue" onclick="startQuiz()">▶ Начать тест</button>
+      <div style="font-size:.76rem;color:var(--muted)" id="quiz-meta">до 10 вопросов · 4 варианта</div>
+    </div>
+    <div id="quizArea">
+      <div class="result-box" style="margin-top:1rem">
+        <div style="font-size:2rem;margin-bottom:.5rem">🎯</div>
+        <div style="font-weight:700;font-size:1rem">Выбери режим и нажми «Начать тест»</div>
+        <div style="font-size:.84rem;color:var(--muted);margin-top:.4rem">4 варианта ответа · мгновенная проверка</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ══════════════════════════════════════════════
+// VOCABULARY DATA — A1 Greek (~320 words)
+// ══════════════════════════════════════════════
+const W = [
+  // ── GREET — Приветствия ──
+  {g:'γεια σου',r:'привет / пока',t:'phrase',s:'greet',f:{}},
+  {g:'γεια σας',r:'здравствуйте / до свидания',t:'phrase',s:'greet',f:{}},
+  {g:'καλημέρα',r:'доброе утро',t:'phrase',s:'greet',f:{}},
+  {g:'καλησπέρα',r:'добрый вечер',t:'phrase',s:'greet',f:{}},
+  {g:'καληνύχτα',r:'спокойной ночи',t:'phrase',s:'greet',f:{}},
+  {g:'αντίο',r:'до свидания',t:'phrase',s:'greet',f:{}},
+  {g:'ευχαριστώ',r:'спасибо',t:'phrase',s:'greet',f:{}},
+  {g:'παρακαλώ',r:'пожалуйста',t:'phrase',s:'greet',f:{}},
+  {g:'συγγνώμη',r:'извините / прости',t:'phrase',s:'greet',f:{}},
+  {g:'εντάξει',r:'ладно, ок, хорошо',t:'phrase',s:'greet',f:{}},
+  {g:'ορίστε',r:'пожалуйста (подавая) / да?',t:'phrase',s:'greet',f:{}},
+  {g:'χαίρω πολύ',r:'очень приятно',t:'phrase',s:'greet',f:{}},
+  {g:'τι κάνεις;',r:'как дела?',t:'phrase',s:'greet',f:{}},
+  {g:'καλά',r:'хорошо',t:'adv',s:'greet',f:{}},
+  {g:'έτσι κι έτσι',r:'так себе',t:'phrase',s:'greet',f:{}},
+  {g:'ναι',r:'да',t:'adv',s:'greet',f:{}},
+  {g:'όχι',r:'нет',t:'adv',s:'greet',f:{}},
+  // ── FAMILY — Семья ──
+  {g:'η οικογένεια',r:'семья',t:'nf',s:'family',f:{p:'οι οικογένειες'}},
+  {g:'ο πατέρας',r:'отец',t:'nm',s:'family',f:{p:'οι πατεράδες'}},
+  {g:'η μητέρα',r:'мать',t:'nf',s:'family',f:{p:'οι μητέρες'}},
+  {g:'ο αδερφός',r:'брат',t:'nm',s:'family',f:{p:'οι αδερφοί'}},
+  {g:'η αδερφή',r:'сестра',t:'nf',s:'family',f:{p:'οι αδερφές'}},
+  {g:'ο παππούς',r:'дедушка',t:'nm',s:'family',f:{p:'οι παππούδες'}},
+  {g:'η γιαγιά',r:'бабушка',t:'nf',s:'family',f:{p:'οι γιαγιάδες'}},
+  {g:'το παιδί',r:'ребёнок',t:'nn',s:'family',f:{p:'τα παιδιά'}},
+  {g:'ο γιος',r:'сын',t:'nm',s:'family',f:{p:'οι γιοι'}},
+  {g:'η κόρη',r:'дочь',t:'nf',s:'family',f:{p:'οι κόρες'}},
+  {g:'ο άντρας',r:'мужчина, муж',t:'nm',s:'family',f:{p:'οι άντρες'}},
+  {g:'η γυναίκα',r:'женщина, жена',t:'nf',s:'family',f:{p:'οι γυναίκες'}},
+  {g:'ο θείος',r:'дядя',t:'nm',s:'family',f:{p:'οι θείοι'}},
+  {g:'η θεία',r:'тётя',t:'nf',s:'family',f:{p:'οι θείες'}},
+  {g:'ο φίλος',r:'друг',t:'nm',s:'family',f:{p:'οι φίλοι'}},
+  {g:'η φίλη',r:'подруга',t:'nf',s:'family',f:{p:'οι φίλες'}},
+  {g:'το μωρό',r:'младенец',t:'nn',s:'family',f:{p:'τα μωρά'}},
+  {g:'ο ενήλικας',r:'взрослый',t:'nm',s:'family',f:{p:'οι ενήλικες'}},
+  {g:'παντρεμένος',r:'женатый / замужняя',t:'adj',s:'family',f:{mf:'παντρεμένη',neut:'παντρεμένο'}},
+  {g:'ανύπαντρος',r:'холостой / незамужняя',t:'adj',s:'family',f:{mf:'ανύπαντρη',neut:'ανύπαντρο'}},
+  // ── HOME — Дом ──
+  {g:'το σπίτι',r:'дом',t:'nn',s:'home',f:{p:'τα σπίτια'}},
+  {g:'το διαμέρισμα',r:'квартира',t:'nn',s:'home',f:{p:'τα διαμερίσματα'}},
+  {g:'η κουζίνα',r:'кухня',t:'nf',s:'home',f:{p:'οι κουζίνες'}},
+  {g:'το δωμάτιο',r:'комната',t:'nn',s:'home',f:{p:'τα δωμάτια'}},
+  {g:'το υπνοδωμάτιο',r:'спальня',t:'nn',s:'home',f:{p:'τα υπνοδωμάτια'}},
+  {g:'το μπάνιο',r:'ванная',t:'nn',s:'home',f:{p:'τα μπάνια'}},
+  {g:'το σαλόνι',r:'гостиная',t:'nn',s:'home',f:{p:'τα σαλόνια'}},
+  {g:'η τουαλέτα',r:'туалет',t:'nf',s:'home',f:{p:'οι τουαλέτες'}},
+  {g:'το τραπέζι',r:'стол',t:'nn',s:'home',f:{p:'τα τραπέζια'}},
+  {g:'η καρέκλα',r:'стул',t:'nf',s:'home',f:{p:'οι καρέκλες'}},
+  {g:'ο καναπές',r:'диван',t:'nm',s:'home',f:{p:'οι καναπέδες'}},
+  {g:'το κρεβάτι',r:'кровать',t:'nn',s:'home',f:{p:'τα κρεβάτια'}},
+  {g:'η πόρτα',r:'дверь',t:'nf',s:'home',f:{p:'οι πόρτες'}},
+  {g:'το παράθυρο',r:'окно',t:'nn',s:'home',f:{p:'τα παράθυρα'}},
+  {g:'η τηλεόραση',r:'телевизор',t:'nf',s:'home',f:{p:'οι τηλεοράσεις'}},
+  {g:'το ψυγείο',r:'холодильник',t:'nn',s:'home',f:{p:'τα ψυγεία'}},
+  {g:'ο φούρνος',r:'духовка / пекарня',t:'nm',s:'home',f:{p:'οι φούρνοι'}},
+  {g:'το κλειδί',r:'ключ',t:'nn',s:'home',f:{p:'τα κλειδιά'}},
+  {g:'ο κήπος',r:'сад',t:'nm',s:'home',f:{p:'οι κήποι'}},
+  {g:'το μπαλκόνι',r:'балкон',t:'nn',s:'home',f:{p:'τα μπαλκόνια'}},
+  {g:'η βρύση',r:'водопроводный кран',t:'nf',s:'home',f:{p:'οι βρύσες'}},
+  {g:'η σκάλα',r:'лестница',t:'nf',s:'home',f:{p:'οι σκάλες'}},
+  {g:'το φως',r:'свет',t:'nn',s:'home',f:{p:'τα φώτα'}},
+  {g:'ο τοίχος',r:'стена',t:'nm',s:'home',f:{p:'οι τοίχοι'}},
+  {g:'το πάτωμα',r:'пол',t:'nn',s:'home',f:{p:'τα πατώματα'}},
+  // ── FOOD — Еда ──
+  {g:'το φαγητό',r:'еда, блюдо',t:'nn',s:'food',f:{p:'τα φαγητά'}},
+  {g:'το ψωμί',r:'хлеб',t:'nn',s:'food',f:{}},
+  {g:'το νερό',r:'вода',t:'nn',s:'food',f:{}},
+  {g:'το γάλα',r:'молоко',t:'nn',s:'food',f:{}},
+  {g:'το τυρί',r:'сыр',t:'nn',s:'food',f:{p:'τα τυριά'}},
+  {g:'το αυγό',r:'яйцо',t:'nn',s:'food',f:{p:'τα αυγά'}},
+  {g:'το κρέας',r:'мясо',t:'nn',s:'food',f:{p:'τα κρέατα'}},
+  {g:'το κοτόπουλο',r:'курица',t:'nn',s:'food',f:{p:'τα κοτόπουλα'}},
+  {g:'το ψάρι',r:'рыба',t:'nn',s:'food',f:{p:'τα ψάρια'}},
+  {g:'η σαλάτα',r:'салат',t:'nf',s:'food',f:{p:'οι σαλάτες'}},
+  {g:'η ντομάτα',r:'помидор',t:'nf',s:'food',f:{p:'οι ντομάτες'}},
+  {g:'η πατάτα',r:'картофель',t:'nf',s:'food',f:{p:'οι πατάτες'}},
+  {g:'το μήλο',r:'яблоко',t:'nn',s:'food',f:{p:'τα μήλα'}},
+  {g:'η μπανάνα',r:'банан',t:'nf',s:'food',f:{p:'οι μπανάνες'}},
+  {g:'το πορτοκάλι',r:'апельсин',t:'nn',s:'food',f:{p:'τα πορτοκάλια'}},
+  {g:'ο καφές',r:'кофе',t:'nm',s:'food',f:{p:'οι καφέδες'}},
+  {g:'το τσάι',r:'чай',t:'nn',s:'food',f:{}},
+  {g:'ο χυμός',r:'сок',t:'nm',s:'food',f:{p:'οι χυμοί'}},
+  {g:'η μπύρα',r:'пиво',t:'nf',s:'food',f:{p:'οι μπύρες'}},
+  {g:'το κρασί',r:'вино',t:'nn',s:'food',f:{p:'τα κρασιά'}},
+  {g:'το εστιατόριο',r:'ресторан',t:'nn',s:'food',f:{p:'τα εστιατόρια'}},
+  {g:'η σούπα',r:'суп',t:'nf',s:'food',f:{p:'οι σούπες'}},
+  {g:'το γλυκό',r:'сладкое, десерт',t:'nn',s:'food',f:{p:'τα γλυκά'}},
+  {g:'το παγωτό',r:'мороженое',t:'nn',s:'food',f:{p:'τα παγωτά'}},
+  {g:'νόστιμος',r:'вкусный',t:'adj',s:'food',f:{mf:'νόστιμη',neut:'νόστιμο'}},
+  {g:'αλμυρός',r:'солёный',t:'adj',s:'food',f:{mf:'αλμυρή',neut:'αλμυρό'}},
+  {g:'γλυκός',r:'сладкий',t:'adj',s:'food',f:{mf:'γλυκιά',neut:'γλυκό'}},
+  // ── TIME — Время ──
+  {g:'η ώρα',r:'час, время',t:'nf',s:'time',f:{p:'οι ώρες'}},
+  {g:'η μέρα',r:'день',t:'nf',s:'time',f:{p:'οι μέρες'}},
+  {g:'η νύχτα',r:'ночь',t:'nf',s:'time',f:{p:'οι νύχτες'}},
+  {g:'η εβδομάδα',r:'неделя',t:'nf',s:'time',f:{p:'οι εβδομάδες'}},
+  {g:'ο μήνας',r:'месяц',t:'nm',s:'time',f:{p:'οι μήνες'}},
+  {g:'ο χρόνος',r:'год, время',t:'nm',s:'time',f:{p:'οι χρόνοι'}},
+  {g:'η Δευτέρα',r:'понедельник',t:'nf',s:'time',f:{}},
+  {g:'η Τρίτη',r:'вторник',t:'nf',s:'time',f:{}},
+  {g:'η Τετάρτη',r:'среда',t:'nf',s:'time',f:{}},
+  {g:'η Πέμπτη',r:'четверг',t:'nf',s:'time',f:{}},
+  {g:'η Παρασκευή',r:'пятница',t:'nf',s:'time',f:{}},
+  {g:'το Σάββατο',r:'суббота',t:'nn',s:'time',f:{}},
+  {g:'η Κυριακή',r:'воскресенье',t:'nf',s:'time',f:{}},
+  {g:'σήμερα',r:'сегодня',t:'adv',s:'time',f:{}},
+  {g:'αύριο',r:'завтра',t:'adv',s:'time',f:{}},
+  {g:'χθες',r:'вчера',t:'adv',s:'time',f:{}},
+  {g:'τώρα',r:'сейчас',t:'adv',s:'time',f:{}},
+  {g:'πρωί',r:'утро',t:'nn',s:'time',f:{}},
+  {g:'μεσημέρι',r:'полдень',t:'nn',s:'time',f:{}},
+  {g:'απόγευμα',r:'послеполудень',t:'nn',s:'time',f:{}},
+  {g:'βράδυ',r:'вечер',t:'nn',s:'time',f:{}},
+  {g:'μετά',r:'потом, после',t:'adv',s:'time',f:{}},
+  {g:'πάντα',r:'всегда',t:'adv',s:'time',f:{}},
+  {g:'ποτέ',r:'никогда',t:'adv',s:'time',f:{}},
+  {g:'μερικές φορές',r:'иногда',t:'adv',s:'time',f:{}},
+  // ── BODY — Тело ──
+  {g:'το κεφάλι',r:'голова',t:'nn',s:'body',f:{p:'τα κεφάλια'}},
+  {g:'το πρόσωπο',r:'лицо',t:'nn',s:'body',f:{p:'τα πρόσωπα'}},
+  {g:'τα μαλλιά',r:'волосы',t:'nn',s:'body',f:{}},
+  {g:'τα μάτια',r:'глаза',t:'nn',s:'body',f:{}},
+  {g:'η μύτη',r:'нос',t:'nf',s:'body',f:{p:'οι μύτες'}},
+  {g:'το στόμα',r:'рот',t:'nn',s:'body',f:{p:'τα στόματα'}},
+  {g:'τα αυτιά',r:'уши',t:'nn',s:'body',f:{}},
+  {g:'ο λαιμός',r:'горло, шея',t:'nm',s:'body',f:{p:'οι λαιμοί'}},
+  {g:'η πλάτη',r:'спина',t:'nf',s:'body',f:{p:'οι πλάτες'}},
+  {g:'η κοιλιά',r:'живот',t:'nf',s:'body',f:{p:'οι κοιλιές'}},
+  {g:'το χέρι',r:'рука',t:'nn',s:'body',f:{p:'τα χέρια'}},
+  {g:'το πόδι',r:'нога',t:'nn',s:'body',f:{p:'τα πόδια'}},
+  {g:'η καρδιά',r:'сердце',t:'nf',s:'body',f:{p:'οι καρδιές'}},
+  {g:'τα δόντια',r:'зубы',t:'nn',s:'body',f:{}},
+  {g:'ο γιατρός',r:'врач',t:'nm',s:'body',f:{p:'οι γιατροί'}},
+  {g:'άρρωστος',r:'больной',t:'adj',s:'body',f:{mf:'άρρωστη',neut:'άρρωστο'}},
+  {g:'υγιής',r:'здоровый',t:'adj',s:'body',f:{mf:'υγιής',neut:'υγιές'}},
+  {g:'ο πυρετός',r:'жар, температура',t:'nm',s:'body',f:{}},
+  {g:'ο πόνος',r:'боль',t:'nm',s:'body',f:{p:'οι πόνοι'}},
+  {g:'το φάρμακο',r:'лекарство',t:'nn',s:'body',f:{p:'τα φάρμακα'}},
+  // ── CLOTHES — Одежда и цвета ──
+  {g:'τα ρούχα',r:'одежда',t:'nn',s:'clothes',f:{}},
+  {g:'το μπλουζάκι',r:'футболка',t:'nn',s:'clothes',f:{p:'τα μπλουζάκια'}},
+  {g:'το παντελόνι',r:'брюки',t:'nn',s:'clothes',f:{p:'τα παντελόνια'}},
+  {g:'το φόρεμα',r:'платье',t:'nn',s:'clothes',f:{p:'τα φορέματα'}},
+  {g:'η φούστα',r:'юбка',t:'nf',s:'clothes',f:{p:'οι φούστες'}},
+  {g:'το σακάκι',r:'пиджак',t:'nn',s:'clothes',f:{p:'τα σακάκια'}},
+  {g:'το παλτό',r:'пальто',t:'nn',s:'clothes',f:{p:'τα παλτά'}},
+  {g:'τα παπούτσια',r:'обувь, ботинки',t:'nn',s:'clothes',f:{}},
+  {g:'οι κάλτσες',r:'носки',t:'nf',s:'clothes',f:{}},
+  {g:'το καπέλο',r:'шляпа, шапка',t:'nn',s:'clothes',f:{p:'τα καπέλα'}},
+  {g:'τα γυαλιά',r:'очки',t:'nn',s:'clothes',f:{}},
+  {g:'η τσάντα',r:'сумка',t:'nf',s:'clothes',f:{p:'οι τσάντες'}},
+  {g:'κόκκινος',r:'красный',t:'adj',s:'clothes',f:{mf:'κόκκινη',neut:'κόκκινο'}},
+  {g:'μπλε',r:'синий, голубой',t:'adj',s:'clothes',f:{}},
+  {g:'πράσινος',r:'зелёный',t:'adj',s:'clothes',f:{mf:'πράσινη',neut:'πράσινο'}},
+  {g:'άσπρος',r:'белый',t:'adj',s:'clothes',f:{mf:'άσπρη',neut:'άσπρο'}},
+  {g:'μαύρος',r:'чёрный',t:'adj',s:'clothes',f:{mf:'μαύρη',neut:'μαύρο'}},
+  {g:'κίτρινος',r:'жёлтый',t:'adj',s:'clothes',f:{mf:'κίτρινη',neut:'κίτρινο'}},
+  // ── TRANSPORT — Транспорт ──
+  {g:'το αυτοκίνητο',r:'автомобиль',t:'nn',s:'transport',f:{p:'τα αυτοκίνητα'}},
+  {g:'το λεωφορείο',r:'автобус',t:'nn',s:'transport',f:{p:'τα λεωφορεία'}},
+  {g:'το τρένο',r:'поезд',t:'nn',s:'transport',f:{p:'τα τρένα'}},
+  {g:'το αεροπλάνο',r:'самолёт',t:'nn',s:'transport',f:{p:'τα αεροπλάνα'}},
+  {g:'το πλοίο',r:'корабль',t:'nn',s:'transport',f:{p:'τα πλοία'}},
+  {g:'το μετρό',r:'метро',t:'nn',s:'transport',f:{}},
+  {g:'το ταξί',r:'такси',t:'nn',s:'transport',f:{}},
+  {g:'το ποδήλατο',r:'велосипед',t:'nn',s:'transport',f:{p:'τα ποδήλατα'}},
+  {g:'ο δρόμος',r:'дорога, улица',t:'nm',s:'transport',f:{p:'οι δρόμοι'}},
+  {g:'η στάση',r:'остановка',t:'nf',s:'transport',f:{p:'οι στάσεις'}},
+  {g:'ο σταθμός',r:'станция, вокзал',t:'nm',s:'transport',f:{p:'οι σταθμοί'}},
+  {g:'το αεροδρόμιο',r:'аэропорт',t:'nn',s:'transport',f:{p:'τα αεροδρόμια'}},
+  {g:'αριστερά',r:'налево, слева',t:'adv',s:'transport',f:{}},
+  {g:'δεξιά',r:'направо, справа',t:'adv',s:'transport',f:{}},
+  {g:'ευθεία',r:'прямо',t:'adv',s:'transport',f:{}},
+  {g:'κοντά',r:'близко, рядом',t:'adv',s:'transport',f:{}},
+  {g:'μακριά',r:'далеко',t:'adv',s:'transport',f:{}},
+  // ── SHOPPING — Покупки ──
+  {g:'το κατάστημα',r:'магазин',t:'nn',s:'shopping',f:{p:'τα καταστήματα'}},
+  {g:'το σούπερ μάρκετ',r:'супермаркет',t:'nn',s:'shopping',f:{}},
+  {g:'η αγορά',r:'рынок, покупка',t:'nf',s:'shopping',f:{p:'οι αγορές'}},
+  {g:'η τιμή',r:'цена',t:'nf',s:'shopping',f:{p:'οι τιμές'}},
+  {g:'τα χρήματα',r:'деньги',t:'nn',s:'shopping',f:{}},
+  {g:'το ευρώ',r:'евро',t:'nn',s:'shopping',f:{}},
+  {g:'η απόδειξη',r:'чек, квитанция',t:'nf',s:'shopping',f:{p:'οι αποδείξεις'}},
+  {g:'η έκπτωση',r:'скидка',t:'nf',s:'shopping',f:{p:'οι εκπτώσεις'}},
+  {g:'το δώρο',r:'подарок',t:'nn',s:'shopping',f:{p:'τα δώρα'}},
+  {g:'φτηνός',r:'дешёвый',t:'adj',s:'shopping',f:{mf:'φτηνή',neut:'φτηνό'}},
+  {g:'ακριβός',r:'дорогой',t:'adj',s:'shopping',f:{mf:'ακριβή',neut:'ακριβό'}},
+  {g:'ανοιχτός',r:'открытый',t:'adj',s:'shopping',f:{mf:'ανοιχτή',neut:'ανοιχτό'}},
+  {g:'κλειστός',r:'закрытый',t:'adj',s:'shopping',f:{mf:'κλειστή',neut:'κλειστό'}},
+  // ── WEATHER — Погода и природа ──
+  {g:'ο καιρός',r:'погода',t:'nm',s:'weather',f:{}},
+  {g:'ο ήλιος',r:'солнце',t:'nm',s:'weather',f:{}},
+  {g:'η βροχή',r:'дождь',t:'nf',s:'weather',f:{}},
+  {g:'το χιόνι',r:'снег',t:'nn',s:'weather',f:{}},
+  {g:'ο αέρας',r:'ветер, воздух',t:'nm',s:'weather',f:{}},
+  {g:'η ομίχλη',r:'туман',t:'nf',s:'weather',f:{}},
+  {g:'η θερμοκρασία',r:'температура',t:'nf',s:'weather',f:{}},
+  {g:'η θάλασσα',r:'море',t:'nf',s:'weather',f:{p:'οι θάλασσες'}},
+  {g:'το βουνό',r:'гора',t:'nn',s:'weather',f:{p:'τα βουνά'}},
+  {g:'η λίμνη',r:'озеро',t:'nf',s:'weather',f:{p:'οι λίμνες'}},
+  {g:'ζεστός',r:'тёплый, горячий',t:'adj',s:'weather',f:{mf:'ζεστή',neut:'ζεστό'}},
+  {g:'κρύος',r:'холодный',t:'adj',s:'weather',f:{mf:'κρύα',neut:'κρύο'}},
+  {g:'συννεφιασμένος',r:'облачный, пасмурный',t:'adj',s:'weather',f:{mf:'συννεφιασμένη',neut:'συννεφιασμένο'}},
+  {g:'βρέχει',r:'идёт дождь',t:'vi',s:'weather',f:{}},
+  {g:'χιονίζει',r:'идёт снег',t:'vi',s:'weather',f:{}},
+  // ── SCHOOL — Школа и работа ──
+  {g:'το σχολείο',r:'школа',t:'nn',s:'school',f:{p:'τα σχολεία'}},
+  {g:'η τάξη',r:'класс, аудитория',t:'nf',s:'school',f:{p:'οι τάξεις'}},
+  {g:'ο δάσκαλος',r:'учитель',t:'nm',s:'school',f:{p:'οι δάσκαλοι'}},
+  {g:'η δασκάλα',r:'учительница',t:'nf',s:'school',f:{p:'οι δασκάλες'}},
+  {g:'ο μαθητής',r:'ученик',t:'nm',s:'school',f:{p:'οι μαθητές'}},
+  {g:'το βιβλίο',r:'книга',t:'nn',s:'school',f:{p:'τα βιβλία'}},
+  {g:'το τετράδιο',r:'тетрадь',t:'nn',s:'school',f:{p:'τα τετράδια'}},
+  {g:'το μολύβι',r:'карандаш',t:'nn',s:'school',f:{p:'τα μολύβια'}},
+  {g:'ο υπολογιστής',r:'компьютер',t:'nm',s:'school',f:{p:'οι υπολογιστές'}},
+  {g:'η εργασία',r:'работа, задание',t:'nf',s:'school',f:{p:'οι εργασίες'}},
+  {g:'το γραφείο',r:'офис, рабочий стол',t:'nn',s:'school',f:{p:'τα γραφεία'}},
+  {g:'η ερώτηση',r:'вопрос',t:'nf',s:'school',f:{p:'οι ερωτήσεις'}},
+  {g:'η απάντηση',r:'ответ',t:'nf',s:'school',f:{p:'οι απαντήσεις'}},
+  {g:'το μάθημα',r:'урок, занятие',t:'nn',s:'school',f:{p:'τα μαθήματα'}},
+  {g:'η εξέταση',r:'экзамен',t:'nf',s:'school',f:{p:'οι εξετάσεις'}},
+  {g:'σωστός',r:'правильный',t:'adj',s:'school',f:{mf:'σωστή',neut:'σωστό'}},
+  {g:'λάθος',r:'ошибка, неправильно',t:'nn',s:'school',f:{}},
+  // ── VERBS — Базовые глаголы ──
+  {g:'είμαι',r:'быть',t:'vi',s:'verbs',f:{past:'ήμουν'}},
+  {g:'έχω',r:'иметь',t:'vt',s:'verbs',f:{past:'είχα',imp:'έχε'}},
+  {g:'πηγαίνω',r:'идти, ехать',t:'vi',s:'verbs',f:{past:'πήγα',imp:'πήγαινε'}},
+  {g:'έρχομαι',r:'приходить, приезжать',t:'vi',s:'verbs',f:{past:'ήρθα',imp:'έλα'}},
+  {g:'κάνω',r:'делать',t:'vt',s:'verbs',f:{past:'έκανα',imp:'κάνε'}},
+  {g:'λέω',r:'говорить, сказать',t:'vt',s:'verbs',f:{past:'είπα',imp:'πες'}},
+  {g:'βλέπω',r:'видеть, смотреть',t:'vt',s:'verbs',f:{past:'είδα',imp:'δες'}},
+  {g:'τρώω',r:'есть (пищу)',t:'vt',s:'verbs',f:{past:'έφαγα',imp:'φάε'}},
+  {g:'πίνω',r:'пить',t:'vt',s:'verbs',f:{past:'ήπια',imp:'πιες'}},
+  {g:'κοιμάμαι',r:'спать',t:'vi',s:'verbs',f:{past:'κοιμήθηκα',imp:'κοιμήσου'}},
+  {g:'ακούω',r:'слышать, слушать',t:'vt',s:'verbs',f:{past:'άκουσα',imp:'άκουσε'}},
+  {g:'μιλάω',r:'говорить, разговаривать',t:'vi',s:'verbs',f:{past:'μίλησα',imp:'μίλα'}},
+  {g:'ρωτάω',r:'спрашивать',t:'vt',s:'verbs',f:{past:'ρώτησα',imp:'ρώτα'}},
+  {g:'απαντάω',r:'отвечать',t:'vi',s:'verbs',f:{past:'απάντησα',imp:'απάντα'}},
+  {g:'θέλω',r:'хотеть',t:'vt',s:'verbs',f:{past:'ήθελα',imp:'θέλε'}},
+  {g:'μπορώ',r:'мочь, уметь',t:'vi',s:'verbs',f:{past:'μπόρεσα'}},
+  {g:'ξέρω',r:'знать',t:'vt',s:'verbs',f:{past:'ήξερα'}},
+  {g:'αγαπάω',r:'любить',t:'vt',s:'verbs',f:{past:'αγάπησα',imp:'αγάπα'}},
+  {g:'μένω',r:'жить, оставаться',t:'vi',s:'verbs',f:{past:'έμεινα',imp:'μείνε'}},
+  {g:'δουλεύω',r:'работать',t:'vi',s:'verbs',f:{past:'δούλεψα',imp:'δούλεψε'}},
+  {g:'παίζω',r:'играть',t:'vi',s:'verbs',f:{past:'έπαιξα',imp:'παίξε'}},
+  {g:'διαβάζω',r:'читать, учиться',t:'vt',s:'verbs',f:{past:'διάβασα',imp:'διάβασε'}},
+  {g:'γράφω',r:'писать',t:'vt',s:'verbs',f:{past:'έγραψα',imp:'γράψε'}},
+  {g:'ανοίγω',r:'открывать',t:'vt',s:'verbs',f:{past:'άνοιξα',imp:'άνοιξε'}},
+  {g:'κλείνω',r:'закрывать',t:'vt',s:'verbs',f:{past:'έκλεισα',imp:'κλείσε'}},
+  {g:'αγοράζω',r:'покупать',t:'vt',s:'verbs',f:{past:'αγόρασα',imp:'αγόρασε'}},
+  {g:'πληρώνω',r:'платить',t:'vt',s:'verbs',f:{past:'πλήρωσα',imp:'πλήρωσε'}},
+  {g:'βοηθάω',r:'помогать',t:'vt',s:'verbs',f:{past:'βοήθησα',imp:'βοήθα'}},
+  {g:'φτάνω',r:'прибывать, доходить',t:'vi',s:'verbs',f:{past:'έφτασα',imp:'φτάσε'}},
+  {g:'περιμένω',r:'ждать',t:'vt',s:'verbs',f:{past:'περίμενα',imp:'περίμενε'}},
+  {g:'καταλαβαίνω',r:'понимать',t:'vt',s:'verbs',f:{past:'κατάλαβα',imp:'κατάλαβε'}},
+  {g:'χρειάζομαι',r:'нуждаться, нужно',t:'vt',s:'verbs',f:{past:'χρειάστηκα'}},
+  {g:'φοράω',r:'носить (одежду)',t:'vt',s:'verbs',f:{past:'φόρεσα',imp:'φόρεσε'}},
+  {g:'οδηγώ',r:'водить машину',t:'vt',s:'verbs',f:{past:'οδήγησα',imp:'οδήγησε'}},
+  {g:'ταξιδεύω',r:'путешествовать',t:'vi',s:'verbs',f:{past:'ταξίδεψα',imp:'ταξίδεψε'}},
+  // ── ADJ — Прилагательные ──
+  {g:'καλός',r:'хороший',t:'adj',s:'adj',f:{mf:'καλή',neut:'καλό'}},
+  {g:'κακός',r:'плохой',t:'adj',s:'adj',f:{mf:'κακή',neut:'κακό'}},
+  {g:'ωραίος',r:'красивый, приятный',t:'adj',s:'adj',f:{mf:'ωραία',neut:'ωραίο'}},
+  {g:'μεγάλος',r:'большой, старший',t:'adj',s:'adj',f:{mf:'μεγάλη',neut:'μεγάλο'}},
+  {g:'μικρός',r:'маленький, младший',t:'adj',s:'adj',f:{mf:'μικρή',neut:'μικρό'}},
+  {g:'νέος',r:'новый, молодой',t:'adj',s:'adj',f:{mf:'νέα',neut:'νέο'}},
+  {g:'παλιός',r:'старый',t:'adj',s:'adj',f:{mf:'παλιά',neut:'παλιό'}},
+  {g:'ψηλός',r:'высокий',t:'adj',s:'adj',f:{mf:'ψηλή',neut:'ψηλό'}},
+  {g:'κοντός',r:'низкий, короткий',t:'adj',s:'adj',f:{mf:'κοντή',neut:'κοντό'}},
+  {g:'γρήγορος',r:'быстрый',t:'adj',s:'adj',f:{mf:'γρήγορη',neut:'γρήγορο'}},
+  {g:'αργός',r:'медленный',t:'adj',s:'adj',f:{mf:'αργή',neut:'αργό'}},
+  {g:'εύκολος',r:'лёгкий, простой',t:'adj',s:'adj',f:{mf:'εύκολη',neut:'εύκολο'}},
+  {g:'δύσκολος',r:'трудный, сложный',t:'adj',s:'adj',f:{mf:'δύσκολη',neut:'δύσκολο'}},
+  {g:'χαρούμενος',r:'радостный, весёлый',t:'adj',s:'adj',f:{mf:'χαρούμενη',neut:'χαρούμενο'}},
+  {g:'λυπημένος',r:'грустный',t:'adj',s:'adj',f:{mf:'λυπημένη',neut:'λυπημένο'}},
+  {g:'κουρασμένος',r:'усталый',t:'adj',s:'adj',f:{mf:'κουρασμένη',neut:'κουρασμένο'}},
+  {g:'πεινασμένος',r:'голодный',t:'adj',s:'adj',f:{mf:'πεινασμένη',neut:'πεινασμένο'}},
+  {g:'διψασμένος',r:'жаждущий',t:'adj',s:'adj',f:{mf:'διψασμένη',neut:'διψασμένο'}},
+  {g:'ελεύθερος',r:'свободный',t:'adj',s:'adj',f:{mf:'ελεύθερη',neut:'ελεύθερο'}},
+  {g:'απασχολημένος',r:'занятый',t:'adj',s:'adj',f:{mf:'απασχολημένη',neut:'απασχολημένο'}},
+  {g:'ενδιαφέρον',r:'интересный',t:'adj',s:'adj',f:{mf:'ενδιαφέρουσα',neut:'ενδιαφέρον'}},
+  {g:'βαρετός',r:'скучный',t:'adj',s:'adj',f:{mf:'βαρετή',neut:'βαρετό'}},
+  {g:'καθαρός',r:'чистый',t:'adj',s:'adj',f:{mf:'καθαρή',neut:'καθαρό'}},
+  {g:'βρώμικος',r:'грязный',t:'adj',s:'adj',f:{mf:'βρώμικη',neut:'βρώμικο'}},
+  {g:'ήσυχος',r:'тихий, спокойный',t:'adj',s:'adj',f:{mf:'ήσυχη',neut:'ήσυχο'}},
+  // ── NUMBERS — Числа ──
+  {g:'ένα',r:'один / одно (ср.)',t:'adj',s:'numbers',f:{}},
+  {g:'δύο',r:'два / две',t:'adj',s:'numbers',f:{}},
+  {g:'τρία',r:'три',t:'adj',s:'numbers',f:{}},
+  {g:'τέσσερα',r:'четыре',t:'adj',s:'numbers',f:{}},
+  {g:'πέντε',r:'пять',t:'adj',s:'numbers',f:{}},
+  {g:'έξι',r:'шесть',t:'adj',s:'numbers',f:{}},
+  {g:'επτά',r:'семь',t:'adj',s:'numbers',f:{}},
+  {g:'οκτώ',r:'восемь',t:'adj',s:'numbers',f:{}},
+  {g:'εννέα',r:'девять',t:'adj',s:'numbers',f:{}},
+  {g:'δέκα',r:'десять',t:'adj',s:'numbers',f:{}},
+  {g:'έντεκα',r:'одиннадцать',t:'adj',s:'numbers',f:{}},
+  {g:'δώδεκα',r:'двенадцать',t:'adj',s:'numbers',f:{}},
+  {g:'είκοσι',r:'двадцать',t:'adj',s:'numbers',f:{}},
+  {g:'τριάντα',r:'тридцать',t:'adj',s:'numbers',f:{}},
+  {g:'πενήντα',r:'пятьдесят',t:'adj',s:'numbers',f:{}},
+  {g:'εκατό',r:'сто',t:'adj',s:'numbers',f:{}},
+  {g:'χίλια',r:'тысяча',t:'adj',s:'numbers',f:{}},
+  {g:'πρώτος',r:'первый',t:'adj',s:'numbers',f:{mf:'πρώτη',neut:'πρώτο'}},
+  {g:'δεύτερος',r:'второй',t:'adj',s:'numbers',f:{mf:'δεύτερη',neut:'δεύτερο'}},
+  {g:'τρίτος',r:'третий',t:'adj',s:'numbers',f:{mf:'τρίτη',neut:'τρίτο'}},
+  // ── GRAMMAR — Местоимения, союзы, предлоги ──
+  {g:'εγώ',r:'я',t:'pron',s:'grammar',f:{}},
+  {g:'εσύ',r:'ты',t:'pron',s:'grammar',f:{}},
+  {g:'αυτός',r:'он',t:'pron',s:'grammar',f:{}},
+  {g:'αυτή',r:'она',t:'pron',s:'grammar',f:{}},
+  {g:'αυτό',r:'оно',t:'pron',s:'grammar',f:{}},
+  {g:'εμείς',r:'мы',t:'pron',s:'grammar',f:{}},
+  {g:'εσείς',r:'вы (мн./вежл.)',t:'pron',s:'grammar',f:{}},
+  {g:'αυτοί',r:'они (м./мн.)',t:'pron',s:'grammar',f:{}},
+  {g:'τι;',r:'что? какой?',t:'pron',s:'grammar',f:{}},
+  {g:'ποιος;',r:'кто? который?',t:'pron',s:'grammar',f:{}},
+  {g:'πού;',r:'где? куда?',t:'adv',s:'grammar',f:{}},
+  {g:'πότε;',r:'когда?',t:'adv',s:'grammar',f:{}},
+  {g:'πώς;',r:'как?',t:'adv',s:'grammar',f:{}},
+  {g:'γιατί;',r:'почему?',t:'adv',s:'grammar',f:{}},
+  {g:'πόσο;',r:'сколько? насколько?',t:'adv',s:'grammar',f:{}},
+  {g:'και',r:'и, тоже',t:'conj',s:'grammar',f:{}},
+  {g:'αλλά',r:'но',t:'conj',s:'grammar',f:{}},
+  {g:'ή',r:'или',t:'conj',s:'grammar',f:{}},
+  {g:'γιατί',r:'потому что',t:'conj',s:'grammar',f:{}},
+  {g:'αν',r:'если',t:'conj',s:'grammar',f:{}},
+  {g:'όταν',r:'когда (союз)',t:'conj',s:'grammar',f:{}},
+  {g:'ότι',r:'что (союз)',t:'conj',s:'grammar',f:{}},
+  {g:'από',r:'от, из',t:'prep',s:'grammar',f:{}},
+  {g:'σε',r:'в, на, к',t:'prep',s:'grammar',f:{}},
+  {g:'για',r:'для, о, за',t:'prep',s:'grammar',f:{}},
+  {g:'με',r:'с (совместно)',t:'prep',s:'grammar',f:{}},
+  {g:'χωρίς',r:'без',t:'prep',s:'grammar',f:{}},
+  {g:'πριν',r:'до, перед',t:'prep',s:'grammar',f:{}},
+  {g:'μετά από',r:'после',t:'prep',s:'grammar',f:{}},
+];
+
+// ── METADATA ──
+const TOPIC_META = {
+  greet:    {label:'Приветствия',    icon:'👋'},
+  family:   {label:'Семья',          icon:'👨‍👩‍👧'},
+  home:     {label:'Дом',            icon:'🏠'},
+  food:     {label:'Еда',            icon:'🍽️'},
+  time:     {label:'Время',          icon:'🕐'},
+  body:     {label:'Тело',           icon:'🫀'},
+  clothes:  {label:'Одежда',         icon:'👗'},
+  transport:{label:'Транспорт',      icon:'🚌'},
+  shopping: {label:'Покупки',        icon:'🛒'},
+  weather:  {label:'Погода',         icon:'☀️'},
+  school:   {label:'Школа/Работа',   icon:'🎓'},
+  verbs:    {label:'Глаголы',        icon:'⚡'},
+  adj:      {label:'Прилагательные', icon:'🎨'},
+  numbers:  {label:'Числа',          icon:'🔢'},
+  grammar:  {label:'Местоимения и служебные', icon:'📐'},
+};
+const TOPIC_ORDER = ['greet','family','home','food','time','body','clothes','transport','shopping','weather','school','verbs','adj','numbers','grammar'];
+
+const POS_GROUPS = {
+  all:   null,
+  noun:  ['nm','nf','nn'],
+  verb:  ['vt','vi'],
+  adj:   ['adj'],
+  adv:   ['adv'],
+  other: ['phrase','conj','prep','pron'],
+};
+const TYPE_LABEL = {
+  nm:'сущ.м', nf:'сущ.ж', nn:'сущ.с',
+  vt:'гл.пер', vi:'гл.неп',
+  adj:'прил', adv:'нар', conj:'союз',
+  prep:'предл', phrase:'фраза', pron:'мест',
+};
+const TYPE_CLS = {
+  nm:'type-nm', nf:'type-nf', nn:'type-nn',
+  vt:'type-vt', vi:'type-vi',
+  adj:'type-adj', adv:'type-adv',
+  phrase:'type-phrase', conj:'type-conj', prep:'type-prep', pron:'type-pron',
+};
+const FORM_LABELS = {
+  p:'Множественное', gen:'Родительный',
+  past:'Прошедшее', imp:'Повелительное',
+  mf:'Женский род', neut:'Средний род',
+  a1:'1 л. ед.', a2:'2 л. ед.', a3:'3 л. ед.',
+};
+
+// ── SM-2 / LOCALSTORAGE ──
+const LS_KEY = 'greek_a1_v1';
+function loadProgress(){ try{return JSON.parse(localStorage.getItem(LS_KEY)||'{}')}catch(e){return{}} }
+function saveProgress(d){ try{localStorage.setItem(LS_KEY,JSON.stringify(d))}catch(e){} }
+function sm2(card, q){
+  let {interval=1,ef=2.5,rep=0,k=0,u=0}=card;
+  if(q>=3){
+    if(rep===0)interval=1; else if(rep===1)interval=6; else interval=Math.round(interval*ef);
+    ef=Math.max(1.3,ef+0.1-(5-q)*(0.08+(5-q)*0.02));
+    rep++;k++;
+  }else{interval=1;rep=0;u++;}
+  return{interval,ef,rep,k,u,last:Date.now(),due:Date.now()+interval*86400000};
+}
+function recordWord(w,q){const d=loadProgress();d[w.g]=sm2(d[w.g]||{},q);saveProgress(d);}
+function getWordState(w,data){const s=(data||loadProgress())[w.g];if(!s)return'unseen';return s.k>0&&s.rep>0?'known':'unknown';}
+function isDue(w,data){const s=(data||loadProgress())[w.g];return !!(s&&s.due&&s.due<=Date.now());}
+function getNextDue(w){
+  const s=loadProgress()[w.g]; if(!s||!s.due)return null;
+  const diff=s.due-Date.now(); if(diff<=0)return'сегодня';
+  const d=Math.ceil(diff/86400000); return d===1?'завтра':`через ${d} д.`;
+}
+function getProgressCounts(){
+  const data=loadProgress();let known=0,unknown=0,unseen=0,dueToday=0;
+  W.forEach(w=>{const s=data[w.g];if(!s){unseen++;return;}
+    if(s.k>0&&s.rep>0)known++;else unknown++;if(isDue(w,data))dueToday++;});
+  return{known,unknown,unseen,dueToday,total:W.length};
+}
+function resetProgress(){
+  if(!confirm('Сбросить весь прогресс по карточкам?'))return;
+  localStorage.removeItem(LS_KEY);renderProgressBar();filterVocab();
+}
+function renderProgressBar(){
+  const el=document.getElementById('globalProgress');if(!el)return;
+  const{known,unknown,unseen,dueToday,total}=getProgressCounts();
+  const pct=total?Math.round(known/total*100):0;
+  el.innerHTML=`<strong>${pct}% освоено</strong>
+    <div class="mini-prog"><div class="mini-prog-fill" style="width:${pct}%"></div></div>
+    <span style="color:var(--green)">✓ ${known}</span>
+    <span style="color:var(--red)">✗ ${unknown}</span>
+    <span>◌ ${unseen} новых</span>
+    ${dueToday?`<span style="color:#dc2626;font-weight:700">📅 ${dueToday} на сегодня</span>`:''}
+    <button onclick="resetProgress()" style="margin-left:auto;font-size:.7rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;font-family:inherit">сбросить</button>`;
+  const dc=document.getElementById('ff-cnt-due');if(dc)dc.textContent=dueToday;
+}
+
+// ── TAB SWITCHING ──
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='flash')initFlash();
+}
+
+// ── VOCAB FILTERING ──
+let currentTopic='all', currentPos='all', searchQ='';
+
+function setTopic(t,el){
+  currentTopic=t;
+  document.querySelectorAll('#topic-pills .pill').forEach(p=>p.classList.remove('active'));
+  if(el)el.classList.add('active');
+  filterVocab();
+}
+function setPos(p,el){
+  currentPos=p;
+  document.querySelectorAll('#pos-pills .pill').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  filterVocab();
+}
+function getFilteredWords(){
+  const posTypes=POS_GROUPS[currentPos];
+  return W.filter(w=>{
+    const topicOk=currentTopic==='all'||w.s===currentTopic;
+    const posOk=!posTypes||posTypes.includes(w.t);
+    return topicOk&&posOk;
+  });
+}
+
+function filterVocab(){
+  const q=searchQ.toLowerCase();
+  const posTypes=POS_GROUPS[currentPos];
+  const filtered=W.filter(w=>{
+    const topicOk=currentTopic==='all'||w.s===currentTopic;
+    const posOk=!posTypes||posTypes.includes(w.t);
+    const srchOk=!q||w.g.toLowerCase().includes(q)||w.r.toLowerCase().includes(q);
+    return topicOk&&posOk&&srchOk;
+  });
+
+  // Group by topic
+  const sections={};
+  TOPIC_ORDER.forEach(t=>{sections[t]=[];});
+  filtered.forEach(w=>{if(sections[w.s])sections[w.s].push(w);});
+
+  const container=document.getElementById('vocab-list');
+  if(!container)return;
+  container.innerHTML='';
+
+  let total=0;
+  const progData=loadProgress();
+  TOPIC_ORDER.forEach(sec=>{
+    const words=sections[sec];
+    if(!words||!words.length)return;
+    total+=words.length;
+    const m=TOPIC_META[sec]||{label:sec,icon:'📌'};
+    const hdr=document.createElement('div');
+    hdr.className='vsec-hdr';
+    hdr.innerHTML=`<span class="vsec-icon">${m.icon}</span><span class="vsec-name">${m.label}</span><span class="vsec-cnt">${words.length} сл.</span>`;
+    container.appendChild(hdr);
+
+    words.forEach(w=>{
+      const hasF=Object.keys(w.f||{}).length>0;
+      const state=getWordState(w,progData);
+      const wr=document.createElement('div');
+      wr.className=hasF?'wr expandable':'wr';
+      if(hasF)wr.onclick=()=>wr.classList.toggle('expanded');
+
+      let formsHtml='';
+      if(hasF){
+        const rows=Object.entries(w.f).map(([k,v])=>
+          `<tr><td>${FORM_LABELS[k]||k}</td><td class="ft-greek">${v}</td></tr>`).join('');
+        formsHtml=`<div class="wr-forms"><table class="forms-table"><tbody>${rows}</tbody></table></div>`;
+      }
+      const tcls=TYPE_CLS[w.t]||'';
+      const topicL=TOPIC_META[w.s]?TOPIC_META[w.s].label:w.s;
+      wr.innerHTML=`
+        <div>
+          <span class="wr-greek">${w.g}</span>
+          <span class="wr-type ${tcls}">${TYPE_LABEL[w.t]||w.t}</span>
+          <span class="wr-topic">${topicL}</span>
+          ${hasF?'<span class="wr-expand">▼</span>':''}
+          <span class="wd-dot ${state}"></span>
+        </div>
+        <div></div>
+        <div class="wr-rus">${w.r}</div>
+        ${formsHtml}`;
+      container.appendChild(wr);
+    });
+  });
+
+  const cnt=document.getElementById('vocab-count');
+  if(cnt)cnt.textContent=`Слов: ${total} из ${W.length}`;
+
+  // Mini progress in vocab
+  const{known,unseen}=getProgressCounts();
+  const mini=document.getElementById('vocab-progress-mini');
+  if(mini&&W.length)mini.innerHTML=`<span style="color:var(--green)">✓ ${known} знаю</span> &nbsp; <span style="color:var(--muted)">◌ ${unseen} новых</span>`;
+}
+
+// ── FLASHCARDS ──
+let fMode='gr',fFilter='all',fDeck=[],fIdx=0,fCorrect=0,fTotal=0,fFlipped=false;
+function initFlash(){
+  renderProgressBar();
+  const base=getFilteredWords();
+  const data=loadProgress();
+  const st=w=>{const s=data[w.g];if(!s)return'unseen';return s.k>0&&s.rep>0?'known':'unknown';};
+  const dueFn=w=>{const s=data[w.g];return !!(s&&s.due&&s.due<=Date.now());};
+  const fKnown=base.filter(w=>st(w)==='known').length;
+  const fUnknown=base.filter(w=>st(w)==='unknown').length;
+  const fUnseen=base.filter(w=>st(w)==='unseen').length;
+  const fDue=base.filter(dueFn).length;
+  const g=id=>document.getElementById(id);
+  g('ff-cnt-all').textContent=base.length;g('ff-cnt-unknown').textContent=fUnknown;
+  g('ff-cnt-unseen').textContent=fUnseen;g('ff-cnt-known').textContent=fKnown;
+  let pool;
+  if(fFilter==='due')pool=base.filter(dueFn);
+  else if(fFilter==='unknown')pool=base.filter(w=>st(w)==='unknown');
+  else if(fFilter==='unseen')pool=base.filter(w=>st(w)==='unseen');
+  else if(fFilter==='known')pool=base.filter(w=>st(w)==='known');
+  else pool=[...base];
+  if(!pool.length)pool=[...base];
+  fDeck=pool.sort(()=>Math.random()-.5);
+  fIdx=0;fCorrect=0;fTotal=0;fFlipped=false;
+  g('flashResult').style.display='none';
+  g('flashCatInfo').textContent=fFilter==='due'?`На сегодня (${fDue})`:
+    fFilter==='unknown'?`Не знаю (${fUnknown})`:fFilter==='unseen'?`Новые (${fUnseen})`:
+    fFilter==='known'?`Знаю (${fKnown})`:`Все (${base.length})`;
+  showCard();
+}
+function setFlashFilter(f){
+  fFilter=f;
+  ['due','all','unknown','unseen','known'].forEach(id=>
+    document.getElementById('ff-'+id).classList.toggle('active',id===f));
+  initFlash();
+}
+function setFlashMode(m){
+  fMode=m;
+  document.getElementById('fm-gr').classList.toggle('active',m==='gr');
+  document.getElementById('fm-ru').classList.toggle('active',m==='ru');
+  fFlipped=false;showCard();
+}
+function shuffleFlash(){fDeck.sort(()=>Math.random()-.5);fIdx=0;fFlipped=false;showCard();}
+function resetFlash(){fIdx=0;fCorrect=0;fTotal=0;fFlipped=false;document.getElementById('flashResult').style.display='none';showCard();}
+function showCard(){
+  if(fIdx>=fDeck.length){showFlashResult();return;}
+  const w=fDeck[fIdx];
+  const front=fMode==='gr'?w.g:w.r;
+  const back=fMode==='gr'?w.r:w.g;
+  document.getElementById('fc-hint-front').textContent=fMode==='gr'?'Греческое':'Русский';
+  document.getElementById('fc-word-front').textContent=front;
+  const topicL=TOPIC_META[w.s]?`${TOPIC_META[w.s].icon} ${TOPIC_META[w.s].label}`:'';
+  document.getElementById('fc-sub-front').textContent=topicL;
+  document.getElementById('fc-hint-back').textContent=fMode==='gr'?'Перевод':'Греческое';
+  document.getElementById('fc-word-back').textContent=back;
+  document.getElementById('fc-sub-back').textContent=`${TYPE_LABEL[w.t]||w.t} · ${topicL}`;
+  const fcForms=document.getElementById('fc-forms');
+  if(fcForms){
+    const fKeys=Object.keys(w.f||{});
+    fcForms.innerHTML=fKeys.length?fKeys.map(k=>`<span><strong>${FORM_LABELS[k]||k}</strong> ${w.f[k]}</span>`).join(''):'';
+  }
+  const sm2el=document.getElementById('fc-sm2-next');
+  const nd=getNextDue(w);
+  if(sm2el)sm2el.textContent=nd?`повтор: ${nd}`:'';
+  const card=document.getElementById('flashCard');
+  card.classList.remove('flipped');fFlipped=false;
+  const pct=fDeck.length?fIdx/fDeck.length*100:0;
+  document.getElementById('flashProg').style.width=pct+'%';
+  document.getElementById('flashProgTxt').textContent=fIdx+' / '+fDeck.length;
+}
+function flipCard(){fFlipped=!fFlipped;document.getElementById('flashCard').classList.toggle('flipped',fFlipped);}
+function markCard(q){
+  if(!fFlipped){flipCard();return;}
+  fTotal++;if(q>=3)fCorrect++;
+  recordWord(fDeck[fIdx],q);fIdx++;
+  const card=document.getElementById('flashCard');
+  card.style.transition='none';void card.offsetWidth;showCard();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{card.style.transition='';}));
+  filterVocab(); // update dots
+}
+function showFlashResult(){
+  const pct=fTotal?Math.round(fCorrect/fTotal*100):0;
+  document.getElementById('flashProg').style.width='100%';
+  document.getElementById('flashProgTxt').textContent=fDeck.length+' / '+fDeck.length;
+  renderProgressBar();
+  document.getElementById('flashResult').style.display='block';
+  document.getElementById('flashResult').innerHTML=`
+    <div class="result-box">
+      <div class="result-big">${pct}%</div>
+      <div class="result-sub">Знаю ${fCorrect} из ${fTotal} слов</div>
+      <div class="score-breakdown">
+        <div class="sb-item"><div class="sb-num" style="color:var(--green)">${fCorrect}</div><div class="sb-lbl">Знаю ✓</div></div>
+        <div class="sb-item"><div class="sb-num" style="color:var(--red)">${fTotal-fCorrect}</div><div class="sb-lbl">Не знаю ✗</div></div>
+      </div>
+      <div style="margin-top:1.2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-blue" onclick="resetFlash()">↺ Ещё раз</button>
+        <button class="btn btn-outline" onclick="initFlash()">🔀 Перемешать</button>
+        <button class="btn btn-outline" onclick="setFlashFilter('unknown')">🔴 Слабые</button>
+        <button class="btn btn-outline" onclick="setFlashFilter('due')">📅 На сегодня</button>
+      </div>
+    </div>`;
+}
+
+// ── QUIZ ──
+let qMode='gr',qDeck=[],qIdx=0,qRight=0,qWrong=0,qWrongWords=[];
+function setQuizMode(m){
+  qMode=m;
+  document.getElementById('qm-gr').classList.toggle('active',m==='gr');
+  document.getElementById('qm-ru').classList.toggle('active',m==='ru');
+}
+function startQuiz(){
+  const pool=getFilteredWords();
+  if(pool.length<4){
+    document.getElementById('quizArea').innerHTML=`<div class="result-box" style="margin-top:1rem"><div style="font-size:1.6rem">🔍</div><div style="font-weight:700;margin-top:.5rem">Слишком мало слов</div><div style="font-size:.84rem;color:var(--muted);margin-top:.4rem">Нужно минимум 4 слова — измени фильтр в разделе Словарь</div></div>`;
+    return;
+  }
+  const n=Math.min(10,pool.length);
+  qDeck=pool.sort(()=>Math.random()-.5).slice(0,n);
+  qIdx=0;qRight=0;qWrong=0;qWrongWords=[];
+  const meta=document.getElementById('quiz-meta');
+  if(meta)meta.textContent=`${n} вопросов · 4 варианта · ${pool.length} слов в фильтре`;
+  renderQuiz();
+}
+function retryWrong(){
+  if(!qWrongWords.length)return;
+  qDeck=[...qWrongWords].sort(()=>Math.random()-.5);
+  qIdx=0;qRight=0;qWrong=0;qWrongWords=[];renderQuiz();
+}
+function renderQuiz(){
+  if(qIdx>=qDeck.length){showQuizResult();return;}
+  const w=qDeck[qIdx];
+  const question=qMode==='gr'?w.g:w.r;
+  const correct=qMode==='gr'?w.r:w.g;
+  const pool=qDeck.length>=8?qDeck:W; // use full W if deck too small for good distractors
+  const sameType=pool.filter(x=>x!==w&&x.t===w.t).sort(()=>Math.random()-.5);
+  const anyOther=pool.filter(x=>x!==w&&x.t!==w.t).sort(()=>Math.random()-.5);
+  const wrongs=[...sameType,...anyOther].slice(0,3).map(x=>qMode==='gr'?x.r:x.g);
+  const opts=[correct,...wrongs].sort(()=>Math.random()-.5);
+  const ci=opts.indexOf(correct);
+  const optCls=qMode==='ru'?'qopt greek-opt':'qopt';
+  document.getElementById('quizArea').innerHTML=`
+    <div class="quiz-stats">
+      <span class="stat-chip sc-right">✓ ${qRight}</span>
+      <span class="stat-chip sc-wrong">✗ ${qWrong}</span>
+      <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:${qIdx/qDeck.length*100}%"></div></div>
+      <span style="font-size:.77rem;font-weight:600;color:var(--muted)">${qIdx+1}/${qDeck.length}</span>
+    </div>
+    <div class="quiz-q">
+      <div class="quiz-num">Вопрос ${qIdx+1} из ${qDeck.length}</div>
+      <div class="${qMode==='ru'?'quiz-word quiz-word-ru':'quiz-word'}">${question}</div>
+      <div class="quiz-opts">${opts.map((o,i)=>`<button class="${optCls}" id="qo${i}" onclick="answerQuiz(${i},${ci})">${o}</button>`).join('')}</div>
+    </div>`;
+}
+function answerQuiz(chosen,correct){
+  document.querySelectorAll('.qopt').forEach(b=>b.disabled=true);
+  document.getElementById('qo'+chosen).classList.add(chosen===correct?'correct':'wrong');
+  if(chosen!==correct)document.getElementById('qo'+correct).classList.add('correct');
+  const w=qDeck[qIdx];
+  if(chosen===correct){qRight++;recordWord(w,5);}else{qWrong++;qWrongWords.push(w);recordWord(w,0);}
+  setTimeout(()=>{qIdx++;renderQuiz();},1100);
+}
+function showQuizResult(){
+  const pct=Math.round(qRight/qDeck.length*100);
+  const fb=pct>=80?'🎉 Отлично!':pct>=60?'👍 Хорошо, есть над чем поработать.':'📖 Нужно больше практики.';
+  const wrongHTML=qWrongWords.length?`
+    <div class="wrong-list">
+      <div class="wrong-list-hdr">❌ Ошибки (${qWrongWords.length})</div>
+      ${qWrongWords.map(w=>`<div class="wrong-item"><div class="wi-q">${qMode==='gr'?w.g:w.r}</div><div>${qMode==='gr'?w.r:w.g}</div></div>`).join('')}
+    </div>`:'';
+  const retryBtn=qWrongWords.length?`<button class="btn btn-red" onclick="retryWrong()">↺ Повторить ошибки (${qWrongWords.length})</button>`:'';
+  document.getElementById('quizArea').innerHTML=`
+    <div class="result-box" style="margin-top:.5rem">
+      <div class="result-big">${pct}%</div>
+      <div class="result-sub">${fb}</div>
+      <div class="score-breakdown">
+        <div class="sb-item"><div class="sb-num" style="color:var(--green)">${qRight}</div><div class="sb-lbl">Правильно</div></div>
+        <div class="sb-item"><div class="sb-num" style="color:var(--red)">${qDeck.length-qRight}</div><div class="sb-lbl">Неправильно</div></div>
+      </div>
+      <div style="margin-top:1.2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        ${retryBtn}
+        <button class="btn btn-blue" onclick="startQuiz()">🔀 Новый тест</button>
+      </div>
+      ${wrongHTML}
+    </div>`;
+  renderProgressBar();
+}
+
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded',()=>{
+  filterVocab();
+  const si=document.getElementById('vocab-search');
+  if(si)si.addEventListener('input',e=>{searchQ=e.target.value;filterVocab();});
+  // Keyboard shortcuts for flashcards
+  document.addEventListener('keydown',e=>{
+    if(!document.getElementById('tab-flash').classList.contains('active'))return;
+    if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+    if(e.key===' '){e.preventDefault();flipCard();}
+    else if(e.key==='1')markCard(0);
+    else if(e.key==='2')markCard(3);
+    else if(e.key==='3')markCard(5);
+  });
+  // Swipe gestures on flashcard
+  let txStart=0,tyStart=0;
+  const fc=document.getElementById('flashCard');
+  fc.addEventListener('touchstart',e=>{txStart=e.touches[0].clientX;tyStart=e.touches[0].clientY;},{passive:true});
+  fc.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-txStart;
+    const dy=e.changedTouches[0].clientY-tyStart;
+    if(Math.abs(dx)<12&&Math.abs(dy)<12)return; // tap → let onclick handle
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){
+      e.preventDefault();
+      if(!fFlipped){flipCard();}
+      else if(dx<0)markCard(0);
+      else markCard(5);
+    }
+  },{passive:false});
+});
+</script>
+</body>
+</html>
