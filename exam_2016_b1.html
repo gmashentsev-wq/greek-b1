@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPG B1 · Тест 2016</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Noto+Serif:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f0f0eb; --surface:#fff; --border:#e0ddd6;
+  --g1:#0d3b2e; --g2:#1a5c40; --g3:#2d8653; --sage:#74b99a;
+  --bl:#e8f5ee; --blm:#a7d4bb;
+  --green:#1a6b40; --gl:#e8f5ee;
+  --amber:#b45309; --al:#fffbeb;
+  --red:#dc2626; --rl:#fef2f2;
+  --text:#0f1a15; --t2:#2d4a3a; --muted:#6b7c72;
+  --sh:0 1px 4px rgba(13,59,46,.07); --shm:0 4px 16px rgba(13,59,46,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* NAVBAR */
+.navbar{background:var(--g1);padding:0 2rem;display:flex;align-items:center;gap:2rem;position:sticky;top:0;z-index:90;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.nav-logo{display:flex;align-items:center;gap:.6rem;color:#fff;padding:.85rem 0;flex-shrink:0}
+.nav-logo-icon{width:32px;height:32px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;border:1.5px solid rgba(255,255,255,.25)}
+.nav-logo-text{font-weight:700;font-size:.95rem}
+.nav-logo-sub{font-size:.7rem;opacity:.6}
+.nav-info{color:rgba(255,255,255,.45);font-size:.75rem;margin-left:auto}
+
+/* EXAM TOPBAR */
+.exam-wrap{max-width:880px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+.exam-topbar{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:2px solid var(--border)}
+.esec-nav{display:flex;gap:.4rem;flex:1;flex-wrap:wrap}
+.esec-btn{padding:.5rem 1rem;border-radius:30px;font-size:.82rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-family:inherit;transition:all .15s}
+.esec-btn:hover{border-color:var(--blm);color:var(--g1)}
+.esec-btn.active{background:var(--g1);border-color:var(--g1);color:#fff}
+.exam-toggles{display:flex;gap:.5rem}
+.tog-btn{padding:.45rem .9rem;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-family:inherit;transition:all .15s;white-space:nowrap}
+.tog-btn.on{background:var(--bl);border-color:var(--blm);color:var(--g1)}
+
+/* SECTIONS */
+.exam-section{display:none}
+.exam-section.active{display:block}
+.exam-section-title{font-family:'DM Serif Display',serif;font-size:1.5rem;color:var(--g1);margin-bottom:.3rem}
+.exam-section-sub{font-size:.82rem;color:var(--muted);margin-bottom:1.4rem;display:flex;gap:1.2rem;flex-wrap:wrap}
+
+/* PARTS */
+.exam-part{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.8rem;margin-bottom:1.4rem;box-shadow:var(--sh)}
+.exam-part-hdr{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.exam-part-num{background:var(--g1);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
+.exam-part-title{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--g1);margin-bottom:.2rem}
+.exam-part-meta{font-size:.75rem;color:var(--muted)}
+
+/* CONTENT */
+.exam-instr{background:var(--bl);border-left:3px solid var(--g3);padding:.85rem 1.1rem;border-radius:0 8px 8px 0;font-size:.85rem;color:var(--t2);margin-bottom:1.2rem;line-height:1.6}
+.exam-text{font-family:'Noto Serif',serif;font-size:.95rem;line-height:1.85;color:var(--text);margin-bottom:1.2rem}
+.exam-text p{margin-bottom:.85rem}
+.blank{display:inline-block;min-width:90px;border-bottom:2px solid var(--g3);color:var(--g1);font-weight:600;padding:0 .3rem}
+
+/* TABLE */
+.exam-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:1rem}
+.exam-table th{background:var(--g1);color:#fff;padding:.55rem .9rem;text-align:left;font-weight:600;font-size:.78rem}
+.exam-table td{padding:.6rem .9rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.exam-table tr:last-child td{border-bottom:none}
+.exam-table tr:nth-child(even) td{background:#fafaf8}
+.exam-table .lbl{font-weight:700;color:var(--g1);white-space:nowrap}
+.exam-table .example{background:var(--bl)!important}
+.exam-table th, .exam-table td{text-align:center}
+.exam-table td:first-child{text-align:left}
+
+/* INTERACTIVE */
+.exam-sel{font-family:inherit;font-size:.82rem;padding:.22rem .5rem;border:1.5px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);cursor:pointer;min-width:80px;transition:border-color .15s}
+.exam-sel:focus{border-color:var(--g3);outline:none}
+.exam-sel.correct{border-color:#16a34a!important;background:#f0fdf4;color:#16a34a;font-weight:600}
+.exam-sel.wrong{border-color:var(--red)!important;background:var(--rl);color:var(--red)}
+.exam-cb{width:18px;height:18px;cursor:pointer;accent-color:var(--g2);vertical-align:middle}
+.exam-inp{font-family:inherit;font-size:.82rem;padding:.22rem .6rem;border:1.5px solid var(--border);border-radius:6px;width:160px;background:var(--surface);color:var(--text);transition:border-color .15s}
+.exam-inp:focus{border-color:var(--g3);outline:none}
+.exam-ta{width:100%;font-family:inherit;font-size:.85rem;padding:.75rem;border:1.5px solid var(--border);border-radius:8px;resize:vertical;min-height:150px;background:var(--surface);color:var(--text);line-height:1.6;margin-top:.75rem}
+.exam-ta:focus{border-color:var(--g3);outline:none}
+.wc-label{font-size:.75rem;color:var(--muted);margin-top:.35rem;text-align:right}
+.cb-correct{outline:2px solid #16a34a;border-radius:3px}
+.cb-wrong{outline:2px solid var(--red);border-radius:3px}
+
+/* CHECK */
+.check-row{margin:.9rem 0;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.check-btn{background:var(--g1);color:#fff;border:none;padding:.45rem 1.2rem;border-radius:20px;font-family:inherit;font-size:.82rem;font-weight:600;cursor:pointer;transition:background .15s}
+.check-btn:hover{background:var(--g2)}
+.check-result{font-size:.88rem;font-weight:600}
+.check-result.pass{color:#16a34a}
+.check-result.fail{color:var(--red)}
+
+/* KEY & TRANS */
+.key-box{background:#fffbf0;border:1px solid #f0d070;border-radius:10px;padding:1rem 1.2rem;margin-top:1rem;font-size:.85rem;display:none}
+.key-box strong{color:var(--g1);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.5rem}
+.key-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.3rem;align-items:baseline}
+.key-num{font-weight:700;color:var(--g1);min-width:24px}
+.key-ans{font-family:'Noto Serif',serif;color:var(--text)}
+.trans-box{background:#f0f7ff;border:1px solid #b8d4f0;border-radius:10px;padding:1rem 1.2rem;margin-top:.8rem;font-size:.85rem;line-height:1.7;color:var(--t2);display:none}
+.trans-box strong{color:#1a4a8a;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.5rem}
+
+/* TF */
+.tf-grid{display:grid;grid-template-columns:1fr auto;gap:.5rem .75rem;align-items:center;margin-bottom:.5rem}
+.tf-stmt{font-family:'Noto Serif',serif;font-size:.9rem;line-height:1.55}
+.tf-btns{display:flex;gap:.3rem}
+.tf-btn{padding:.25rem .65rem;border-radius:5px;font-size:.75rem;font-weight:700;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;font-family:inherit;transition:all .1s}
+.tf-btn.σ{background:#e8f5ee;border-color:var(--green);color:var(--green)}
+.tf-btn.λ{background:var(--rl);border-color:var(--red);color:var(--red)}
+
+/* WRITING / SPEAKING */
+.writing-prompt{background:#faf9f7;border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.4rem;font-family:'Noto Serif',serif;font-size:.92rem;line-height:1.75;margin-bottom:.8rem}
+.speak-q{padding:.6rem 0;border-bottom:1px solid var(--border);font-family:'Noto Serif',serif;font-size:.9rem;line-height:1.55;display:flex;gap:.6rem}
+.speak-q:last-child{border-bottom:none}
+.speak-q-dash{color:var(--g3);font-weight:700;flex-shrink:0}
+
+/* AUDIO WARNING */
+.audio-warn{background:var(--al);border:1px solid #fcd34d;border-radius:8px;padding:.75rem 1rem;font-size:.84rem;color:var(--amber);margin-bottom:1rem}
+
+/* ── NAV TABS ── */
+.nav-tabs{display:flex;gap:.25rem;margin-left:1rem}
+.nav-tab{padding:.5rem 1.1rem;border-radius:6px 6px 0 0;font-size:.82rem;font-weight:600;cursor:pointer;border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-family:inherit;transition:all .15s}
+.nav-tab:hover{background:rgba(255,255,255,.18);color:#fff}
+.nav-tab.active{background:#fff;color:var(--g1)}
+
+/* ── TAB PANELS ── */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── VOCAB ── */
+.vocab-wrap{max-width:880px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+.vc-search{width:100%;padding:.65rem 1rem;font-size:.95rem;font-family:inherit;border:1.5px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);margin-bottom:1rem;outline:none;transition:border-color .15s}
+.vc-search:focus{border-color:var(--g3)}
+.vc-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.vc-pill{padding:.35rem .85rem;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-family:inherit;transition:all .15s}
+.vc-pill:hover{border-color:var(--blm);color:var(--g1)}
+.vc-pill.active{background:var(--g1);border-color:var(--g1);color:#fff}
+.vc-count{font-size:.78rem;color:var(--muted);margin-bottom:.8rem}
+.vsec-hdr{display:flex;align-items:center;gap:.75rem;padding:.75rem 0;margin:1.2rem 0 .4rem;border-bottom:2px solid var(--border)}
+.vsec-icon{font-size:1.3rem}
+.vsec-name{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--g1)}
+.vsec-cnt{font-size:.75rem;color:var(--muted);margin-left:auto;background:var(--bl);border-radius:12px;padding:.2rem .6rem}
+.wr{display:grid;grid-template-columns:1fr auto;gap:.4rem .75rem;align-items:start;padding:.65rem .9rem;border-radius:10px;background:var(--surface);border:1px solid var(--border);margin-bottom:.45rem;cursor:pointer;transition:box-shadow .15s}
+.wr:hover{box-shadow:var(--shm)}
+.wr>div:not(.wr-forms){display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem}
+.wr-greek{font-family:'Noto Serif',serif;font-size:1rem;color:var(--text);font-weight:600}
+.wr-type{font-size:.68rem;color:var(--muted);background:#f0f0eb;padding:.1rem .4rem;border-radius:4px;font-weight:500}
+.wr-cat{font-size:.65rem;color:var(--sage);background:var(--bl);padding:.1rem .35rem;border-radius:4px}
+.wr-rus{font-size:.85rem;color:var(--t2);grid-column:1;padding-left:0}
+.wr-forms{display:none;grid-column:1/-1;border-top:1px solid var(--border);margin-top:.5rem;padding-top:.5rem}
+.wr.expanded .wr-forms{display:block}
+.forms-table{width:100%;font-size:.78rem;border-collapse:collapse}
+.forms-table td{padding:.2rem .4rem;color:var(--t2)}
+.forms-table td:first-child{color:var(--muted);white-space:nowrap;width:120px}
+.ft-greek{font-family:'Noto Serif',serif;font-weight:600;color:var(--text)}
+
+/* ── FLASHCARD ── */
+.ex-wrap{max-width:600px;margin:2rem auto;padding:0 1rem}
+.ex-controls{display:flex;gap:.6rem;margin-bottom:1.2rem;flex-wrap:wrap;align-items:center}
+.ex-progress{display:flex;gap:.75rem;margin-bottom:1.2rem;align-items:center}
+.prog-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--g1),var(--g3));border-radius:4px;transition:width .4s}
+.prog-txt{font-size:.78rem;font-weight:600;color:var(--muted);white-space:nowrap}
+.card-scene{perspective:1000px;margin:0 auto 1.5rem}
+.card-3d{width:100%;height:220px;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:pointer;border-radius:18px}
+.card-3d.flipped{transform:rotateY(180deg)}
+.card-face{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;box-shadow:var(--shm)}
+.card-front{background:var(--surface);border:1.5px solid var(--border)}
+.card-back{background:linear-gradient(135deg,var(--g1),var(--g3));transform:rotateY(180deg)}
+.card-hint{font-size:.72rem;color:var(--muted);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.06em}
+.card-word{font-size:1.6rem;font-weight:700;text-align:center;line-height:1.3}
+.card-front .card-word{font-family:'Noto Serif',serif;color:var(--g1)}
+.card-back .card-word{color:#fff}
+.card-type{font-size:.75rem;color:var(--muted);margin-top:.5rem;font-style:italic}
+.card-back .card-type{color:rgba(255,255,255,.65)}
+.card-hint-click{font-size:.72rem;color:var(--muted);margin-top:1rem}
+.fc-forms{margin-top:.7rem;font-size:.75rem;color:rgba(255,255,255,.65);line-height:1.7}
+.fc-forms span{margin-right:.9rem;white-space:nowrap}
+.fc-forms strong{color:rgba(255,255,255,.9)}
+.sm2-next{font-size:.7rem;color:rgba(255,255,255,.5);margin-top:.5rem}
+.card-actions{display:flex;gap:.75rem;justify-content:center}
+.btn{padding:.6rem 1.4rem;border-radius:10px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;border:none}
+.btn-blue{background:var(--g1);color:#fff}.btn-blue:hover{background:var(--g2)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#047857}
+.btn-red{background:var(--red);color:#fff}.btn-red:hover{background:#b91c1c}
+.btn-amber{background:var(--amber);color:#fff}.btn-amber:hover{background:#b45309}
+.btn-outline{background:var(--surface);color:var(--text);border:1.5px solid var(--border)}.btn-outline:hover{background:var(--bg)}
+.mode-toggle{display:flex;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;overflow:hidden}
+.mode-btn{flex:1;padding:.45rem .9rem;font-size:.78rem;font-weight:600;cursor:pointer;border:none;background:none;color:var(--muted);font-family:inherit;transition:all .15s}
+.mode-btn.active{background:var(--g1);color:#fff}
+.result-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center;box-shadow:var(--sh)}
+.result-big{font-size:2.5rem;font-weight:800;color:var(--g1);font-family:'DM Serif Display',serif}
+.result-sub{font-size:.9rem;color:var(--muted);margin-top:.4rem}
+.score-breakdown{display:flex;justify-content:center;gap:2rem;margin-top:1.2rem}
+.sb-item{text-align:center}.sb-num{font-size:1.4rem;font-weight:800}.sb-lbl{font-size:.72rem;color:var(--muted)}
+.progress-bar-wrap{background:var(--bg);border-radius:8px;padding:.55rem 1rem;margin-bottom:.8rem;display:flex;align-items:center;gap:1rem;font-size:.78rem;color:var(--muted);flex-wrap:wrap}
+.progress-bar-wrap strong{color:var(--text);font-size:.85rem}
+.mini-prog{flex:1;min-width:80px;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.mini-prog-fill{height:100%;background:var(--g2);border-radius:3px;transition:width .4s}
+.filter-btns{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
+.filter-btn{padding:.3rem .85rem;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-family:inherit;font-size:.78rem;font-weight:500;cursor:pointer;transition:all .15s;color:var(--t2)}
+.filter-btn:hover{border-color:var(--g3);color:var(--g1)}
+.filter-btn.active{background:var(--g1);color:#fff;border-color:var(--g1)}
+.fb-cnt{font-size:.68rem;padding:.05rem .3rem;border-radius:8px;margin-left:.3rem}
+.filter-btn:not(.active) .fb-cnt{background:var(--bl);color:var(--g2)}
+.filter-btn.active .fb-cnt{background:rgba(255,255,255,.25);color:inherit}
+.due-badge{background:#dc2626;color:#fff;font-size:.68rem;font-weight:700;padding:.1rem .35rem;border-radius:8px}
+.wrong-list{margin-top:1rem;text-align:left;max-width:480px;margin:1rem auto 0}
+.wrong-list-hdr{font-size:.75rem;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:.5rem}
+.wrong-item{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;padding:.45rem .7rem;border-radius:8px;background:var(--rl);border:1px solid #fecaca;margin-bottom:.35rem;font-size:.85rem}
+.wrong-item .wi-q{font-weight:600;color:var(--g1);font-family:'Noto Serif',serif}
+
+/* ── QUIZ ── */
+.quiz-stats{display:flex;gap:1rem;margin-bottom:1.2rem;align-items:center}
+.stat-chip{font-size:.78rem;font-weight:600;padding:.3rem .75rem;border-radius:20px}
+.sc-right{background:var(--gl);color:var(--green)}
+.sc-wrong{background:var(--rl);color:var(--red)}
+.quiz-q{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem 1.8rem;box-shadow:var(--sh);margin-bottom:1.2rem}
+.quiz-num{font-size:.7rem;font-weight:700;color:var(--g1);text-transform:uppercase;letter-spacing:.06em;background:var(--bl);display:inline-block;padding:.18rem .55rem;border-radius:5px;margin-bottom:.65rem}
+.quiz-word{font-size:1.3rem;font-weight:700;font-family:'Noto Serif',serif;color:var(--g1);margin-bottom:1rem}
+.quiz-opts{display:flex;flex-direction:column;gap:.5rem}
+.qopt{padding:.72rem 1rem;border:1.5px solid var(--border);border-radius:10px;background:#f8fafc;color:var(--text);font-size:.88rem;font-weight:500;cursor:pointer;text-align:left;transition:all .15s;font-family:inherit}
+.qopt:hover:not(:disabled){border-color:var(--blm);background:var(--bl);color:var(--g1)}
+.qopt.correct{background:var(--gl);border-color:var(--green);color:var(--green);font-weight:600}
+.qopt.wrong{background:var(--rl);border-color:var(--red);color:var(--red);font-weight:600}
+.qopt:disabled{cursor:default}
+
+/* ── SPELLING ── */
+.spell-progress{margin-bottom:1rem}
+.spell-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;box-shadow:var(--sh);text-align:center;margin-bottom:1.2rem}
+.spell-ru{font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:.4rem}
+.spell-type{font-size:.78rem;color:var(--muted);font-style:italic;margin-bottom:1.4rem}
+.spell-input{width:100%;padding:.75rem 1rem;border:2px solid var(--border);border-radius:10px;font-size:1.05rem;font-family:'Noto Serif',serif;text-align:center;outline:none;transition:border-color .15s;color:var(--text)}
+.spell-input:focus{border-color:var(--g3)}
+.spell-input.ok{border-color:var(--green);background:var(--gl);color:var(--green)}
+.spell-input.err{border-color:var(--red);background:var(--rl);color:var(--red)}
+.spell-answer{margin-top:.75rem;font-size:.88rem}
+.spell-hint-letters{display:flex;justify-content:center;gap:.3rem;margin-top:1rem;flex-wrap:wrap}
+.sl{display:inline-flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:6px;font-size:.85rem;font-weight:600;font-family:'Noto Serif',serif}
+.sl.ok{background:var(--gl);color:var(--green);border:1.5px solid var(--green)}
+.sl.err{background:var(--rl);color:var(--red);border:1.5px solid var(--red)}
+.sl.miss{background:var(--bg);color:var(--muted);border:1.5px solid var(--border)}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">Ε</div>
+    <div>
+      <div class="nav-logo-text">B1 · Ελληνικά</div>
+      <div class="nav-logo-sub">Тест 2016</div>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('exam',this)">📋 Тест 2016</button>
+    <button class="nav-tab" onclick="switchTab('vocab',this)">📚 Словарь</button>
+    <button class="nav-tab" onclick="switchTab('flash',this)">🃏 Карточки</button>
+    <button class="nav-tab" onclick="switchTab('quiz',this)">✅ Тест</button>
+    <button class="nav-tab" onclick="switchTab('spell',this)">✍️ Написание</button>
+  </div>
+  <div class="nav-info">KPG · B1 · 2016</div>
+</nav>
+
+<!-- TAB: EXAM -->
+<div class="tab-panel active" id="tab-exam">
+<div class="exam-wrap">
+
+  <!-- TOPBAR -->
+  <div class="exam-topbar">
+    <div class="esec-nav">
+      <button class="esec-btn active" onclick="showSec('reading',this)">📖 Чтение <span style="opacity:.6;font-weight:400">25 б.</span></button>
+      <button class="esec-btn" onclick="showSec('listening',this)">🎧 Аудирование <span style="opacity:.6;font-weight:400">25 б.</span></button>
+      <button class="esec-btn" onclick="showSec('writing',this)">✏️ Письмо <span style="opacity:.6;font-weight:400">25 б.</span></button>
+      <button class="esec-btn" onclick="showSec('speaking',this)">🗣️ Говорение <span style="opacity:.6;font-weight:400">25 б.</span></button>
+    </div>
+    <div class="exam-toggles">
+      <button class="tog-btn" id="btnKeys" onclick="toggleKeys()">🔑 Ключи</button>
+      <button class="tog-btn" id="btnTrans" onclick="toggleTrans()">🇷🇺 Перевод</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       ЧТЕНИЕ
+  ═══════════════════════════════════ -->
+  <div class="exam-section active" id="esec-reading">
+    <div class="exam-section-title">Κατανόηση γραπτού λόγου</div>
+    <div class="exam-section-sub">
+      <span>📋 Понимание письменной речи</span>
+      <span>⏱️ 40 минут</span>
+      <span>🏆 25 баллов</span>
+    </div>
+
+    <!-- ЗАДАНИЕ 1 — Музеи (таблица чекбоксов) -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">1</div>
+        <div>
+          <div class="exam-part-title">Μουσεία της Αθήνας</div>
+          <div class="exam-part-meta">12 баллов · соответствие характеристик музеям</div>
+        </div>
+      </div>
+      <div class="exam-instr">Ψάχνετε στο διαδίκτυο πληροφορίες για διάφορα μουσεία της Αθήνας. Από τον πίνακα που ακολουθεί σημειώνετε με ✓ τι προσφέρει το καθένα, όπως στο παράδειγμα.<br><em>Προσοχή: πρέπει να σημειώσετε συνολικά δώδεκα (12) ✓ χωρίς το παράδειγμα.</em></div>
+      <div class="trans-box"><strong>Перевод</strong>Вы ищете в интернете информацию о различных музеях Афин. В таблице ниже отмечайте ✓ то, что предлагает каждый музей, как в примере. Всего нужно отметить 12 пунктов (не считая примера).</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem">
+        <div class="writing-prompt" style="font-size:.85rem"><strong style="color:var(--g1)">A — Εθνική Πινακοθήκη</strong><br><br>Η Εθνική Πινακοθήκη είναι το σημαντικότερο μουσείο τέχνης της Ελλάδας. Περιέχει έργα διάσημων Ελλήνων ζωγράφων. Υπάρχουν καθημερινές ξεναγήσεις από ειδικούς. Στο ισόγειο λειτουργεί κατάστημα αναμνηστικών.</div>
+        <div class="writing-prompt" style="font-size:.85rem"><strong style="color:var(--g1)">B — Μουσείο Ακρόπολης</strong><br><br>Το Μουσείο Ακρόπολης βρίσκεται δίπλα στην Ακρόπολη. Περιέχει αρχαία ευρήματα και έργα Ελλήνων καλλιτεχνών. Διαθέτει κατάστημα δώρων. Το εστιατόριο στον τελευταίο όροφο έχει μοναδική θέα στην Ακρόπολη.</div>
+        <div class="writing-prompt" style="font-size:.85rem"><strong style="color:var(--g1)">C — Μουσείο Συναισθημάτων</strong><br><br>Το Μουσείο Συναισθημάτων βοηθά τους επισκέπτες να κατανοήσουν τα συναισθήματά τους μέσα από διαδραστικές εκθέσεις. Είναι κατάλληλο για παιδιά και οικογένειες. Εκπαιδευμένοι ξεναγοί συνοδεύουν κάθε ομάδα.</div>
+        <div class="writing-prompt" style="font-size:.85rem"><strong style="color:var(--g1)">D — Μουσείο Πειραμάτων</strong><br><br>Στο Μουσείο Πειραμάτων οι επισκέπτες μπορούν να κάνουν πειράματα επιστήμης! Οι εκθέσεις είναι διαδραστικές και εκπαιδευτικές. Κατάλληλο για παιδιά από 6 χρονών και άνω.</div>
+        <div class="writing-prompt" style="font-size:.85rem"><strong style="color:var(--g1)">E — Παιδικό Μουσείο</strong><br><br>Το Παιδικό Μουσείο απευθύνεται σε παιδιά από 3 έως 12 χρονών. Η είσοδος είναι δωρεάν για παιδιά κάτω από 5 χρονών. Υπάρχουν παιχνίδια και δραστηριότητες για κάθε ηλικία.</div>
+      </div>
+
+      <table class="exam-table">
+        <tr><th>Χαρακτηριστικά</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+        <tr class="example"><td>Βρίσκεται στην Αθήνα</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        <tr>
+          <td>Κατάστημα αναμνηστικών</td>
+          <td><input type="checkbox" class="exam-cb" id="t1shopA"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1shopB"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1shopC"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1shopD"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1shopE"></td>
+        </tr>
+        <tr>
+          <td>Κατάλληλο για παιδιά</td>
+          <td><input type="checkbox" class="exam-cb" id="t1kidsA"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1kidsB"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1kidsC"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1kidsD"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1kidsE"></td>
+        </tr>
+        <tr>
+          <td>Δωρεάν είσοδος (για κάποιους)</td>
+          <td><input type="checkbox" class="exam-cb" id="t1freeA"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1freeB"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1freeC"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1freeD"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1freeE"></td>
+        </tr>
+        <tr>
+          <td>Διαδραστικές εκθέσεις</td>
+          <td><input type="checkbox" class="exam-cb" id="t1interA"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1interB"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1interC"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1interD"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1interE"></td>
+        </tr>
+        <tr>
+          <td>Ξεναγήσεις</td>
+          <td><input type="checkbox" class="exam-cb" id="t1guidA"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1guidB"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1guidC"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1guidD"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1guidE"></td>
+        </tr>
+        <tr>
+          <td>Έργα Ελλήνων καλλιτεχνών</td>
+          <td><input type="checkbox" class="exam-cb" id="t1greekA"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1greekB"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1greekC"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1greekD"></td>
+          <td><input type="checkbox" class="exam-cb" id="t1greekE"></td>
+        </tr>
+      </table>
+      <div class="check-row">
+        <button class="check-btn" onclick="checkTask1()">✅ Проверить задание 1</button>
+        <span id="t1result" class="check-result"></span>
+      </div>
+      <div class="key-box" id="key1">
+        <strong>🔑 Ключ — Задание 1</strong>
+        <div class="key-row"><span class="key-ans">Κατάστημα αναμνηστικών → A, B</span></div>
+        <div class="key-row"><span class="key-ans">Κατάλληλο για παιδιά → C, D, E</span></div>
+        <div class="key-row"><span class="key-ans">Δωρεάν είσοδος → E</span></div>
+        <div class="key-row"><span class="key-ans">Διαδραστικές εκθέσεις → C, D</span></div>
+        <div class="key-row"><span class="key-ans">Ξεναγήσεις → A, C</span></div>
+        <div class="key-row"><span class="key-ans">Έργα Ελλήνων καλλιτεχνών → A, B</span></div>
+        <div style="margin-top:.5rem;font-size:.78rem;color:var(--muted)">⚠️ Ключ восстановлен по OCR — возможны неточности.</div>
+      </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 2 — Κηπουρική (заполнение пропусков) -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">2</div>
+        <div>
+          <div class="exam-part-title">Κηπουρική στα σχολεία</div>
+          <div class="exam-part-meta">6 баллов · заполнение пропусков из банка слов</div>
+        </div>
+      </div>
+      <div class="exam-instr">Διαβάζετε ένα άρθρο για την κηπουρική στα σχολεία. Μερικές φράσεις, όμως, δεν φαίνονται καλά. Στον πίνακα που ακολουθεί υπάρχουν φράσεις που ταιριάζουν στα κενά. Διαβάστε προσεκτικά και συμπληρώστε τα κενά, όπως στο παράδειγμα.<br><em>Υπάρχουν τρεις φράσεις που δεν ταιριάζουν σε κανένα κενό.</em></div>
+      <div class="trans-box"><strong>Перевод инструкции</strong>Вы читаете статью о садоводстве в школах. Некоторые фразы плохо видны. В таблице ниже есть фразы, подходящие к пропускам. Внимательно прочитайте и заполните пропуски, как в примере. Три фразы лишние.</div>
+
+      <div class="exam-text">
+        <p>Σε πολλά σχολεία της Ελλάδας, οι μαθητές ασχολούνται με τη <span class="blank">0 κηπουρική ✓</span>. Στο πρόγραμμα «Κήπος στο σχολείο», τα παιδιά
+        <select class="exam-sel" id="t2q1" style="min-width:230px">
+          <option value="">—</option>
+          <option>παρακολουθούσαν πώς μεγαλώνουν</option>
+          <option>και στην ψυχολογία τους</option>
+          <option>πώς να τα φροντίζουν</option>
+          <option>τα έχουν φυτέψει οι ίδιοι</option>
+          <option>για να νιώσουν καλύτερα οι μαθητές</option>
+          <option>πιο σίγουροι για τις δυνατότητές τους</option>
+          <option>να ψωνίζουν στο σούπερ μάρκετ</option>
+          <option>με τη βοήθεια των γονέων τους</option>
+          <option>μόνο κατά τη διάρκεια των μαθημάτων</option>
+        </select>
+        τα φυτά που φύτευαν κάθε μέρα.</p>
+
+        <p>Οι επιστήμονες λένε ότι η κηπουρική βοηθά στη σωματική υγεία
+        <select class="exam-sel" id="t2q2" style="min-width:230px">
+          <option value="">—</option>
+          <option>παρακολουθούσαν πώς μεγαλώνουν</option>
+          <option>και στην ψυχολογία τους</option>
+          <option>πώς να τα φροντίζουν</option>
+          <option>τα έχουν φυτέψει οι ίδιοι</option>
+          <option>για να νιώσουν καλύτερα οι μαθητές</option>
+          <option>πιο σίγουροι για τις δυνατότητές τους</option>
+          <option>να ψωνίζουν στο σούπερ μάρκετ</option>
+          <option>με τη βοήθεια των γονέων τους</option>
+          <option>μόνο κατά τη διάρκεια των μαθημάτων</option>
+        </select>
+        των παιδιών.</p>
+
+        <p>Οι δάσκαλοι δίδαξαν στους μαθητές
+        <select class="exam-sel" id="t2q3" style="min-width:230px">
+          <option value="">—</option>
+          <option>παρακολουθούσαν πώς μεγαλώνουν</option>
+          <option>και στην ψυχολογία τους</option>
+          <option>πώς να τα φροντίζουν</option>
+          <option>τα έχουν φυτέψει οι ίδιοι</option>
+          <option>για να νιώσουν καλύτερα οι μαθητές</option>
+          <option>πιο σίγουροι για τις δυνατότητές τους</option>
+          <option>να ψωνίζουν στο σούπερ μάρκετ</option>
+          <option>με τη βοήθεια των γονέων τους</option>
+          <option>μόνο κατά τη διάρκεια των μαθημάτων</option>
+        </select>
+        για να μεγαλώσουν υγιεινά λαχανικά.</p>
+
+        <p>Τα παιδιά είναι πιο περήφανα για τα λαχανικά που
+        <select class="exam-sel" id="t2q4" style="min-width:230px">
+          <option value="">—</option>
+          <option>παρακολουθούσαν πώς μεγαλώνουν</option>
+          <option>και στην ψυχολογία τους</option>
+          <option>πώς να τα φροντίζουν</option>
+          <option>τα έχουν φυτέψει οι ίδιοι</option>
+          <option>για να νιώσουν καλύτερα οι μαθητές</option>
+          <option>πιο σίγουροι για τις δυνατότητές τους</option>
+          <option>να ψωνίζουν στο σούπερ μάρκετ</option>
+          <option>με τη βοήθεια των γονέων τους</option>
+          <option>μόνο κατά τη διάρκεια των μαθημάτων</option>
+        </select>
+        στο σχολείο.</p>
+
+        <p>Υπάρχουν ειδικά προγράμματα
+        <select class="exam-sel" id="t2q5" style="min-width:230px">
+          <option value="">—</option>
+          <option>παρακολουθούσαν πώς μεγαλώνουν</option>
+          <option>και στην ψυχολογία τους</option>
+          <option>πώς να τα φροντίζουν</option>
+          <option>τα έχουν φυτέψει οι ίδιοι</option>
+          <option>για να νιώσουν καλύτερα οι μαθητές</option>
+          <option>πιο σίγουροι για τις δυνατότητές τους</option>
+          <option>να ψωνίζουν στο σούπερ μάρκετ</option>
+          <option>με τη βοήθεια των γονέων τους</option>
+          <option>μόνο κατά τη διάρκεια των μαθημάτων</option>
+        </select>
+        κατά τη διάρκεια της σχολικής χρονιάς.</p>
+
+        <p>Μετά από αυτή την εμπειρία, τα παιδιά αισθάνονται
+        <select class="exam-sel" id="t2q6" style="min-width:230px">
+          <option value="">—</option>
+          <option>παρακολουθούσαν πώς μεγαλώνουν</option>
+          <option>και στην ψυχολογία τους</option>
+          <option>πώς να τα φροντίζουν</option>
+          <option>τα έχουν φυτέψει οι ίδιοι</option>
+          <option>για να νιώσουν καλύτερα οι μαθητές</option>
+          <option>πιο σίγουροι για τις δυνατότητές τους</option>
+          <option>να ψωνίζουν στο σούπερ μάρκετ</option>
+          <option>με τη βοήθεια των γονέων τους</option>
+          <option>μόνο κατά τη διάρκεια των μαθημάτων</option>
+        </select>.</p>
+      </div>
+      <div class="trans-box"><strong>Перевод текста</strong>Во многих греческих школах ученики занимаются садоводством. В программе «Сад в школе» дети [1] растения, которые сажали каждый день. Учёные говорят, что садоводство помогает физическому здоровью [2] детей. Учителя научили учеников [3], чтобы вырастить здоровые овощи. Дети больше гордятся овощами, которые [4] в школе сами. Существуют специальные программы [5] в течение учебного года. После этого опыта дети чувствуют себя [6] своих возможностей.</div>
+
+      <div class="check-row">
+        <button class="check-btn" onclick="checkTask2()">✅ Проверить задание 2</button>
+        <span id="t2result" class="check-result"></span>
+      </div>
+      <div class="key-box" id="key2">
+        <strong>🔑 Ключ — Задание 2</strong>
+        <div class="key-row"><span class="key-num">1→</span><span class="key-ans">παρακολουθούσαν πώς μεγαλώνουν</span></div>
+        <div class="key-row"><span class="key-num">2→</span><span class="key-ans">και στην ψυχολογία τους</span></div>
+        <div class="key-row"><span class="key-num">3→</span><span class="key-ans">πώς να τα φροντίζουν</span></div>
+        <div class="key-row"><span class="key-num">4→</span><span class="key-ans">τα έχουν φυτέψει οι ίδιοι</span></div>
+        <div class="key-row"><span class="key-num">5→</span><span class="key-ans">για να νιώσουν καλύτερα οι μαθητές</span></div>
+        <div class="key-row"><span class="key-num">6→</span><span class="key-ans">πιο σίγουροι για τις δυνατότητές τους</span></div>
+        <div style="margin-top:.5rem;font-size:.78rem;color:var(--muted)">Лишние фразы: να ψωνίζουν στο σούπερ μάρκετ · με τη βοήθεια των γονέων τους · μόνο κατά τη διάρκεια των μαθημάτων</div>
+      </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3 — Θείος Γιακουμής (Верно/Неверно) -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">3</div>
+        <div>
+          <div class="exam-part-title">Ο θείος Γιακουμής</div>
+          <div class="exam-part-meta">6 баллов · верно / неверно</div>
+        </div>
+      </div>
+      <div class="exam-instr">Διαβάστε το παρακάτω κείμενο. Για κάθε πρόταση που ακολουθεί σημειώστε αν είναι σωστή (Σ) ή λάθος (Λ).<br><em>Προσοχή: πρέπει να σημειώσετε συνολικά έξι (6) απαντήσεις χωρίς το παράδειγμα.</em></div>
+      <div class="exam-text">
+        <p>Ο θείος Γιακουμής είναι ένας ηλικιωμένος άντρας που μένει σε ένα μικρό χωριό της βόρειας Ελλάδας. Τον γνώρισα σε μια αργία, όταν πήγα εκεί με την οικογένειά μου. Εκείνο το βράδυ, στη μοναδική ταβέρνα του χωριού, ο θείος Γιακουμής καθόταν σε μια γωνιά και έπαιζε κιθάρα. Τραγουδούσε παλιά ελληνικά τραγούδια και όλοι οι χωριανοί τον περικύκλωσαν. Ήταν φανερό ότι τον αγαπούν πολύ.</p>
+        <p>Αργότερα μου εξήγησε ότι έμαθε αυτά τα τραγούδια από τον πατέρα του — δεν ήταν δικά του, αλλά παλιά δημοτικά τραγούδια. Ήμουν εντυπωσιασμένος. Ρώτησα αν σκέφτεται να γίνει επαγγελματίας μουσικός. Γέλασε: «Εδώ στο χωριό έχω ό,τι χρειάζομαι. Δεν θέλω τίποτα άλλο».</p>
+      </div>
+      <div class="trans-box"><strong>Перевод текста</strong>Дядя Якумис — пожилой мужчина, живущий в небольшой деревне на севере Греции. Я познакомился с ним в один из праздников, когда приехал туда с семьёй. В тот вечер в единственной таверне деревни дядя Якумис сидел в углу и играл на гитаре. Он пел старые греческие песни, и все жители деревни столпились вокруг него. Было видно, что они его очень любят. Позже он объяснил мне, что выучил эти песни от отца — это были не его собственные, а старые народные песни. Я был под впечатлением. Я спросил, думает ли он стать профессиональным музыкантом. Он засмеялся: «Здесь в деревне у меня есть всё, что нужно. Мне больше ничего не нужно».</div>
+
+      <div style="margin-top:1rem">
+        <div class="tf-grid">
+          <div class="tf-stmt" style="font-style:italic;color:var(--muted)">0. Ο θείος Γιακουμής είναι νέος άντρας. <em>(παράδειγμα)</em></div>
+          <div class="tf-btns"><span class="tf-btn λ">Λ ✓</span></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">1. Ο θείος Γιακουμής μένει σε χωριό.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">2. Ο αφηγητής γνώρισε τον θείο Γιακουμή σε ένα σεμινάριο.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">3. Τα τραγούδια που έπαιζε ο θείος ήταν ξένα.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">4. Ο θείος Γιακουμής έμαθε τα τραγούδια από τον πατέρα του.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">5. Οι χωριανοί αγαπούν τον θείο Γιακουμή.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
+        </div>
+        <div class="tf-grid">
+          <div class="tf-stmt">6. Ο θείος Γιακουμής θέλει να γίνει επαγγελματίας μουσικός.</div>
+          <div class="tf-btns"><button class="tf-btn" onclick="toggleTF(this,'σ')">Σ</button><button class="tf-btn" onclick="toggleTF(this,'λ')">Λ</button></div>
+        </div>
+      </div>
+      <div class="check-row">
+        <button class="check-btn" onclick="checkTask3()">✅ Проверить задание 3</button>
+        <span id="t3result" class="check-result"></span>
+      </div>
+      <div class="key-box" id="key3">
+        <strong>🔑 Ключ — Задание 3</strong>
+        <div class="key-row"><span class="key-num">1→</span><span class="key-ans">Σ (μένει σε μικρό χωριό)</span></div>
+        <div class="key-row"><span class="key-num">2→</span><span class="key-ans">Λ (познакомились в αργία, не на семинаре)</span></div>
+        <div class="key-row"><span class="key-num">3→</span><span class="key-ans">Λ (παλιά ελληνικά / δημοτικά τραγούδια, не иностранные)</span></div>
+        <div class="key-row"><span class="key-num">4→</span><span class="key-ans">Σ (έμαθε από τον πατέρα του)</span></div>
+        <div class="key-row"><span class="key-num">5→</span><span class="key-ans">Σ (όλοι οι χωριανοί τον αγαπούν)</span></div>
+        <div class="key-row"><span class="key-num">6→</span><span class="key-ans">Λ (δεν θέλει — «εδώ έχω ό,τι χρειάζομαι»)</span></div>
+      </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 4 — Аренда (заполнение пропусков) -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">4</div>
+        <div>
+          <div class="exam-part-title">Συμβουλές πριν νοικιάσετε σπίτι</div>
+          <div class="exam-part-meta">7 баллов · заполнение пропусков</div>
+        </div>
+      </div>
+      <div class="exam-instr">Διαβάζετε στο διαδίκτυο ένα κείμενο με συμβουλές για ενοικίαση σπιτιού. Μερικές λέξεις/φράσεις δεν φαίνονται καλά. Στον πίνακα που ακολουθεί υπάρχουν λέξεις/φράσεις που ταιριάζουν στα κενά. Συμπληρώνετε δίπλα σε κάθε λέξη/φράση τον αριθμό του κενού, όπως στο παράδειγμα.<br><em>Υπάρχουν τέσσερις λέξεις/φράσεις που δεν ταιριάζουν σε κανένα κενό.</em></div>
+      <div class="exam-text">
+        <p>Πριν υπογράψετε συμβόλαιο ενοικίασης, μιλήστε πρώτα με τον <select class="exam-sel" id="t4q1" style="min-width:170px"><option value="">—</option><option>γείτονα</option><option>περισσότερα</option><option>φυσικό</option><option>είναι πιθανό</option><option>τρέχει</option><option>πρακτικούς λόγους</option><option>θα υποφέρετε</option><option>ακριβότερο</option><option>πολύ μακριά</option><option>να αγοράσετε</option><option>παλιότερο</option></select> για να μάθετε πώς είναι η γειτονιά.</p>
+        <p>Ρωτήστε για τη θέρμανση: αν είναι ατομική και όχι κεντρική, θα ξοδεύετε <select class="exam-sel" id="t4q2" style="min-width:170px"><option value="">—</option><option>γείτονα</option><option>περισσότερα</option><option>φυσικό</option><option>είναι πιθανό</option><option>τρέχει</option><option>πρακτικούς λόγους</option><option>θα υποφέρετε</option><option>ακριβότερο</option><option>πολύ μακριά</option><option>να αγοράσετε</option><option>παλιότερο</option></select> χρήματα σε πετρέλαιο τον χειμώνα.</p>
+        <p>Αν το σπίτι είναι παλιό, είναι <select class="exam-sel" id="t4q3" style="min-width:170px"><option value="">—</option><option>γείτονα</option><option>περισσότερα</option><option>φυσικό</option><option>είναι πιθανό</option><option>τρέχει</option><option>πρακτικούς λόγους</option><option>θα υποφέρετε</option><option>ακριβότερο</option><option>πολύ μακριά</option><option>να αγοράσετε</option><option>παλιότερο</option></select> να υπάρχουν προβλήματα με τις συσκευές.</p>
+        <p><select class="exam-sel" id="t4q4" style="min-width:170px"><option value="">—</option><option>γείτονα</option><option>περισσότερα</option><option>φυσικό</option><option>είναι πιθανό</option><option>τρέχει</option><option>πρακτικούς λόγους</option><option>θα υποφέρετε</option><option>ακριβότερο</option><option>πολύ μακριά</option><option>να αγοράσετε</option><option>παλιότερο</option></select> να χρειαστούν επισκευές στις σωληνώσεις. Ελέγξτε αν το νερό <select class="exam-sel" id="t4q5" style="min-width:170px"><option value="">—</option><option>γείτονα</option><option>περισσότερα</option><option>φυσικό</option><option>είναι πιθανό</option><option>τρέχει</option><option>πρακτικούς λόγους</option><option>θα υποφέρετε</option><option>ακριβότερο</option><option>πολύ μακριά</option><option>να αγοράσετε</option><option>παλιότερο</option></select> καλά από όλες τις βρύσες.</p>
+        <p>Πολλοί ενοικιαστές αλλάζουν διαμέρισμα για <select class="exam-sel" id="t4q6" style="min-width:170px"><option value="">—</option><option>γείτονα</option><option>περισσότερα</option><option>φυσικό</option><option>είναι πιθανό</option><option>τρέχει</option><option>πρακτικούς λόγους</option><option>θα υποφέρετε</option><option>ακριβότερο</option><option>πολύ μακριά</option><option>να αγοράσετε</option><option>παλιότερο</option></select> όπως η απόσταση από τη δουλειά ή τα σχολεία.</p>
+        <p>Αν αγνοήσετε αυτές τις συμβουλές, <select class="exam-sel" id="t4q7" style="min-width:170px"><option value="">—</option><option>γείτονα</option><option>περισσότερα</option><option>φυσικό</option><option>είναι πιθανό</option><option>τρέχει</option><option>πρακτικούς λόγους</option><option>θα υποφέρετε</option><option>ακριβότερο</option><option>πολύ μακριά</option><option>να αγοράσετε</option><option>παλιότερο</option></select> αργότερα!</p>
+      </div>
+      <div class="trans-box"><strong>Перевод</strong>Прежде чем подписывать договор аренды, поговорите с [1] соседом, чтобы узнать, как обстоят дела в районе. Спросите об отоплении: если оно автономное, а не централизованное, вы будете тратить [2] денег на мазут зимой. Если дом старый, [3] естественно, что с приборами могут быть проблемы. [4] Вероятно, потребуется ремонт труб. Проверьте, [5] нормально ли течёт вода из всех кранов. Многие жильцы меняют квартиру по [6] практическим причинам — например, расстояние до работы или школ. Если проигнорируете эти советы, [7] потом пострадаете!</div>
+
+      <table class="exam-table" style="max-width:400px">
+        <tr><th>Слово/фраза</th><th>№ пропуска</th></tr>
+        <tr class="example"><td>συμβόλαιο</td><td>0 ✓</td></tr>
+        <tr><td>γείτονα</td><td>___</td></tr>
+        <tr><td>περισσότερα</td><td>___</td></tr>
+        <tr><td>φυσικό</td><td>___</td></tr>
+        <tr><td>είναι πιθανό</td><td>___</td></tr>
+        <tr><td>τρέχει</td><td>___</td></tr>
+        <tr><td>πρακτικούς λόγους</td><td>___</td></tr>
+        <tr><td>θα υποφέρετε</td><td>___</td></tr>
+        <tr><td>ακριβότερο</td><td>___</td></tr>
+        <tr><td>πολύ μακριά</td><td>___</td></tr>
+        <tr><td>να αγοράσετε</td><td>___</td></tr>
+        <tr><td>παλιότερο</td><td>___</td></tr>
+      </table>
+      <div class="check-row">
+        <button class="check-btn" onclick="checkTask4()">✅ Проверить задание 4</button>
+        <span id="t4result" class="check-result"></span>
+      </div>
+      <div class="key-box" id="key4">
+        <strong>🔑 Ключ — Задание 4</strong>
+        <div class="key-row"><span class="key-num">1→</span><span class="key-ans">γείτονα</span></div>
+        <div class="key-row"><span class="key-num">2→</span><span class="key-ans">περισσότερα</span></div>
+        <div class="key-row"><span class="key-num">3→</span><span class="key-ans">φυσικό</span></div>
+        <div class="key-row"><span class="key-num">4→</span><span class="key-ans">είναι πιθανό</span></div>
+        <div class="key-row"><span class="key-num">5→</span><span class="key-ans">τρέχει</span></div>
+        <div class="key-row"><span class="key-num">6→</span><span class="key-ans">πρακτικούς λόγους</span></div>
+        <div class="key-row"><span class="key-num">7→</span><span class="key-ans">θα υποφέρετε</span></div>
+        <div style="margin-top:.5rem;font-size:.78rem;color:var(--muted)">⚠️ Ключ восстановлен по OCR — сверяйся с оригиналом.</div>
+      </div>
+    </div>
+  </div><!-- /esec-reading -->
+
+  <!-- ═══════════════════════════════════
+       АУДИРОВАНИЕ
+  ═══════════════════════════════════ -->
+  <div class="exam-section" id="esec-listening">
+    <div class="exam-section-title">Κατανόηση προφορικού λόγου</div>
+    <div class="exam-section-sub">
+      <span>🎧 Понимание устной речи</span>
+      <span>⏱️ 25 минут</span>
+      <span>🏆 25 баллов</span>
+    </div>
+
+    <div class="exam-part" style="border-left:4px solid var(--amber)">
+      <div class="audio-warn">⚠️ Этот раздел требует аудиозаписи. Представлены только структура заданий и ключи.</div>
+
+      <!-- ЗАДАНИЕ 1 — Erasmus (заметки) -->
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">1</div>
+        <div>
+          <div class="exam-part-title">Πρόγραμμα Erasmus — Заметки Ελένης</div>
+          <div class="exam-part-meta">12 баллов · краткие заметки (1–3 слова)</div>
+        </div>
+      </div>
+      <div class="exam-instr">Θα ακούσετε δύο (2) φορές έναν διάλογο. Η Ελένη μιλάει με έναν φίλο της για το πρόγραμμα Erasmus. Κρατάτε πολύ σύντομες σημειώσεις (1–3 λέξεις), όπως στο παράδειγμα.</div>
+      <div class="trans-box"><strong>Перевод</strong>Вы услышите дважды диалог. Элени разговаривает с другом о программе Erasmus. Делайте очень краткие заметки (1–3 слова), как в примере.</div>
+
+      <table class="exam-table" style="margin-top:.8rem">
+        <tr><th>#</th><th>Вопрос</th><th>Ответ (заметки)</th></tr>
+        <tr class="example"><td>0</td><td>Ποιο πρόγραμμα συζητάνε</td><td>Erasmus</td></tr>
+        <tr><td>1</td><td>Σε ποια χώρα θέλει να πάει η Ελένη</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>2</td><td>Πόσους μήνες διαρκεί η παραμονή</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>3</td><td>Τι γλώσσα πρέπει να ξέρει</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>4</td><td>Πότε είναι η προθεσμία αίτησης</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>5</td><td>Τι καλύπτει η υποτροφία</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>6</td><td>Πόσα ευρώ παίρνει κάθε μήνα</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>7</td><td>Πού θα μένει η Ελένη</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>8</td><td>Τι μαθήματα θα παρακολουθεί</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>9</td><td>Πότε αρχίζει το πρόγραμμα</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>10</td><td>Τι έγγραφα χρειάζεται</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>11</td><td>Ποιος την βοήθησε να αποφασίσει</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+        <tr><td>12</td><td>Πώς αισθάνεται η Ελένη για το πρόγραμμα</td><td><input type="text" class="exam-inp" placeholder="1–3 слова"></td></tr>
+      </table>
+      <div class="key-box" id="key5">
+        <strong>🔑 Ключ — Задание 1 (Аудирование)</strong>
+        <div style="font-size:.82rem;color:var(--muted);font-style:italic">Ключи доступны только при наличии аудиозаписи. Ответы зависят от конкретного аудиотекста.</div>
+      </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 2 — Телохранитель vs Спасатель -->
+    <div class="exam-part" style="margin-top:1.4rem;border-left:4px solid var(--amber)">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">2</div>
+        <div>
+          <div class="exam-part-title">Σωματοφύλακας και Ναυαγοσώστρια</div>
+          <div class="exam-part-meta">13 баллов · соответствие высказываний собеседникам</div>
+        </div>
+      </div>
+      <div class="exam-instr">Θα ακούσετε δύο (2) φορές μια συνέντευξη σε μια ραδιοφωνική εκπομπή. Ο Πέτρος Νικολάου (σωματοφύλακας) και η Μαρία Χαλκιά (ναυαγοσώστρια) μιλούν για τη δουλειά τους. Σημειώνετε ✓ στις πληροφορίες που ταιριάζουν σε κάθε πρόσωπο.<br><em>Ορισμένες πληροφορίες ταιριάζουν και στα δύο πρόσωπα.</em></div>
+      <div class="trans-box"><strong>Перевод</strong>Вы услышите дважды интервью в радиопередаче. Петрос Николау (телохранитель) и Мария Халкиа (спасатель) рассказывают о своей работе. Отмечайте ✓ информацию, подходящую к каждому человеку. Некоторые данные подходят обоим.</div>
+
+      <table class="exam-table" style="margin-top:.8rem">
+        <tr><th>#</th><th>Информация</th><th>Πέτρος</th><th>Μαρία</th></tr>
+        <tr class="example"><td>0</td><td>Δουλεύει με άλλους ανθρώπους</td><td>✓</td><td></td></tr>
+        <tr><td>1</td><td>Έχει σπουδάσει σε ειδική σχολή</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>2</td><td>Ο μισθός είναι καλός</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>3</td><td>Δουλεύει τα Σαββατοκύριακα</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>4</td><td>Παρακολουθεί τακτικά σεμινάρια</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>5</td><td>Έχει σώσει ανθρώπους</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>6</td><td>Η δουλειά του/της είναι επικίνδυνη</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>7</td><td>Δουλεύει μόνο το καλοκαίρι</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>8</td><td>Χρησιμοποιεί ειδικό εξοπλισμό</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>9</td><td>Εργάζεται σε ιδιωτική εταιρεία</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>10</td><td>Αγαπά πολύ τη δουλειά του/της</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>11</td><td>Θέλει να αλλάξει δουλειά στο μέλλον</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>12</td><td>Ξυπνά πολύ νωρίς το πρωί</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+        <tr><td>13</td><td>Δουλεύει αμέσως μετά τις σπουδές</td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td><td><input type="text" class="exam-inp" style="width:60px" placeholder="✓"></td></tr>
+      </table>
+      <div class="key-box" id="key6">
+        <strong>🔑 Ключ — Задание 2 (Аудирование)</strong>
+        <div style="font-size:.82rem;color:var(--muted);font-style:italic">Ключи доступны только при наличии аудиозаписи.</div>
+      </div>
+    </div>
+  </div><!-- /esec-listening -->
+
+  <!-- ═══════════════════════════════════
+       ПИСЬМО
+  ═══════════════════════════════════ -->
+  <div class="exam-section" id="esec-writing">
+    <div class="exam-section-title">Παραγωγή γραπτού λόγου</div>
+    <div class="exam-section-sub">
+      <span>✏️ Письменная речь</span>
+      <span>⏱️ 55 минут</span>
+      <span>🏆 25 баллов</span>
+    </div>
+
+    <!-- ЧАСТЬ 1 — Письмо другу -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">1</div>
+        <div>
+          <div class="exam-part-title">Γράμμα σε φίλη — Письмо подруге</div>
+          <div class="exam-part-meta">12 баллов · ~150 λέξεις</div>
+        </div>
+      </div>
+      <div class="writing-prompt">
+        Την περασμένη εβδομάδα το αυτοκίνητό σας χάλασε στη μέση του δρόμου. Γράψτε ένα γράμμα στη φίλη σας την Αθανασία και περιγράψτε τι συνέβη. Πείτε:<br><br>
+        • πού βρισκόσασταν όταν χάλασε το αυτοκίνητο<br>
+        • τι ώρα ήταν και με ποιον ήσασταν<br>
+        • τι κάνατε όταν καταλάβατε τη βλάβη<br>
+        • ποιος σας βοήθησε τελικά<br>
+        • πώς αισθανθήκατε<br><br>
+        <strong>(150 λέξεις)</strong><br><br>
+        <em>Προσοχή: στο τέλος του γράμματος μην υπογράψετε με το όνομά σας. Χρησιμοποιήστε άλλο όνομα.</em>
+      </div>
+      <div class="trans-box"><strong>Перевод задания</strong>На прошлой неделе ваша машина сломалась посреди дороги. Напишите письмо подруге Афанасии и опишите, что произошло. Напишите: где вы были, когда сломалась машина; который был час и с кем вы были; что вы сделали, когда обнаружили поломку; кто вам в итоге помог; как вы себя чувствовали. (150 слов) <em>Не подписывайтесь своим именем.</em></div>
+      <div style="margin-top:1rem">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:.4rem">Начало письма (дано в задании):</div>
+        <div class="writing-prompt" style="border-left:3px solid var(--g3)">15 Μαΐου 2016<br><br>Αγαπητή Αθανασία,</div>
+      </div>
+      <textarea class="exam-ta" id="w1text" placeholder="Γράψε εδώ το γράμμά σου…" oninput="countWords(this,'wc1')"></textarea>
+      <div class="wc-label" id="wc1">Слов: 0 / 150</div>
+    </div>
+
+    <!-- ЧАСТЬ 2 — Текст об учителе -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num">2</div>
+        <div>
+          <div class="exam-part-title">«Καθηγήτρια της χρονιάς η κ. Τσακίρη»</div>
+          <div class="exam-part-meta">13 баллов · ~150 λέξεις</div>
+        </div>
+      </div>
+      <div class="writing-prompt">
+        Διαβάσατε στην εφημερίδα ότι η κυρία Τσακίρη, καθηγήτρια στο σχολείο σας, ανακηρύχθηκε «Καθηγήτρια της χρονιάς». Γράψτε ένα κείμενο για την εφημερίδα του σχολείου σας. Αναφερθείτε:<br><br>
+        • ποια είναι η κ. Τσακίρη και τι διδάσκει<br>
+        • γιατί είναι αγαπητή στους μαθητές<br>
+        • τι κάνει για να βοηθά τους μαθητές εκτός μαθημάτων<br>
+        • πώς αισθάνονται οι μαθητές για αυτή την ανακοίνωση<br><br>
+        <strong>(150 λέξεις)</strong>
+      </div>
+      <div class="trans-box"><strong>Перевод задания</strong>Вы прочитали в газете, что г-жа Цакири, учительница вашей школы, была названа «Учителем года». Напишите текст для школьной газеты. Напишите: кто такая г-жа Цакири и что преподаёт; почему она любима учениками; что она делает, чтобы помогать ученикам за пределами уроков; как ученики относятся к этому объявлению. (150 слов)</div>
+      <textarea class="exam-ta" id="w2text" placeholder="Γράψε εδώ το κείμενό σου…" oninput="countWords(this,'wc2')"></textarea>
+      <div class="wc-label" id="wc2">Слов: 0 / 150</div>
+    </div>
+  </div><!-- /esec-writing -->
+
+  <!-- ═══════════════════════════════════
+       ГОВОРЕНИЕ
+  ═══════════════════════════════════ -->
+  <div class="exam-section" id="esec-speaking">
+    <div class="exam-section-title">Παραγωγή προφορικού λόγου</div>
+    <div class="exam-section-sub">
+      <span>🗣️ Устная речь</span>
+      <span>⏱️ 15–20 минут</span>
+      <span>🏆 25 баллов</span>
+    </div>
+
+    <!-- Часть 1 -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num" style="background:var(--g2)">1</div>
+        <div>
+          <div class="exam-part-title">Πρώτο μέρος — Личные вопросы</div>
+          <div class="exam-part-meta">Разговор об общих темах</div>
+        </div>
+      </div>
+      <div class="speak-q"><span class="speak-q-dash">—</span><span>Μιλήστε για την οικογένειά σας. Πόσα άτομα είναι και πώς περνάτε τον ελεύθερο χρόνο σας μαζί;</span></div>
+      <div class="speak-q"><span class="speak-q-dash">—</span><span>Συγκρίνετε τη ζωή στο παρελθόν με τη ζωή σήμερα. Τι έχει αλλάξει;</span></div>
+      <div class="speak-q"><span class="speak-q-dash">—</span><span>Πηγαίνετε συχνά σε κινηματογράφο ή βλέπετε ταινίες στο σπίτι; Ποια ταινία σας άρεσε τελευταία;</span></div>
+      <div class="speak-q"><span class="speak-q-dash">—</span><span>Τι σημαίνει για εσάς η λέξη «διακοπές»; Πού προτιμάτε να πηγαίνετε και γιατί;</span></div>
+    </div>
+
+    <!-- Часть 2 -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num" style="background:var(--g2)">2</div>
+        <div>
+          <div class="exam-part-title">Δεύτερο μέρος — Описание изображений</div>
+          <div class="exam-part-meta">2 фотографии · описание и сравнение</div>
+        </div>
+      </div>
+      <div class="writing-prompt" style="font-size:.88rem">
+        <strong style="color:var(--g1)">Εικόνα Α — Ατύχημα στον δρόμο</strong><br>
+        <div style="margin-top:.75rem;line-height:1.7">Περιγράψτε τι βλέπετε στη φωτογραφία. Τι συνέβη; Ποιοι βρίσκονται εκεί; Πώς αισθάνονται οι άνθρωποι που εμπλέκονται; Τι πρέπει να κάνουμε για να αποφύγουμε τέτοια ατυχήματα;</div>
+      </div>
+      <div class="writing-prompt" style="font-size:.88rem">
+        <strong style="color:var(--g1)">Εικόνα Β — Οικογένεια σε διακοπές</strong><br>
+        <div style="margin-top:.75rem;line-height:1.7">Περιγράψτε τι βλέπετε. Πού βρίσκονται; Τι κάνουν; Συγκρίνετε τις δύο εικόνες — ποια σιτουάσιον σας αρέσει περισσότερο και γιατί;</div>
+      </div>
+    </div>
+
+    <!-- Часть 3 -->
+    <div class="exam-part">
+      <div class="exam-part-hdr">
+        <div class="exam-part-num" style="background:var(--g3)">3</div>
+        <div>
+          <div class="exam-part-title">Τρίτο μέρος — Ролевые игры</div>
+          <div class="exam-part-meta">2 сценария: выбрать 1</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div class="writing-prompt" style="font-size:.85rem">
+          <strong style="color:var(--g1)">Σενάριο Α: Μετακόμιση στο χωριό</strong>
+          <div style="margin-top:.75rem;line-height:1.65">
+            <strong>Роль A:</strong> Вы решили переехать из города в деревню. Расскажите другу о своём решении. Объясните причины (ησυχία, φύση, κόστος ζωής). Выслушайте его возражения и ответьте на них.<br><br>
+            <strong>Роль B:</strong> Ваш друг хочет переехать в деревню. Вы не согласны — объясните, почему жизнь в городе лучше (δουλειά, διασκέδαση, άνεση). Попробуйте его переубедить.
+          </div>
+        </div>
+        <div class="writing-prompt" style="font-size:.85rem">
+          <strong style="color:var(--g1)">Σενάριο Β: Σχολή μαγειρικής</strong>
+          <div style="margin-top:.75rem;line-height:1.65">
+            <strong>Роль A:</strong> Вы хотите записаться на курсы кулинарии. Позвоните и узнайте: расписание, стоимость, что включено, нужен ли опыт. Задайте все вопросы и примите решение.<br><br>
+            <strong>Роль B:</strong> Вы — сотрудник кулинарной школы. Ответьте на вопросы клиента о курсах, расписании и ценах. Расскажите о программе и постарайтесь убедить его записаться.
+          </div>
+        </div>
+      </div>
+      <div class="trans-box"><strong>Оригинальный текст заданий (греческий)</strong>
+        <strong>Σενάριο Α:</strong> Αποφασίσατε να μετακομίσετε από την πόλη στο χωριό. Μιλάτε με έναν φίλο σας για αυτή την απόφαση. Εξηγείτε τους λόγους σας. Ακούτε τα επιχειρήματά του και απαντάτε.<br><br>
+        <strong>Σενάριο Β:</strong> Θέλετε να παρακολουθήσετε μαθήματα μαγειρικής. Τηλεφωνείτε σε μια σχολή μαγειρικής. Ρωτάτε για το πρόγραμμα, την τιμή και τις ώρες. Ο υπάλληλος σας δίνει πληροφορίες.
+      </div>
+    </div>
+
+    <div class="exam-part" style="margin-top:1.2rem">
+      <div style="font-size:.82rem;font-weight:600;color:var(--muted);margin-bottom:.5rem">📝 Заметки для подготовки к говорению</div>
+      <textarea class="exam-ta" id="speak_notes" rows="5" placeholder="Пиши тезисы, слова, фразы для подготовки…"></textarea>
+    </div>
+  </div><!-- /esec-speaking -->
+
+</div><!-- /exam-wrap -->
+</div><!-- /tab-exam -->
+
+<!-- TAB: VOCAB -->
+<div class="tab-panel" id="tab-vocab">
+  <div class="vocab-wrap">
+    <input type="text" class="vc-search" id="vocab-search" placeholder="Поиск слова на греческом или русском…">
+    <div class="vc-pills">
+      <button class="vc-pill active" onclick="setCat('all',this)">📚 Все</button>
+      <button class="vc-pill" onclick="setCat('daily',this)">🏠 Повседневное</button>
+      <button class="vc-pill" onclick="setCat('travel',this)">✈️ Путешествия</button>
+      <button class="vc-pill" onclick="setCat('health',this)">💊 Здоровье</button>
+      <button class="vc-pill" onclick="setCat('food',this)">🍴 Еда</button>
+      <button class="vc-pill" onclick="setCat('work',this)">💼 Работа</button>
+      <button class="vc-pill" onclick="setCat('society',this)">🏛️ Общество</button>
+      <button class="vc-pill" onclick="setCat('emotions',this)">❤️ Эмоции</button>
+      <button class="vc-pill" onclick="setCat('nature',this)">🌿 Природа</button>
+      <button class="vc-pill" onclick="setCat('conn',this)">🔗 Союзы</button>
+    </div>
+    <div class="vc-count" id="vocab-count"></div>
+    <div id="vocab-list"></div>
+  </div>
+</div>
+
+<!-- TAB: КАРТОЧКИ -->
+<div class="tab-panel" id="tab-flash">
+  <div class="ex-wrap">
+    <div class="progress-bar-wrap" id="globalProgress"></div>
+    <div class="filter-btns">
+      <button class="filter-btn" id="ff-due" onclick="setFlashFilter('due')">📅 На сегодня <span class="fb-cnt due-badge" id="ff-cnt-due">0</span></button>
+      <button class="filter-btn active" id="ff-all" onclick="setFlashFilter('all')">Все слова <span class="fb-cnt" id="ff-cnt-all">—</span></button>
+      <button class="filter-btn" id="ff-unknown" onclick="setFlashFilter('unknown')">🔴 Не знаю <span class="fb-cnt" id="ff-cnt-unknown">—</span></button>
+      <button class="filter-btn" id="ff-unseen" onclick="setFlashFilter('unseen')">◌ Новые <span class="fb-cnt" id="ff-cnt-unseen">—</span></button>
+      <button class="filter-btn" id="ff-known" onclick="setFlashFilter('known')">✅ Знаю <span class="fb-cnt" id="ff-cnt-known">—</span></button>
+    </div>
+    <div class="ex-controls">
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="fm-gr" onclick="setFlashMode('gr')">🇬🇷 → 🇷🇺</button>
+        <button class="mode-btn" id="fm-ru" onclick="setFlashMode('ru')">🇷🇺 → 🇬🇷</button>
+      </div>
+      <button class="btn btn-outline" onclick="shuffleFlash()">🔀 Перемешать</button>
+      <button class="btn btn-outline" onclick="resetFlash()">↺ Сначала</button>
+      <div style="margin-left:auto;font-size:.78rem;color:var(--muted)" id="flashCatInfo">Все слова</div>
+    </div>
+    <div class="ex-progress">
+      <div class="prog-bar"><div class="prog-fill" id="flashProg" style="width:0%"></div></div>
+      <div class="prog-txt" id="flashProgTxt">0 / 0</div>
+    </div>
+    <div class="card-scene">
+      <div class="card-3d" id="flashCard" onclick="flipCard()">
+        <div class="card-face card-front">
+          <div class="card-hint" id="fc-hint-front">Греческое</div>
+          <div class="card-word" id="fc-word-front">—</div>
+          <div class="card-type" id="fc-type"></div>
+          <div class="card-hint-click">нажми чтобы перевернуть</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-hint" style="color:rgba(255,255,255,.6)" id="fc-hint-back">Перевод</div>
+          <div class="card-word" id="fc-word-back">—</div>
+          <div class="card-type" id="fc-type-back"></div>
+          <div class="fc-forms" id="fc-forms"></div>
+          <div class="sm2-next" id="fc-sm2-next"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="btn btn-red" onclick="markCard(0)">✗ Не знаю</button>
+      <button class="btn btn-amber" onclick="markCard(3)">~ С трудом</button>
+      <button class="btn btn-green" onclick="markCard(5)">✓ Знаю</button>
+    </div>
+    <div id="flashResult" style="display:none;margin-top:1.5rem"></div>
+  </div>
+</div>
+
+<!-- TAB: ТЕСТ (QUIZ) -->
+<div class="tab-panel" id="tab-quiz">
+  <div class="ex-wrap">
+    <div class="ex-controls">
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="qm-gr" onclick="setQuizMode('gr')">🇬🇷 → 🇷🇺</button>
+        <button class="mode-btn" id="qm-ru" onclick="setQuizMode('ru')">🇷🇺 → 🇬🇷</button>
+      </div>
+      <button class="btn btn-blue" onclick="startQuiz()">▶ Начать тест</button>
+      <div style="font-size:.78rem;color:var(--muted)">10 вопросов · 4 варианта</div>
+    </div>
+    <div id="quizArea">
+      <div class="result-box" style="margin-top:1rem">
+        <div style="font-size:2rem;margin-bottom:.5rem">🎯</div>
+        <div style="font-weight:700;font-size:1rem">Выбери режим и нажми «Начать тест»</div>
+        <div style="font-size:.85rem;color:var(--muted);margin-top:.4rem">4 варианта ответа · мгновенная проверка</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: НАПИСАНИЕ (SPELLING) -->
+<div class="tab-panel" id="tab-spell">
+  <div class="ex-wrap">
+    <div class="ex-controls">
+      <button class="btn btn-blue" onclick="startSpell()">▶ Начать</button>
+      <button class="btn btn-outline" onclick="nextSpell()">Пропустить →</button>
+      <div style="font-size:.78rem;color:var(--muted)">Напиши слово по-гречески</div>
+    </div>
+    <div id="spellArea">
+      <div class="result-box" style="margin-top:1rem">
+        <div style="font-size:2rem;margin-bottom:.5rem">✍️</div>
+        <div style="font-weight:700;font-size:1rem">Напиши греческое слово по переводу</div>
+        <div style="font-size:.85rem;color:var(--muted);margin-top:.4rem">Тренирует правописание и активный словарь</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── TAB SWITCHING ──
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'flash') initFlash();
+}
+
+// ── SM-2 / LOCALSTORAGE ──
+const LS_KEY = 'greek_b1_2016_v1';
+function loadProgress() { try { return JSON.parse(localStorage.getItem(LS_KEY)||'{}'); } catch(e) { return {}; } }
+function saveProgress(d) { try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch(e) {} }
+function sm2(card, quality) {
+  let {interval=1, ef=2.5, rep=0, k=0, u=0} = card;
+  if (quality >= 3) {
+    if      (rep === 0) interval = 1;
+    else if (rep === 1) interval = 6;
+    else                interval = Math.round(interval * ef);
+    ef = Math.max(1.3, ef + 0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+    rep++; k++;
+  } else { interval = 1; rep = 0; u++; }
+  return { interval, ef, rep, k, u, last: Date.now(), due: Date.now() + interval * 86400000 };
+}
+function recordWord(word, quality) {
+  const d = loadProgress(); d[word.g] = sm2(d[word.g]||{}, quality); saveProgress(d);
+}
+function getWordState(word) {
+  const s = loadProgress()[word.g];
+  if (!s) return 'unseen';
+  return s.k > 0 && s.rep > 0 ? 'known' : 'unknown';
+}
+function isDue(word) {
+  const s = loadProgress()[word.g];
+  return s && s.due && s.due <= Date.now();
+}
+function getNextDue(word) {
+  const s = loadProgress()[word.g];
+  if (!s || !s.due) return null;
+  const diff = s.due - Date.now();
+  if (diff <= 0) return 'сегодня';
+  const days = Math.ceil(diff / 86400000);
+  return days === 1 ? 'завтра' : `через ${days} д.`;
+}
+function getProgressCounts() {
+  const data = loadProgress(); let known=0, unknown=0, unseen=0, dueToday=0;
+  W.forEach(w => {
+    const s = data[w.g];
+    if (!s) { unseen++; return; }
+    if (s.k > 0 && s.rep > 0) known++; else unknown++;
+    if (isDue(w)) dueToday++;
+  });
+  return { known, unknown, unseen, dueToday, total: W.length };
+}
+function resetProgress() {
+  if (!confirm('Сбросить весь прогресс по карточкам?')) return;
+  localStorage.removeItem(LS_KEY); renderProgressBar();
+}
+function renderProgressBar() {
+  const el = document.getElementById('globalProgress'); if (!el) return;
+  const {known, unknown, unseen, dueToday, total} = getProgressCounts();
+  const pct = total ? Math.round(known / total * 100) : 0;
+  el.innerHTML = `<strong>${pct}% освоено</strong>
+    <div class="mini-prog"><div class="mini-prog-fill" style="width:${pct}%"></div></div>
+    <span style="color:var(--green)">✓ ${known}</span>
+    <span style="color:var(--red)">✗ ${unknown}</span>
+    <span>◌ ${unseen} новых</span>
+    ${dueToday ? `<span style="color:#dc2626;font-weight:700">📅 ${dueToday} на сегодня</span>` : ''}
+    <button onclick="resetProgress()" style="margin-left:auto;font-size:.72rem;color:var(--muted);background:none;border:none;cursor:pointer;padding:0;font-family:inherit">сбросить</button>`;
+  const dueCnt = document.getElementById('ff-cnt-due'); if (dueCnt) dueCnt.textContent = dueToday;
+}
+
+// ── FLASHCARDS ──
+let fMode='gr', fFilter='all', fDeck=[], fIdx=0, fCorrect=0, fTotal=0, fFlipped=false;
+
+function initFlash() {
+  renderProgressBar();
+  const {known, unknown, unseen, dueToday, total} = getProgressCounts();
+  const g = id => document.getElementById(id);
+  g('ff-cnt-all').textContent     = total;
+  g('ff-cnt-unknown').textContent = unknown;
+  g('ff-cnt-unseen').textContent  = unseen;
+  g('ff-cnt-known').textContent   = known;
+  g('ff-cnt-due').textContent     = dueToday;
+  let pool;
+  if      (fFilter==='due')     pool = W.filter(w=>isDue(w));
+  else if (fFilter==='unknown') pool = W.filter(w=>getWordState(w)==='unknown');
+  else if (fFilter==='unseen')  pool = W.filter(w=>getWordState(w)==='unseen');
+  else if (fFilter==='known')   pool = W.filter(w=>getWordState(w)==='known');
+  else                          pool = [...W];
+  if (!pool.length) pool = [...W];
+  fDeck = pool.sort(()=>Math.random()-.5);
+  fIdx=0; fCorrect=0; fTotal=0; fFlipped=false;
+  g('flashResult').style.display='none';
+  g('flashCatInfo').textContent =
+    fFilter==='due'     ? `На сегодня (${dueToday})`   :
+    fFilter==='unknown' ? `Не знаю (${unknown})`        :
+    fFilter==='unseen'  ? `Новые (${unseen})`            :
+    fFilter==='known'   ? `Знаю (${known})`              : `Все слова (${total})`;
+  showCard();
+}
+function setFlashFilter(f) {
+  fFilter = f;
+  ['due','all','unknown','unseen','known'].forEach(id =>
+    document.getElementById('ff-'+id).classList.toggle('active', id===f));
+  initFlash();
+}
+function setFlashMode(m) {
+  fMode = m;
+  document.getElementById('fm-gr').classList.toggle('active', m==='gr');
+  document.getElementById('fm-ru').classList.toggle('active', m==='ru');
+  fFlipped = false; showCard();
+}
+function shuffleFlash() { fDeck.sort(()=>Math.random()-.5); fIdx=0; fFlipped=false; showCard(); }
+function resetFlash()   { fIdx=0; fCorrect=0; fTotal=0; fFlipped=false; document.getElementById('flashResult').style.display='none'; showCard(); }
+
+function showCard() {
+  if (fIdx >= fDeck.length) { showFlashResult(); return; }
+  const w = fDeck[fIdx];
+  const front = fMode==='gr' ? w.g : w.r;
+  const back  = fMode==='gr' ? w.r : w.g;
+  document.getElementById('fc-hint-front').textContent = fMode==='gr' ? 'Греческое' : 'Русский';
+  document.getElementById('fc-word-front').textContent = front;
+  document.getElementById('fc-type').textContent = (TYPE_LABEL[w.t]||w.t) + ' · ' + (SECTION_DESC[w.s]||w.s);
+  document.getElementById('fc-hint-back').textContent  = fMode==='gr' ? 'Перевод' : 'Греческое';
+  document.getElementById('fc-word-back').textContent  = back;
+  document.getElementById('fc-type-back').textContent  = TYPE_LABEL[w.t]||w.t;
+  // Forms on back
+  const fcForms = document.getElementById('fc-forms');
+  if (fcForms) {
+    const fKeys = Object.keys(w.f||{});
+    if (fKeys.length) {
+      const FL = {p:'Мн.ч.',g:'Род.п.',a1:'1л.',a2:'2л.',a3:'3л.',past:'Прош.',imp:'Повел.'};
+      fcForms.innerHTML = fKeys.map(k=>`<span><strong>${FL[k]||k}</strong> ${w.f[k]}</span>`).join('');
+    } else fcForms.innerHTML = '';
+  }
+  const nextDue = getNextDue(w);
+  const sm2el = document.getElementById('fc-sm2-next');
+  if (sm2el) sm2el.textContent = nextDue ? `повтор: ${nextDue}` : '';
+  const card = document.getElementById('flashCard');
+  card.classList.remove('flipped'); fFlipped = false;
+  const pct = fDeck.length ? fIdx / fDeck.length * 100 : 0;
+  document.getElementById('flashProg').style.width = pct + '%';
+  document.getElementById('flashProgTxt').textContent = fIdx + ' / ' + fDeck.length;
+}
+function flipCard() {
+  fFlipped = !fFlipped;
+  document.getElementById('flashCard').classList.toggle('flipped', fFlipped);
+}
+function markCard(quality) {
+  if (!fFlipped) { flipCard(); return; }
+  fTotal++; if (quality >= 3) fCorrect++;
+  recordWord(fDeck[fIdx], quality);
+  fIdx++;
+  const card = document.getElementById('flashCard');
+  card.style.transition='none'; void card.offsetWidth; showCard();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ card.style.transition=''; }));
+}
+function showFlashResult() {
+  const pct = fTotal ? Math.round(fCorrect/fTotal*100) : 0;
+  document.getElementById('flashProg').style.width='100%';
+  document.getElementById('flashProgTxt').textContent = fDeck.length+' / '+fDeck.length;
+  renderProgressBar();
+  document.getElementById('flashResult').style.display='block';
+  document.getElementById('flashResult').innerHTML=`
+    <div class="result-box">
+      <div class="result-big">${pct}%</div>
+      <div class="result-sub">Знаю ${fCorrect} из ${fTotal} слов</div>
+      <div class="score-breakdown">
+        <div class="sb-item"><div class="sb-num" style="color:var(--green)">${fCorrect}</div><div class="sb-lbl">Знаю ✓</div></div>
+        <div class="sb-item"><div class="sb-num" style="color:var(--red)">${fTotal-fCorrect}</div><div class="sb-lbl">Не знаю ✗</div></div>
+      </div>
+      <div style="margin-top:1.2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-blue" onclick="resetFlash()">↺ Ещё раз</button>
+        <button class="btn btn-outline" onclick="initFlash()">🔀 Перемешать</button>
+        <button class="btn btn-outline" onclick="setFlashFilter('unknown')">🔴 Слабые</button>
+        <button class="btn btn-outline" onclick="setFlashFilter('due')">📅 На сегодня</button>
+      </div>
+    </div>`;
+}
+
+// ── QUIZ ──
+let qMode='gr', qDeck=[], qIdx=0, qRight=0, qWrong=0, qWrongWords=[];
+function setQuizMode(m) {
+  qMode = m;
+  document.getElementById('qm-gr').classList.toggle('active', m==='gr');
+  document.getElementById('qm-ru').classList.toggle('active', m==='ru');
+}
+function startQuiz() {
+  qDeck = [...W].sort(()=>Math.random()-.5).slice(0,10);
+  qIdx=0; qRight=0; qWrong=0; qWrongWords=[];
+  renderQuiz();
+}
+function retryWrong() {
+  if (!qWrongWords.length) return;
+  qDeck = [...qWrongWords].sort(()=>Math.random()-.5);
+  qIdx=0; qRight=0; qWrong=0; qWrongWords=[];
+  renderQuiz();
+}
+function renderQuiz() {
+  if (qIdx >= qDeck.length) { showQuizResult(); return; }
+  const w = qDeck[qIdx];
+  const question = qMode==='gr' ? w.g : w.r;
+  const correct  = qMode==='gr' ? w.r : w.g;
+  const sameType = W.filter(x => x!==w && x.t===w.t).sort(()=>Math.random()-.5);
+  const anyOther = W.filter(x => x!==w && x.t!==w.t).sort(()=>Math.random()-.5);
+  const wrongs   = [...sameType, ...anyOther].slice(0,3).map(x => qMode==='gr' ? x.r : x.g);
+  const opts = [correct, ...wrongs].sort(()=>Math.random()-.5);
+  const ci = opts.indexOf(correct);
+  document.getElementById('quizArea').innerHTML = `
+    <div class="quiz-stats">
+      <span class="stat-chip sc-right">✓ ${qRight}</span>
+      <span class="stat-chip sc-wrong">✗ ${qWrong}</span>
+      <div class="prog-bar" style="flex:1"><div class="prog-fill" style="width:${qIdx/qDeck.length*100}%"></div></div>
+      <span style="font-size:.78rem;font-weight:600;color:var(--muted)">${qIdx+1}/${qDeck.length}</span>
+    </div>
+    <div class="quiz-q">
+      <div class="quiz-num">Вопрос ${qIdx+1} из ${qDeck.length}</div>
+      <div class="quiz-word">${question}</div>
+      <div class="quiz-opts">${opts.map((o,i)=>`<button class="qopt" id="qo${i}" onclick="answerQuiz(${i},${ci})">${o}</button>`).join('')}</div>
+    </div>`;
+}
+function answerQuiz(chosen, correct) {
+  document.querySelectorAll('.qopt').forEach(b => b.disabled=true);
+  document.getElementById('qo'+chosen).classList.add(chosen===correct ? 'correct' : 'wrong');
+  if (chosen !== correct) document.getElementById('qo'+correct).classList.add('correct');
+  const w = qDeck[qIdx];
+  if (chosen === correct) { qRight++; recordWord(w, 5); }
+  else { qWrong++; qWrongWords.push(w); recordWord(w, 0); }
+  setTimeout(()=>{ qIdx++; renderQuiz(); }, 1100);
+}
+function showQuizResult() {
+  const pct = Math.round(qRight/qDeck.length*100);
+  const fb = pct>=80 ? '🎉 Отлично!' : pct>=60 ? '👍 Хорошо, есть над чем поработать.' : '📖 Нужно больше практики.';
+  const wrongHTML = qWrongWords.length ? `
+    <div class="wrong-list">
+      <div class="wrong-list-hdr">❌ Ошибки (${qWrongWords.length})</div>
+      ${qWrongWords.map(w=>`<div class="wrong-item"><div class="wi-q">${qMode==='gr'?w.g:w.r}</div><div>${qMode==='gr'?w.r:w.g}</div></div>`).join('')}
+    </div>` : '';
+  const retryBtn = qWrongWords.length
+    ? `<button class="btn btn-red" onclick="retryWrong()">↺ Повторить ошибки (${qWrongWords.length})</button>` : '';
+  document.getElementById('quizArea').innerHTML = `
+    <div class="result-box" style="margin-top:.5rem">
+      <div class="result-big">${pct}%</div>
+      <div class="result-sub">${fb}</div>
+      <div class="score-breakdown">
+        <div class="sb-item"><div class="sb-num" style="color:var(--green)">${qRight}</div><div class="sb-lbl">Правильно</div></div>
+        <div class="sb-item"><div class="sb-num" style="color:var(--red)">${qDeck.length-qRight}</div><div class="sb-lbl">Неправильно</div></div>
+      </div>
+      <div style="margin-top:1.2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        ${retryBtn}
+        <button class="btn btn-blue" onclick="startQuiz()">🔀 Новый тест</button>
+      </div>
+      ${wrongHTML}
+    </div>`;
+  renderProgressBar();
+}
+
+// ── SPELLING ──
+let sDeck=[], sIdx=0, sRight=0, sWrong=0;
+function startSpell() {
+  sDeck = [...W].sort(()=>Math.random()-.5);
+  sIdx=0; sRight=0; sWrong=0;
+  showSpell();
+}
+function nextSpell() {
+  if (!sDeck.length) { startSpell(); return; }
+  sIdx = (sIdx+1) % sDeck.length;
+  showSpell();
+}
+function showSpell() {
+  if (!sDeck.length) return;
+  const w = sDeck[sIdx];
+  document.getElementById('spellArea').innerHTML = `
+    <div class="spell-progress">
+      <div class="prog-bar"><div class="prog-fill" style="width:${sIdx/sDeck.length*100}%"></div></div>
+      <div style="font-size:.78rem;font-weight:600;color:var(--muted);margin-top:.35rem;text-align:right">${sIdx+1} / ${sDeck.length} &nbsp;·&nbsp; ✓ ${sRight} &nbsp; ✗ ${sWrong}</div>
+    </div>
+    <div class="spell-card">
+      <div class="spell-ru">${w.r}</div>
+      <div class="spell-type">${TYPE_LABEL[w.t]||w.t} · ${SECTION_DESC[w.s]||w.s}</div>
+      <input class="spell-input" id="spellIn" placeholder="Введи по-гречески..." autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')checkSpell()">
+      <div class="spell-answer" id="spellAns"></div>
+      <div class="spell-hint-letters" id="spellHint"></div>
+    </div>
+    <div style="display:flex;gap:.75rem;justify-content:center;margin-top:.5rem">
+      <button class="btn btn-blue" onclick="checkSpell()">Проверить</button>
+      <button class="btn btn-outline" onclick="nextSpell()">Пропустить →</button>
+    </div>`;
+  document.getElementById('spellIn').focus();
+}
+function checkSpell() {
+  const w = sDeck[sIdx];
+  const input = document.getElementById('spellIn');
+  if (!input) return;
+  const val = input.value.trim();
+  if (!val) return;
+  const stripArt = s => s.replace(/^(ο|η|το|τα|οι)\s+/i,'').trim();
+  const ok = stripArt(val).toLowerCase() === stripArt(w.g).toLowerCase()
+          || val.toLowerCase() === w.g.toLowerCase();
+  input.className = 'spell-input ' + (ok ? 'ok' : 'err');
+  input.disabled = true;
+  const hint = document.getElementById('spellHint');
+  hint.innerHTML = w.g.split('').map((ch,i)=>{
+    if (ch===' ') return '<span style="width:.5rem"></span>';
+    const uch = val[i]||'';
+    const cls = uch && uch.toLowerCase()===ch.toLowerCase() ? 'ok' : uch ? 'err' : 'miss';
+    return `<span class="sl ${cls}">${ch}</span>`;
+  }).join('');
+  const ans = document.getElementById('spellAns');
+  if (ok) {
+    sRight++;
+    ans.innerHTML = `<span style="color:var(--green);font-weight:600">✓ Правильно!</span>`;
+  } else {
+    sWrong++;
+    ans.innerHTML = `<span style="color:var(--red);font-weight:600">✗</span> &nbsp;Правильно: <span style="font-family:'Noto Serif',serif;font-weight:600;color:var(--g1)">${w.g}</span>`;
+  }
+  setTimeout(()=>{ sIdx=(sIdx+1)%sDeck.length; showSpell(); }, 2000);
+}
+
+// ── VOCABULARY DATA (2016 exam, ~130 words) ──
+const W = [
+  // Задание 1 — Музеи
+  {g:'η πινακοθήκη',r:'картинная галерея',t:'nf',c:'society',s:'reading1',f:{}},
+  {g:'τα εγκαίνια',r:'торжественное открытие',t:'nn',c:'society',s:'reading1',f:{}},
+  {g:'διάσημος',r:'знаменитый',t:'adj',c:'daily',s:'reading1',f:{}},
+  {g:'η συλλογή',r:'коллекция, сборник',t:'nf',c:'society',s:'reading1',f:{}},
+  {g:'πρωτότυπος',r:'оригинальный',t:'adj',c:'daily',s:'reading1',f:{}},
+  {g:'το εισιτήριο',r:'билет',t:'nn',c:'travel',s:'reading1',f:{p:'τα εισιτήρια'}},
+  {g:'αναγνωρισμένος',r:'признанный',t:'adj',c:'society',s:'reading1',f:{}},
+  {g:'το συναίσθημα',r:'чувство, эмоция',t:'nn',c:'emotions',s:'reading1',f:{p:'τα συναισθήματα'}},
+  {g:'το παραμύθι',r:'сказка',t:'nn',c:'daily',s:'reading1',f:{p:'τα παραμύθια'}},
+  {g:'το πείραμα',r:'опыт, эксперимент',t:'nn',c:'daily',s:'reading1',f:{p:'τα πειράματα'}},
+  {g:'η επιστήμη',r:'наука',t:'nf',c:'society',s:'reading1',f:{}},
+  {g:'ο τομέας',r:'сфера, область',t:'nm',c:'work',s:'reading1',f:{}},
+  {g:'ο πολιτισμός',r:'цивилизация, культура',t:'nm',c:'society',s:'reading1',f:{}},
+  {g:'απευθύνομαι',r:'обращаться (к кому-л.)',t:'vi',c:'daily',s:'reading1',f:{a1:'απευθύνομαι'}},
+  {g:'η ηλικία',r:'возраст',t:'nf',c:'daily',s:'reading1',f:{}},
+  {g:'διαδραστικός',r:'интерактивный',t:'adj',c:'daily',s:'reading1',f:{}},
+  {g:'η συνήθεια',r:'привычка',t:'nf',c:'daily',s:'reading1',f:{}},
+  // Задание 2 — Κηπουρική στα σχολεία
+  {g:'η κηπουρική',r:'садоводство',t:'nf',c:'nature',s:'reading2',f:{}},
+  {g:'ο σπόρος',r:'семя, зерно',t:'nm',c:'nature',s:'reading2',f:{p:'οι σπόροι'}},
+  {g:'η διατροφή',r:'питание, диета',t:'nf',c:'health',s:'reading2',f:{}},
+  {g:'το λαχανικό',r:'овощ',t:'nn',c:'food',s:'reading2',f:{p:'τα λαχανικά'}},
+  {g:'φυτεύω',r:'сажать, высаживать',t:'vt',c:'nature',s:'reading2',f:{a1:'φυτεύω',a2:'φυτεύεις',a3:'φυτεύει'}},
+  {g:'παράγω',r:'производить, выращивать',t:'vt',c:'work',s:'reading2',f:{a1:'παράγω',a2:'παράγεις',a3:'παράγει'}},
+  {g:'υγιεινός',r:'здоровый, полезный',t:'adj',c:'health',s:'reading2',f:{}},
+  {g:'η γη',r:'земля, почва',t:'nf',c:'nature',s:'reading2',f:{}},
+  {g:'η ψυχολογία',r:'психология',t:'nf',c:'daily',s:'reading2',f:{}},
+  {g:'αισθάνομαι',r:'чувствовать себя',t:'vi',c:'emotions',s:'reading2',f:{a1:'αισθάνομαι',a2:'αισθάνεσαι',a3:'αισθάνεται'}},
+  {g:'ικανός',r:'способный, умелый',t:'adj',c:'work',s:'reading2',f:{}},
+  {g:'ο σεβασμός',r:'уважение',t:'nm',c:'society',s:'reading2',f:{}},
+  {g:'η φύση',r:'природа',t:'nf',c:'nature',s:'reading2',f:{}},
+  // Задание 3 — Ο θείος Γιακουμής
+  {g:'η ταβέρνα',r:'таверна',t:'nf',c:'food',s:'reading3',f:{}},
+  {g:'η αργία',r:'праздник, выходной день',t:'nf',c:'daily',s:'reading3',f:{p:'οι αργίες'}},
+  {g:'ο καλλιτέχνης',r:'художник, артист',t:'nm',c:'society',s:'reading3',f:{p:'οι καλλιτέχνες'}},
+  {g:'η κιθάρα',r:'гитара',t:'nf',c:'daily',s:'reading3',f:{}},
+  {g:'ηλικιωμένος',r:'пожилой',t:'adj',c:'daily',s:'reading3',f:{}},
+  {g:'εντυπωσιασμένος',r:'впечатлённый',t:'adj',c:'emotions',s:'reading3',f:{}},
+  {g:'ο πλούτος',r:'богатство',t:'nm',c:'society',s:'reading3',f:{}},
+  {g:'το μάρμαρο',r:'мрамор',t:'nn',c:'daily',s:'reading3',f:{}},
+  {g:'το πεζοδρόμιο',r:'тротуар',t:'nn',c:'travel',s:'reading3',f:{p:'τα πεζοδρόμια'}},
+  {g:'φορτωμένος',r:'нагружённый',t:'adj',c:'daily',s:'reading3',f:{}},
+  {g:'κατεβαίνω',r:'спускаться',t:'vi',c:'travel',s:'reading3',f:{a1:'κατεβαίνω',a2:'κατεβαίνεις',a3:'κατεβαίνει'}},
+  {g:'ο χωριανός',r:'деревенский житель',t:'nm',c:'daily',s:'reading3',f:{p:'οι χωριανοί'}},
+  // Задание 4 — Συμβουλές πριν νοικιάσετε σπίτι
+  {g:'νοικιάζω',r:'арендовать, снимать жильё',t:'vt',c:'daily',s:'reading4',f:{a1:'νοικιάζω',a2:'νοικιάζεις',a3:'νοικιάζει'}},
+  {g:'η συμβουλή',r:'совет',t:'nf',c:'daily',s:'reading4',f:{p:'οι συμβουλές'}},
+  {g:'η θέρμανση',r:'отопление',t:'nf',c:'daily',s:'reading4',f:{}},
+  {g:'ατομικός',r:'индивидуальный',t:'adj',c:'daily',s:'reading4',f:{}},
+  {g:'κεντρικός',r:'центральный',t:'adj',c:'travel',s:'reading4',f:{}},
+  {g:'το πετρέλαιο',r:'нефть, мазут',t:'nn',c:'daily',s:'reading4',f:{}},
+  {g:'ο ενοικιαστής',r:'арендатор',t:'nm',c:'daily',s:'reading4',f:{p:'οι ενοικιαστές'}},
+  {g:'ο λογαριασμός',r:'счёт, квитанция',t:'nm',c:'work',s:'reading4',f:{p:'οι λογαριασμοί'}},
+  {g:'η βρύση',r:'водопроводный кран',t:'nf',c:'daily',s:'reading4',f:{p:'οι βρύσες'}},
+  {g:'η συσκευή',r:'прибор, устройство',t:'nf',c:'daily',s:'reading4',f:{p:'οι συσκευές'}},
+  {g:'η γειτονιά',r:'район, соседство',t:'nf',c:'travel',s:'reading4',f:{p:'οι γειτονιές'}},
+  {g:'η φασαρία',r:'шум, суматоха',t:'nf',c:'daily',s:'reading4',f:{}},
+  {g:'το φαρμακείο',r:'аптека',t:'nn',c:'health',s:'reading4',f:{p:'τα φαρμακεία'}},
+  {g:'ο φούρνος',r:'пекарня, духовка',t:'nm',c:'food',s:'reading4',f:{p:'οι φούρνοι'}},
+  {g:'η απόσταση',r:'расстояние',t:'nf',c:'travel',s:'reading4',f:{p:'οι αποστάσεις'}},
+  {g:'μειώνω',r:'уменьшать, снижать',t:'vt',c:'work',s:'reading4',f:{a1:'μειώνω',a2:'μειώνεις',a3:'μειώνει'}},
+  {g:'ξοδεύω',r:'тратить',t:'vt',c:'work',s:'reading4',f:{a1:'ξοδεύω',a2:'ξοδεύεις',a3:'ξοδεύει'}},
+  {g:'υποφέρω',r:'страдать',t:'vi',c:'emotions',s:'reading4',f:{a1:'υποφέρω',a2:'υποφέρεις',a3:'υποφέρει'}},
+  // Аудирование — Erasmus / Работа
+  {g:'το πρόγραμμα',r:'программа, расписание',t:'nn',c:'work',s:'listening',f:{p:'τα προγράμματα'}},
+  {g:'ο φοιτητής',r:'студент',t:'nm',c:'daily',s:'listening',f:{p:'οι φοιτητές'}},
+  {g:'η ανταλλαγή',r:'обмен',t:'nf',c:'daily',s:'listening',f:{}},
+  {g:'αποτυγχάνω',r:'терпеть неудачу',t:'vi',c:'emotions',s:'listening',f:{a1:'αποτυγχάνω',a2:'αποτυγχάνεις',a3:'αποτυγχάνει'}},
+  {g:'παρακολουθώ',r:'посещать, следить',t:'vt',c:'daily',s:'listening',f:{a1:'παρακολουθώ',a2:'παρακολουθείς',a3:'παρακολουθεί'}},
+  {g:'η υποτροφία',r:'стипендия, грант',t:'nf',c:'work',s:'listening',f:{p:'οι υποτροφίες'}},
+  {g:'η παραμονή',r:'пребывание',t:'nf',c:'travel',s:'listening',f:{}},
+  {g:'ελεύθερος',r:'свободный',t:'adj',c:'daily',s:'listening',f:{}},
+  {g:'το εξωτερικό',r:'заграница',t:'nn',c:'travel',s:'listening',f:{}},
+  {g:'ο σωματοφύλακας',r:'телохранитель',t:'nm',c:'work',s:'listening',f:{p:'οι σωματοφύλακες'}},
+  {g:'η ναυαγοσώστρια',r:'спасательница (пляж)',t:'nf',c:'work',s:'listening',f:{}},
+  {g:'ο μισθός',r:'зарплата',t:'nm',c:'work',s:'listening',f:{p:'οι μισθοί'}},
+  {g:'το σεμινάριο',r:'семинар',t:'nn',c:'work',s:'listening',f:{p:'τα σεμινάρια'}},
+  {g:'εργάζομαι',r:'работать',t:'vi',c:'work',s:'listening',f:{a1:'εργάζομαι',a2:'εργάζεσαι',a3:'εργάζεται'}},
+  {g:'αμέσως',r:'сразу, немедленно',t:'adv',c:'daily',s:'listening',f:{}},
+  {g:'ιδιωτικός',r:'частный',t:'adj',c:'work',s:'listening',f:{}},
+  // Письмо и Говорение
+  {g:'χαλάω',r:'ломаться, портить',t:'vi',c:'daily',s:'writing',f:{a1:'χαλάω',a2:'χαλάς',a3:'χαλάει'}},
+  {g:'η βλάβη',r:'поломка, неисправность',t:'nf',c:'daily',s:'writing',f:{p:'οι βλάβες'}},
+  {g:'η μετακόμιση',r:'переезд',t:'nf',c:'travel',s:'writing',f:{}},
+  {g:'σκοπεύω',r:'намереваться, планировать',t:'vi',c:'daily',s:'writing',f:{a1:'σκοπεύω',a2:'σκοπεύεις',a3:'σκοπεύει'}},
+  {g:'η ησυχία',r:'тишина, покой',t:'nf',c:'daily',s:'writing',f:{}},
+  {g:'η απόφαση',r:'решение',t:'nf',c:'daily',s:'writing',f:{p:'οι αποφάσεις'}},
+  {g:'επιμένω',r:'настаивать',t:'vi',c:'daily',s:'writing',f:{a1:'επιμένω',a2:'επιμένεις',a3:'επιμένει'}},
+  {g:'στενοχωριέμαι',r:'расстраиваться, переживать',t:'vi',c:'emotions',s:'writing',f:{a1:'στενοχωριέμαι'}},
+  {g:'η άνεση',r:'удобство, комфорт',t:'nf',c:'daily',s:'writing',f:{}},
+  {g:'η διασκέδαση',r:'развлечение',t:'nf',c:'daily',s:'writing',f:{}},
+  {g:'η ευκαιρία',r:'возможность, шанс',t:'nf',c:'daily',s:'writing',f:{p:'οι ευκαιρίες'}},
+  {g:'συμφωνώ',r:'соглашаться',t:'vi',c:'daily',s:'writing',f:{a1:'συμφωνώ',a2:'συμφωνείς',a3:'συμφωνεί'}},
+  {g:'ο κήπος',r:'сад',t:'nm',c:'nature',s:'writing',f:{p:'οι κήποι'}},
+  {g:'ο ρόλος',r:'роль',t:'nm',c:'daily',s:'writing',f:{p:'οι ρόλοι'}},
+  {g:'το ατύχημα',r:'несчастный случай',t:'nn',c:'daily',s:'writing',f:{p:'τα ατυχήματα'}},
+  {g:'προτείνω',r:'предлагать',t:'vt',c:'daily',s:'writing',f:{a1:'προτείνω',a2:'προτείνεις',a3:'προτείνει'}},
+  {g:'η μαγειρική',r:'кулинария',t:'nf',c:'food',s:'writing',f:{}},
+  {g:'ο αέρας',r:'воздух, ветер',t:'nm',c:'nature',s:'writing',f:{}},
+  {g:'περιγράφω',r:'описывать',t:'vt',c:'daily',s:'writing',f:{a1:'περιγράφω',a2:'περιγράφεις',a3:'περιγράφει'}},
+  {g:'η ταινία',r:'фильм',t:'nf',c:'daily',s:'writing',f:{p:'οι ταινίες'}},
+  // Глаголы
+  {g:'τρέχω',r:'бежать, течь',t:'vi',c:'daily',s:'verbs',f:{a1:'τρέχω',a2:'τρέχεις',a3:'τρέχει'}},
+  {g:'σώζω',r:'спасать',t:'vt',c:'daily',s:'verbs',f:{a1:'σώζω',a2:'σώζεις',a3:'σώζει'}},
+  {g:'νοιάζομαι',r:'заботиться, беспокоиться',t:'vi',c:'emotions',s:'verbs',f:{a1:'νοιάζομαι',a2:'νοιάζεσαι',a3:'νοιάζεται'}},
+  {g:'ξεκινώ',r:'начинать, отправляться',t:'vi',c:'daily',s:'verbs',f:{a1:'ξεκινώ',a2:'ξεκινάς',a3:'ξεκινά'}},
+  {g:'αποφασίζω',r:'решать',t:'vi',c:'daily',s:'verbs',f:{a1:'αποφασίζω',a2:'αποφασίζεις',a3:'αποφασίζει'}},
+  {g:'πείθω',r:'убеждать',t:'vt',c:'daily',s:'verbs',f:{a1:'πείθω',a2:'πείθεις',a3:'πείθει'}},
+  {g:'φεύγω',r:'уходить, уезжать',t:'vi',c:'travel',s:'verbs',f:{a1:'φεύγω',a2:'φεύγεις',a3:'φεύγει'}},
+  {g:'μένω',r:'оставаться, жить',t:'vi',c:'daily',s:'verbs',f:{a1:'μένω',a2:'μένεις',a3:'μένει'}},
+  {g:'υποστηρίζω',r:'поддерживать',t:'vt',c:'daily',s:'verbs',f:{a1:'υποστηρίζω',a2:'υποστηρίζεις',a3:'υποστηρίζει'}},
+  {g:'εξηγώ',r:'объяснять',t:'vt',c:'daily',s:'verbs',f:{a1:'εξηγώ',a2:'εξηγείς',a3:'εξηγεί'}},
+  {g:'ανακοινώνω',r:'объявлять',t:'vt',c:'daily',s:'verbs',f:{a1:'ανακοινώνω',a2:'ανακοινώνεις',a3:'ανακοινώνει'}},
+  {g:'νιώθω',r:'чувствовать',t:'vt',c:'emotions',s:'verbs',f:{a1:'νιώθω',a2:'νιώθεις',a3:'νιώθει'}},
+  // Разное
+  {g:'σημαντικός',r:'важный, значительный',t:'adj',c:'society',s:'misc',f:{}},
+  {g:'χρήσιμος',r:'полезный',t:'adj',c:'daily',s:'misc',f:{}},
+  {g:'οργανωμένος',r:'организованный',t:'adj',c:'work',s:'misc',f:{}},
+  {g:'διαφορετικά',r:'по-другому, иначе',t:'adv',c:'daily',s:'misc',f:{}},
+  {g:'τελικά',r:'в конце концов',t:'adv',c:'daily',s:'misc',f:{}},
+  {g:'συνεχώς',r:'постоянно, непрерывно',t:'adv',c:'daily',s:'misc',f:{}},
+  {g:'η ιστοσελίδα',r:'веб-сайт, страница',t:'nf',c:'daily',s:'misc',f:{p:'οι ιστοσελίδες'}},
+  {g:'ο λόγος',r:'слово, причина',t:'nm',c:'daily',s:'misc',f:{p:'οι λόγοι'}},
+  {g:'ο πελάτης',r:'клиент, покупатель',t:'nm',c:'work',s:'misc',f:{p:'οι πελάτες'}},
+  {g:'το παρελθόν',r:'прошлое',t:'nn',c:'daily',s:'misc',f:{}},
+  {g:'πιστεύω',r:'верить, думать',t:'vt',c:'daily',s:'misc',f:{a1:'πιστεύω',a2:'πιστεύεις',a3:'πιστεύει'}},
+  {g:'η εκδρομή',r:'экскурсия, поездка',t:'nf',c:'travel',s:'misc',f:{p:'οι εκδρομές'}},
+  // Союзы и связки
+  {g:'αλλά',r:'но, однако',t:'conj',c:'conn',s:'conn',f:{}},
+  {g:'ή',r:'или',t:'conj',c:'conn',s:'conn',f:{}},
+  {g:'αν',r:'если, ли',t:'conj',c:'conn',s:'conn',f:{}},
+  {g:'όμως',r:'однако, но',t:'conj',c:'conn',s:'conn',f:{}},
+  {g:'επειδή',r:'потому что',t:'conj',c:'conn',s:'conn',f:{}},
+  {g:'γιατί',r:'потому что, почему',t:'conj',c:'conn',s:'conn',f:{}},
+  {g:'ενώ',r:'пока, в то время как',t:'conj',c:'conn',s:'conn',f:{}},
+  {g:'όταν',r:'когда',t:'conj',c:'conn',s:'conn',f:{}},
+  {g:'για να',r:'чтобы (+ конъюнктив)',t:'conj',c:'conn',s:'conn',f:{}},
+  {g:'ότι',r:'что (союз)',t:'conj',c:'conn',s:'conn',f:{}},
+];
+
+const CAT_META = {
+  all:     {label:'Все',          icon:'📚'},
+  daily:   {label:'Повседневное', icon:'🏠'},
+  travel:  {label:'Путешествия',  icon:'✈️'},
+  health:  {label:'Здоровье',     icon:'💊'},
+  food:    {label:'Еда',          icon:'🍴'},
+  work:    {label:'Работа',       icon:'💼'},
+  society: {label:'Общество',     icon:'🏛️'},
+  emotions:{label:'Эмоции',       icon:'❤️'},
+  nature:  {label:'Природа',      icon:'🌿'},
+  conn:    {label:'Союзы',        icon:'🔗'},
+};
+const SECTION_ICONS = {
+  reading1:'📖', reading2:'🌱', reading3:'🎸',
+  reading4:'🏠', listening:'🎧', writing:'✏️',
+  verbs:'⚡', misc:'📋', conn:'🔗'
+};
+const SECTION_DESC = {
+  reading1:'Задание 1 — Музеи',
+  reading2:'Задание 2 — Садоводство (Κηπουρική)',
+  reading3:'Задание 3 — Дядя Якумис',
+  reading4:'Задание 4 — Аренда жилья',
+  listening:'Аудирование — Erasmus / Работа',
+  writing:'Письмо и Говорение',
+  verbs:'Глаголы',
+  misc:'Разное',
+  conn:'Союзы и связки'
+};
+const TYPE_LABEL = {
+  nm:'сущ.м', nf:'сущ.ж', nn:'сущ.с',
+  vt:'гл.пер', vi:'гл.неп',
+  adj:'прил', adv:'нар', conj:'союз', prep:'предл'
+};
+const SEC_ORDER = ['reading1','reading2','reading3','reading4','listening','writing','verbs','misc','conn'];
+
+let currentCat = 'all', searchQ = '';
+
+function filterVocab() {
+  const q = searchQ.toLowerCase();
+  const filtered = W.filter(w => {
+    const catOk = currentCat === 'all' || w.c === currentCat;
+    const srchOk = !q || w.g.toLowerCase().includes(q) || w.r.toLowerCase().includes(q);
+    return catOk && srchOk;
+  });
+  const sections = {};
+  SEC_ORDER.forEach(s => { sections[s] = []; });
+  filtered.forEach(w => { if (sections[w.s]) sections[w.s].push(w); });
+  const container = document.getElementById('vocab-list');
+  if (!container) return;
+  container.innerHTML = '';
+  let total = 0;
+  SEC_ORDER.forEach(sec => {
+    const words = sections[sec];
+    if (!words || !words.length) return;
+    total += words.length;
+    const hdr = document.createElement('div');
+    hdr.className = 'vsec-hdr';
+    hdr.innerHTML = `<span class="vsec-icon">${SECTION_ICONS[sec]||'📌'}</span><span class="vsec-name">${SECTION_DESC[sec]||sec}</span><span class="vsec-cnt">${words.length} сл.</span>`;
+    container.appendChild(hdr);
+    words.forEach(w => {
+      const hasF = Object.keys(w.f).length > 0;
+      const wr = document.createElement('div');
+      wr.className = 'wr';
+      if (hasF) wr.onclick = () => wr.classList.toggle('expanded');
+      const catI = CAT_META[w.c] ? CAT_META[w.c].icon : '';
+      const catL = CAT_META[w.c] ? CAT_META[w.c].label : w.c;
+      let formsHtml = '';
+      if (hasF) {
+        const FL = {p:'Мн.ч.',g:'Род.п.',a1:'1 л.ед.',a2:'2 л.ед.',a3:'3 л.ед.',a1p:'1 л.мн.',a2p:'2 л.мн.',a3p:'3 л.мн.',past:'Прош.',imp:'Повел.',mf:'Ж.р.',nn:'С.р.'};
+        let rows = '';
+        for (const [k,v] of Object.entries(w.f)) {
+          if (v) rows += `<tr><td>${FL[k]||k}</td><td class="ft-greek">${v}</td></tr>`;
+        }
+        formsHtml = `<div class="wr-forms"><table class="forms-table"><tbody>${rows}</tbody></table></div>`;
+      }
+      wr.innerHTML = `
+        <div><span class="wr-greek">${w.g}</span><span class="wr-type">${TYPE_LABEL[w.t]||w.t}</span><span class="wr-cat">${catI} ${catL}</span></div>
+        <div style="font-size:.7rem;color:var(--muted)">${hasF ? '▼' : ''}</div>
+        <div class="wr-rus">${w.r}</div>
+        ${formsHtml}`;
+      container.appendChild(wr);
+    });
+  });
+  const cnt = document.getElementById('vocab-count');
+  if (cnt) cnt.textContent = 'Показано слов: ' + total;
+}
+
+function setCat(cat, el) {
+  currentCat = cat;
+  document.querySelectorAll('.vc-pill').forEach(p => p.classList.remove('active'));
+  if (el) el.classList.add('active');
+  filterVocab();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  filterVocab();
+  const si = document.getElementById('vocab-search');
+  if (si) si.addEventListener('input', e => { searchQ = e.target.value; filterVocab(); });
+});
+
+// ── Переключение секций ──
+function showSec(id, btn) {
+  document.querySelectorAll('.exam-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.esec-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('esec-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Ключи / Перевод ──
+let keysOn = false, transOn = false;
+
+function toggleKeys() {
+  keysOn = !keysOn;
+  document.querySelectorAll('.key-box').forEach(el => el.style.display = keysOn ? 'block' : 'none');
+  const btn = document.getElementById('btnKeys');
+  btn.classList.toggle('on', keysOn);
+  btn.textContent = keysOn ? '🔑 Ключи: вкл.' : '🔑 Ключи';
+}
+
+function toggleTrans() {
+  transOn = !transOn;
+  document.querySelectorAll('.trans-box').forEach(el => el.style.display = transOn ? 'block' : 'none');
+  const btn = document.getElementById('btnTrans');
+  btn.classList.toggle('on', transOn);
+  btn.textContent = transOn ? '🇷🇺 Перевод: вкл.' : '🇷🇺 Перевод';
+}
+
+// ── T/F кнопки ──
+function toggleTF(btn, cls) {
+  const container = btn.closest('.tf-btns');
+  if (btn.classList.contains(cls)) {
+    btn.className = 'tf-btn';
+  } else {
+    container.querySelectorAll('button.tf-btn').forEach(b => b.className = 'tf-btn');
+    btn.className = 'tf-btn ' + cls;
+  }
+}
+
+// ── Счётчик слов ──
+function countWords(ta, wcId) {
+  const n = ta.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+  const el = document.getElementById(wcId);
+  if (el) el.textContent = 'Слов: ' + n + ' / 150';
+}
+
+// ── ПРОВЕРКА ЗАДАНИЕ 1 (Музеи) ──
+function checkTask1() {
+  const key = {
+    t1shopA:true,  t1shopB:true,  t1shopC:false, t1shopD:false, t1shopE:false,
+    t1kidsA:false, t1kidsB:false, t1kidsC:true,  t1kidsD:true,  t1kidsE:true,
+    t1freeA:false, t1freeB:false, t1freeC:false, t1freeD:false, t1freeE:true,
+    t1interA:false,t1interB:false,t1interC:true, t1interD:true, t1interE:false,
+    t1guidA:true,  t1guidB:false, t1guidC:true,  t1guidD:false, t1guidE:false,
+    t1greekA:true, t1greekB:true, t1greekC:false,t1greekD:false,t1greekE:false
+  };
+  let correct = 0, total = Object.keys(key).length;
+  for (const [id, expected] of Object.entries(key)) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    el.classList.remove('cb-correct', 'cb-wrong');
+    if (el.checked === expected) { correct++; el.classList.add('cb-correct'); }
+    else { el.classList.add('cb-wrong'); }
+  }
+  const r = document.getElementById('t1result');
+  // Count only the "should be checked" ones as the score denominator = 12
+  let checked_correct = 0;
+  for (const [id, expected] of Object.entries(key)) {
+    const el = document.getElementById(id);
+    if (el && el.checked && expected) checked_correct++;
+  }
+  r.textContent = checked_correct + '/12 правильно';
+  r.className = 'check-result ' + (checked_correct >= 9 ? 'pass' : 'fail');
+}
+
+// ── ПРОВЕРКА ЗАДАНИЕ 2 (Κηπουρική) ──
+function checkTask2() {
+  const key = {
+    1: 'παρακολουθούσαν πώς μεγαλώνουν',
+    2: 'και στην ψυχολογία τους',
+    3: 'πώς να τα φροντίζουν',
+    4: 'τα έχουν φυτέψει οι ίδιοι',
+    5: 'για να νιώσουν καλύτερα οι μαθητές',
+    6: 'πιο σίγουροι για τις δυνατότητές τους'
+  };
+  let score = 0;
+  for (let i = 1; i <= 6; i++) {
+    const el = document.getElementById('t2q' + i);
+    if (!el) continue;
+    el.classList.remove('correct', 'wrong');
+    if (el.value === key[i]) { score++; el.classList.add('correct'); }
+    else { el.classList.add('wrong'); }
+  }
+  const r = document.getElementById('t2result');
+  r.textContent = score + '/6 правильно';
+  r.className = 'check-result ' + (score >= 4 ? 'pass' : 'fail');
+}
+
+// ── ПРОВЕРКА ЗАДАНИЕ 3 (T/F) ──
+function checkTask3() {
+  const key = ['σ', 'λ', 'λ', 'σ', 'σ', 'λ'];
+  const grids = document.querySelectorAll('#esec-reading .tf-grid');
+  let score = 0;
+  for (let i = 1; i <= 6; i++) {
+    const grid = grids[i];
+    if (!grid) continue;
+    let answer = null;
+    grid.querySelectorAll('.tf-btn').forEach(b => {
+      if (b.classList.contains('σ')) answer = 'σ';
+      if (b.classList.contains('λ')) answer = 'λ';
+    });
+    if (answer === key[i - 1]) score++;
+  }
+  const r = document.getElementById('t3result');
+  r.textContent = score + '/6 правильно';
+  r.className = 'check-result ' + (score >= 4 ? 'pass' : 'fail');
+}
+
+// ── ПРОВЕРКА ЗАДАНИЕ 4 (Аренда) ──
+function checkTask4() {
+  const key = {
+    1: 'γείτονα',
+    2: 'περισσότερα',
+    3: 'φυσικό',
+    4: 'είναι πιθανό',
+    5: 'τρέχει',
+    6: 'πρακτικούς λόγους',
+    7: 'θα υποφέρετε'
+  };
+  let score = 0;
+  for (let i = 1; i <= 7; i++) {
+    const el = document.getElementById('t4q' + i);
+    if (!el) continue;
+    el.classList.remove('correct', 'wrong');
+    if (el.value === key[i]) { score++; el.classList.add('correct'); }
+    else { el.classList.add('wrong'); }
+  }
+  const r = document.getElementById('t4result');
+  r.textContent = score + '/7 правильно' + (score < 7 ? ' (ключ приблизительный)' : ' ✓');
+  r.className = 'check-result ' + (score >= 5 ? 'pass' : 'fail');
+}
+</script>
+</body>
+</html>

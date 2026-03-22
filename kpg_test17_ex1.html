@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPG B1 · Тест 17 · Упражнение 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f0f0eb; --surface:#fff; --border:#e0ddd6;
+  --g1:#0d3b2e; --g2:#1a5c40; --g3:#2d8653; --sage:#74b99a;
+  --bl:#e8f5ee; --blm:#a7d4bb;
+  --green:#1a6b40; --gl:#e8f5ee;
+  --amber:#b45309; --al:#fffbeb; --amb:#fde68a;
+  --red:#dc2626; --rl:#fef2f2;
+  --blue:#1e40af; --bll:#eff6ff; --blb:#bfdbfe;
+  --text:#0f1a15; --t2:#2d4a3a; --muted:#6b7c72;
+  --sh:0 1px 4px rgba(13,59,46,.07); --shm:0 4px 16px rgba(13,59,46,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh}
+
+/* NAVBAR */
+.navbar{background:var(--g1);padding:0 1.5rem;display:flex;align-items:center;gap:1.5rem;position:sticky;top:0;z-index:90;box-shadow:0 2px 12px rgba(0,0,0,.18);flex-wrap:wrap}
+.nav-logo{display:flex;align-items:center;gap:.6rem;color:#fff;padding:.85rem 0;flex-shrink:0}
+.nav-logo-icon{width:32px;height:32px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;border:1.5px solid rgba(255,255,255,.25)}
+.nav-logo-text{font-weight:700;font-size:.95rem}
+.nav-logo-sub{font-size:.7rem;opacity:.6}
+.nav-tabs{display:flex;gap:.25rem}
+.nav-tab{padding:.5rem 1.1rem;border-radius:6px 6px 0 0;font-size:.82rem;font-weight:600;cursor:pointer;border:none;background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-family:inherit;transition:all .15s}
+.nav-tab:hover{background:rgba(255,255,255,.18);color:#fff}
+.nav-tab.active{background:#fff;color:var(--g1)}
+
+/* PANELS */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* WRAP */
+.wrap{max-width:860px;margin:0 auto;padding:1.8rem 1.5rem 5rem}
+
+/* TITLE CARD */
+.title-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.3rem 1.6rem;margin-bottom:1.4rem;box-shadow:var(--sh)}
+.title-card h1{font-family:'Noto Serif',serif;font-size:1.15rem;color:var(--g1);font-weight:600;line-height:1.5}
+.title-card .meta{font-size:.73rem;color:var(--muted);margin-top:.35rem;font-weight:500}
+
+/* INSTRUCTIONS */
+.instr{background:var(--al);border:1px solid var(--amb);border-radius:10px;padding:.75rem 1rem;margin-bottom:1.2rem;font-size:.8rem;color:var(--amber);font-weight:500;line-height:1.5}
+
+/* OPTIONS PANEL */
+.options-panel{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.3rem;margin-bottom:1.3rem;box-shadow:var(--sh)}
+.options-label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.8rem}
+.options-grid{display:flex;flex-wrap:wrap;gap:.5rem}
+.opt{display:flex;align-items:center;gap:.5rem;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:.42rem .75rem;cursor:pointer;font-size:.82rem;font-family:inherit;transition:all .15s;user-select:none;color:var(--t2)}
+.opt:hover{border-color:var(--blm);box-shadow:var(--sh)}
+.opt.selected{background:var(--g1);border-color:var(--g1);color:#fff}
+.opt.used{opacity:.45;cursor:default;border-style:dashed}
+.opt.example{background:var(--bl);border-color:var(--blm);color:var(--g2);cursor:default;font-style:italic}
+.opt-num{font-size:.65rem;font-weight:700;background:rgba(255,255,255,.25);border-radius:4px;padding:.05rem .3rem;min-width:18px;text-align:center}
+.opt.example .opt-num{background:var(--blm)}
+.opt-text{font-family:'Noto Serif',serif}
+
+/* TEXT AREA */
+.text-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.6rem;box-shadow:var(--sh);line-height:1.95;font-size:.9rem;color:var(--text)}
+.text-card .reading-title{font-family:'Noto Serif',serif;font-size:1.05rem;font-weight:700;color:var(--g1);text-align:center;margin-bottom:1.1rem;line-height:1.45}
+.para{margin-bottom:.9rem}
+.para.bullet{padding-left:1.2rem;position:relative}
+.para.bullet::before{content:'•';position:absolute;left:0;color:var(--sage);font-weight:700}
+.gap{display:inline-flex;align-items:center;min-width:140px;border-bottom:2.5px solid var(--g3);margin:0 .2rem;padding:.05rem .5rem;border-radius:0;cursor:pointer;transition:all .2s;background:transparent;vertical-align:baseline;position:relative}
+.gap:hover{background:var(--bl);border-radius:4px}
+.gap.filled{background:var(--bl);border-radius:4px;border-bottom-color:var(--green)}
+.gap.filled.correct{background:#d1fae5;border-bottom-color:#16a34a}
+.gap.filled.wrong{background:var(--rl);border-bottom-color:var(--red)}
+.gap.example-gap{background:var(--bl);border-radius:4px;border-bottom-color:var(--blm);cursor:default;color:var(--g2);font-style:italic}
+.gap-num{font-size:.63rem;font-weight:700;color:var(--muted);margin-right:.25rem;vertical-align:middle}
+.gap-text{font-family:'Noto Serif',serif;font-size:.82rem;color:var(--g1);font-weight:600}
+.gap-placeholder{color:var(--border);font-size:.75rem}
+.gap.selected-target{border-bottom-color:var(--amber);background:var(--al);border-radius:4px;animation:pulse .7s infinite alternate}
+@keyframes pulse{from{background:var(--al)}to{background:#fef3c7}}
+
+/* CONTROLS */
+.ctrl-row{display:flex;gap:.6rem;margin-top:1.2rem;flex-wrap:wrap}
+.btn{padding:.5rem 1.1rem;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .15s}
+.btn-check{background:var(--g1);color:#fff}
+.btn-check:hover{background:var(--g2)}
+.btn-reset{background:var(--bg);border:1.5px solid var(--border);color:var(--muted)}
+.btn-reset:hover{border-color:var(--red);color:var(--red)}
+.btn-keys{background:var(--al);border:1.5px solid var(--amb);color:var(--amber)}
+.btn-keys:hover{background:var(--amb)}
+
+/* RESULT */
+.result-bar{margin-top:1rem;padding:.6rem 1rem;border-radius:8px;font-size:.83rem;font-weight:600;display:none}
+.result-bar.show{display:block}
+.result-bar.good{background:#d1fae5;border:1px solid #6ee7b7;color:#065f46}
+.result-bar.bad{background:var(--rl);border:1px solid #fca5a5;color:#7f1d1d}
+
+/* ── TRANSLATION TAB ── */
+.trans-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.6rem;box-shadow:var(--sh);margin-bottom:1rem}
+.trans-title{font-family:'Noto Serif',serif;font-size:1rem;font-weight:700;color:var(--g1);text-align:center;margin-bottom:1.3rem}
+.trans-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1.2rem;margin-bottom:.9rem;padding-bottom:.9rem;border-bottom:1px solid var(--border)}
+.trans-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.trans-gr{font-family:'Noto Serif',serif;font-size:.84rem;color:var(--text);line-height:1.7}
+.trans-ru{font-size:.82rem;color:var(--t2);line-height:1.7}
+.trans-lang{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.3rem}
+.gap-inline{display:inline;background:var(--bl);border-radius:3px;padding:.05rem .3rem;font-weight:700;color:var(--g1);font-family:'Noto Serif',serif;font-size:.82rem}
+.gap-inline-ru{display:inline;background:var(--al);border-radius:3px;padding:.05rem .3rem;font-weight:700;color:var(--amber);font-size:.82rem}
+.bullet-marker{color:var(--sage);font-weight:700;margin-right:.3rem}
+
+/* ── KEYS TAB ── */
+.keys-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem 1.6rem;box-shadow:var(--sh);margin-bottom:1rem}
+.keys-title{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem}
+.key-row{display:flex;align-items:flex-start;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--border)}
+.key-row:last-child{border-bottom:none}
+.key-num{width:28px;height:28px;background:var(--g1);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0}
+.key-num.example{background:var(--blm);color:var(--g1)}
+.key-body{}
+.key-gr{font-family:'Noto Serif',serif;font-size:.88rem;font-weight:600;color:var(--g1)}
+.key-ru{font-size:.78rem;color:var(--muted);margin-top:.15rem}
+.key-tag{font-size:.62rem;font-weight:700;background:var(--al);color:var(--amber);border-radius:4px;padding:.1rem .35rem;margin-left:.4rem;vertical-align:middle}
+
+.distractor-section{margin-top:1.2rem}
+.distractor-label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.distractor-list{display:flex;flex-direction:column;gap:.4rem}
+.distractor-item{font-family:'Noto Serif',serif;font-size:.83rem;color:var(--muted);padding:.4rem .7rem;background:var(--bg);border-radius:6px;border:1px dashed var(--border)}
+.distractor-ru{font-family:'Inter',sans-serif;font-size:.74rem;color:var(--muted);margin-left:.4rem;font-style:italic}
+
+/* VOCAB GLOSS */
+.vocab-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.6rem;box-shadow:var(--sh)}
+.vocab-title{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.8rem}
+.vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem}
+.vocab-item{display:flex;gap:.5rem;align-items:baseline;font-size:.78rem}
+.vocab-gr{font-family:'Noto Serif',serif;font-weight:600;color:var(--g1)}
+.vocab-ru{color:var(--muted)}
+
+@media(max-width:600px){
+  .trans-row{grid-template-columns:1fr}
+  .trans-row .trans-lang:first-child{margin-top:0}
+  .vocab-grid{grid-template-columns:1fr}
+  .options-grid{flex-direction:column}
+  .opt{width:100%}
+  .navbar{padding:0 1rem}
+  .wrap{padding:1.2rem 1rem 4rem}
+  .gap{min-width:110px}
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">🇬🇷</div>
+    <div><div class="nav-logo-text">KPG B1</div><div class="nav-logo-sub">Тест 17 · Упражнение 1</div></div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('exercise',this)">✏️ Упражнение</button>
+    <button class="nav-tab" onclick="switchTab('translation',this)">📖 Перевод</button>
+    <button class="nav-tab" onclick="switchTab('keys',this)">🔑 Ключи</button>
+  </div>
+</div>
+
+<!-- ════════════ EXERCISE ════════════ -->
+<div id="tab-exercise" class="tab-panel active">
+  <div class="wrap">
+    <div class="title-card">
+      <h1>Πώς να κάνετε τους άλλους να σας συμπαθήσουν</h1>
+      <div class="meta">Чтение · Заполните пропуски словосочетаниями из списка ниже</div>
+    </div>
+
+    <div class="instr">Выберите словосочетание из списка, затем кликните на пропуск в тексте. Пример (0) уже заполнен.</div>
+
+    <!-- OPTIONS -->
+    <div class="options-panel">
+      <div class="options-label">Варианты ответов</div>
+      <div class="options-grid" id="options-grid">
+        <div class="opt example" data-key="0">
+          <span class="opt-num">0</span>
+          <span class="opt-text">αν τους αρέσει κάποιος</span>
+        </div>
+        <div class="opt" data-key="A" onclick="selectOption(this)">
+          <span class="opt-num">A</span>
+          <span class="opt-text">θα πιστέψουν στα λόγια σας</span>
+        </div>
+        <div class="opt" data-key="B" onclick="selectOption(this)">
+          <span class="opt-num">B</span>
+          <span class="opt-text">που βρίσκονται δίπλα σας</span>
+        </div>
+        <div class="opt" data-key="C" onclick="selectOption(this)">
+          <span class="opt-num">C</span>
+          <span class="opt-text">πάρα πολύ άσχημα</span>
+        </div>
+        <div class="opt" data-key="D" onclick="selectOption(this)">
+          <span class="opt-num">D</span>
+          <span class="opt-text">που είναι μακριά σας</span>
+        </div>
+        <div class="opt" data-key="E" onclick="selectOption(this)">
+          <span class="opt-num">E</span>
+          <span class="opt-text">είναι και η πιο σημαντική</span>
+        </div>
+        <div class="opt" data-key="F" onclick="selectOption(this)">
+          <span class="opt-num">F</span>
+          <span class="opt-text">ότι τον ακούτε με προσοχή</span>
+        </div>
+        <div class="opt" data-key="G" onclick="selectOption(this)">
+          <span class="opt-num">G</span>
+          <span class="opt-text">και όχι με αδιαφορία</span>
+        </div>
+        <div class="opt" data-key="H" onclick="selectOption(this)">
+          <span class="opt-num">H</span>
+          <span class="opt-text">σίγουροι για τον εαυτό σας</span>
+        </div>
+        <div class="opt" data-key="I" onclick="selectOption(this)">
+          <span class="opt-num">I</span>
+          <span class="opt-text">είναι λίγο πιο μικρή από τις άλλες</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEXT -->
+    <div class="text-card">
+      <div class="reading-title">Πώς να κάνετε τους άλλους να σας συμπαθήσουν</div>
+
+      <div class="para">
+        Οι άνθρωποι χρειάζονται συνήθως λίγα μόνο δευτερόλεπτα, για να αποφασίσουν
+        <span class="gap example-gap" data-gap="0">
+          <span class="gap-num">0</span>
+          <span class="gap-text">αν τους αρέσει κάποιος</span>
+        </span>.
+        Με άλλα λόγια, η πρώτη εντύπωση που δίνουμε
+        <span class="gap" data-gap="1" onclick="fillGap(this)">
+          <span class="gap-num">1</span>
+          <span class="gap-placeholder">···</span>
+        </span>.
+        Αν θέλετε, λοιπόν, να κάνετε τους άλλους να σας συμπαθήσουν, ορίστε μερικοί απλοί τρόποι:
+      </div>
+
+      <div class="para bullet">
+        Χαιρετήστε τους με καλή διάθεση. Είτε πείτε ένα απλό «γεια» είτε ένα πιο επίσημο «καλησπέρα σας», θα πρέπει να μιλήσετε με ενθουσιασμό
+        <span class="gap" data-gap="2" onclick="fillGap(this)">
+          <span class="gap-num">2</span>
+          <span class="gap-placeholder">···</span>
+        </span>.
+      </div>
+
+      <div class="para bullet">
+        Χρησιμοποιήστε τα μάτια σας, για να τραβήξετε την προσοχή των ανθρώπων. Κοιτάξτε τους στα μάτια, όταν μιλάτε. Αυτό δείχνει ότι νιώθετε
+        <span class="gap" data-gap="3" onclick="fillGap(this)">
+          <span class="gap-num">3</span>
+          <span class="gap-placeholder">···</span>
+        </span>.
+      </div>
+
+      <div class="para bullet">
+        Χαμογελάστε. Το χαμόγελο δίνει στους άλλους την εντύπωση ότι λέτε την αλήθεια. Έτσι οι συνομιλητές σας θα σας έχουν εμπιστοσύνη και
+        <span class="gap" data-gap="4" onclick="fillGap(this)">
+          <span class="gap-num">4</span>
+          <span class="gap-placeholder">···</span>
+        </span>.
+      </div>
+
+      <div class="para bullet">
+        Μετά από μια νέα γνωριμία, επαναλάβετε το όνομα του συνομιλητή σας. Αυτό θα του δείξει
+        <span class="gap" data-gap="5" onclick="fillGap(this)">
+          <span class="gap-num">5</span>
+          <span class="gap-placeholder">···</span>
+        </span>.
+      </div>
+
+      <div class="para bullet">
+        Μιλήστε σαν να βρίσκεστε μπροστά στον πιο σημαντικό άνθρωπο του κόσμου. Ξεχάστε όλες τις δουλειές και τα προβλήματά σας και δώστε σημασία σε αυτούς
+        <span class="gap" data-gap="6" onclick="fillGap(this)">
+          <span class="gap-num">6</span>
+          <span class="gap-placeholder">···</span>
+        </span>.
+      </div>
+    </div>
+
+    <div class="ctrl-row">
+      <button class="btn btn-check" onclick="checkAnswers()">Проверить ответы</button>
+      <button class="btn btn-reset" onclick="resetAll()">Сбросить</button>
+    </div>
+    <div class="result-bar" id="result-bar"></div>
+  </div>
+</div>
+
+<!-- ════════════ TRANSLATION ════════════ -->
+<div id="tab-translation" class="tab-panel">
+  <div class="wrap">
+    <div class="trans-card">
+      <div class="trans-title">Построчный перевод</div>
+
+      <!-- TITLE ROW -->
+      <div class="trans-row">
+        <div>
+          <div class="trans-lang">🇬🇷 Греческий</div>
+          <div class="trans-gr">Πώς να κάνετε τους άλλους να σας συμπαθήσουν</div>
+        </div>
+        <div>
+          <div class="trans-lang">🇷🇺 Русский</div>
+          <div class="trans-ru"><strong>Как расположить других к себе</strong></div>
+        </div>
+      </div>
+
+      <!-- P1 -->
+      <div class="trans-row">
+        <div>
+          <div class="trans-gr">
+            Οι άνθρωποι χρειάζονται συνήθως λίγα μόνο δευτερόλεπτα, για να αποφασίσουν
+            <span class="gap-inline">[0] αν τους αρέσει κάποιος</span>.
+            Με άλλα λόγια, η πρώτη εντύπωση που δίνουμε
+            <span class="gap-inline">[1] είναι και η πιο σημαντική</span>.
+            Αν θέλετε, λοιπόν, να κάνετε τους άλλους να σας συμπαθήσουν, ορίστε μερικοί απλοί τρόποι:
+          </div>
+        </div>
+        <div>
+          <div class="trans-ru">
+            Людям обычно нужно всего несколько секунд, чтобы решить
+            <span class="gap-inline-ru">[0] нравится ли им кто-то</span>.
+            Другими словами, первое впечатление, которое мы производим,
+            <span class="gap-inline-ru">[1] является самым важным</span>.
+            Если вы хотите, чтобы другие симпатизировали вам, вот несколько простых способов:
+          </div>
+        </div>
+      </div>
+
+      <!-- BULLET 1 -->
+      <div class="trans-row">
+        <div>
+          <div class="trans-gr">
+            <span class="bullet-marker">•</span>Χαιρετήστε τους με καλή διάθεση. Είτε πείτε ένα απλό «γεια» είτε ένα πιο επίσημο «καλησπέρα σας», θα πρέπει να μιλήσετε με ενθουσιασμό
+            <span class="gap-inline">[2] και όχι με αδιαφορία</span>.
+          </div>
+        </div>
+        <div>
+          <div class="trans-ru">
+            <span class="bullet-marker">•</span>Приветствуйте их с хорошим настроением. Скажете ли вы простое «привет» или более официальное «добрый вечер», вы должны говорить с энтузиазмом
+            <span class="gap-inline-ru">[2] а не с безразличием</span>.
+          </div>
+        </div>
+      </div>
+
+      <!-- BULLET 2 -->
+      <div class="trans-row">
+        <div>
+          <div class="trans-gr">
+            <span class="bullet-marker">•</span>Χρησιμοποιήστε τα μάτια σας, για να τραβήξετε την προσοχή των ανθρώπων. Κοιτάξτε τους στα μάτια, όταν μιλάτε. Αυτό δείχνει ότι νιώθετε
+            <span class="gap-inline">[3] σίγουροι για τον εαυτό σας</span>.
+          </div>
+        </div>
+        <div>
+          <div class="trans-ru">
+            <span class="bullet-marker">•</span>Используйте глаза, чтобы привлечь внимание людей. Смотрите им в глаза, когда разговариваете. Это показывает, что вы чувствуете себя
+            <span class="gap-inline-ru">[3] уверенными в себе</span>.
+          </div>
+        </div>
+      </div>
+
+      <!-- BULLET 3 -->
+      <div class="trans-row">
+        <div>
+          <div class="trans-gr">
+            <span class="bullet-marker">•</span>Χαμογελάστε. Το χαμόγελο δίνει στους άλλους την εντύπωση ότι λέτε την αλήθεια. Έτσι οι συνομιλητές σας θα σας έχουν εμπιστοσύνη και
+            <span class="gap-inline">[4] θα πιστέψουν στα λόγια σας</span>.
+          </div>
+        </div>
+        <div>
+          <div class="trans-ru">
+            <span class="bullet-marker">•</span>Улыбайтесь. Улыбка создаёт у других впечатление, что вы говорите правду. Так ваши собеседники будут вам доверять и
+            <span class="gap-inline-ru">[4] будут верить вашим словам</span>.
+          </div>
+        </div>
+      </div>
+
+      <!-- BULLET 4 -->
+      <div class="trans-row">
+        <div>
+          <div class="trans-gr">
+            <span class="bullet-marker">•</span>Μετά από μια νέα γνωριμία, επαναλάβετε το όνομα του συνομιλητή σας. Αυτό θα του δείξει
+            <span class="gap-inline">[5] ότι τον ακούτε με προσοχή</span>.
+          </div>
+        </div>
+        <div>
+          <div class="trans-ru">
+            <span class="bullet-marker">•</span>После нового знакомства повторите имя собеседника. Это покажет ему
+            <span class="gap-inline-ru">[5] что вы слушаете его внимательно</span>.
+          </div>
+        </div>
+      </div>
+
+      <!-- BULLET 5 -->
+      <div class="trans-row">
+        <div>
+          <div class="trans-gr">
+            <span class="bullet-marker">•</span>Μιλήστε σαν να βρίσκεστε μπροστά στον πιο σημαντικό άνθρωπο του κόσμου. Ξεχάστε όλες τις δουλειές και τα προβλήματά σας και δώστε σημασία σε αυτούς
+            <span class="gap-inline">[6] που βρίσκονται δίπλα σας</span>.
+          </div>
+        </div>
+        <div>
+          <div class="trans-ru">
+            <span class="bullet-marker">•</span>Говорите так, словно стоите перед самым важным человеком в мире. Забудьте обо всех делах и проблемах и уделите внимание тем,
+            <span class="gap-inline-ru">[6] кто находится рядом с вами</span>.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VOCAB GLOSS -->
+    <div class="vocab-card">
+      <div class="vocab-title">Полезная лексика из текста</div>
+      <div class="vocab-grid">
+        <div class="vocab-item"><span class="vocab-gr">συμπαθώ</span><span class="vocab-ru">— симпатизировать, нравиться</span></div>
+        <div class="vocab-item"><span class="vocab-gr">δευτερόλεπτο</span><span class="vocab-ru">— секунда</span></div>
+        <div class="vocab-item"><span class="vocab-gr">η εντύπωση</span><span class="vocab-ru">— впечатление</span></div>
+        <div class="vocab-item"><span class="vocab-gr">χαιρετώ</span><span class="vocab-ru">— приветствовать</span></div>
+        <div class="vocab-item"><span class="vocab-gr">ο ενθουσιασμός</span><span class="vocab-ru">— энтузиазм</span></div>
+        <div class="vocab-item"><span class="vocab-gr">η αδιαφορία</span><span class="vocab-ru">— безразличие, равнодушие</span></div>
+        <div class="vocab-item"><span class="vocab-gr">τραβώ την προσοχή</span><span class="vocab-ru">— привлекать внимание</span></div>
+        <div class="vocab-item"><span class="vocab-gr">νιώθω</span><span class="vocab-ru">— чувствовать, ощущать</span></div>
+        <div class="vocab-item"><span class="vocab-gr">το χαμόγελο</span><span class="vocab-ru">— улыбка</span></div>
+        <div class="vocab-item"><span class="vocab-gr">η εμπιστοσύνη</span><span class="vocab-ru">— доверие</span></div>
+        <div class="vocab-item"><span class="vocab-gr">η γνωριμία</span><span class="vocab-ru">— знакомство</span></div>
+        <div class="vocab-item"><span class="vocab-gr">ο συνομιλητής</span><span class="vocab-ru">— собеседник</span></div>
+        <div class="vocab-item"><span class="vocab-gr">επαναλαμβάνω</span><span class="vocab-ru">— повторять</span></div>
+        <div class="vocab-item"><span class="vocab-gr">δίνω σημασία</span><span class="vocab-ru">— уделять внимание, придавать значение</span></div>
+        <div class="vocab-item"><span class="vocab-gr">σίγουρος</span><span class="vocab-ru">— уверенный</span></div>
+        <div class="vocab-item"><span class="vocab-gr">ξεχνώ</span><span class="vocab-ru">— забывать</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════ KEYS ════════════ -->
+<div id="tab-keys" class="tab-panel">
+  <div class="wrap">
+    <div class="keys-card">
+      <div class="keys-title">Ответы · Ключи</div>
+
+      <div class="key-row">
+        <div class="key-num example">0</div>
+        <div class="key-body">
+          <div class="key-gr">αν τους αρέσει κάποιος <span class="key-tag">пример</span></div>
+          <div class="key-ru">нравится ли им кто-то</div>
+        </div>
+      </div>
+      <div class="key-row">
+        <div class="key-num">1</div>
+        <div class="key-body">
+          <div class="key-gr">είναι και η πιο σημαντική <span class="key-tag">E</span></div>
+          <div class="key-ru">является самым важным</div>
+        </div>
+      </div>
+      <div class="key-row">
+        <div class="key-num">2</div>
+        <div class="key-body">
+          <div class="key-gr">και όχι με αδιαφορία <span class="key-tag">G</span></div>
+          <div class="key-ru">а не с безразличием</div>
+        </div>
+      </div>
+      <div class="key-row">
+        <div class="key-num">3</div>
+        <div class="key-body">
+          <div class="key-gr">σίγουροι για τον εαυτό σας <span class="key-tag">H</span></div>
+          <div class="key-ru">уверенными в себе</div>
+        </div>
+      </div>
+      <div class="key-row">
+        <div class="key-num">4</div>
+        <div class="key-body">
+          <div class="key-gr">θα πιστέψουν στα λόγια σας <span class="key-tag">A</span></div>
+          <div class="key-ru">будут верить вашим словам</div>
+        </div>
+      </div>
+      <div class="key-row">
+        <div class="key-num">5</div>
+        <div class="key-body">
+          <div class="key-gr">ότι τον ακούτε με προσοχή <span class="key-tag">F</span></div>
+          <div class="key-ru">что вы слушаете его внимательно</div>
+        </div>
+      </div>
+      <div class="key-row">
+        <div class="key-num">6</div>
+        <div class="key-body">
+          <div class="key-gr">που βρίσκονται δίπλα σας <span class="key-tag">B</span></div>
+          <div class="key-ru">кто находится рядом с вами</div>
+        </div>
+      </div>
+
+      <div class="distractor-section">
+        <div class="distractor-label">Лишние варианты (не используются)</div>
+        <div class="distractor-list">
+          <div class="distractor-item">C — πάρα πολύ άσχημα <span class="distractor-ru">очень некрасиво / очень плохо</span></div>
+          <div class="distractor-item">D — που είναι μακριά σας <span class="distractor-ru">которые находятся далеко от вас</span></div>
+          <div class="distractor-item">I — είναι λίγο πιο μικρή από τις άλλες <span class="distractor-ru">немного меньше других</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STATE ──
+const CORRECT = { '1':'E', '2':'G', '3':'H', '4':'A', '5':'F', '6':'B' };
+const OPT_TEXT = {
+  'A':'θα πιστέψουν στα λόγια σας',
+  'B':'που βρίσκονται δίπλα σας',
+  'C':'πάρα πολύ άσχημα',
+  'D':'που είναι μακριά σας',
+  'E':'είναι και η πιο σημαντική',
+  'F':'ότι τον ακούτε με προσοχή',
+  'G':'και όχι με αδιαφορία',
+  'H':'σίγουροι για τον εαυτό σας',
+  'I':'είναι λίγο πιο μικρή από τις άλλες',
+};
+
+let selectedOpt = null;   // currently selected option key
+let answers = {};         // gap# -> optKey
+
+function selectOption(el) {
+  if (el.classList.contains('used') || el.classList.contains('example')) return;
+  // deselect previously selected
+  document.querySelectorAll('.opt.selected').forEach(o => o.classList.remove('selected'));
+  if (selectedOpt === el.dataset.key) { selectedOpt = null; return; }
+  el.classList.add('selected');
+  selectedOpt = el.dataset.key;
+  // highlight unfilled gaps
+  document.querySelectorAll('.gap:not(.example-gap)').forEach(g => {
+    if (!answers[g.dataset.gap]) g.classList.add('selected-target');
+    else g.classList.remove('selected-target');
+  });
+}
+
+function fillGap(el) {
+  const gap = el.dataset.gap;
+  if (!selectedOpt && !answers[gap]) return;
+  // if re-clicking a filled gap with no selection → clear it
+  if (!selectedOpt && answers[gap]) {
+    clearGap(gap);
+    return;
+  }
+  // un-use previous answer in this gap
+  if (answers[gap]) freeOption(answers[gap]);
+  // place answer
+  answers[gap] = selectedOpt;
+  const text = OPT_TEXT[selectedOpt];
+  el.innerHTML = `<span class="gap-num">${gap}</span><span class="gap-text">${text}</span>`;
+  el.classList.add('filled');
+  el.classList.remove('selected-target', 'correct', 'wrong');
+  // mark option as used
+  const optEl = document.querySelector(`.opt[data-key="${selectedOpt}"]`);
+  if (optEl) { optEl.classList.remove('selected'); optEl.classList.add('used'); }
+  selectedOpt = null;
+  // remove target highlight from all
+  document.querySelectorAll('.gap').forEach(g => g.classList.remove('selected-target'));
+  hideResult();
+}
+
+function clearGap(gap) {
+  if (answers[gap]) { freeOption(answers[gap]); delete answers[gap]; }
+  const el = document.querySelector(`.gap[data-gap="${gap}"]`);
+  if (el) {
+    el.innerHTML = `<span class="gap-num">${gap}</span><span class="gap-placeholder">···</span>`;
+    el.classList.remove('filled','correct','wrong');
+  }
+  hideResult();
+}
+
+function freeOption(key) {
+  const optEl = document.querySelector(`.opt[data-key="${key}"]`);
+  if (optEl) optEl.classList.remove('used','selected');
+}
+
+function checkAnswers() {
+  let score = 0;
+  for (let gap = 1; gap <= 6; gap++) {
+    const el = document.querySelector(`.gap[data-gap="${gap}"]`);
+    if (!answers[gap]) continue;
+    el.classList.remove('correct','wrong');
+    if (answers[gap] === CORRECT[gap]) { el.classList.add('correct'); score++; }
+    else el.classList.add('wrong');
+  }
+  const filled = Object.keys(answers).length;
+  const bar = document.getElementById('result-bar');
+  bar.className = 'result-bar show ' + (score === 6 ? 'good' : score >= 4 ? 'good' : 'bad');
+  bar.textContent = `Результат: ${score} / 6${filled < 6 ? ` (заполнено ${filled} из 6)` : ''}`;
+}
+
+function resetAll() {
+  answers = {};
+  selectedOpt = null;
+  document.querySelectorAll('.opt:not(.example)').forEach(o => o.classList.remove('selected','used'));
+  for (let gap = 1; gap <= 6; gap++) {
+    const el = document.querySelector(`.gap[data-gap="${gap}"]`);
+    if (el) {
+      el.innerHTML = `<span class="gap-num">${gap}</span><span class="gap-placeholder">···</span>`;
+      el.classList.remove('filled','correct','wrong','selected-target');
+    }
+  }
+  hideResult();
+}
+
+function hideResult() {
+  const bar = document.getElementById('result-bar');
+  bar.className = 'result-bar';
+}
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
