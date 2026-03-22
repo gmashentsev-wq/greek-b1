@@ -155,6 +155,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
     <button class="nav-tab" onclick="switchTab('translation',this)">📖 Перевод</button>
     <button class="nav-tab" onclick="switchTab('keys',this)">🔑 Ключи</button>
     <button class="nav-tab" onclick="switchTab('listening',this)">🎧 Аудирование 1</button>
+    <button class="nav-tab" onclick="switchTab('listening2',this)">🎧 Аудирование 2</button>
   </div>
 </div>
 
@@ -708,6 +709,185 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webk
   </div>
 </div>
 
+<!-- ════════════ LISTENING 2 ════════════ -->
+<div id="tab-listening2" class="tab-panel">
+  <div class="wrap">
+    <div class="title-card">
+      <h1>Ερώτημα 2 (ακουστικό) — Μαραθώνιος Αθήνας · Συνέντευξη</h1>
+      <div class="meta">13 баллов · отметьте ✓ информацию, подходящую каждому собеседнику · ~15:22–19:27 в файле B1_2017.mp3</div>
+    </div>
+
+    <!-- ИНСТРУКЦИЯ -->
+    <div class="instr">Θα ακούσετε δύο (2) φορές μια συνέντευξη. Δύο άνθρωποι που έτρεξαν στον Μαραθώνιο της Αθήνας συνομιλούν με έναν δημοσιογράφο. Σημειώνετε ✓ στις πληροφορίες που ταιριάζουν σε κάθε ομιλητή. Ορισμένες πληροφορίες ταιριάζουν και στις δύο περιπτώσεις. Συνολικά 13 ✓ χωρίς το παράδειγμα.</div>
+
+    <!-- ТЕСТ-ТАБЛИЦА -->
+    <div class="text-card" style="padding:0;overflow:hidden">
+      <table style="width:100%;border-collapse:collapse;font-size:.85rem">
+        <thead>
+          <tr style="background:var(--g1);color:#fff">
+            <th style="padding:.7rem 1rem;text-align:left;width:60%">Πληροφορία</th>
+            <th style="padding:.7rem .6rem;text-align:center;width:20%">Μιχάλης<br><span style="font-size:.7rem;opacity:.75">Κιούσης</span></th>
+            <th style="padding:.7rem .6rem;text-align:center;width:20%">Μαρίνα<br><span style="font-size:.7rem;opacity:.75">Ζέλου</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:var(--bl)">
+            <td style="padding:.65rem 1rem;color:var(--g2);font-style:italic">0. Είναι κομμωτής/κομμώτρια. <em>(παράδειγμα)</em></td>
+            <td style="text-align:center">—</td>
+            <td style="text-align:center">✓</td>
+          </tr>
+          <tr id="l2row1m" style="border-bottom:1px solid var(--border)">
+            <td style="padding:.65rem 1rem" rowspan="1">1. Αρχικά, για να κάνει γυμναστική, πήγαινε για περίπατο.</td>
+            <td id="l2row1m" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2m1"></td>
+            <td id="l2row1z" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2z1"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:#fafaf8">
+            <td style="padding:.65rem 1rem">2. Ήταν επαγγελματίας αθλητής/αθλήτρια.</td>
+            <td id="l2row2m" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2m2"></td>
+            <td id="l2row2z" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2z2"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.65rem 1rem">3. Συμμετέχει στον μαραθώνιο τα τελευταία 5 χρόνια.</td>
+            <td id="l2row3m" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2m3"></td>
+            <td id="l2row3z" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2z3"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:#fafaf8">
+            <td style="padding:.65rem 1rem">4. Είναι μεγαλύτερος/μεγαλύτερη από 40 χρονών.</td>
+            <td id="l2row4m" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2m4"></td>
+            <td id="l2row4z" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2z4"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.65rem 1rem">5. Φέτος πήρε μέρος στον μαραθώνιο με την ομάδα του δήμου του/της.</td>
+            <td id="l2row5m" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2m5"></td>
+            <td id="l2row5z" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2z5"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:#fafaf8">
+            <td style="padding:.65rem 1rem">6. Έκανε προπόνηση κάθε μέρα όλη τη χρονιά.</td>
+            <td id="l2row6m" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2m6"></td>
+            <td id="l2row6z" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2z6"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.65rem 1rem">7. Συνήθως προπονείται τις βραδινές ώρες.</td>
+            <td id="l2row7m" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2m7"></td>
+            <td id="l2row7z" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2z7"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);background:#fafaf8">
+            <td style="padding:.65rem 1rem">8. Έφτασε στο τέρμα του αγώνα με δυσκολία.</td>
+            <td id="l2row8m" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2m8"></td>
+            <td id="l2row8z" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2z8"></td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)">
+            <td style="padding:.65rem 1rem">9. Στο τέλος της διαδρομής, τον/την περίμενε η οικογένειά του/της.</td>
+            <td id="l2row9m" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2m9"></td>
+            <td id="l2row9z" style="text-align:center;padding:.5rem"><input type="checkbox" class="exam-cb" id="l2z9"></td>
+          </tr>
+          <tr>
+            <td style="padding:.65rem 1rem;background:#fafaf8">10. Μετά το τέλος του αγώνα διασκέδασε με την ομάδα του/της.</td>
+            <td id="l2row10m" style="text-align:center;padding:.5rem;background:#fafaf8"><input type="checkbox" class="exam-cb" id="l2m10"></td>
+            <td id="l2row10z" style="text-align:center;padding:.5rem;background:#fafaf8"><input type="checkbox" class="exam-cb" id="l2z10"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ctrl-row">
+      <button class="btn btn-check" onclick="checkL2()">Проверить ответы</button>
+      <button class="btn btn-reset" onclick="resetL2()">Сбросить</button>
+      <button class="btn btn-keys" onclick="toggleL2Key()">Показать ключ</button>
+    </div>
+    <div class="result-bar" id="l2result"></div>
+
+    <!-- КЛЮЧ (скрытый) -->
+    <div id="l2key" style="display:none;margin-top:1rem">
+      <div class="keys-card">
+        <div class="keys-title">Ответы · Ключи</div>
+        <table style="width:100%;border-collapse:collapse;font-size:.84rem">
+          <tr style="background:var(--g1);color:#fff">
+            <th style="padding:.5rem .8rem;text-align:left">#</th>
+            <th style="padding:.5rem .8rem;text-align:left">Πληροφορία</th>
+            <th style="padding:.5rem .6rem;text-align:center">Μιχάλης</th>
+            <th style="padding:.5rem .6rem;text-align:center">Μαρίνα</th>
+          </tr>
+          <tr style="background:var(--bl)"><td style="padding:.5rem .8rem;color:var(--g2)">0</td><td style="padding:.5rem .8rem;font-style:italic;color:var(--g2)">Είναι κομμωτής/κομμώτρια</td><td style="text-align:center">—</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem .8rem">1</td><td style="padding:.5rem .8rem">Αρχικά πήγαινε για περίπατο</td><td style="text-align:center">—</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td></tr>
+          <tr style="border-bottom:1px solid var(--border);background:#fafaf8"><td style="padding:.5rem .8rem">2</td><td style="padding:.5rem .8rem">Ήταν επαγγελματίας αθλητής</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td><td style="text-align:center">—</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem .8rem">3</td><td style="padding:.5rem .8rem">Μαραθώνιος τα τελευταία 5 χρόνια</td><td style="text-align:center">—</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td></tr>
+          <tr style="border-bottom:1px solid var(--border);background:#fafaf8"><td style="padding:.5rem .8rem">4</td><td style="padding:.5rem .8rem">Μεγαλύτερος/η από 40 χρονών</td><td style="text-align:center">—</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem .8rem">5</td><td style="padding:.5rem .8rem">Έτρεξε με ομάδα δήμου φέτος</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td></tr>
+          <tr style="border-bottom:1px solid var(--border);background:#fafaf8"><td style="padding:.5rem .8rem">6</td><td style="padding:.5rem .8rem">Προπόνηση κάθε μέρα ΟΛΗ τη χρονιά</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td><td style="text-align:center">—</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem .8rem">7</td><td style="padding:.5rem .8rem">Προπόνηση βραδινές ώρες</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td></tr>
+          <tr style="border-bottom:1px solid var(--border);background:#fafaf8"><td style="padding:.5rem .8rem">8</td><td style="padding:.5rem .8rem">Τερμάτισε με δυσκολία</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:.5rem .8rem">9</td><td style="padding:.5rem .8rem">Περίμενε η οικογένεια στο τέρμα</td><td style="text-align:center">—</td><td style="text-align:center;color:#16a34a;font-weight:700">✓</td></tr>
+          <tr><td style="padding:.5rem .8rem;background:#fafaf8">10</td><td style="padding:.5rem .8rem;background:#fafaf8">Γιόρτασε με ομάδα μετά</td><td style="text-align:center;color:#16a34a;font-weight:700;background:#fafaf8">✓</td><td style="text-align:center;background:#fafaf8">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ПОСТРОЧНЫЙ ПЕРЕВОД -->
+    <div class="trans-card" style="margin-top:1.4rem">
+      <div class="trans-title">Построчный перевод интервью</div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Ведущий</div><div class="trans-gr">Αγαπημένοι μας φίλοι και φίλες, καλή σας μέρα! Σήμερα έχουμε μαζί μας δύο συμπολίτες μας που έτρεξαν στον φετινό Μαραθώνιο — τον Μιχάλη Κιούση, υπάλληλο γραφείου, και τη Μαρίνα Ζέλου, κομμώτρια.</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">Дорогие друзья, добрый день! Сегодня у нас в гостях двое сограждан, пробежавших этот марафон — Михалис Кьюсис, офисный сотрудник, и Марина Зелу, парикмахер.</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-gr">Ας ξεκινήσουμε από εσάς, κυρία Ζέλου. Μιλήστε μας λίγο για την απόφασή σας να τρέξετε στον Μαραθώνιο. Πότε και πώς αποφασίσατε να πάρετε μέρος;</div></div><div><div class="trans-ru">Начнём с вас, госпожа Зелу. Расскажите о своём решении участвовать в марафоне. Когда и как вы решили принять участие?</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Μαρίνα Ζέλου</div><div class="trans-gr">Όλα ξεκίνησαν πριν από 8 χρόνια. Είχα πάρει μερικά κιλά και ο γιατρός μου είπε να κάνω γυμναστική. Άρχισα λοιπόν να περπατάω — στην αρχή ένα χιλιόμετρο κάθε μέρα και μετά περισσότερα.</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">Всё началось 8 лет назад. Я набрала лишний вес, и врач сказал заниматься физкультурой. Начала ходить пешком — поначалу километр в день, потом больше.</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-gr">Το επόμενο στάδιο ήταν το τρέξιμο. Επειδή μου άρεσε πολύ και έτρεχα μεγάλες αποστάσεις, αποφάσισα να πάρω μέρος σε αγώνες δρόμου. Έτρεξα για πρώτη φορά στον Μαραθώνιο πριν από 5 χρόνια. Από τότε τρέχω κάθε χρονιά.</div></div><div><div class="trans-ru">Следующим этапом стал бег. Поскольку мне это понравилось и я стала пробегать большие расстояния, решила участвовать в соревнованиях. В первый раз пробежала марафон 5 лет назад. С тех пор бегу каждый год.</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-gr">Συνεχίζω ακόμη και τώρα στα 58 χρόνια. Φέτος έτρεξα με την ομάδα του δήμου μου, του δήμου Αθηναίων.</div></div><div><div class="trans-ru">Продолжаю даже сейчас, в 58 лет. В этом году бежала с командой своего муниципалитета — муниципалитета Афин.</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Ведущий</div><div class="trans-gr">Τι προετοιμασία κάνατε; Κάνατε προπόνηση κάθε μέρα;</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">Как вы готовились? Тренировались каждый день?</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Μαρίνα Ζέλου</div><div class="trans-gr">Στη διάρκεια της χρονιάς έτρεχα δύο με τρεις φορές στην εβδομάδα. Τον τελευταίο μήνα όμως έκανα προπόνηση καθημερινά. Συνήθως τρέχω το βράδυ, μετά τη δουλειά.</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">В течение года бегала два-три раза в неделю. Но в последний месяц тренировалась ежедневно. Обычно бегаю вечером, после работы.</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Ведущий</div><div class="trans-gr">Συναντήσατε δυσκολίες κατά τη διάρκεια του αγώνα;</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">Столкнулись ли с трудностями во время соревнования?</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Μαρίνα Ζέλου</div><div class="trans-gr">Στο μεγαλύτερο μέρος της διαδρομής ένιωθα αρκετά καλά. Ένα με δύο χιλιόμετρα πριν από το τέρμα όμως ένιωσα ξαφνικά έντονη αδιαθεσία. Με δυσκολία τα κατάφερα να τερματίσω. Στο τέρμα με περίμεναν ο άντρας μου και τα παιδιά μου. Η χαρά μου ήταν μεγάλη και ξέχασα αμέσως όλες τις δυσκολίες. Πήγαμε μετά όλοι μαζί για φαγητό.</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">На большей части маршрута чувствовала себя хорошо. Но за 1–2 км до финиша вдруг почувствовала сильное недомогание. С трудом добралась до финиша. Там меня ждали муж и дети. Радость была огромной, сразу забыла обо всех трудностях. Потом все вместе пошли поесть.</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Ведущий</div><div class="trans-gr">Σας ευχαριστούμε πολύ, κυρία Ζέλου. Ας περάσουμε τώρα σε εσάς, κύριε Κιούση. Εσείς πώς αποφασίσατε να πάρετε μέρος στον Μαραθώνιο;</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">Большое спасибо, госпожа Зелу. Перейдём к вам, господин Кьюсис. Как вы решили участвовать в марафоне?</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Μιχάλης Κιούσης</div><div class="trans-gr">Εγώ ήμουν αθλητής σε ομάδα και έτρεχα κάθε μέρα για να κάνω προπόνηση. Σταμάτησα να ασχολούμαι επαγγελματικά με τον αθλητισμό πριν από δύο χρόνια, όταν έγινα τριάντα χρονών. Συνεχίζω όμως να κάνω προπόνηση κάθε μέρα. Συνήθως τρέχω και εγώ το βράδυ, πριν πάω για ύπνο. Ο αθλητισμός είναι μέσα στη ζωή μου.</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">Я был спортсменом в команде и бегал каждый день. Два года назад, когда мне исполнилось тридцать, перестал заниматься профессионально. Но продолжаю тренироваться каждый день. Обычно тоже бегаю вечером, перед сном. Спорт — часть моей жизни.</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-gr">Παίρνω συχνά μέρος σε αγώνες δρόμου. Εδώ και τρία χρόνια παίρνω μέρος στον Μαραθώνιο της Αθήνας και αγωνίζομαι κι εγώ με την ομάδα του δήμου μου, του δήμου Περιστερίου.</div></div><div><div class="trans-ru">Часто участвую в соревнованиях по бегу. Уже три года участвую в Афинском марафоне и тоже соревнуюсь с командой своего муниципалитета — муниципалитета Перистери.</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Ведущий</div><div class="trans-gr">Φαντάζομαι λοιπόν ότι εσείς δεν συναντήσατε ιδιαίτερες δυσκολίες.</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">Полагаю, вы не столкнулись с особыми трудностями.</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Μιχάλης Κιούσης</div><div class="trans-gr">Κι όμως, είναι πολύ δύσκολο να τρέξεις 42 ολόκληρα χιλιόμετρα. Ήταν δύσκολο και για εμένα να τερματίσω. Τα κατάφερα όμως, όπως και όλη η ομάδα μου. Μετά τον τερματισμό το γιορτάσαμε όλοι μαζί.</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">И всё же, очень тяжело пробежать все 42 километра. Мне тоже было трудно добраться до финиша. Но я справился, как и вся команда. После финиша все вместе отпраздновали.</div></div></div>
+
+      <div class="trans-row"><div><div class="trans-lang">🇬🇷 Ведущий</div><div class="trans-gr">Σας ευχαριστώ πολύ και τους δύο. Σας εύχομαι καλή συνέχεια και σε νέους αγώνες.</div></div><div><div class="trans-lang">🇷🇺 Перевод</div><div class="trans-ru">Большое спасибо вам обоим. Желаю успехов и новых побед.</div></div></div>
+    </div>
+
+    <!-- СЛОВАРЬ -->
+    <div class="vocab-card">
+      <div class="vocab-title">Лексика из интервью</div>
+      <div class="vocab-grid">
+        <div class="vocab-item"><span class="vocab-gr">ο μαραθώνιος</span><span class="vocab-ru">— марафон</span></div>
+        <div class="vocab-item"><span class="vocab-gr">ο αγώνας δρόμου</span><span class="vocab-ru">— забег, беговые соревнования</span></div>
+        <div class="vocab-item"><span class="vocab-gr">ο δήμος</span><span class="vocab-ru">— муниципалитет, городской район</span></div>
+        <div class="vocab-item"><span class="vocab-gr">ο/η υπάλληλος γραφείου</span><span class="vocab-ru">— офисный сотрудник</span></div>
+        <div class="vocab-item"><span class="vocab-gr">ο/η κομμωτής/κομμώτρια</span><span class="vocab-ru">— парикмахер</span></div>
+        <div class="vocab-item"><span class="vocab-gr">παίρνω μέρος</span><span class="vocab-ru">— принимать участие</span></div>
+        <div class="vocab-item"><span class="vocab-gr">η προετοιμασία</span><span class="vocab-ru">— подготовка</span></div>
+        <div class="vocab-item"><span class="vocab-gr">η προπόνηση</span><span class="vocab-ru">— тренировка</span></div>
+        <div class="vocab-item"><span class="vocab-gr">προπονούμαι</span><span class="vocab-ru">— тренироваться</span></div>
+        <div class="vocab-item"><span class="vocab-gr">καθημερινά</span><span class="vocab-ru">— ежедневно</span></div>
+        <div class="vocab-item"><span class="vocab-gr">η διαδρομή</span><span class="vocab-ru">— маршрут, дистанция</span></div>
+        <div class="vocab-item"><span class="vocab-gr">το τέρμα</span><span class="vocab-ru">— финиш</span></div>
+        <div class="vocab-item"><span class="vocab-gr">τερματίζω</span><span class="vocab-ru">— финишировать</span></div>
+        <div class="vocab-item"><span class="vocab-gr">η αδιαθεσία</span><span class="vocab-ru">— недомогание</span></div>
+        <div class="vocab-item"><span class="vocab-gr">έντονος</span><span class="vocab-ru">— сильный, интенсивный</span></div>
+        <div class="vocab-item"><span class="vocab-gr">ο/η επαγγελματίας αθλητής</span><span class="vocab-ru">— профессиональный спортсмен</span></div>
+        <div class="vocab-item"><span class="vocab-gr">ασχολούμαι με</span><span class="vocab-ru">— заниматься чем-либо</span></div>
+        <div class="vocab-item"><span class="vocab-gr">τα κατάφερα</span><span class="vocab-ru">— мне удалось, справился/ась</span></div>
+        <div class="vocab-item"><span class="vocab-gr">γιορτάζω</span><span class="vocab-ru">— праздновать</span></div>
+        <div class="vocab-item"><span class="vocab-gr">η απόσταση</span><span class="vocab-ru">— расстояние, дистанция</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <script>
 // ── STATE ──
 const CORRECT = { '1':'E', '2':'G', '3':'H', '4':'A', '5':'F', '6':'B' };
@@ -819,6 +999,54 @@ function switchTab(id, btn) {
   document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
   btn.classList.add('active');
+}
+
+// placeholder
+function checkL2() {
+  const KEY = {
+    1:  {m:false, z:true},
+    2:  {m:true,  z:false},
+    3:  {m:false, z:true},
+    4:  {m:false, z:true},
+    5:  {m:true,  z:true},
+    6:  {m:true,  z:false},
+    7:  {m:true,  z:true},
+    8:  {m:true,  z:true},
+    9:  {m:false, z:true},
+    10: {m:true,  z:false}
+  };
+  let score = 0, total = 13;
+  for (let i = 1; i <= 10; i++) {
+    const cbM = document.getElementById('l2m' + i);
+    const cbZ = document.getElementById('l2z' + i);
+    const rowM = document.getElementById('l2row' + i + 'm');
+    const rowZ = document.getElementById('l2row' + i + 'z');
+    const okM = (cbM.checked === KEY[i].m);
+    const okZ = (cbZ.checked === KEY[i].z);
+    if (KEY[i].m) { score += okM ? 1 : 0; }
+    if (KEY[i].z) { score += okZ ? 1 : 0; }
+    rowM.style.background = KEY[i].m ? (okM ? '#d1fae5' : '#fef2f2') : '';
+    rowZ.style.background = KEY[i].z ? (okZ ? '#d1fae5' : '#fef2f2') : '';
+  }
+  const bar = document.getElementById('l2result');
+  bar.className = 'result-bar show ' + (score >= 11 ? 'good' : 'bad');
+  bar.textContent = `Результат: ${score} / ${total}`;
+}
+
+function resetL2() {
+  for (let i = 1; i <= 10; i++) {
+    document.getElementById('l2m' + i).checked = false;
+    document.getElementById('l2z' + i).checked = false;
+    document.getElementById('l2row' + i + 'm').style.background = '';
+    document.getElementById('l2row' + i + 'z').style.background = '';
+  }
+  const bar = document.getElementById('l2result');
+  bar.className = 'result-bar';
+}
+
+function toggleL2Key() {
+  const el = document.getElementById('l2key');
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
 </script>
 </body>
