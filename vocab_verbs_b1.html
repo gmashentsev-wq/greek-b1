@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPG B1 · Глаголы</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f0f0eb; --surface:#fff; --border:#e0ddd6;
+  --g1:#0d3b2e; --g2:#1a5c40; --g3:#2d8653; --sage:#74b99a;
+  --bl:#e8f5ee; --blm:#a7d4bb;
+  --text:#0f1a15; --t2:#2d4a3a; --muted:#6b7c72;
+  --sh:0 1px 4px rgba(13,59,46,.07); --shm:0 4px 16px rgba(13,59,46,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+
+.navbar{background:var(--g1);padding:0 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:90;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.nav-back{color:rgba(255,255,255,.6);text-decoration:none;font-size:.8rem;padding:.85rem 0;transition:color .15s}
+.nav-back:hover{color:#fff}
+.nav-logo{color:#fff;padding:.85rem 0}
+.nav-logo-text{font-weight:700;font-size:.95rem}
+.nav-logo-sub{font-size:.7rem;opacity:.6}
+
+.wrap{max-width:820px;margin:0 auto;padding:1.5rem 1.5rem 4rem}
+
+.top-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.4rem;margin-bottom:1.2rem;box-shadow:var(--sh)}
+.search{width:100%;padding:.6rem 1rem;font-size:1rem;font-family:inherit;border:1.5px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);outline:none;transition:border-color .15s;margin-bottom:.9rem}
+.search:focus{border-color:var(--g3);background:#fff}
+
+.filter-label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem}
+.pills{display:flex;gap:.4rem;flex-wrap:wrap}
+.pill{padding:.28rem .7rem;border-radius:20px;font-size:.73rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);color:var(--muted);font-family:inherit;transition:all .15s;white-space:nowrap}
+.pill:hover{border-color:var(--blm);color:var(--g1)}
+.pill.active{background:var(--g1);border-color:var(--g1);color:#fff}
+
+.meta{font-size:.75rem;color:var(--muted);margin-top:.7rem}
+.meta strong{color:var(--text)}
+
+.sec-hdr{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;margin:1.3rem 0 .4rem;border-bottom:2px solid var(--border)}
+.sec-icon{font-size:1.1rem}
+.sec-name{font-weight:700;font-size:.95rem;color:var(--g1)}
+.sec-cnt{font-size:.7rem;color:var(--muted);margin-left:auto;background:var(--bl);border-radius:12px;padding:.18rem .55rem;font-weight:600}
+
+.vrow{display:flex;align-items:baseline;gap:.6rem;padding:.5rem .8rem;border-radius:8px;background:var(--surface);border:1px solid var(--border);margin-bottom:.3rem}
+.vrow:hover{box-shadow:var(--shm);border-color:var(--blm)}
+.vgr{font-family:'Noto Serif',serif;font-size:.97rem;font-weight:600;color:var(--text);min-width:170px}
+.vru{font-size:.84rem;color:var(--t2)}
+.vrow.hidden{display:none}
+
+.sec-block.hidden{display:none}
+.empty{text-align:center;padding:2.5rem;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a class="nav-back" href="index.html">← Главная</a>
+  <div class="nav-logo">
+    <div class="nav-logo-text">Глаголы B1</div>
+    <div class="nav-logo-sub">205 глаголов греческого языка</div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="top-box">
+    <input class="search" id="search" type="text" placeholder="Поиск по греческому или русскому…" oninput="filter()">
+    <div class="filter-label">Категория</div>
+    <div class="pills" id="pills"></div>
+    <div class="meta" id="meta"></div>
+  </div>
+  <div id="list"></div>
+</div>
+
+<script>
+const CATS = [
+  { id:'base',  icon:'⚙️',  name:'Базовые' },
+  { id:'move',  icon:'🚶',  name:'Движение' },
+  { id:'daily', icon:'🏠',  name:'Быт' },
+  { id:'comm',  icon:'💬',  name:'Общение' },
+  { id:'work',  icon:'💼',  name:'Работа' },
+  { id:'edu',   icon:'📚',  name:'Образование' },
+  { id:'health',icon:'🏥',  name:'Здоровье' },
+  { id:'shop',  icon:'🛒',  name:'Покупки' },
+  { id:'feel',  icon:'❤️',  name:'Чувства' },
+  { id:'social',icon:'🤝',  name:'Общество' },
+  { id:'mind',  icon:'🧠',  name:'Мышление' },
+  { id:'home',  icon:'🏡',  name:'Жильё' },
+  { id:'nature',icon:'🌿',  name:'Природа' },
+];
+
+const VERBS = [
+  // БАЗОВЫЕ
+  {g:'είμαι',      r:'быть, являться',                c:'base'},
+  {g:'έχω',        r:'иметь',                         c:'base'},
+  {g:'γίνομαι',    r:'становиться, происходить',       c:'base'},
+  {g:'υπάρχω',     r:'существовать, иметься',          c:'base'},
+  {g:'μπορώ',      r:'мочь, уметь',                   c:'base'},
+  {g:'θέλω',       r:'хотеть',                        c:'base'},
+  {g:'χρειάζομαι', r:'нуждаться, нужен',              c:'base'},
+  {g:'αρέσω',      r:'нравиться',                     c:'base'},
+  {g:'φαίνομαι',   r:'казаться, выглядеть',            c:'base'},
+  {g:'πρέπει',     r:'нужно, должен',                 c:'base'},
+
+  // ДВИЖЕНИЕ
+  {g:'πηγαίνω',    r:'идти, ехать',                   c:'move'},
+  {g:'έρχομαι',    r:'приходить, приезжать',           c:'move'},
+  {g:'φεύγω',      r:'уходить, уезжать',              c:'move'},
+  {g:'φτάνω',      r:'приезжать, добираться',          c:'move'},
+  {g:'επιστρέφω',  r:'возвращаться',                  c:'move'},
+  {g:'ταξιδεύω',   r:'путешествовать',                c:'move'},
+  {g:'περπατώ',    r:'ходить пешком',                 c:'move'},
+  {g:'τρέχω',      r:'бежать',                        c:'move'},
+  {g:'οδηγώ',      r:'водить машину',                 c:'move'},
+  {g:'ανεβαίνω',   r:'подниматься',                   c:'move'},
+  {g:'κατεβαίνω',  r:'спускаться',                    c:'move'},
+  {g:'μπαίνω',     r:'входить',                       c:'move'},
+  {g:'βγαίνω',     r:'выходить',                      c:'move'},
+  {g:'περνώ',      r:'проходить, проезжать',           c:'move'},
+  {g:'σταματώ',    r:'останавливаться',               c:'move'},
+  {g:'στρίβω',     r:'поворачивать',                  c:'move'},
+  {g:'ξεκινώ',     r:'отправляться, начинать',         c:'move'},
+  {g:'πετώ',       r:'летать',                        c:'move'},
+  {g:'κολυμπώ',    r:'плавать',                       c:'move'},
+  {g:'διασχίζω',   r:'пересекать',                    c:'move'},
+
+  // БЫТ
+  {g:'ξυπνώ',      r:'просыпаться',                   c:'daily'},
+  {g:'σηκώνομαι',  r:'вставать',                      c:'daily'},
+  {g:'κοιμάμαι',   r:'спать',                         c:'daily'},
+  {g:'τρώω',       r:'есть, кушать',                  c:'daily'},
+  {g:'πίνω',       r:'пить',                          c:'daily'},
+  {g:'πλένομαι',   r:'мыться',                        c:'daily'},
+  {g:'ντύνομαι',   r:'одеваться',                     c:'daily'},
+  {g:'μαγειρεύω',  r:'готовить еду',                  c:'daily'},
+  {g:'καθαρίζω',   r:'убирать, чистить',              c:'daily'},
+  {g:'σκουπίζω',   r:'подметать, вытирать',            c:'daily'},
+  {g:'πλένω',      r:'мыть (что-то)',                 c:'daily'},
+  {g:'σιδερώνω',   r:'гладить одежду',                c:'daily'},
+  {g:'ψωνίζω',     r:'делать покупки',                c:'daily'},
+  {g:'ανοίγω',     r:'открывать',                     c:'daily'},
+  {g:'κλείνω',     r:'закрывать, бронировать',         c:'daily'},
+  {g:'βάζω',       r:'класть, ставить',               c:'daily'},
+  {g:'παίρνω',     r:'брать, получать',               c:'daily'},
+  {g:'δίνω',       r:'давать',                        c:'daily'},
+  {g:'φέρνω',      r:'приносить',                     c:'daily'},
+  {g:'αφήνω',      r:'оставлять, бросать',            c:'daily'},
+  {g:'ξεκουράζομαι',r:'отдыхать',                     c:'daily'},
+  {g:'κάνω',       r:'делать',                        c:'daily'},
+  {g:'χρησιμοποιώ',r:'использовать',                  c:'daily'},
+  {g:'τακτοποιώ',  r:'приводить в порядок',           c:'daily'},
+  {g:'ετοιμάζω',   r:'готовить, подготавливать',       c:'daily'},
+
+  // ОБЩЕНИЕ
+  {g:'μιλώ',       r:'говорить, разговаривать',        c:'comm'},
+  {g:'λέω',        r:'говорить, сказать',             c:'comm'},
+  {g:'ρωτώ',       r:'спрашивать',                    c:'comm'},
+  {g:'απαντώ',     r:'отвечать',                      c:'comm'},
+  {g:'εξηγώ',      r:'объяснять',                     c:'comm'},
+  {g:'περιγράφω',  r:'описывать',                     c:'comm'},
+  {g:'συζητώ',     r:'обсуждать',                     c:'comm'},
+  {g:'γράφω',      r:'писать',                        c:'comm'},
+  {g:'διαβάζω',    r:'читать',                        c:'comm'},
+  {g:'τηλεφωνώ',   r:'звонить по телефону',           c:'comm'},
+  {g:'στέλνω',     r:'отправлять',                    c:'comm'},
+  {g:'ακούω',      r:'слушать, слышать',              c:'comm'},
+  {g:'φωνάζω',     r:'кричать, звать',                c:'comm'},
+  {g:'διηγούμαι',  r:'рассказывать',                  c:'comm'},
+  {g:'αναφέρω',    r:'упоминать, сообщать',            c:'comm'},
+  {g:'επικοινωνώ', r:'общаться, связываться',          c:'comm'},
+  {g:'καλώ',       r:'звонить, приглашать',            c:'comm'},
+  {g:'δηλώνω',     r:'заявлять, декларировать',        c:'comm'},
+  {g:'ζητώ',       r:'просить, требовать',             c:'comm'},
+  {g:'προτείνω',   r:'предлагать',                    c:'comm'},
+
+  // РАБОТА
+  {g:'εργάζομαι',  r:'работать',                      c:'work'},
+  {g:'δουλεύω',    r:'работать (разг.)',               c:'work'},
+  {g:'αναζητώ',    r:'искать',                        c:'work'},
+  {g:'προσλαμβάνω',r:'нанимать',                      c:'work'},
+  {g:'απολύω',     r:'увольнять',                     c:'work'},
+  {g:'πληρώνω',    r:'платить',                       c:'work'},
+  {g:'κερδίζω',    r:'зарабатывать, выигрывать',       c:'work'},
+  {g:'διευθύνω',   r:'руководить',                    c:'work'},
+  {g:'οργανώνω',   r:'организовывать',               c:'work'},
+  {g:'σχεδιάζω',   r:'планировать, проектировать',     c:'work'},
+  {g:'αποφασίζω',  r:'принимать решение',             c:'work'},
+  {g:'φτιάχνω',    r:'делать, создавать',             c:'work'},
+  {g:'επισκευάζω', r:'ремонтировать',                 c:'work'},
+  {g:'συνεργάζομαι',r:'сотрудничать',                 c:'work'},
+  {g:'βοηθώ',      r:'помогать',                      c:'work'},
+  {g:'παραδίδω',   r:'сдавать, передавать',            c:'work'},
+  {g:'ασχολούμαι', r:'заниматься чем-то',             c:'work'},
+  {g:'αντιμετωπίζω',r:'справляться, сталкиваться',    c:'work'},
+  {g:'παράγω',     r:'производить',                   c:'work'},
+  {g:'μισθώνω',    r:'арендовать, нанимать',          c:'work'},
+
+  // ОБРАЗОВАНИЕ
+  {g:'μαθαίνω',    r:'учиться, узнавать',             c:'edu'},
+  {g:'διδάσκω',    r:'преподавать',                   c:'edu'},
+  {g:'σπουδάζω',   r:'учиться (в вузе)',              c:'edu'},
+  {g:'εξετάζω',    r:'проверять, экзаменовать',        c:'edu'},
+  {g:'περνώ',      r:'сдавать экзамен',               c:'edu'},
+  {g:'κόβω',       r:'срезать, не сдать экзамен',      c:'edu'},
+  {g:'κατανοώ',    r:'понимать',                      c:'edu'},
+  {g:'θυμάμαι',    r:'помнить',                       c:'edu'},
+  {g:'ξεχνώ',      r:'забывать',                      c:'edu'},
+  {g:'επαναλαμβάνω',r:'повторять',                    c:'edu'},
+  {g:'ασκούμαι',   r:'практиковаться, упражняться',    c:'edu'},
+  {g:'γνωρίζω',    r:'знать, быть знакомым',          c:'edu'},
+  {g:'αποκτώ',     r:'приобретать',                   c:'edu'},
+  {g:'αναπτύσσω',  r:'развивать',                     c:'edu'},
+  {g:'αξιολογώ',   r:'оценивать',                     c:'edu'},
+
+  // ЗДОРОВЬЕ
+  {g:'αρρωσταίνω', r:'заболевать',                    c:'health'},
+  {g:'αναρρώνω',   r:'выздоравливать',               c:'health'},
+  {g:'πονώ',       r:'болеть (испытывать боль)',       c:'health'},
+  {g:'θεραπεύω',   r:'лечить',                        c:'health'},
+  {g:'συνταγογραφώ',r:'выписывать рецепт',            c:'health'},
+  {g:'νοσηλεύομαι',r:'лечиться в больнице',           c:'health'},
+  {g:'γυμνάζομαι', r:'заниматься спортом',            c:'health'},
+  {g:'κουράζομαι', r:'уставать',                      c:'health'},
+  {g:'ζαλίζομαι',  r:'чувствовать головокружение',    c:'health'},
+  {g:'βήχω',       r:'кашлять',                       c:'health'},
+  {g:'πάσχω',      r:'страдать от болезни',           c:'health'},
+  {g:'χειρουργώ',  r:'оперировать',                   c:'health'},
+  {g:'αδυνατίζω',  r:'худеть',                        c:'health'},
+  {g:'παχαίνω',    r:'набирать вес',                  c:'health'},
+  {g:'διατρέφομαι',r:'питаться',                      c:'health'},
+
+  // ПОКУПКИ
+  {g:'αγοράζω',    r:'покупать',                      c:'shop'},
+  {g:'πουλώ',      r:'продавать',                     c:'shop'},
+  {g:'χρεώνω',     r:'начислять, брать плату',         c:'shop'},
+  {g:'κοστίζω',    r:'стоить (о цене)',               c:'shop'},
+  {g:'αξίζει',     r:'стоить, быть ценным',           c:'shop'},
+  {g:'ανταλλάσσω', r:'обменивать',                    c:'shop'},
+  {g:'επιστρέφω',  r:'возвращать товар',              c:'shop'},
+  {g:'παραγγέλνω', r:'заказывать',                    c:'shop'},
+  {g:'δανείζω',    r:'одалживать',                    c:'shop'},
+  {g:'χρωστώ',     r:'быть должным',                  c:'shop'},
+  {g:'εξοικονομώ', r:'экономить',                     c:'shop'},
+  {g:'επενδύω',    r:'инвестировать',                 c:'shop'},
+  {g:'κρατώ',      r:'держать, хранить',              c:'shop'},
+  {g:'διαθέτω',    r:'располагать, иметь в наличии',  c:'shop'},
+  {g:'συγκρίνω',   r:'сравнивать',                    c:'shop'},
+
+  // ЧУВСТВА
+  {g:'αγαπώ',      r:'любить',                        c:'feel'},
+  {g:'μισώ',       r:'ненавидеть',                    c:'feel'},
+  {g:'φοβάμαι',    r:'бояться',                       c:'feel'},
+  {g:'χαίρομαι',   r:'радоваться',                    c:'feel'},
+  {g:'λυπάμαι',    r:'расстраиваться, сожалеть',       c:'feel'},
+  {g:'θυμώνω',     r:'злиться',                       c:'feel'},
+  {g:'ανησυχώ',    r:'беспокоиться',                  c:'feel'},
+  {g:'εκπλήσσομαι',r:'удивляться',                    c:'feel'},
+  {g:'ενθουσιάζομαι',r:'восхищаться, быть в восторге',c:'feel'},
+  {g:'νιώθω',      r:'чувствовать',                   c:'feel'},
+  {g:'ντρέπομαι',  r:'стесняться',                    c:'feel'},
+  {g:'στεναχωριέμαι',r:'грустить, расстраиваться',    c:'feel'},
+  {g:'απογοητεύομαι',r:'разочаровываться',            c:'feel'},
+  {g:'χαλαρώνω',   r:'расслабляться',                 c:'feel'},
+  {g:'κλαίω',      r:'плакать',                       c:'feel'},
+  {g:'γελώ',       r:'смеяться',                      c:'feel'},
+  {g:'χαμογελώ',   r:'улыбаться',                     c:'feel'},
+  {g:'ονειρεύομαι',r:'мечтать, видеть сны',           c:'feel'},
+  {g:'ερωτεύομαι', r:'влюбляться',                    c:'feel'},
+  {g:'αγχώνομαι',  r:'нервничать, тревожиться',        c:'feel'},
+
+  // ОБЩЕСТВО
+  {g:'γνωρίζομαι', r:'знакомиться',                   c:'social'},
+  {g:'συναντώ',    r:'встречать, встречаться',         c:'social'},
+  {g:'αποχαιρετώ', r:'прощаться',                     c:'social'},
+  {g:'προσκαλώ',   r:'приглашать',                    c:'social'},
+  {g:'επισκέπτομαι',r:'навещать',                     c:'social'},
+  {g:'φιλοξενώ',   r:'принимать гостей',              c:'social'},
+  {g:'ευχαριστώ',  r:'благодарить',                   c:'social'},
+  {g:'συγχωρώ',    r:'прощать',                       c:'social'},
+  {g:'συγχαίρω',   r:'поздравлять',                   c:'social'},
+  {g:'παντρεύομαι',r:'жениться, выходить замуж',       c:'social'},
+  {g:'χωρίζω',     r:'разводиться, расставаться',      c:'social'},
+  {g:'αρραβωνιάζομαι',r:'обручаться',                 c:'social'},
+  {g:'χαιρετώ',    r:'здороваться',                   c:'social'},
+  {g:'παρακαλώ',   r:'просить, пожалуйста',            c:'social'},
+  {g:'φροντίζω',   r:'заботиться',                    c:'social'},
+
+  // МЫШЛЕНИЕ
+  {g:'σκέφτομαι',  r:'думать, размышлять',            c:'mind'},
+  {g:'καταλαβαίνω',r:'понимать',                      c:'mind'},
+  {g:'πιστεύω',    r:'верить, думать',                c:'mind'},
+  {g:'νομίζω',     r:'думать, считать',               c:'mind'},
+  {g:'υποθέτω',    r:'предполагать',                  c:'mind'},
+  {g:'αποδέχομαι', r:'принимать, соглашаться',         c:'mind'},
+  {g:'αρνούμαι',   r:'отказываться',                  c:'mind'},
+  {g:'συμφωνώ',    r:'соглашаться',                   c:'mind'},
+  {g:'διαφωνώ',    r:'не соглашаться',                c:'mind'},
+  {g:'επιλέγω',    r:'выбирать',                      c:'mind'},
+  {g:'βλέπω',      r:'видеть',                        c:'mind'},
+  {g:'κοιτάζω',    r:'смотреть',                      c:'mind'},
+  {g:'παρατηρώ',   r:'наблюдать, замечать',            c:'mind'},
+  {g:'αναγνωρίζω', r:'узнавать, признавать',           c:'mind'},
+  {g:'αντιλαμβάνομαι',r:'воспринимать, осознавать',   c:'mind'},
+
+  // ЖИЛЬЁ
+  {g:'κατοικώ',    r:'жить, проживать',               c:'home'},
+  {g:'νοικιάζω',   r:'снимать / сдавать жильё',       c:'home'},
+  {g:'μετακομίζω', r:'переезжать',                    c:'home'},
+  {g:'διακοσμώ',   r:'украшать',                      c:'home'},
+  {g:'επιδιορθώνω',r:'ремонтировать',                 c:'home'},
+  {g:'χτίζω',      r:'строить',                       c:'home'},
+  {g:'βάφω',       r:'красить',                       c:'home'},
+  {g:'φυτεύω',     r:'сажать (растения)',              c:'home'},
+  {g:'ποτίζω',     r:'поливать',                      c:'home'},
+  {g:'αποθηκεύω',  r:'хранить',                       c:'home'},
+
+  // ПРИРОДА
+  {g:'καλλιεργώ',  r:'выращивать, возделывать',        c:'nature'},
+  {g:'μαζεύω',     r:'собирать',                      c:'nature'},
+  {g:'μολύνω',     r:'загрязнять',                    c:'nature'},
+  {g:'ανακυκλώνω', r:'перерабатывать (отходы)',        c:'nature'},
+  {g:'εξοικονομώ', r:'экономить (ресурсы)',            c:'nature'},
+];
+
+let activeCat = 'all';
+
+function buildPills() {
+  const p = document.getElementById('pills');
+  let html = `<button class="pill active" onclick="setCat('all',this)">Все (${VERBS.length})</button>`;
+  CATS.forEach(c => {
+    const n = VERBS.filter(v => v.c === c.id).length;
+    html += `<button class="pill" onclick="setCat('${c.id}',this)">${c.icon} ${c.name} (${n})</button>`;
+  });
+  p.innerHTML = html;
+}
+
+function setCat(id, btn) {
+  activeCat = id;
+  document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  filter();
+}
+
+function filter() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  let visible = 0;
+
+  CATS.forEach(c => {
+    const block = document.getElementById('sec-' + c.id);
+    if (!block) return;
+    let secVisible = 0;
+    block.querySelectorAll('.vrow').forEach(row => {
+      const gr = row.dataset.gr;
+      const ru = row.dataset.ru;
+      const cat = row.dataset.cat;
+      const catOk = activeCat === 'all' || cat === activeCat;
+      const qOk = !q || gr.includes(q) || ru.includes(q);
+      if (catOk && qOk) {
+        row.classList.remove('hidden');
+        secVisible++;
+        visible++;
+      } else {
+        row.classList.add('hidden');
+      }
+    });
+    const secBlock = block.closest('.sec-block');
+    if (secVisible === 0) secBlock.classList.add('hidden');
+    else {
+      secBlock.classList.remove('hidden');
+      block.previousElementSibling.querySelector('.sec-cnt').textContent = secVisible;
+    }
+  });
+
+  document.getElementById('meta').innerHTML = `Показано: <strong>${visible}</strong> из <strong>${VERBS.length}</strong>`;
+}
+
+function buildList() {
+  const list = document.getElementById('list');
+  let html = '';
+  CATS.forEach(c => {
+    const verbs = VERBS.filter(v => v.c === c.id);
+    html += `<div class="sec-block">
+      <div class="sec-hdr">
+        <span class="sec-icon">${c.icon}</span>
+        <span class="sec-name">${c.name}</span>
+        <span class="sec-cnt">${verbs.length}</span>
+      </div>
+      <div id="sec-${c.id}">`;
+    verbs.forEach(v => {
+      html += `<div class="vrow" data-gr="${v.g.toLowerCase()}" data-ru="${v.r.toLowerCase()}" data-cat="${v.c}">
+        <span class="vgr">${v.g}</span>
+        <span class="vru">${v.r}</span>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+  list.innerHTML = html;
+}
+
+buildPills();
+buildList();
+filter();
+</script>
+</body>
+</html>
