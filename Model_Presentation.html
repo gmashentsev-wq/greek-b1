@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subscription App — Revenue Model & Forecast 2025–2027</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg:       #f4f5f7;
+  --surface:  #ffffff;
+  --surface2: #eef0f4;
+  --border:   #d0d5de;
+  --border2:  #b8bfcc;
+  --text:     #1a1f2e;
+  --text-2:   #4a5068;
+  --text-3:   #8892a4;
+  --navy:     #1a2744;
+  --navy-mid: #243560;
+  --blue:     #2c4fa3;
+  --blue-lt:  #dde5f6;
+  --slate:    #5a6a8a;
+  --red:      #c0392b;
+  --red-lt:   #faeaea;
+  --amber:    #9a6200;
+  --amber-lt: #fdf3e0;
+  --green:    #1a6644;
+  --green-lt: #e3f2ec;
+  --rule:     #d0d5de;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:200;
+  height: 44px;
+  background: var(--navy);
+  display: flex; align-items: center;
+  padding: 0 28px; gap: 20px;
+  border-bottom: 1px solid var(--navy-mid);
+}
+.nav-brand {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+.nav-dots { display:flex; gap:5px; flex:1; }
+.nav-dot {
+  width:6px; height:6px; border-radius:50%;
+  background: rgba(255,255,255,0.2); cursor:pointer;
+  transition: background 0.15s;
+}
+.nav-dot.active { background:#fff; }
+.nav-dot:hover { background: rgba(255,255,255,0.5); }
+.nav-controls { display:flex; align-items:center; gap:12px; }
+.nav-btn {
+  background: none; border: 1px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.8); padding: 3px 12px; cursor:pointer;
+  font-family: 'IBM Plex Mono', monospace; font-size:10px;
+  letter-spacing: 0.04em; transition: all 0.15s; border-radius:2px;
+}
+.nav-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.5); }
+.nav-counter {
+  font-family: 'IBM Plex Mono', monospace; font-size:10px;
+  color: rgba(255,255,255,0.35); min-width:40px; text-align:center;
+}
+
+/* ── DECK ── */
+.deck { padding-top:44px; }
+
+.slide {
+  display: none; opacity:0;
+  min-height: calc(100vh - 44px);
+  padding: 44px 52px 36px;
+  flex-direction: column;
+  transition: opacity 0.25s ease;
+  background: var(--bg);
+}
+.slide.active { display:flex; }
+.slide.visible { opacity:1; }
+
+/* slide variants */
+.slide-hero { background: var(--navy); }
+.slide-white { background: var(--surface); }
+.slide-gray  { background: var(--bg); }
+
+/* ── TYPE ── */
+.label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 14px;
+}
+.label-inv { color: rgba(255,255,255,0.4); }
+
+h1 {
+  font-size: clamp(32px,4vw,56px); font-weight:300;
+  line-height:1.1; letter-spacing:-0.02em; color: var(--surface);
+}
+h1 strong { font-weight:600; }
+h2 {
+  font-size: clamp(22px,2.8vw,36px); font-weight:300;
+  line-height:1.15; letter-spacing:-0.02em;
+  color: var(--navy); margin-bottom: 28px;
+}
+h2 strong { font-weight:600; }
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+/* ── GRID UTILITIES ── */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.g3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.g4 { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.g5 { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+
+/* ── STAT CARD ── */
+.kpi {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 18px 20px;
+}
+.kpi.dark { background: var(--navy-mid); border-color: transparent; }
+.kpi-label {
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  letter-spacing:0.08em; text-transform:uppercase;
+  color: var(--text-3); margin-bottom:8px;
+}
+.kpi.dark .kpi-label { color:rgba(255,255,255,0.4); }
+.kpi-value {
+  font-size: clamp(20px,2.2vw,28px); font-weight:300;
+  letter-spacing:-0.02em; line-height:1; color:var(--navy);
+}
+.kpi.dark .kpi-value { color:#fff; }
+.kpi-sub { font-size:11px; color:var(--text-3); margin-top:5px; }
+.kpi.dark .kpi-sub { color:rgba(255,255,255,0.4); }
+.up  { color: var(--green) !important; }
+.dn  { color: var(--red) !important; }
+.nt  { color: var(--amber) !important; }
+.dim { color: var(--text-3) !important; }
+
+/* ── DIVIDER ── */
+.rule { height:1px; background:var(--rule); margin:20px 0; }
+
+/* ── TABLE ── */
+.ft {
+  width:100%; border-collapse:collapse;
+  font-size:12px;
+}
+.ft thead th {
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  letter-spacing:0.08em; text-transform:uppercase; color:var(--text-3);
+  padding:7px 12px; text-align:right; border-bottom:2px solid var(--navy);
+  background:var(--surface);
+}
+.ft thead th:first-child { text-align:left; }
+.ft tbody td {
+  padding:8px 12px; text-align:right;
+  font-family:'IBM Plex Mono',monospace; font-size:11px;
+  border-bottom:1px solid var(--border); background:var(--surface);
+}
+.ft tbody td:first-child {
+  text-align:left; font-family:'IBM Plex Sans',sans-serif;
+  font-size:12px; color:var(--text);
+}
+.ft tbody tr.total td {
+  font-weight:500; border-top:1px solid var(--navy);
+  border-bottom:2px solid var(--navy);
+}
+.ft tbody tr.subtotal td { font-weight:500; border-bottom:1px solid var(--border2); }
+.ft tbody tr.sub td { color:var(--text-2); font-size:10.5px; }
+.ft tbody tr.sub td:first-child { padding-left:24px; color:var(--text-2); }
+.ft tbody tr.section-head td {
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--text-3); background:var(--surface2);
+  padding:6px 12px; border-bottom:none;
+}
+.ft .pos { color:var(--green); }
+.ft .neg { color:var(--red); }
+.ft .dim { color:var(--text-3); }
+
+/* ── SCENARIO CARDS ── */
+.sc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--border); }
+.sc-card { padding:28px 24px; border-right:1px solid var(--border); }
+.sc-card:last-child { border-right:none; }
+.sc-card.active-scen { background:var(--surface); }
+.sc-card.passive { background:var(--surface2); }
+.sc-tag {
+  display:inline-block; font-family:'IBM Plex Mono',monospace;
+  font-size:8px; letter-spacing:0.12em; text-transform:uppercase;
+  padding:3px 8px; margin-bottom:14px;
+}
+.sc-tag.base { background:var(--navy); color:#fff; }
+.sc-tag.bear { background:var(--red-lt); color:var(--red); border:1px solid var(--red); }
+.sc-tag.bull { background:var(--green-lt); color:var(--green); border:1px solid var(--green); }
+.sc-title { font-size:18px; font-weight:300; margin-bottom:4px; color:var(--navy); }
+.sc-desc  { font-size:11px; color:var(--text-3); margin-bottom:20px; }
+.sc-metric { margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid var(--border); }
+.sc-metric:last-of-type { border-bottom:none; }
+.sc-mlab { font-size:10px; color:var(--text-3); }
+.sc-mval { font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:500; color:var(--navy); }
+.sc-lever {
+  margin-top:16px; padding-top:16px; border-top:1px solid var(--border);
+  font-size:11px; color:var(--text-2);
+}
+.sc-lever div { margin-bottom:5px; display:flex; gap:8px; }
+.sc-lever .k { color:var(--text-3); min-width:90px; font-size:10px; }
+.sc-lever .v { font-weight:500; font-size:11px; color:var(--text); }
+
+/* ── CHANNEL CARD ── */
+.ch-card { background:var(--surface); border:1px solid var(--border); padding:20px; }
+.ch-name {
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--text-3); margin-bottom:14px;
+  padding-bottom:10px; border-bottom:1px solid var(--border);
+}
+.ch-row { display:flex; justify-content:space-between; align-items:baseline;
+          margin-bottom:7px; padding-bottom:7px; border-bottom:1px solid var(--surface2); }
+.ch-row:last-child { border-bottom:none; margin-bottom:0; }
+.ch-rl { font-size:11px; color:var(--text-2); }
+.ch-rv { font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:500; }
+
+/* ── COHORT BARS ── */
+.cohort-wrap { display:flex; align-items:flex-end; gap:5px; height:110px; margin:16px 0 6px; }
+.c-col { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; }
+.c-bar { width:100%; background:var(--blue); transition:height 0.7s ease; min-height:2px; }
+.c-bar.warn { background:var(--slate); }
+.c-bar.low  { background:var(--border2); }
+.c-val { font-family:'IBM Plex Mono',monospace; font-size:8px; color:var(--text-3); margin-bottom:3px; }
+.c-lbl { font-family:'IBM Plex Mono',monospace; font-size:8px; color:var(--text-3); margin-top:4px; }
+
+/* ── INSIGHT STRIP ── */
+.insight-strip { display:flex; gap:0; border:1px solid var(--border); }
+.in-cell {
+  flex:1; padding:16px 18px;
+  border-right:1px solid var(--border);
+}
+.in-cell:last-child { border-right:none; }
+.in-num {
+  font-size:clamp(20px,2vw,28px); font-weight:300;
+  letter-spacing:-0.02em; color:var(--navy);
+  margin-bottom:6px; font-family:'IBM Plex Mono',monospace;
+}
+.in-txt { font-size:11px; color:var(--text-2); line-height:1.5; }
+
+/* ── FLOW STEPS ── */
+.flow { display:flex; align-items:stretch; border:1px solid var(--border); }
+.flow-step {
+  flex:1; padding:14px 16px; background:var(--surface);
+  border-right:1px solid var(--border);
+}
+.flow-step:last-child { border-right:none; }
+.flow-step-num {
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  color:var(--text-3); margin-bottom:4px;
+}
+.flow-step-title { font-size:12px; font-weight:500; margin-bottom:2px; color:var(--navy); }
+.flow-step-body  { font-size:11px; color:var(--text-2); }
+
+/* ── OBS GRID ── */
+.obs-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.obs {
+  background:var(--surface); border:1px solid var(--border);
+  padding:14px 16px;
+}
+.obs-n { font-family:'IBM Plex Mono',monospace; font-size:8px; color:var(--text-3); margin-bottom:6px; }
+.obs-t { font-size:12px; font-weight:500; margin-bottom:4px; color:var(--navy); }
+.obs-b { font-size:11px; color:var(--text-2); line-height:1.4; }
+.tag {
+  display:inline-block; font-family:'IBM Plex Mono',monospace;
+  font-size:8px; letter-spacing:0.06em; padding:2px 6px;
+  margin-top:6px; text-transform:uppercase;
+}
+.tag-r { background:var(--red-lt); color:var(--red); }
+.tag-g { background:var(--green-lt); color:var(--green); }
+.tag-n { background:var(--surface2); color:var(--text-3); }
+
+/* ── FOOTER ── */
+.sf {
+  margin-top:auto; padding-top:18px;
+  border-top:1px solid var(--border);
+  display:flex; justify-content:space-between;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:9px; color:var(--text-3);
+}
+.slide-hero .sf { border-color:rgba(255,255,255,0.12); color:rgba(255,255,255,0.3); }
+
+/* ── KEY HINT ── */
+.hint {
+  position:fixed; bottom:14px; right:18px;
+  font-family:'IBM Plex Mono',monospace; font-size:9px;
+  color:var(--text-3); pointer-events:none;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">Revenue Model · 2025–2027</span>
+  <div class="nav-dots" id="navDots"></div>
+  <div class="nav-controls">
+    <button class="nav-btn" onclick="prevSlide()">← Prev</button>
+    <span class="nav-counter" id="ctr">1 / 10</span>
+    <button class="nav-btn" onclick="nextSlide()">Next →</button>
+  </div>
+</nav>
+
+<div class="deck">
+
+<!-- ══════════════════════════════════════════
+     SLIDE 1 — TITLE
+══════════════════════════════════════════ -->
+<div class="slide slide-hero" id="s1">
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;max-width:700px">
+    <div class="label label-inv" style="margin-bottom:20px">Confidential · FP&A · 2025</div>
+    <h1>Subscription App<br><strong>Revenue Model &amp;<br>Forecast 2025–2027</strong></h1>
+    <div style="height:1px;background:rgba(255,255,255,0.15);margin:28px 0"></div>
+    <p style="color:rgba(255,255,255,0.55);font-size:13px;line-height:1.7;max-width:500px">
+      Three-scenario revenue forecast for a mobile subscription app
+      across iOS, Android, and Web channels. Built on 32 months of
+      historical P&amp;L actuals, operational metrics, and 20-cohort
+      retention data.
+    </p>
+    <div style="display:flex;gap:32px;margin-top:36px">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:4px">Historical data through</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#fff">August 2025</div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:4px">Forecast horizon</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#fff">December 2027</div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:4px">Scenarios</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#fff">Base · Bear · Bull</div>
+      </div>
+    </div>
+  </div>
+  <div class="sf">
+    <span>Slide 1 of 10</span>
+    <span>Navigate with ← → arrow keys or Prev / Next</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 2 — EXECUTIVE SUMMARY
+══════════════════════════════════════════ -->
+<div class="slide slide-white" id="s2">
+  <div class="label">Executive Summary</div>
+  <h2><strong>The business has tripled in two years.</strong><br>2025 is the first Contribution-positive year.</h2>
+
+  <div class="g4" style="margin-bottom:20px">
+    <div class="kpi">
+      <div class="kpi-label">2023 Net Revenue</div>
+      <div class="kpi-value">$11.3M</div>
+      <div class="kpi-sub">Base year</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">2024 Net Revenue</div>
+      <div class="kpi-value">$31.0M</div>
+      <div class="kpi-sub up">+175% YoY</div>
+    </div>
+    <div class="kpi" style="border-color:var(--blue);border-width:1.5px">
+      <div class="kpi-label">2025 YTD (Jan–Aug)</div>
+      <div class="kpi-value">$26.5M</div>
+      <div class="kpi-sub up">First Contribution+ period</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">GP Margin (2025 YTD)</div>
+      <div class="kpi-value">84.6%</div>
+      <div class="kpi-sub up">+11.7pp vs 2023</div>
+    </div>
+  </div>
+
+  <div class="insight-strip">
+    <div class="in-cell">
+      <div class="in-num">82–85%</div>
+      <div class="in-txt">Gross profit margin — fundamentally healthy unit economics. Negative EBITDA reflects deliberate UAC investment, not structural weakness.</div>
+    </div>
+    <div class="in-cell">
+      <div class="in-num">79.2%</div>
+      <div class="in-txt">UAC as % of net revenue (2025 YTD), down from 96.6% in 2023. Every scenario hinges on this ratio. The growth model is UAC-driven by design.</div>
+    </div>
+    <div class="in-cell">
+      <div class="in-num nt">16.4%</div>
+      <div class="in-txt">Monthly churn on Web — which now drives 66% of revenue. Highest-leverage improvement available. A 5pp reduction adds ~$3–5M revenue at zero incremental spend.</div>
+    </div>
+    <div class="in-cell">
+      <div class="in-num up">2.6×</div>
+      <div class="in-txt">12-month eROAS on iOS / Android. Each $1 of mobile acquisition returns $2.60 in net LTV within one year. Payback in 1.6 months.</div>
+    </div>
+  </div>
+
+  <div class="sf">
+    <span>Slide 2 of 10</span>
+    <span>All figures from verified historical P&amp;L and operational metrics, Jan 2023 – Aug 2025</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 3 — HISTORICAL P&L
+══════════════════════════════════════════ -->
+<div class="slide slide-gray" id="s3">
+  <div class="label">Historical Performance · Jan 2023 – Aug 2025</div>
+  <h2><strong>P&amp;L Actuals</strong> · 2023–2025 YTD</h2>
+
+  <table class="ft">
+    <thead>
+      <tr>
+        <th style="width:200px">Line item</th>
+        <th>2023 Actual</th>
+        <th>2024 Actual</th>
+        <th>2025 (Jan–Aug)</th>
+        <th>2024 vs 2023</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="section-head"><td colspan="5">Revenue</td></tr>
+      <tr class="total"><td>Gross Billing</td><td>$12.7M</td><td>$33.9M</td><td>$29.3M</td><td class="up">+167%</td></tr>
+      <tr class="sub"><td>Refunds &amp; Platform Taxes</td><td class="neg">(1.5M)</td><td class="neg">(2.9M)</td><td class="neg">(2.8M)</td><td class="dim">—</td></tr>
+      <tr class="total"><td>Net Revenue</td><td>$11.3M</td><td>$31.0M</td><td>$26.5M</td><td class="up">+175%</td></tr>
+      <tr class="section-head"><td colspan="5">Cost Structure</td></tr>
+      <tr class="sub"><td>Store Commissions</td><td class="neg">(3.0M)</td><td class="neg">(5.7M)</td><td class="neg">(4.4M)</td><td class="dim">—</td></tr>
+      <tr class="sub"><td>IT Infrastructure</td><td class="neg">(0.0M)</td><td class="neg">(0.3M)</td><td class="neg">(0.3M)</td><td class="dim">—</td></tr>
+      <tr class="total"><td>Gross Profit</td><td>$8.2M</td><td>$25.0M</td><td>$22.4M</td><td class="up">+205%</td></tr>
+      <tr class="sub"><td>GP Margin %</td><td>72.9%</td><td>80.7%</td><td>84.6%</td><td class="up">+7.8pp</td></tr>
+      <tr class="section-head"><td colspan="5">Marketing &amp; OpEx</td></tr>
+      <tr><td>User Acquisition (UAC)</td><td class="neg">(10.9M)</td><td class="neg">(26.3M)</td><td class="neg">(21.0M)</td><td class="dim">—</td></tr>
+      <tr class="sub"><td>UAC % of Net Revenue</td><td class="neg">96.6%</td><td class="neg">84.7%</td><td class="neg">79.2%</td><td class="up">−11.9pp</td></tr>
+      <tr class="total"><td>Contribution</td><td class="neg">(2.7M)</td><td class="neg">(1.2M)</td><td class="up pos">+1.4M</td><td class="up">▲ First positive</td></tr>
+      <tr class="sub"><td>Contribution Margin</td><td class="neg">−23.7%</td><td class="neg">−4.0%</td><td class="up pos">+5.4%</td><td class="up">+29pp</td></tr>
+      <tr class="sub"><td>S&amp;M / R&amp;D / G&amp;A</td><td class="neg">(3.7M)</td><td class="neg">(6.0M)</td><td class="neg">(9.6M)</td><td class="dim">—</td></tr>
+      <tr class="total"><td>EBITDA Adjusted</td><td class="neg">(6.4M)</td><td class="neg">(7.2M)</td><td class="neg">(4.9M)</td><td class="dim">—</td></tr>
+      <tr class="sub"><td>EBITDA Margin</td><td class="neg">−57.0%</td><td class="neg">−23.3%</td><td class="neg">−18.3%</td><td class="up">+38.7pp</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:14px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);font-size:11px;color:var(--text-2)">
+    <strong>Note:</strong> If UAC were held at 35% of Net Revenue, estimated EBITDA margin would be approximately +20%. The current loss is entirely a function of the growth investment decision, not unit economics.
+  </div>
+
+  <div class="sf">
+    <span>Slide 3 of 10</span>
+    <span>Source: P&amp;L actuals, 32 months Jan 2023 – Aug 2025</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 4 — CHANNEL UNIT ECONOMICS
+══════════════════════════════════════════ -->
+<div class="slide slide-white" id="s4">
+  <div class="label">Unit Economics · T12: Sep 2024 – Aug 2025</div>
+  <h2><strong>Three channels.</strong> Fundamentally different<br>economics across acquisition, margin, and retention.</h2>
+
+  <div class="g3" style="margin-bottom:18px">
+    <div class="ch-card">
+      <div class="ch-name">iOS · 29% of revenue</div>
+      <div class="ch-row"><span class="ch-rl">CAC ($/new sub)</span><span class="ch-rv">$39.47</span></div>
+      <div class="ch-row"><span class="ch-rl">ARPU gross ($/m)</span><span class="ch-rv">$34.94</span></div>
+      <div class="ch-row"><span class="ch-rl">Store commission</span><span class="ch-rv nt">28.2%</span></div>
+      <div class="ch-row"><span class="ch-rl">Net ARPU (after fees)</span><span class="ch-rv">$25.11</span></div>
+      <div class="ch-row"><span class="ch-rl">Monthly churn</span><span class="ch-rv">9.5%</span></div>
+      <div class="ch-row"><span class="ch-rl">LTV 12-month</span><span class="ch-rv">$103.45</span></div>
+      <div class="ch-row"><span class="ch-rl">eROAS 12m / 24m</span><span class="ch-rv up">2.62× / 3.18×</span></div>
+      <div style="margin-top:12px;padding:8px 10px;background:var(--green-lt);font-size:11px;color:var(--green)">
+        Best capital efficiency. Payback: 1.6 months.
+      </div>
+    </div>
+    <div class="ch-card">
+      <div class="ch-name">Android · 5% of revenue</div>
+      <div class="ch-row"><span class="ch-rl">CAC ($/new sub)</span><span class="ch-rv">$32.66</span></div>
+      <div class="ch-row"><span class="ch-rl">ARPU gross ($/m)</span><span class="ch-rv">$23.54</span></div>
+      <div class="ch-row"><span class="ch-rl">Store commission</span><span class="ch-rv up">15.0%</span></div>
+      <div class="ch-row"><span class="ch-rl">Net ARPU (after fees)</span><span class="ch-rv">$20.00</span></div>
+      <div class="ch-row"><span class="ch-rl">Monthly churn</span><span class="ch-rv">8.7%</span></div>
+      <div class="ch-row"><span class="ch-rl">LTV 12-month</span><span class="ch-rv">$82.41</span></div>
+      <div class="ch-row"><span class="ch-rl">eROAS 12m / 24m</span><span class="ch-rv up">2.52× / 3.07×</span></div>
+      <div style="margin-top:12px;padding:8px 10px;background:var(--green-lt);font-size:11px;color:var(--green)">
+        Lowest CAC. Google reduced commission to 15% flat.
+      </div>
+    </div>
+    <div class="ch-card" style="border-color:var(--border2)">
+      <div class="ch-name">Web · 66% of revenue</div>
+      <div class="ch-row"><span class="ch-rl">CAC ($/new sub)</span><span class="ch-rv dn">$123.12</span></div>
+      <div class="ch-row"><span class="ch-rl">ARPU gross ($/m)</span><span class="ch-rv">$38.34</span></div>
+      <div class="ch-row"><span class="ch-rl">Store commission</span><span class="ch-rv up">6.2%</span></div>
+      <div class="ch-row"><span class="ch-rl">Net ARPU (after fees)</span><span class="ch-rv">$35.95</span></div>
+      <div class="ch-row"><span class="ch-rl">Monthly churn</span><span class="ch-rv dn">16.4%</span></div>
+      <div class="ch-row"><span class="ch-rl">LTV 12-month</span><span class="ch-rv">$148.15</span></div>
+      <div class="ch-row"><span class="ch-rl">eROAS 12m / 24m</span><span class="ch-rv nt">1.20× / 1.46×</span></div>
+      <div style="margin-top:12px;padding:8px 10px;background:var(--amber-lt);font-size:11px;color:var(--amber)">
+        Best GP margin, but CAC is 3× higher. eROAS below threshold.
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:12px 16px;background:var(--surface2);border:1px solid var(--border);font-size:12px;color:var(--text-2)">
+    <strong>Strategic read:</strong> iOS and Android deliver 2× better return per marketing dollar at 12-month horizon.
+    Web is structurally superior on GP margin (6% fee vs 28%), but inferior on CAC efficiency and churn.
+    The optimal portfolio balances both. Web's advantage fully materialises only if churn is reduced from 16.4% to ~10–11%.
+  </div>
+
+  <div class="sf">
+    <span>Slide 4 of 10</span>
+    <span>T12 Sep 2024 – Aug 2025 · LTV uses actual 20-cohort survival curve · churn = stock-flow method</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 5 — RETENTION
+══════════════════════════════════════════ -->
+<div class="slide slide-gray" id="s5">
+  <div class="label">Retention · 20-Cohort Average · All Channels Blended</div>
+  <h2>Only <strong>15.5%</strong> of subscribers remain<br>after 12 months.</h2>
+
+  <div class="g2" style="align-items:start;gap:32px">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px">Subscriber survival curve — cohort average</div>
+      <div class="cohort-wrap" id="cohortChart"></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--text-3)">Month from subscription start · source: 20 cohorts, ops metrics</div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin-top:20px">
+        <div style="background:var(--surface);padding:12px 10px;text-align:center">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--text-3);margin-bottom:4px">M0→M1 churn</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:var(--red);font-weight:500">28.1%</div>
+        </div>
+        <div style="background:var(--surface);padding:12px 10px;text-align:center">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--text-3);margin-bottom:4px">M6 survival</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:var(--navy);font-weight:500">31.3%</div>
+        </div>
+        <div style="background:var(--surface);padding:12px 10px;text-align:center">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--text-3);margin-bottom:4px">M12 survival</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:var(--navy);font-weight:500">15.5%</div>
+        </div>
+        <div style="background:var(--surface);padding:12px 10px;text-align:center">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--text-3);margin-bottom:4px">M12→M13</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:var(--red);font-weight:500">−26%</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red)">
+        <div style="font-size:12px;font-weight:500;margin-bottom:4px;color:var(--navy)">28% churn in Month 1 — the primary value leak</div>
+        <div style="font-size:11px;color:var(--text-2);line-height:1.5">Trial cancellations and impulse churn. Fixing onboarding by 5pp = +$3–5M annual revenue at zero incremental UAC cost. Highest-ROI retention intervention.</div>
+      </div>
+      <div style="padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--amber)">
+        <div style="font-size:12px;font-weight:500;margin-bottom:4px;color:var(--navy)">Month 12→13 renewal cliff: −26% spike</div>
+        <div style="font-size:11px;color:var(--text-2);line-height:1.5">Annual plan holders who don't renew. Proactive outreach at Month 11 is a high-ROI retention play for the existing subscriber base.</div>
+      </div>
+      <div style="padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue)">
+        <div style="font-size:12px;font-weight:500;margin-bottom:4px;color:var(--navy)">LTV exceeds CAC within 2 months (iOS/Android)</div>
+        <div style="font-size:11px;color:var(--text-2);line-height:1.5">Even with 28% M1 churn, the unit economics work. LTV 12m = $103 (iOS) vs CAC $39. The business model is sound; the question is optimisation speed.</div>
+      </div>
+      <div style="padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--border2)">
+        <div style="font-size:12px;font-weight:500;margin-bottom:4px;color:var(--navy)">Two churn rates — both correct</div>
+        <div style="font-size:11px;color:var(--text-2);line-height:1.5">Cohort M1 churn (28%) ≠ stock-flow churn (9–16%). M1 = first month cancellations. Stock-flow = steady-state monthly loss across the full subscriber base. Used differently in LTV vs subscriber model.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf">
+    <span>Slide 5 of 10</span>
+    <span>20 cohorts · all platforms blended · data through Aug 2025</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 6 — SCENARIO OVERVIEW
+══════════════════════════════════════════ -->
+<div class="slide slide-white" id="s6">
+  <div class="label">Forecast 2025–2027 · Three Scenarios</div>
+  <h2>Same starting point. Three strategic<br><strong>paths forward.</strong></h2>
+
+  <div class="sc-grid">
+    <!-- BASE -->
+    <div class="sc-card active-scen">
+      <span class="sc-tag base">Base Case</span>
+      <div class="sc-title">Status Quo</div>
+      <div class="sc-desc">Continue current trajectory — no strategic changes</div>
+      <div class="sc-metric">
+        <div class="sc-mlab">2026F Net Revenue</div>
+        <div class="sc-mval">$39.9M</div>
+      </div>
+      <div class="sc-metric">
+        <div class="sc-mlab">2026F Contribution</div>
+        <div class="sc-mval dn">$(1.4M)</div>
+      </div>
+      <div class="sc-metric">
+        <div class="sc-mlab">2027F Net Revenue</div>
+        <div class="sc-mval">$46.9M</div>
+      </div>
+      <div class="sc-metric">
+        <div class="sc-mlab">EBITDA break-even</div>
+        <div class="sc-mval dim">Beyond 2027</div>
+      </div>
+      <div class="sc-lever">
+        <div><span class="k">UAC growth</span><span class="v">+15%/yr</span></div>
+        <div><span class="k">Web churn</span><span class="v">16.4% (unchanged)</span></div>
+        <div><span class="k">ARPU growth</span><span class="v">+8%/yr</span></div>
+        <div><span class="k">Web CAC</span><span class="v">unchanged</span></div>
+      </div>
+    </div>
+    <!-- BEAR -->
+    <div class="sc-card passive">
+      <span class="sc-tag bear">Bear Case</span>
+      <div class="sc-title">Efficiency Decay</div>
+      <div class="sc-desc">Market saturation · rising CPM · high churn persists</div>
+      <div class="sc-metric">
+        <div class="sc-mlab">2026F Net Revenue</div>
+        <div class="sc-mval dn">$27.2M</div>
+      </div>
+      <div class="sc-metric">
+        <div class="sc-mlab">2026F Contribution</div>
+        <div class="sc-mval dn">$(9.1M)</div>
+      </div>
+      <div class="sc-metric">
+        <div class="sc-mlab">2027F Net Revenue</div>
+        <div class="sc-mval dn">$26.4M</div>
+      </div>
+      <div class="sc-metric">
+        <div class="sc-mlab">EBITDA break-even</div>
+        <div class="sc-mval dn">Not in horizon</div>
+      </div>
+      <div class="sc-lever">
+        <div><span class="k">UAC growth</span><span class="v">+5%/yr</span></div>
+        <div><span class="k">Web churn</span><span class="v">18.5% (+2.1pp)</span></div>
+        <div><span class="k">ARPU growth</span><span class="v">+3%/yr</span></div>
+        <div><span class="k">Web CAC</span><span class="v">+30% (CPM rise)</span></div>
+      </div>
+    </div>
+    <!-- BULL -->
+    <div class="sc-card passive">
+      <span class="sc-tag bull">Bull Case</span>
+      <div class="sc-title">Two Levers</div>
+      <div class="sc-desc">Web retention fix + UAC efficiency improvement</div>
+      <div class="sc-metric">
+        <div class="sc-mlab">2026F Net Revenue</div>
+        <div class="sc-mval up">$60.1M</div>
+      </div>
+      <div class="sc-metric">
+        <div class="sc-mlab">2026F Contribution</div>
+        <div class="sc-mval up">$13.5M</div>
+      </div>
+      <div class="sc-metric">
+        <div class="sc-mlab">2027F Net Revenue</div>
+        <div class="sc-mval up">$83.5M</div>
+      </div>
+      <div class="sc-metric">
+        <div class="sc-mlab">EBITDA break-even</div>
+        <div class="sc-mval up">H2 2027</div>
+      </div>
+      <div class="sc-lever">
+        <div><span class="k">UAC growth</span><span class="v">+25%/yr</span></div>
+        <div><span class="k">Web churn</span><span class="v">11.0% (−5.4pp)</span></div>
+        <div><span class="k">ARPU growth</span><span class="v">+10%/yr</span></div>
+        <div><span class="k">Web CAC</span><span class="v">−20% (mix/CRM)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;padding:10px 16px;background:var(--surface2);border:1px solid var(--border);font-size:11px;color:var(--text-2)">
+    All scenarios share identical Aug-2025 starting subscriber base (iOS 157k · Android 47k · Web 125k) and the same historical assumption methodology.
+    Divergence begins Sep-2025. The primary driver of scenario spread is Web churn rate and UAC efficiency — not revenue assumptions.
+  </div>
+
+  <div class="sf">
+    <span>Slide 6 of 10</span>
+    <span>Full assumption table: Slide 9 · Excel model: 1_Assumptions sheet</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 7 — BASE CASE DETAIL
+══════════════════════════════════════════ -->
+<div class="slide slide-gray" id="s7">
+  <div class="label">Base Case · Detail</div>
+  <h2><strong>Moderate growth.</strong> EBITDA break-even<br>remains beyond the 2027 horizon.</h2>
+
+  <div class="g2" style="align-items:start;gap:24px">
+    <div>
+      <table class="ft">
+        <thead>
+          <tr><th>Metric</th><th>2023A</th><th>2024A</th><th>2025E</th><th>2026F</th><th>2027F</th></tr>
+        </thead>
+        <tbody>
+          <tr class="total"><td>Net Revenue</td><td>$11.3M</td><td>$31.0M</td><td>$39.4M</td><td>$39.9M</td><td>$46.9M</td></tr>
+          <tr class="sub"><td>YoY Growth</td><td class="dim">—</td><td class="up">+175%</td><td class="up">+27%</td><td class="up">+1%</td><td class="up">+18%</td></tr>
+          <tr class="total"><td>Gross Profit</td><td>$8.2M</td><td>$25.0M</td><td>$33.3M</td><td>$33.2M</td><td>$38.7M</td></tr>
+          <tr class="sub"><td>GP Margin</td><td>72.9%</td><td>80.7%</td><td>84.5%</td><td>83.2%</td><td>82.6%</td></tr>
+          <tr><td>User Acquisition</td><td class="neg">(10.9M)</td><td class="neg">(26.3M)</td><td class="neg">(31.0M)</td><td class="neg">(34.6M)</td><td class="neg">(38.8M)</td></tr>
+          <tr class="sub"><td>UAC % of Revenue</td><td class="neg">96.6%</td><td class="neg">84.7%</td><td class="neg">78.7%</td><td class="neg">86.8%</td><td class="neg">82.7%</td></tr>
+          <tr class="total"><td>Contribution</td><td class="neg">(2.7M)</td><td class="neg">(1.2M)</td><td class="up pos">2.3M</td><td class="neg">(1.4M)</td><td class="dim">≈0</td></tr>
+          <tr class="sub"><td>Contribution Margin</td><td class="neg">−23.7%</td><td class="neg">−4.0%</td><td class="up pos">+5.8%</td><td class="neg">−3.6%</td><td class="dim">≈0%</td></tr>
+          <tr class="total"><td>EBITDA Adjusted</td><td class="neg">(6.4M)</td><td class="neg">(7.2M)</td><td class="neg">(7.1M)</td><td class="neg">(11.1M)</td><td class="neg">(11.4M)</td></tr>
+          <tr class="sub"><td>EBITDA Margin</td><td class="neg">−57.0%</td><td class="neg">−23.3%</td><td class="neg">−18.1%</td><td class="neg">−27.9%</td><td class="neg">−24.3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px">Average Subscriber Base (k)</div>
+        <table class="ft" style="font-size:11px">
+          <thead><tr><th>Channel</th><th>2024A</th><th>2025 YTD</th><th>2026F</th><th>2027F</th></tr></thead>
+          <tbody>
+            <tr><td>iOS</td><td>229</td><td>174</td><td>186</td><td>214</td></tr>
+            <tr><td>Android</td><td>63</td><td>59</td><td>46</td><td>49</td></tr>
+            <tr><td>Web</td><td>66</td><td>112</td><td>100</td><td>105</td></tr>
+            <tr class="subtotal"><td>Total</td><td>358</td><td>345</td><td>331</td><td>368</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="padding:14px 16px;background:var(--amber-lt);border:1px solid var(--border);border-left:3px solid var(--amber)">
+        <div style="font-size:12px;font-weight:500;margin-bottom:4px;color:var(--navy)">Why 2026F ≈ 2025E revenue</div>
+        <div style="font-size:11px;color:var(--text-2);line-height:1.5">
+          2025E includes an anomalous Jan-25 UAC spike ($5.1M in one month, 100% of revenue).
+          That month inflates the 2025E total. The underlying 2026 run-rate without that spike is
+          on a gradual growth trajectory. Web base is declining at T12 UAC levels due to churn exceeding new acquisition.
+        </div>
+      </div>
+
+      <div style="padding:14px 16px;background:var(--surface);border:1px solid var(--border)">
+        <div style="font-size:12px;font-weight:500;margin-bottom:4px;color:var(--navy)">What changes the Base trajectory</div>
+        <div style="font-size:11px;color:var(--text-2);line-height:1.5">
+          Web churn fix (16.4% → 11%) would add ~$3–5M revenue with no UAC change.
+          Alternatively, 25% higher Web UAC spend would stabilise the Web subscriber base.
+          Either move shifts the output materially toward the Bull Case.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf">
+    <span>Slide 7 of 10</span>
+    <span>Base: UAC +15%/yr · churn unchanged · ARPU +8%/yr · Web CAC unchanged</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 8 — BULL CASE
+══════════════════════════════════════════ -->
+<div class="slide slide-white" id="s8">
+  <div class="label">Bull Case · The Opportunity</div>
+  <h2>Two management decisions change<br><strong>the trajectory entirely.</strong></h2>
+
+  <div class="g2" style="align-items:start;gap:24px">
+    <div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px">
+        <div style="padding:16px 18px;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--navy)">
+          <div style="font-size:12px;font-weight:500;margin-bottom:6px;color:var(--navy)">① Web Churn: 16.4% → 11.0% (−5.4pp)</div>
+          <div style="font-size:11px;color:var(--text-2);line-height:1.5;margin-bottom:8px">
+            Achievable through improved onboarding flow, M11 renewal campaigns,
+            and annual plan conversion incentives. Each 1pp improvement in Web churn
+            adds approximately $600k annual revenue with zero incremental UAC.
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--green)">
+            Total impact: +$3–5M annual revenue at zero incremental UAC cost
+          </div>
+        </div>
+        <div style="padding:16px 18px;background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--navy)">
+          <div style="font-size:12px;font-weight:500;margin-bottom:6px;color:var(--navy)">② Web CAC: $123 → $98 (−20%)</div>
+          <div style="font-size:11px;color:var(--text-2);line-height:1.5;margin-bottom:8px">
+            CRM reactivation of lapsed users, organic/SEO contribution, and
+            better-performing creative. Improves 12m eROAS from 1.20× to ~1.50×
+            — crossing the threshold for confident scaling.
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--green)">
+            Same UAC budget → 25% more Web subscribers acquired
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:16px 18px;background:var(--green-lt);border:1px solid var(--green)">
+        <div style="font-size:11px;font-weight:500;margin-bottom:10px;color:var(--green)">Combined effect — Bull vs Base (2027F)</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+          <div>
+            <div style="font-size:10px;color:var(--text-3)">Revenue</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:var(--green);font-weight:500">$83.5M</div>
+            <div style="font-size:10px;color:var(--text-3)">vs Base $46.9M</div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--text-3)">Contribution</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:var(--green);font-weight:500">$25.7M</div>
+            <div style="font-size:10px;color:var(--text-3)">vs Base ≈$0</div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--text-3)">EBITDA</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:16px;color:var(--green);font-weight:500">$6.6M</div>
+            <div style="font-size:10px;color:var(--text-3)">vs Base $(11.4M)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px">Full scenario comparison</div>
+      <table class="ft">
+        <thead>
+          <tr><th>Metric</th><th>Bear</th><th>Base</th><th>Bull</th></tr>
+        </thead>
+        <tbody>
+          <tr class="section-head"><td colspan="4">2026F</td></tr>
+          <tr><td>Net Revenue</td><td class="neg">$27.2M</td><td>$39.9M</td><td class="pos">$60.1M</td></tr>
+          <tr class="sub"><td>Contribution</td><td class="neg">(9.1M)</td><td class="neg">(1.4M)</td><td class="pos">13.5M</td></tr>
+          <tr class="sub"><td>UAC % of Revenue</td><td class="neg">116%</td><td class="neg">87%</td><td class="pos">63%</td></tr>
+          <tr class="sub"><td>EBITDA</td><td class="neg">(16.1M)</td><td class="neg">(11.1M)</td><td class="pos">≈(0.3M)</td></tr>
+          <tr class="section-head"><td colspan="4">2027F</td></tr>
+          <tr><td>Net Revenue</td><td class="neg">$26.4M</td><td>$46.9M</td><td class="pos">$83.5M</td></tr>
+          <tr class="sub"><td>Contribution</td><td class="neg">(11.5M)</td><td class="dim">≈0</td><td class="pos">25.7M</td></tr>
+          <tr class="sub"><td>UAC % of Revenue</td><td class="neg">126%</td><td class="neg">83%</td><td class="pos">54%</td></tr>
+          <tr class="sub"><td>EBITDA</td><td class="neg">(18.3M)</td><td class="neg">(11.4M)</td><td class="pos">6.6M</td></tr>
+          <tr class="section-head"><td colspan="4">Avg Web subs</td></tr>
+          <tr class="sub"><td>2026F (k)</td><td class="neg">69</td><td>100</td><td class="pos">166</td></tr>
+          <tr class="sub"><td>2027F (k)</td><td class="neg">63</td><td>105</td><td class="pos">209</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="sf">
+    <span>Slide 8 of 10</span>
+    <span>Bull: Web churn 11%, Web CAC −20%, UAC +25%/yr, ARPU +10%/yr</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 9 — METHODOLOGY
+══════════════════════════════════════════ -->
+<div class="slide slide-gray" id="s9">
+  <div class="label">Model Methodology</div>
+  <h2><strong>How the model works.</strong></h2>
+
+  <div class="flow" style="margin-bottom:20px">
+    <div class="flow-step">
+      <div class="flow-step-num">01 INPUT</div>
+      <div class="flow-step-title">Monthly UAC budget</div>
+      <div class="flow-step-body">By channel: iOS / Android / Web. Scenario-specific growth rate applied from Sep-25.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">02 ACQUISITION</div>
+      <div class="flow-step-title">÷ CAC = New subs</div>
+      <div class="flow-step-body">UAC / CAC / 1,000 = new subscribers per month per channel.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">03 STOCK-FLOW</div>
+      <div class="flow-step-title">Subscriber base</div>
+      <div class="flow-step-body">Subs<sub>t</sub> = Subs<sub>t−1</sub> × (1−churn) + new. Churn is scenario-specific per channel.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">04 REVENUE</div>
+      <div class="flow-step-title">Subs × ARPU → GB</div>
+      <div class="flow-step-body">Effective ARPU grows at scenario rate from T12 base. Net revenue applies refund and tax deductions.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">05 P&amp;L</div>
+      <div class="flow-step-title">GP → Contrib → EBITDA</div>
+      <div class="flow-step-body">Store commissions per channel. OpEx ratios (S&amp;M, R&amp;D, G&amp;A) applied as % of Net Revenue.</div>
+    </div>
+  </div>
+
+  <div class="g2" style="align-items:start;gap:24px">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px">Key assumptions — source &amp; method</div>
+      <table class="ft" style="font-size:11px">
+        <thead><tr><th>Parameter</th><th>Base</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>iOS monthly churn</td><td>9.5%</td><td>Stock-flow, 29 obs.</td></tr>
+          <tr><td>Android monthly churn</td><td>8.7%</td><td>Stock-flow, 26 obs.</td></tr>
+          <tr><td>Web monthly churn</td><td>16.4%</td><td>Stock-flow, 20 obs.</td></tr>
+          <tr><td>CAC — iOS</td><td>$39.47</td><td>T12 UAC ÷ new subs</td></tr>
+          <tr><td>CAC — Android</td><td>$32.66</td><td>T12 UAC ÷ new subs</td></tr>
+          <tr><td>CAC — Web</td><td>$123.12</td><td>T12 UAC ÷ new subs</td></tr>
+          <tr><td>Store comm — iOS</td><td>28.2%</td><td>T12 avg, PL actuals</td></tr>
+          <tr><td>Store comm — Android</td><td>15.0%</td><td>T12 avg, flat</td></tr>
+          <tr><td>Store comm — Web</td><td>6.2%</td><td>T12 avg, PL actuals</td></tr>
+          <tr><td>Refund rate</td><td>8.0%</td><td>T12 avg, PL actuals</td></tr>
+          <tr><td>ARPU growth (Base)</td><td>+8%/yr</td><td>T12 was +24%; moderated</td></tr>
+          <tr><td>UAC T12 monthly base</td><td>iOS $686k / Web $1.7M</td><td>PL UAC actuals, T12 avg</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="padding:12px 14px;background:var(--surface);border:1px solid var(--border)">
+        <div style="font-size:11px;font-weight:500;margin-bottom:4px;color:var(--navy)">Effective ARPU vs. ops ARPU</div>
+        <div style="font-size:11px;color:var(--text-2);line-height:1.5">Model uses GB ÷ total subscribers (effective ARPU: iOS $6.77, Web $20.68), not the per-paying-user figure ($34–38). This correctly accounts for annual plan holders who appear in subscriber count but bill once per year.</div>
+      </div>
+      <div style="padding:12px 14px;background:var(--surface);border:1px solid var(--border)">
+        <div style="font-size:11px;font-weight:500;margin-bottom:4px;color:var(--navy)">Scenario switching</div>
+        <div style="font-size:11px;color:var(--text-2);line-height:1.5">Single cell in Excel workbook (1_Assumptions, cell C44 = BASE / BEAR / BULL). All 958 formulas recalculate automatically. Scenarios diverge from Sep-2025 onward; 2023A and 2024A are fixed historical actuals in all three.</div>
+      </div>
+      <div style="padding:12px 14px;background:var(--surface);border:1px solid var(--border)">
+        <div style="font-size:11px;font-weight:500;margin-bottom:4px;color:var(--navy)">Data coverage</div>
+        <div style="font-size:11px;color:var(--text-2);line-height:1.5">32 months of P&amp;L actuals (Jan 2023 – Aug 2025) · 20 subscription cohorts for retention analysis · Ops metrics: subscriber counts, ARPU, new subscriber flow, eROAS by channel.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sf">
+    <span>Slide 9 of 10</span>
+    <span>T12 = Sep 2024 – Aug 2025 · All assumptions traceable to source data</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SLIDE 10 — KEY OBSERVATIONS
+══════════════════════════════════════════ -->
+<div class="slide slide-white" id="s10">
+  <div class="label">Appendix · Historical Analysis</div>
+  <h2><strong>15 key observations</strong> from 32 months of data.</h2>
+
+  <div class="obs-grid">
+    <div class="obs"><div class="obs-n">01</div><div class="obs-t">Revenue tripled in two years</div><div class="obs-b">$11.3M (2023) → $31.0M (2024) → $39.4M (2025E). Growth driven almost entirely by paid acquisition, not organic.</div><span class="tag tag-n">Growth</span></div>
+    <div class="obs"><div class="obs-n">02</div><div class="obs-t">2025 = first Contribution-positive year</div><div class="obs-b">$1.4M positive contribution in Jan–Aug 2025. The business model is self-validating at the unit level for the first time.</div><span class="tag tag-g">Milestone</span></div>
+    <div class="obs"><div class="obs-n">03</div><div class="obs-t">Web: 0% → 66% of revenue in 2 years</div><div class="obs-b">Deliberate strategy to bypass Apple/Google store commissions. Web billing: $1.8M (2023) → $15.6M (2024) → $17.6M (8m 2025).</div><span class="tag tag-g">Channel</span></div>
+    <div class="obs"><div class="obs-n">04</div><div class="obs-t">ARPU grew +24% in trailing 12 months</div><div class="obs-b">Blended ARPU: $26.95/m (Aug-24) → $38.36/m (Aug-25). Driven by annual plan adoption, repricing, and Web mix shift.</div><span class="tag tag-g">Pricing</span></div>
+    <div class="obs"><div class="obs-n">05</div><div class="obs-t">GP margin expanding: 73% → 85%</div><div class="obs-b">Improvement driven by channel mix shift toward Web (6% commission) from iOS (28%). Structurally positive as Web share grows.</div><span class="tag tag-g">Margin</span></div>
+    <div class="obs"><div class="obs-n">06</div><div class="obs-t">28% of subscribers leave in Month 1</div><div class="obs-b">First-month churn 28.1% across 20 cohorts. Only 15.5% survive to Month 12. Fixing onboarding by 5pp = +$3–5M at zero UAC cost.</div><span class="tag tag-r">Retention</span></div>
+    <div class="obs"><div class="obs-n">07</div><div class="obs-t">Web churn 2× higher than iOS</div><div class="obs-b">Web stock-flow churn: 16.4%/month vs iOS 9.5%. At T12 UAC levels, Web subscriber base is net-declining. This is the #1 lever.</div><span class="tag tag-r">Web</span></div>
+    <div class="obs"><div class="obs-n">08</div><div class="obs-t">eROAS declining: 1.46× → 1.18×</div><div class="obs-b">Official 2-year eROAS from ops metrics. Declining trend signals rising CPM or audience saturation. Still positive but approaching threshold.</div><span class="tag tag-r">Efficiency</span></div>
+    <div class="obs"><div class="obs-n">09</div><div class="obs-t">iOS/Android: best 12m eROAS</div><div class="obs-b">iOS: 2.62× at 12m, payback 1.6 months. Android: 2.52×. Web: 1.20× at 12m. Mobile channels win on capital efficiency at short horizon.</div><span class="tag tag-n">Unit Econ</span></div>
+    <div class="obs"><div class="obs-n">10</div><div class="obs-t">iOS subscriber base −40% from peak</div><div class="obs-b">iOS subs: 262k (Dec-23) → 157k (Aug-25). Either user migration to Web (positive read) or iOS retention issue (negative read).</div><span class="tag tag-r">iOS</span></div>
+    <div class="obs"><div class="obs-n">11</div><div class="obs-t">UAC % of revenue: volatile, not a ratio</div><div class="obs-b">Range: 39% (Mar-25) to 100% (Jan-25) in 12 months. Not a structural ratio — it's a budget decision that shows up as a metric.</div><span class="tag tag-n">UAC</span></div>
+    <div class="obs"><div class="obs-n">12</div><div class="obs-t">US = 75% of revenue; AU highest ARPU</div><div class="obs-b">US at $37.00/m ARPU (+2.1pp share). Australia: 3.8% share, $38.93 ARPU — highest globally. DE growing +1.3pp. RU declining −3.1pp.</div><span class="tag tag-n">Geography</span></div>
+    <div class="obs"><div class="obs-n">13</div><div class="obs-t">Seasonality: Jan peak, Mar trough</div><div class="obs-b">Jan-25: $5.1M revenue (UAC = 100% of rev). Mar-25: $2.0M. New Year resolution cycle drives pattern. Affects annual comparisons.</div><span class="tag tag-n">Seasonality</span></div>
+    <div class="obs"><div class="obs-n">14</div><div class="obs-t">Business is profitable "at will"</div><div class="obs-b">If UAC reduced to 35% of revenue, EBITDA margin ≈ +20%. Negative EBITDA is a strategic choice. The unit economics work.</div><span class="tag tag-g">Strategy</span></div>
+    <div class="obs"><div class="obs-n">15</div><div class="obs-t">R&amp;D: avg 14% of revenue, range 8–33%</div><div class="obs-b">Large project-based spikes. Industry benchmark at scale: 10–15%. Question for Board: what product bets are being funded and what is their retention ROI?</div><span class="tag tag-n">OpEx</span></div>
+  </div>
+
+  <div class="sf">
+    <span>Slide 10 of 10</span>
+    <span>Source: P&amp;L and operational metrics actuals, Jan 2023 – Aug 2025 (32 months)</span>
+  </div>
+</div>
+
+</div><!-- /deck -->
+<div class="hint">← → navigate</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const dots   = document.getElementById('navDots');
+const ctr    = document.getElementById('ctr');
+let cur = 0;
+
+slides.forEach((_,i) => {
+  const d = document.createElement('div');
+  d.className = 'nav-dot' + (i===0?' active':'');
+  d.onclick = () => go(i);
+  dots.appendChild(d);
+});
+
+function go(n) {
+  slides[cur].classList.remove('active','visible');
+  cur = Math.max(0, Math.min(n, slides.length-1));
+  const s = slides[cur];
+  s.classList.add('active');
+  requestAnimationFrame(() => { requestAnimationFrame(() => s.classList.add('visible')); });
+  document.querySelectorAll('.nav-dot').forEach((d,i) => d.classList.toggle('active', i===cur));
+  ctr.textContent = `${cur+1} / ${slides.length}`;
+  if (cur===4) buildCohort();
+}
+
+function nextSlide() { go(cur+1); }
+function prevSlide() { go(cur-1); }
+
+document.addEventListener('keydown', e => {
+  if (e.key==='ArrowRight'||e.key==='ArrowDown') nextSlide();
+  if (e.key==='ArrowLeft'||e.key==='ArrowUp') prevSlide();
+});
+
+function buildCohort() {
+  const chart = document.getElementById('cohortChart');
+  if (chart.children.length) return;
+  const data = [
+    {m:'M0',v:100},{m:'M1',v:71.9},{m:'M2',v:58.2},{m:'M3',v:48.8},
+    {m:'M4',v:38.7},{m:'M5',v:34.1},{m:'M6',v:31.3},{m:'M7',v:27.2},
+    {m:'M8',v:24.7},{m:'M9',v:23.2},{m:'M10',v:20.1},{m:'M11',v:18.3},
+    {m:'M12',v:15.5},{m:'M13',v:11.5},{m:'M18',v:6.8}
+  ];
+  data.forEach(d => {
+    const wrap = document.createElement('div'); wrap.className='c-col';
+    const val  = document.createElement('div'); val.className='c-val'; val.textContent=d.v+'%';
+    const bar  = document.createElement('div');
+    bar.className = 'c-bar' + (d.v>50?'':d.v>20?' warn':' low');
+    bar.style.height='0px';
+    const lbl  = document.createElement('div'); lbl.className='c-lbl'; lbl.textContent=d.m;
+    wrap.appendChild(val); wrap.appendChild(bar); wrap.appendChild(lbl);
+    chart.appendChild(wrap);
+    setTimeout(() => { bar.style.height = (d.v/100*100)+'px'; }, 80);
+  });
+}
+
+go(0);
+</script>
+</body>
+</html>
